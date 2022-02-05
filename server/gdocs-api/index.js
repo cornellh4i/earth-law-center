@@ -1,6 +1,8 @@
 const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
+// TODO: CREATE .env file for credentials. Set each value to variables and access directly. 
+// Look at pennEnv code (server.js)
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];

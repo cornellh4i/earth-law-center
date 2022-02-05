@@ -16,9 +16,7 @@ function App() {
 
   return (
     <>
-      <h1>MERN App!</h1>
-      <p>Data from server: {data}</p>
-      <h1>Ananya Seelam</h1>
+      <h1>EARTH LAW CENTER x H4I INITIAL CODE </h1>
     </>
   );
 }
