@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <h1>EARTH LAW CENTER x H4I INITIAL CODE </h1>
+      <h1>EARTH LAW CENTER x H4I INITIAL CODE</h1>
     </>
   );
 }

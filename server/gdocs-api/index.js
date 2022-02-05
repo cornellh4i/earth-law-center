@@ -1,8 +1,8 @@
 const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
-// TODO: CREATE .env file for credentials. Set each value to variables and access directly. 
-// Look at pennEnv code (server.js)
+const dotenv = require('dotenv');
+dotenv.config();
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
@@ -11,12 +11,7 @@ const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
 // time.
 const TOKEN_PATH = 'token.json';
 
-// Load client secrets from a local file.
-fs.readFile('credentials.json', (err, content) => {
-  if (err) return console.log('Error loading client secret file:', err);
-  // Authorize a client with credentials, then call the Google Docs API.
-  authorize(JSON.parse(content), printDocTitle);
-});
+authorize(printDocTitle);
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -24,8 +19,11 @@ fs.readFile('credentials.json', (err, content) => {
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, callback) {
-  const { client_secret, client_id, redirect_uris } = credentials.installed;
+function authorize(callback) {
+  const client_id = process.env.CLIENT_ID;
+  const client_secret = process.env.CLIENT_SECRET;
+  const redirect_uris = process.env.REDIRECT_URIS;
+  // const { client_secret, client_id, redirect_uris } = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
 
