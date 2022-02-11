@@ -80,8 +80,7 @@ function printDocTitle(auth) {
     var len_contents = res.data.body.content.length;
     // Each value in the list called "content" is a line of the text"
     // If the line of text is tabbed, one textRun will get everything that is tabbed
-
-    var text = res.data.body.content[5].paragraph.elements[0].textRun.content;
+    var text = res.data.body.content[4].paragraph.elements[0].textRun.content;
     console.log(`The length of the document is: ${len_contents}`);
     console.log(`The text of the document is: ${text}`);
   });
