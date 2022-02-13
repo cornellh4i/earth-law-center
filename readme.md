@@ -1,15 +1,12 @@
-# MERN template project
+# ELC x H4I: Tempate Law Form Filler
 
 ## Introduction
-This project is a template for building fullstack JavaScript applications running on node.js. The technology stack is as follows:
+The Template Law Form Filler is a webiste created by the Cornell Hack4Impact team made to simplify the process of creating eco-centric laws by legislators. 
+This project is a web application deployed on Heroku using:
 - **React** for the front-end, bootstrapped with "Create React App".
 - **express.js** for the server
   - Serves the React app 
   - Provides the JSON API for the React app using http
-
-MongoDB is not used in this template but can be easily integrated into the server app.
-
-The app is fully deployable to any PaaS like Heroku or AWS Elastic Beanstalk that understands how to build and run projects with a **package.json** file. 
 
 ## Commands
 The package.json provides all the commands needed to test and run this application.
@@ -17,9 +14,7 @@ The package.json provides all the commands needed to test and run this applicati
 - **npm run build** builds the static files for the React app.
 - **npm start** starts the complete MERN app.
 - **npm run react-dev** starts the React app in development mode on http://localhost:3000. Only works if the server is started separately. 
-
-## Development
-Use this template to build your own apps. Since the React app is build using Create React App, you can easily update the React version.
+- **npm run gdocs** runs the google docs api code. 
 
 During development of the React app, use **npm run react-dev** or simply navigate to the client folder and run **npm start**. Remember to start the server running as well. 
 
