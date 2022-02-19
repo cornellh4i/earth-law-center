@@ -2,7 +2,7 @@ module.exports = () => {
   const express = require("express");
   const router = express.Router();
 
-  /**** Routes ****/
+  /**** Below are Example Routes from the starter code ****/
   router.get('/hello', async (req, res) => {
     res.json({ msg: "Hello, world!" });
   });
@@ -12,7 +12,7 @@ module.exports = () => {
   });
 
   router.get('/food/:foodleast/:foodfav', async (req, res) => {
-    res.json({ msg: `My favorite food is, ${req.params.foodfav}` });
+    res.json({ msg: `My favorite food is, ${req.params.foodfav}`});
   });
 
   return router;

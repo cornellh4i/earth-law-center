@@ -1,17 +1,20 @@
 const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
+
+// The dotenv package allows us to use the .env file located in the gdocs-api 
+// folder.
 const dotenv = require('dotenv');
 dotenv.config();
 
-// If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
-// time.
+// time. 
 const TOKEN_PATH = 'token.json';
 
-authorize(printDocTitle);
+// This calls the function inside of the authorize function. 
+authorize(printDocInfo);
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -58,7 +61,7 @@ function getNewToken(oAuth2Client, callback) {
       oAuth2Client.setCredentials(token);
       // Store the token to disk for later program executions
       fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-        if (err) console.error(err);
+        if (err) console.error(err); 
         console.log('Token stored to', TOKEN_PATH);
       });
       callback(oAuth2Client);
@@ -67,21 +70,24 @@ function getNewToken(oAuth2Client, callback) {
 }
 
 /**
- * Prints the title of a sample doc:
- * https://docs.google.com/document/d/195j9eDD3ccgjQRttHhJPymLJUCOUjs-jmwTrekvdjFE/edit
+ * Prints some information from a sample doc: 
+ * https://docs.google.com/document/d/1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os/edit
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  */
-function printDocTitle(auth) {
+function printDocInfo(auth) {
   const docs = google.docs({ version: 'v1', auth });
+  // We are using a GET request here
   docs.documents.get({
+    // This document ID is found in the url after the /d
     documentId: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os',
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
+    // Below we are getting the length all of the content in the code 
     var len_contents = res.data.body.content.length;
     // Each value in the list called "content" is a line of the text"
     // If the line of text is tabbed, one textRun will get everything that is tabbed
-    var text = res.data.body.content[4].paragraph.elements[0].textRun.content;
+    var someText = res.data.body.content[4].paragraph.elements[0].textRun.content;
     console.log(`The length of the document is: ${len_contents}`);
-    console.log(`The text of the document is: ${text}`);
+    console.log(`The text of the document is: ${someText}`);
   });
 }
