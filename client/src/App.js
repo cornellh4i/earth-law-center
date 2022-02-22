@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 const API_URL = process.env.REACT_APP_API;
 
 function App() {
@@ -18,7 +19,9 @@ function App() {
   return (
     <>
       <h1>EARTH LAW CENTER x H4I INITIAL CODE</h1>
+      {/* <p>Data from server: {data}</p> */}
     </>
+
   );
 }
 
