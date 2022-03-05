@@ -13,6 +13,8 @@ const TOKEN_PATH = 'token.json';
 // This calls the function inside of the authorize function. 
 authorize(printDocInfo);
 
+// authorizeInsertText(insertText, docID, text, location)
+
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
@@ -32,6 +34,22 @@ function authorize(callback) {
     if (err) return getNewToken(oAuth2Client, callback);
     oAuth2Client.setCredentials(JSON.parse(token));
     callback(oAuth2Client);
+  });
+}
+
+function authorizeInsertText(callback, docID, text, location) {
+  const client_id = process.env.CLIENT_ID;
+  const client_secret = process.env.CLIENT_SECRET;
+  const redirect_uris = process.env.REDIRECT_URIS;
+  // const { client_secret, client_id, redirect_uris } = credentials.installed;
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id, client_secret, redirect_uris[0]);
+
+  // Check if we have previously stored a token.
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return getNewToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(JSON.parse(token));
+    callback(oAuth2Client, docID, text, location);
   });
 }
 
