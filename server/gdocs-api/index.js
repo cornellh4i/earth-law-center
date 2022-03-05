@@ -5,13 +5,14 @@ const { google } = require('googleapis');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/documents'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first time. 
 const TOKEN_PATH = 'token.json';
 
 // This calls the function inside of the authorize function. 
 authorize(printDocInfo);
+authorizeReplaceAllTexts(replaceAllTexts, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "culture", "dfsd");
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -32,6 +33,22 @@ function authorize(callback) {
     if (err) return getNewToken(oAuth2Client, callback);
     oAuth2Client.setCredentials(JSON.parse(token));
     callback(oAuth2Client);
+  });
+}
+
+function authorizeReplaceAllTexts(callback, docId, replaceText, containsText) {
+  const client_id = process.env.CLIENT_ID;
+  const client_secret = process.env.CLIENT_SECRET;
+  const redirect_uris = process.env.REDIRECT_URIS;
+  // const { client_secret, client_id, redirect_uris } = credentials.installed;
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id, client_secret, redirect_uris[0]);
+
+  // Check if we have previously stored a token.
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return getNewToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(JSON.parse(token));
+    callback(oAuth2Client, docId, replaceText, containsText);
   });
 }
 
@@ -58,7 +75,7 @@ function getNewToken(oAuth2Client, callback) {
       oAuth2Client.setCredentials(token);
       // Store the token to disk for later program executions
       fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-        if (err) console.error(err); 
+        if (err) console.error(err);
         console.log('Token stored to', TOKEN_PATH);
       });
       callback(oAuth2Client);
@@ -97,8 +114,8 @@ function printDocInfo(auth) {
  * @param location is the location in the document we want to insert the data at
  * 
  */
- function insertText(auth, docID, text, location) {
-  
+function insertText(auth, docID, text, location) {
+
 }
 
 /**
@@ -106,8 +123,8 @@ function printDocInfo(auth) {
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param docID is the document id of the google doc we want get data from 
  */
- function getAllText(auth, docID) {
-  
+function getAllText(auth, docID) {
+
 }
 
 /**
@@ -118,7 +135,28 @@ function printDocInfo(auth) {
  * @param containsText is the text in the document matching this substring that will be replaced by replaceText.
  * 
  */
- function replaceText(auth, docID, replaceText, containsText) {
-  
+function replaceAllTexts(auth, docID, replaceText, containsText) {
+  const docs = google.docs({ version: 'v1', auth });
+  var updateObject = {
+    documentId: docID,
+
+    requests: [{
+      "replaceAllText":
+      {
+        "replaceText": replaceText,
+        "containsText": {
+          "text": containsText,
+          "matchCase": false
+        }
+      }
+    }],
+
+  };
+  docs.documents.batchUpdate(updateObject)
+    .then(function (res) {
+      console.log(res);
+    }, function (err) {
+      console.error(err);
+    });
 }
 
