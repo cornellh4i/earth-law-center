@@ -13,7 +13,7 @@ const TOKEN_PATH = 'token.json';
 // This calls the function inside of the authorize function. 
 authorize(printDocInfo);
 
-// authorizeInsertText(insertText, docID, text, location)
+// authorizeInsertText(insertText, <docID>, <text>, <location>)
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
