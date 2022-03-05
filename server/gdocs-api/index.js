@@ -1,16 +1,13 @@
 const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
-
-// The dotenv package allows us to use the .env file located in the gdocs-api 
-// folder.
+// The dotenv package allows us to use the .env file located in the gdocs-api folder.
 const dotenv = require('dotenv');
 dotenv.config();
 
 const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
 // The file token.json stores the user's access and refresh tokens, and is
-// created automatically when the authorization flow completes for the first
-// time. 
+// created automatically when the authorization flow completes for the first time. 
 const TOKEN_PATH = 'token.json';
 
 // This calls the function inside of the authorize function. 
@@ -91,3 +88,37 @@ function printDocInfo(auth) {
     console.log(`The text of the document is: ${someText}`);
   });
 }
+
+/**
+ * Inserts text at a location in a google doc
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param docID is the document id of the google doc we want to insert data in
+ * @param text is the text to be inserted into the document with id docID
+ * @param location is the location in the document we want to insert the data at
+ * 
+ */
+ function insertText(auth, docID, text, location) {
+  
+}
+
+/**
+ * Get data from a google doc and return
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param docID is the document id of the google doc we want get data from 
+ */
+ function getAllText(auth, docID) {
+  
+}
+
+/**
+ * Replaces all instances of containsText with replaceText in document specified by docID
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param docID is the document id of the google doc we want to insert data in
+ * @param replaceText is the text that will replace the matched text.
+ * @param containsText is the text in the document matching this substring that will be replaced by replaceText.
+ * 
+ */
+ function replaceText(auth, docID, replaceText, containsText) {
+  
+}
+
