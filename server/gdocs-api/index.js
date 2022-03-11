@@ -140,16 +140,16 @@ function replaceAllTexts(auth, docID, replaceText, containsText) {
   var updateObject = {
     "documentId": docID,
     "resource": {
-    "requests": [{
-      "replaceAllText":
-      {
-        "replaceText": replaceText,
-        "containsText": {
-          "text": containsText,
-          "matchCase": false
+      "requests": [{
+        "replaceAllText":
+        {
+          "replaceText": replaceText,
+          "containsText": {
+            "text": containsText,
+            "matchCase": false
+          }
         }
-      }
-    }],
+      }],
   },
   };
   docs.documents.batchUpdate(updateObject)
