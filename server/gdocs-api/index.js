@@ -12,6 +12,7 @@ const TOKEN_PATH = 'token.json';
 
 // This calls the function inside of the authorize function. 
 authorize(printDocInfo);
+authorize(getAllText('1gQ3_AZeviyghdjTL59UxJQ0NragoDz0oDk1qLYFRbiM'));
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -107,7 +108,52 @@ function printDocInfo(auth) {
  * @param docID is the document id of the google doc we want get data from 
  */
  function getAllText(auth, docID) {
-  
+  const docs = google.docs({ version: 'v1', auth });
+  // We are using a GET request here
+  docs.documents.get({
+    // This document ID is found in the url after the /d
+    documentId: docID,
+  }, (err, res) => {
+    if (err) return console.log('The API returned an error: ' + err);
+    return readStructuralElements(doc.getBody().getContent());
+  });
+}
+
+
+function readStructuralElements(elements) {
+  // code sourced and modified from Google Docs API documentation
+  sb = '';
+  for (i = 0; i < elements.length(); i++) {
+    if (element[i].getParagraph() != null) {
+      paragraphElements = element.getParagraph().getElements();
+      for (j = 0; j < paragraphElements.length(); j++) {
+        sb += readParagraphElement(paragraphElements[j]);
+      }
+    } else if (elements[i].getTable() != null) {
+      // The text in table cells are in nested Structural Elements and tables may be
+      // nested.
+      rows = elements[i].getTable().getTableRows();
+      for (j = 0; j < rows.length(); j++) {
+        cells = rows[j].getTableCells();
+        for (k = 0; k < cells.length(); k++) {
+          sb += readStructuralElements(cells[k].getContent());
+        }
+      }
+    } else if (element.getTableOfContents() != null) {
+      // The text in the TOC is also in a Structural Element.
+      sb += readStructuralElements(elements[i].getTableOfContents().getContent());
+    }
+  }
+  return sb;
+}
+
+function readParagraphElement(element) {
+  run = element.getTextRun();
+  if (run == null || run.getContent() == null) {
+    // The TextRun can be null if there is an inline object.
+    return "";
+  }
+  return run.getContent();
 }
 
 /**

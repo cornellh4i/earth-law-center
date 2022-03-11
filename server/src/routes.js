@@ -15,5 +15,9 @@ module.exports = () => {
     res.json({ msg: `My favorite food is, ${req.params.foodfav}`});
   });
 
+  router.get('/movies/:favmovie', async (req, res) => {
+    res.json({ msg: `My favorite movie is, ${req.params.favmovie}`});
+  });
+
   return router;
 }
