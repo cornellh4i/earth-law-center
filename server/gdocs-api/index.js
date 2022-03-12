@@ -12,7 +12,24 @@ const TOKEN_PATH = 'token.json';
 
 // This calls the function inside of the authorize function. 
 // authorize(printDocInfo);
-authorizeReplaceAllTexts(replaceAllTexts, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "culture", "containsText");
+
+// Run and test the replaceAllTexts function
+// param to change 
+const docId = "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os"
+const empty_docid = "1PLm7mpUY-V5fJI54R-M6uxfWpY3yFCRd25K9DBJQDRg"
+// 1. find every occurence of culture and replace them with elc and replace them
+// back with another call
+authorizeReplaceAllTexts(replaceAllTexts, docId, "ELC!!!!!!!", "culture");
+// add a get all document contents function call to check if change is occurred
+authorizeReplaceAllTexts(replaceAllTexts, docId, "culture", "ELC!!!!!!!");
+
+// 2. replace a piece of text not occurring in the document 
+// should have no effect
+authorizeReplaceAllTexts(replaceAllTexts, docId, "NOEFFECT!!!", "abc");
+
+// 3. replace a nonzero length of text in an empty document should have no 
+// effect
+authorizeReplaceAllTexts(replaceAllTexts, empty_docid, "NOEFFECT!!!", "abc");
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -136,7 +153,13 @@ function getAllText(auth, docID) {
  * 
  */
 function replaceAllTexts(auth, docID, replaceText, containsText) {
+  // get all the documents of the associated authorized user
   const docs = google.docs({ version: 'v1', auth });
+  // pass in the document ID to specify a document to change and put a key of 
+  // replaceAllText representing type of request and its value which is a 
+  // dictionary(json) that contains the the text to substitute in(replaceText) 
+  // and the text to substitute for(containsText) 
+  // string match ignoring uppercase and lowercase (matchCase false)
   var updateObject = {
     "documentId": docID,
     "resource": {
@@ -150,8 +173,9 @@ function replaceAllTexts(auth, docID, replaceText, containsText) {
           }
         }
       }],
-  },
+    },
   };
+  // make the google doc api call passing in the update request object
   docs.documents.batchUpdate(updateObject)
     .then(function (res) {
       console.log(res);
