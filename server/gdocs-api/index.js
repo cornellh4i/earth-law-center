@@ -131,7 +131,7 @@ function printDocInfo(auth) {
     documentId: docID,
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
-    return readStructuralElements(doc.getBody().getContent());
+    return readStructuralElements(res.data.body.content);
   });
 }
 
@@ -139,8 +139,8 @@ function printDocInfo(auth) {
 function readStructuralElements(elements) {
   // code sourced and modified from Google Docs API documentation
   sb = '';
-  for (i = 0; i < elements.length(); i++) {
-    if (element[i].getParagraph() != null) {
+  for (i = 0; i < elements.length; i++) {
+    if (elements[i].paragraph != null) {
       paragraphElements = element.getParagraph().getElements();
       for (j = 0; j < paragraphElements.length(); j++) {
         sb += readParagraphElement(paragraphElements[j]);
