@@ -3,6 +3,7 @@ const readline = require('readline');
 const { google } = require('googleapis');
 // The dotenv package allows us to use the .env file located in the gdocs-api folder.
 const dotenv = require('dotenv');
+const { run } = require('googleapis/build/src/apis/run');
 dotenv.config();
 
 const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
@@ -12,7 +13,7 @@ const TOKEN_PATH = 'token.json';
 
 // This calls the function inside of the authorize function. 
 // authorize(printDocInfo);
- authorizeGetAllText(getAllText, '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os');
+ authorizeGetAllText(getAllText, '12Mua0KcYNWt4Njia9VZzm8ONg_dFlQNRlWxDdLmmf6s');
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -93,7 +94,7 @@ function printDocInfo(auth) {
   // We are using a GET request here
   docs.documents.get({
     // This document ID is found in the url after the /d
-    documentId: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os',
+    documentId: '12Mua0KcYNWt4Njia9VZzm8ONg_dFlQNRlWxDdLmmf6s',
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
     // Below we are getting the length all of the content in the code 
@@ -131,45 +132,69 @@ function printDocInfo(auth) {
     documentId: docID,
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
-    return readStructuralElements(res.data.body.content);
+    var allText = {
+      "title" : res.data.title
+    }
+    for (i = 0; i < res.data.body.content.length; i++) {
+      allText["textRun" + i] = readStructuralElements(res.data.body.content[i]);
+    }
+    console.log(allText);
   });
 }
 
 
-function readStructuralElements(elements) {
+function readStructuralElements(element) {
   // code sourced and modified from Google Docs API documentation
-  sb = '';
-  for (i = 0; i < elements.length; i++) {
-    if (elements[i].paragraph != null) {
-      paragraphElements = element.getParagraph().getElements();
-      for (j = 0; j < paragraphElements.length(); j++) {
-        sb += readParagraphElement(paragraphElements[j]);
-      }
-    } else if (elements[i].getTable() != null) {
-      // The text in table cells are in nested Structural Elements and tables may be
-      // nested.
-      rows = elements[i].getTable().getTableRows();
-      for (j = 0; j < rows.length(); j++) {
-        cells = rows[j].getTableCells();
-        for (k = 0; k < cells.length(); k++) {
-          sb += readStructuralElements(cells[k].getContent());
-        }
-      }
-    } else if (element.getTableOfContents() != null) {
-      // The text in the TOC is also in a Structural Element.
-      sb += readStructuralElements(elements[i].getTableOfContents().getContent());
+  var textRun = {
+    "text" : "",
+    "style" : {
+      "bold" : false,
+      "italic" : false,
+      "underline" : false,
     }
   }
-  return sb;
+  if (element.paragraph != null) {
+    paragraphElements = element.paragraph.elements;
+    for (j = 0; j < paragraphElements.length; j++) {
+      textRun.text += readParagraphElement(paragraphElements[j]);
+      textRun.style = readParagraphElementStyle(paragraphElements[j]);
+    }
+  } else if (element.table != null) {
+    // The text in table cells are in nested Structural Elements and tables may be
+    // nested.
+    rows = element.table.getTableRows();
+    for (j = 0; j < rows.length(); j++) {
+      cells = rows[j].getTableCells();
+      for (k = 0; k < cells.length(); k++) {
+        textRun.text += readStructuralElements(cells[k].getContent());
+      }
+    }
+  } else if (element.tableOfContents != null) {
+    // The text in the TOC is also in a Structural Element.
+    textRun.text += readStructuralElements(element.getTableOfContents().getContent());
+  }  
+  return textRun;
 }
 
 function readParagraphElement(element) {
-  run = element.getTextRun();
-  if (run == null || run.getContent() == null) {
-    // The TextRun can be null if there is an inline object.
+  textRun = element.textRun;
+  if (textRun == null || textRun.content == null) {
+    // The TextRun can be null if there is an inline object.\
     return "";
   }
-  return run.getContent();
+  return textRun.content;
+}
+
+function readParagraphElementStyle(element) {
+  var style = {
+    "bold" : false,
+    "italic" : false,
+    "underline" : false,
+  }
+  style.bold = element.textRun.textStyle.bold;
+  style.italic = element.textRun.textStyle.italic;
+  style.underline = element.textRun.textStyle.underline;
+  return style;
 }
 
 /**
