@@ -4,6 +4,7 @@
 const { google } = require('googleapis');
 
 /**
+ * THIS IS A SAMPLE FUNCTION
  * Prints some information from a sample doc: 
  * https://docs.google.com/document/d/1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os/edit
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
