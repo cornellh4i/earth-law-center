@@ -14,7 +14,7 @@ const TOKEN_PATH = 'token.json';
 // ************ TESTING FUNCTIONS BELOW: ***********************************************************************
 
 // INSERT TEXT TESTS: 
-// authorizeInsertText(insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
+authorizeInsertText(insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
 
 // REPLACE ALL TEXT TESTS: 
 // const docId = "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os"
@@ -226,7 +226,7 @@ function replaceAllTexts(auth, docID, replaceText, containsText) {
   // make the google doc api call passing in the update request object
   docs.documents.batchUpdate(updateObject)
     .then(function (res) {
-      console.log(res);
+      // console.log(res);
     }, function (err) {
       console.error(err);
     });
