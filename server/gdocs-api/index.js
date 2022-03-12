@@ -5,13 +5,31 @@ const { google } = require('googleapis');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/documents'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first time. 
 const TOKEN_PATH = 'token.json';
 
 // This calls the function inside of the authorize function. 
-authorize(printDocInfo);
+// authorize(printDocInfo);
+
+// Run and test the replaceAllTexts function
+// param to change 
+const docId = "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os"
+const empty_docid = "1PLm7mpUY-V5fJI54R-M6uxfWpY3yFCRd25K9DBJQDRg"
+// 1. find every occurence of culture and replace them with elc and replace them
+// back with another call
+authorizeReplaceAllTexts(replaceAllTexts, docId, "ELC!!!!!!!", "culture");
+// add a get all document contents function call to check if change is occurred
+authorizeReplaceAllTexts(replaceAllTexts, docId, "culture", "ELC!!!!!!!");
+
+// 2. replace a piece of text not occurring in the document 
+// should have no effect
+authorizeReplaceAllTexts(replaceAllTexts, docId, "NOEFFECT!!!", "abc");
+
+// 3. replace a nonzero length of text in an empty document should have no 
+// effect
+authorizeReplaceAllTexts(replaceAllTexts, empty_docid, "NOEFFECT!!!", "abc");
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -32,6 +50,22 @@ function authorize(callback) {
     if (err) return getNewToken(oAuth2Client, callback);
     oAuth2Client.setCredentials(JSON.parse(token));
     callback(oAuth2Client);
+  });
+}
+
+function authorizeReplaceAllTexts(callback, docId, replaceText, containsText) {
+  const client_id = process.env.CLIENT_ID;
+  const client_secret = process.env.CLIENT_SECRET;
+  const redirect_uris = process.env.REDIRECT_URIS;
+  // const { client_secret, client_id, redirect_uris } = credentials.installed;
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id, client_secret, redirect_uris[0]);
+
+  // Check if we have previously stored a token.
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return getNewToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(JSON.parse(token));
+    callback(oAuth2Client, docId, replaceText, containsText);
   });
 }
 
@@ -58,7 +92,7 @@ function getNewToken(oAuth2Client, callback) {
       oAuth2Client.setCredentials(token);
       // Store the token to disk for later program executions
       fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-        if (err) console.error(err); 
+        if (err) console.error(err);
         console.log('Token stored to', TOKEN_PATH);
       });
       callback(oAuth2Client);
@@ -97,8 +131,8 @@ function printDocInfo(auth) {
  * @param location is the location in the document we want to insert the data at
  * 
  */
- function insertText(auth, docID, text, location) {
-  
+function insertText(auth, docID, text, location) {
+
 }
 
 /**
@@ -106,8 +140,8 @@ function printDocInfo(auth) {
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param docID is the document id of the google doc we want get data from 
  */
- function getAllText(auth, docID) {
-  
+function getAllText(auth, docID) {
+
 }
 
 /**
@@ -118,7 +152,35 @@ function printDocInfo(auth) {
  * @param containsText is the text in the document matching this substring that will be replaced by replaceText.
  * 
  */
- function replaceText(auth, docID, replaceText, containsText) {
-  
+function replaceAllTexts(auth, docID, replaceText, containsText) {
+  // get all the documents of the associated authorized user
+  const docs = google.docs({ version: 'v1', auth });
+  // pass in the document ID to specify a document to change and put a key of 
+  // replaceAllText representing type of request and its value which is a 
+  // dictionary(json) that contains the the text to substitute in(replaceText) 
+  // and the text to substitute for(containsText) 
+  // string match ignoring uppercase and lowercase (matchCase false)
+  var updateObject = {
+    "documentId": docID,
+    "resource": {
+      "requests": [{
+        "replaceAllText":
+        {
+          "replaceText": replaceText,
+          "containsText": {
+            "text": containsText,
+            "matchCase": false
+          }
+        }
+      }],
+    },
+  };
+  // make the google doc api call passing in the update request object
+  docs.documents.batchUpdate(updateObject)
+    .then(function (res) {
+      console.log(res);
+    }, function (err) {
+      console.error(err);
+    });
 }
 
