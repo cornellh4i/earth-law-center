@@ -10,26 +10,27 @@ const SCOPES = ['https://www.googleapis.com/auth/documents'];
 // created automatically when the authorization flow completes for the first time. 
 const TOKEN_PATH = 'token.json';
 
-// This calls the function inside of the authorize function. 
-// authorize(printDocInfo);
+// ************ TESTING FUNCTIONS BELOW: ***********************************************************************
 
-// Run and test the replaceAllTexts function
-// param to change 
-const docId = "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os"
-const empty_docid = "1PLm7mpUY-V5fJI54R-M6uxfWpY3yFCRd25K9DBJQDRg"
+// INSERT TEXT TESTS: 
+// authorizeInsertText(insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
+
+// REPLACE ALL TEXT TESTS: 
+// const docId = "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os"
+// const empty_docid = "1PLm7mpUY-V5fJI54R-M6uxfWpY3yFCRd25K9DBJQDRg"
 // 1. find every occurence of culture and replace them with elc and replace them
 // back with another call
-authorizeReplaceAllTexts(replaceAllTexts, docId, "ELC!!!!!!!", "culture");
+// authorizeReplaceAllTexts(replaceAllTexts, docId, "ELC!!!!!!!", "culture");
 // add a get all document contents function call to check if change is occurred
-authorizeReplaceAllTexts(replaceAllTexts, docId, "culture", "ELC!!!!!!!");
-
+// authorizeReplaceAllTexts(replaceAllTexts, docId, "culture", "ELC!!!!!!!");
 // 2. replace a piece of text not occurring in the document 
 // should have no effect
-authorizeReplaceAllTexts(replaceAllTexts, docId, "NOEFFECT!!!", "abc");
-
+// authorizeReplaceAllTexts(replaceAllTexts, docId, "NOEFFECT!!!", "abc");
 // 3. replace a nonzero length of text in an empty document should have no 
 // effect
-authorizeReplaceAllTexts(replaceAllTexts, empty_docid, "NOEFFECT!!!", "abc");
+// authorizeReplaceAllTexts(replaceAllTexts, empty_docid, "NOEFFECT!!!", "abc");
+
+// ************************************************************************************************************
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -53,6 +54,12 @@ function authorize(callback) {
   });
 }
 
+/**
+ * Create an OAuth2 client with the given credentials, and then execute the
+ * given callback function.
+ * @param {Object} credentials The authorization client credentials.
+ * @param {function} callback The callback to call with the authorized client.
+ */
 function authorizeReplaceAllTexts(callback, docId, replaceText, containsText) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
@@ -66,6 +73,27 @@ function authorizeReplaceAllTexts(callback, docId, replaceText, containsText) {
     if (err) return getNewToken(oAuth2Client, callback);
     oAuth2Client.setCredentials(JSON.parse(token));
     callback(oAuth2Client, docId, replaceText, containsText);
+  });
+}
+
+/**
+ * Create an OAuth2 client with the given credentials, and then execute the
+ * given callback function.
+ * @param {Object} credentials The authorization client credentials.
+ * @param {function} callback The callback to call with the authorized client.
+ */
+function authorizeInsertText(callback, docID, text, location) {
+  const client_id = process.env.CLIENT_ID;
+  const client_secret = process.env.CLIENT_SECRET;
+  const redirect_uris = process.env.REDIRECT_URIS;
+  // const { client_secret, client_id, redirect_uris } = credentials.installed;
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id, client_secret, redirect_uris[0]);
+  // Check if we have previously stored a token.
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return getNewToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(JSON.parse(token));
+    callback(oAuth2Client, docID, text, location);
   });
 }
 
@@ -132,7 +160,26 @@ function printDocInfo(auth) {
  * 
  */
 function insertText(auth, docID, text, location) {
+  const docs = google.docs({ version: 'v1', auth });
+  
+  // JSON request body, we insert variables for request params
+  var myObject = {
+    documentId: docID,
+    "resource": {
+      "requests": [{
+        "insertText": {
+          "text": text,
+          "location": location,
+        },
+      }],
+    },
+    "writeControl": {}
+  }
 
+  // Send the JSON object in a batchUpdate request
+  docs.documents.batchUpdate(myObject, function (err, res) {
+    if (err) return console.log('The API returned an error: ' + err);
+  });
 }
 
 /**
