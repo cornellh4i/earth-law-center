@@ -10,27 +10,26 @@ const SCOPES = ['https://www.googleapis.com/auth/documents'];
 // created automatically when the authorization flow completes for the first time. 
 const TOKEN_PATH = 'token.json';
 
-// This calls the function inside of the authorize function. 
-// authorize(printDocInfo);
+// ************ TESTING FUNCTIONS BELOW: ***********************************************************************
 
-// ************ TESTING CALLS BELOW: ************************************************************************
-authorizeInsertText(insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
+// INSERT TEXT TESTS: 
+// authorizeInsertText(insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
 
-// Run and test the replaceAllTexts function
-// param to change 
-const docId = "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os"
-const empty_docid = "1PLm7mpUY-V5fJI54R-M6uxfWpY3yFCRd25K9DBJQDRg"
+// REPLACE ALL TEXT TESTS: 
+// const docId = "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os"
+// const empty_docid = "1PLm7mpUY-V5fJI54R-M6uxfWpY3yFCRd25K9DBJQDRg"
 // 1. find every occurence of culture and replace them with elc and replace them
 // back with another call
-authorizeReplaceAllTexts(replaceAllTexts, docId, "ELC!!!!!!!", "culture");
+// authorizeReplaceAllTexts(replaceAllTexts, docId, "ELC!!!!!!!", "culture");
 // add a get all document contents function call to check if change is occurred
-authorizeReplaceAllTexts(replaceAllTexts, docId, "culture", "ELC!!!!!!!");
+// authorizeReplaceAllTexts(replaceAllTexts, docId, "culture", "ELC!!!!!!!");
 // 2. replace a piece of text not occurring in the document 
 // should have no effect
-authorizeReplaceAllTexts(replaceAllTexts, docId, "NOEFFECT!!!", "abc");
+// authorizeReplaceAllTexts(replaceAllTexts, docId, "NOEFFECT!!!", "abc");
 // 3. replace a nonzero length of text in an empty document should have no 
 // effect
-authorizeReplaceAllTexts(replaceAllTexts, empty_docid, "NOEFFECT!!!", "abc");
+// authorizeReplaceAllTexts(replaceAllTexts, empty_docid, "NOEFFECT!!!", "abc");
+
 // ************************************************************************************************************
 
 /**
