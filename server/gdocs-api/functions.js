@@ -1,3 +1,6 @@
+/** 
+ * Contains basic CRUD operations to alter a google doc.
+ */
 const { google } = require('googleapis');
 
 /**
