@@ -11,8 +11,8 @@ const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
 const TOKEN_PATH = 'token.json';
 
 // This calls the function inside of the authorize function. 
-authorize(printDocInfo);
-authorize(getAllText('1gQ3_AZeviyghdjTL59UxJQ0NragoDz0oDk1qLYFRbiM'));
+// authorize(printDocInfo);
+ authorizeGetAllText(getAllText, '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os');
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -183,4 +183,3 @@ function readParagraphElement(element) {
  function replaceText(auth, docID, replaceText, containsText) {
   
 }
-
