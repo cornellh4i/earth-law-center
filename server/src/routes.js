@@ -12,8 +12,9 @@ module.exports = () => {
   });
 
   router.get('/food/:foodleast/:foodfav', async (req, res) => {
-    res.json({ msg: `My favorite food is, ${req.params.foodfav}`});
+    res.json({ msg: `My favorite food is, ${req.params.foodfav}` });
   });
+
 
   return router;
 }
