@@ -5,7 +5,7 @@ const { google } = require('googleapis');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/documents'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first time. 
 const TOKEN_PATH = 'token.json';
@@ -13,7 +13,7 @@ const TOKEN_PATH = 'token.json';
 // This calls the function inside of the authorize function. 
 authorize(printDocInfo);
 
-// authorizeInsertText(insertText, <docID>, <text>, <location>)
+authorizeInsertText(insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -115,8 +115,27 @@ function printDocInfo(auth) {
  * @param location is the location in the document we want to insert the data at
  * 
  */
- function insertText(auth, docID, text, location) {
+function insertText(auth, docID, text, location) {
+  const docs = google.docs({ version: 'v1', auth });
   
+  // JSON request body, we insert variables for request params
+  var myObject = {
+    documentId: docID,
+    "resource": {
+      "requests": [{
+        "insertText": {
+          "text": text,
+          "location": location,
+        },
+      }],
+    },
+    "writeControl": {}
+  }
+
+  // Send the JSON object in a batchUpdate request
+  docs.documents.batchUpdate(myObject, function (err, res) {
+    if (err) return console.log('The API returned an error: ' + err);
+  });
 }
 
 /**
