@@ -13,7 +13,7 @@ const TOKEN_PATH = 'token.json';
 
 // This calls the function inside of the authorize function. 
 // authorize(printDocInfo);
- authorizeGetAllText(getAllText, '12Mua0KcYNWt4Njia9VZzm8ONg_dFlQNRlWxDdLmmf6s');
+ authorizeGetAllText(getAllText, '1OZrCP-jvxxlZim6uInLzR0UjPxmJnLcl88oDToTHmmw');
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -94,7 +94,7 @@ function printDocInfo(auth) {
   // We are using a GET request here
   docs.documents.get({
     // This document ID is found in the url after the /d
-    documentId: '12Mua0KcYNWt4Njia9VZzm8ONg_dFlQNRlWxDdLmmf6s',
+    documentId: '1OZrCP-jvxxlZim6uInLzR0UjPxmJnLcl88oDToTHmmw',
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
     // Below we are getting the length all of the content in the code 
@@ -135,15 +135,17 @@ function printDocInfo(auth) {
     var allText = {
       "title" : res.data.title
     }
-    for (i = 0; i < res.data.body.content.length; i++) {
-      allText["textRun" + i] = readStructuralElements(res.data.body.content[i]);
+    allText["textRun0"] = readStructuralElements(res.data.body.content[0]);
+    for (i = 1; i < res.data.body.content.length; i++) {
+      allText["textRun" + i] = readStructuralElements(res.data.body.content[i], allText["textRun" + (i-1)]);
     }
     console.log(allText);
+    return allText;
   });
 }
 
 
-function readStructuralElements(element) {
+function readStructuralElements(element, prevTextRun) {
   // code sourced and modified from Google Docs API documentation
   var textRun = {
     "text" : "",
@@ -151,6 +153,11 @@ function readStructuralElements(element) {
       "bold" : false,
       "italic" : false,
       "underline" : false,
+    },
+    "listStyle" : {
+      "isList" : false,
+      "nestingLevel" : 0,
+      "numberInList" : 0
     }
   }
   if (element.paragraph != null) {
@@ -158,6 +165,7 @@ function readStructuralElements(element) {
     for (j = 0; j < paragraphElements.length; j++) {
       textRun.text += readParagraphElement(paragraphElements[j]);
       textRun.style = readParagraphElementStyle(paragraphElements[j]);
+      textRun.listStyle = readParagraphElementListStyle(element.paragraph.bullet, prevTextRun.listStyle);
     }
   } else if (element.table != null) {
     // The text in table cells are in nested Structural Elements and tables may be
@@ -191,10 +199,28 @@ function readParagraphElementStyle(element) {
     "italic" : false,
     "underline" : false,
   }
-  style.bold = element.textRun.textStyle.bold;
-  style.italic = element.textRun.textStyle.italic;
-  style.underline = element.textRun.textStyle.underline;
+  style.bold = element.textRun.textStyle.bold == true;
+  style.italic = element.textRun.textStyle.italic == true;
+  style.underline = element.textRun.textStyle.underline == true;
   return style;
+}
+
+function readParagraphElementListStyle(bullet, prevListStyle) {
+  var listStyle = {
+    "isList" : false,
+    "nestingLevel" : 0,
+    "numberInList" : 0
+  }
+  listStyle.isList = bullet != null;
+  listStyle.numberInList = + (bullet != null);
+  if (bullet != null && bullet.nestingLevel != null){
+    listStyle.nestingLevel = bullet.nestingLevel;
+  }
+  if (prevListStyle.isList){
+    listStyle.numberInList = prevListStyle.numberInList + 1;
+    console.log(prevListStyle)
+  }
+  return listStyle;
 }
 
 /**
