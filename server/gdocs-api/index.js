@@ -171,9 +171,13 @@ function insertText(auth, docID, text, location) {
       "writeControl": {}
     }
     // Send the JSON object in a batchUpdate request
-    docs.documents.batchUpdate(updateObject, (err, res)=> {
-      if (err) return console.log(`The API returned an error: ` + err)
-      else console.log(`The copied file for insertion is accessible at ` + docCopyId);
+    docs.documents.batchUpdate(updateObject, (err, res) => {
+      if (err) {
+        return console.log(`The API returned an error: ` + err)
+      } else {
+        console.log(`The copied file for insertion is accessible at ` + docCopyId);
+        return docCopyId;
+      } 
     });
   });
 }
@@ -227,8 +231,12 @@ function replaceAllTexts(auth, docID, replaceText, containsText) {
     };
     // Send the JSON object in a batchUpdate request
     docs.documents.batchUpdate(updateObject, (err, res) => {
-      if (err) return console.log(`The API returned an error: ` + err)
-      else console.log(`The copied file for replacement is accessible at ` + docCopyId);
+      if (err) {
+        return console.log(`The API returned an error: ` + err)
+      } else {
+        console.log(`The copied file for replacement is accessible at ` + docCopyId);
+        return docCopyId;
+      } 
     });
   });
 }
