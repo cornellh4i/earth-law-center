@@ -146,7 +146,7 @@ function printDocInfo(auth) {
 function insertText(auth, docID, text, location) {
   //Authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
-  const drive=google.drive({ version: 'v2', auth });
+  const drive = google.drive({ version: 'v2', auth });
   //Copy file and store id in docCopyId
   var copyTitle = "Copy Title";
   var docCopyId;
@@ -155,7 +155,7 @@ function insertText(auth, docID, text, location) {
     resource: {
       name: copyTitle,
     }
-  }, (err, res) =>{
+  }, (err, res) => {
     docCopyId = res.data.id;
     // JSON request body for batchupdate with docCopyId
     var updateObject = {
@@ -172,8 +172,8 @@ function insertText(auth, docID, text, location) {
     }
     // Send the JSON object in a batchUpdate request
     docs.documents.batchUpdate(updateObject, (err, res)=> {
-      if (err) return console.log('The API returned an error: ' + err)
-      else console.log("The copied file for insertion is accessible at "+docCopyId);
+      if (err) return console.log(`The API returned an error: ` + err)
+      else console.log(`The copied file for insertion is accessible at ` + docCopyId);
     });
   });
 }
@@ -198,7 +198,7 @@ function getAllText(auth, docID) {
 function replaceAllTexts(auth, docID, replaceText, containsText) {
   //Authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
-  const drive=google.drive({ version: 'v2', auth });
+  const drive = google.drive({ version: 'v2', auth });
   //Copy file and store id in docCopyId
   var copyTitle = "Copy Title";
   var docCopyId;
@@ -226,9 +226,9 @@ function replaceAllTexts(auth, docID, replaceText, containsText) {
       },
     };
     // Send the JSON object in a batchUpdate request
-    docs.documents.batchUpdate(updateObject, (err, res)=> {
-      if (err) return console.log('The API returned an error: ' + err)
-      else console.log("The copied file for replacement is accessible at "+docCopyId);
+    docs.documents.batchUpdate(updateObject, (err, res) => {
+      if (err) return console.log(`The API returned an error: ` + err)
+      else console.log(`The copied file for replacement is accessible at ` + docCopyId);
     });
   });
 }
