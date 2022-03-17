@@ -11,6 +11,11 @@ const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.google
 // created automatically when the authorization flow completes for the first time. 
 const TOKEN_PATH = 'token.json';
 
+// COPY AND BATCH UPDATE: 
+const docId = "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os"
+authorizeReplaceAllTexts(replaceAllTexts, docId, "Insomnia","Synesthesia");
+authorizeInsertText(insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
+
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
@@ -139,25 +144,38 @@ function printDocInfo(auth) {
  * 
  */
 function insertText(auth, docID, text, location) {
+  //authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
-  
-  // JSON request body, we insert variables for request params
-  var myObject = {
-    documentId: docID,
-    "resource": {
-      "requests": [{
-        "insertText": {
-          "text": text,
-          "location": location,
-        },
-      }],
-    },
-    "writeControl": {}
-  }
-
-  // Send the JSON object in a batchUpdate request
-  docs.documents.batchUpdate(myObject, function (err, res) {
-    if (err) return console.log('The API returned an error: ' + err);
+  const drive=google.drive({ version: 'v2', auth });
+  //copy file and store id in docCopyId
+  var copyTitle = "Copy Title";
+  var docCopyId;
+  let request = {
+    name: copyTitle,
+  };
+  drive.files.copy({
+    fileId: docID,
+    resource: request,
+  }, (err, res) =>{
+    docCopyId = res.data.id;
+    // JSON request body for batchupdate with docCopyId
+    var updateObject = {
+      documentId: docCopyId,
+      "resource": {
+        "requests": [{
+          "insertText": {
+            "text": text,
+            "location": location,
+          },
+        }],
+      },
+      "writeControl": {}
+    }
+    // Send the JSON object in a batchUpdate request
+    docs.documents.batchUpdate(updateObject, (err, res)=> {
+      if (err) return console.log('The API returned an error: ' + err)
+      else console.log("The copied file for insertion is accessible at "+docCopyId);
+    });
   });
 }
 
@@ -179,34 +197,41 @@ function getAllText(auth, docID) {
  * 
  */
 function replaceAllTexts(auth, docID, replaceText, containsText) {
-  // get all the documents of the associated authorized user
+  //authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
-  // pass in the document ID to specify a document to change and put a key of 
-  // replaceAllText representing type of request and its value which is a 
-  // dictionary(json) that contains the the text to substitute in(replaceText) 
-  // and the text to substitute for(containsText) 
-  // string match ignoring uppercase and lowercase (matchCase false)
-  var updateObject = {
-    "documentId": docID,
-    "resource": {
-      "requests": [{
-        "replaceAllText":
-        {
-          "replaceText": replaceText,
-          "containsText": {
-            "text": containsText,
-            "matchCase": false
-          }
-        }
-      }],
-    },
+  const drive=google.drive({ version: 'v2', auth });
+  //copy file and store id in docCopyId
+  var copyTitle = "Copy Title";
+  var docCopyId;
+  let request = {
+    name: copyTitle,
   };
-  // make the google doc api call passing in the update request object
-  docs.documents.batchUpdate(updateObject)
-    .then(function (res) {
-      // console.log(res);
-    }, function (err) {
-      console.error(err);
+  drive.files.copy({
+    fileId: docID,
+    resource: request,
+  }, (err, res) => {
+    docCopyId = res.data.id;
+    // JSON request body for batchupdate with docCopyId
+    var updateObject = {
+      "documentId": docCopyId,
+      "resource": {
+        "requests": [{
+          "replaceAllText":
+          {
+            "replaceText": replaceText,
+            "containsText": {
+              "text": containsText,
+              "matchCase": false
+            }
+          }
+        }],
+      },
+    };
+    // Send the JSON object in a batchUpdate request
+    docs.documents.batchUpdate(updateObject, (err, res)=> {
+      if (err) return console.log('The API returned an error: ' + err)
+      else console.log("The copied file for replacement is accessible at "+docCopyId);
     });
+  });
 }
 
