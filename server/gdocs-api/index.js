@@ -11,7 +11,7 @@ const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.google
 // created automatically when the authorization flow completes for the first time. 
 const TOKEN_PATH = 'token.json';
 
-// COPY AND BATCH UPDATE: 
+// TESTING FOR COPY & BATCHUPDATE
 const docId = "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os"
 authorizeReplaceAllTexts(replaceAllTexts, docId, "Insomnia","Synesthesia");
 authorizeInsertText(insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
@@ -144,18 +144,17 @@ function printDocInfo(auth) {
  * 
  */
 function insertText(auth, docID, text, location) {
-  //authorize docs and drive
+  //Authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
   const drive=google.drive({ version: 'v2', auth });
-  //copy file and store id in docCopyId
+  //Copy file and store id in docCopyId
   var copyTitle = "Copy Title";
   var docCopyId;
-  let request = {
-    name: copyTitle,
-  };
   drive.files.copy({
     fileId: docID,
-    resource: request,
+    resource: {
+      name: copyTitle,
+    }
   }, (err, res) =>{
     docCopyId = res.data.id;
     // JSON request body for batchupdate with docCopyId
@@ -197,18 +196,17 @@ function getAllText(auth, docID) {
  * 
  */
 function replaceAllTexts(auth, docID, replaceText, containsText) {
-  //authorize docs and drive
+  //Authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
   const drive=google.drive({ version: 'v2', auth });
-  //copy file and store id in docCopyId
+  //Copy file and store id in docCopyId
   var copyTitle = "Copy Title";
   var docCopyId;
-  let request = {
-    name: copyTitle,
-  };
   drive.files.copy({
     fileId: docID,
-    resource: request,
+    resource: {
+      name: copyTitle,
+    }
   }, (err, res) => {
     docCopyId = res.data.id;
     // JSON request body for batchupdate with docCopyId
