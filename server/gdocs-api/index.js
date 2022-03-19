@@ -4,17 +4,17 @@ const { google } = require('googleapis');
 // The dotenv package allows us to use the .env file located in the gdocs-api folder.
 const dotenv = require('dotenv');
 const { run } = require('googleapis/build/src/apis/run');
+const functions = require('./functions.js');
 dotenv.config();
 
-const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive'];
+
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first time. 
 const TOKEN_PATH = 'token.json';
-
 // This calls the function inside of the authorize function. 
 // authorize(printDocInfo);
  authorizeGetAllText(getAllText, '1OZrCP-jvxxlZim6uInLzR0UjPxmJnLcl88oDToTHmmw');
-
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
@@ -54,6 +54,49 @@ function authorizeGetAllText(callback, docID) {
 }
 
 /**
+ * Create an OAuth2 client with the given credentials, and then execute the
+ * given callback function.
+ * @param {Object} credentials The authorization client credentials.
+ * @param {function} callback The callback to call with the authorized client.
+ */
+function authorizeReplaceAllTexts(callback, docId, replaceText, containsText) {
+  const client_id = process.env.CLIENT_ID;
+  const client_secret = process.env.CLIENT_SECRET;
+  const redirect_uris = process.env.REDIRECT_URIS;
+  // const { client_secret, client_id, redirect_uris } = credentials.installed;
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id, client_secret, redirect_uris[0]);
+
+  // Check if we have previously stored a token.
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return getNewToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(JSON.parse(token));
+    callback(oAuth2Client, docId, replaceText, containsText);
+  });
+}
+
+/**
+ * Create an OAuth2 client with the given credentials, and then execute the
+ * given callback function.
+ * @param {Object} credentials The authorization client credentials.
+ * @param {function} callback The callback to call with the authorized client.
+ */
+function authorizeInsertText(callback, docID, text, location) {
+  const client_id = process.env.CLIENT_ID;
+  const client_secret = process.env.CLIENT_SECRET;
+  const redirect_uris = process.env.REDIRECT_URIS;
+  // const { client_secret, client_id, redirect_uris } = credentials.installed;
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id, client_secret, redirect_uris[0]);
+  // Check if we have previously stored a token.
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return getNewToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(JSON.parse(token));
+    callback(oAuth2Client, docID, text, location);
+  });
+}
+
+/**
  * Get and store new token after prompting for user authorization, and then
  * execute the given callback with the authorized OAuth2 client.
  * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
@@ -76,7 +119,7 @@ function getNewToken(oAuth2Client, callback) {
       oAuth2Client.setCredentials(token);
       // Store the token to disk for later program executions
       fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-        if (err) console.error(err); 
+        if (err) console.error(err);
         console.log('Token stored to', TOKEN_PATH);
       });
       callback(oAuth2Client);
