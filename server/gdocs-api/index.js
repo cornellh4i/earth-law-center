@@ -132,9 +132,11 @@ function printDocInfo(auth) {
     documentId: docID,
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
+    // Adds title of doc to JSON 
     var allText = {
       "title" : res.data.title
     }
+    // Creates an attribute for each text run in the doc
     allText["textRun0"] = readStructuralElements(res.data.body.content[0]);
     for (i = 1; i < res.data.body.content.length; i++) {
       allText["textRun" + i] = readStructuralElements(res.data.body.content[i], allText["textRun" + (i-1)]);
@@ -149,11 +151,13 @@ function readStructuralElements(element, prevTextRun) {
   // code sourced and modified from Google Docs API documentation
   var textRun = {
     "text" : "",
+    // Stores data on font style
     "style" : {
       "bold" : false,
       "italic" : false,
       "underline" : false,
     },
+    // Stores data on list style
     "listStyle" : {
       "isList" : false,
       "nestingLevel" : 0,
@@ -161,8 +165,10 @@ function readStructuralElements(element, prevTextRun) {
     }
   }
   if (element.paragraph != null) {
+    // Parses text within paragraph structural element
     paragraphElements = element.paragraph.elements;
     for (j = 0; j < paragraphElements.length; j++) {
+      // Parses text, style, and list style of paragraph element
       textRun.text += readParagraphElement(paragraphElements[j]);
       textRun.style = readParagraphElementStyle(paragraphElements[j]);
       textRun.listStyle = readParagraphElementListStyle(element.paragraph.bullet, prevTextRun.listStyle);
@@ -171,6 +177,7 @@ function readStructuralElements(element, prevTextRun) {
     // The text in table cells are in nested Structural Elements and tables may be
     // nested.
     rows = element.table.getTableRows();
+    // Parses rows and columns of table
     for (j = 0; j < rows.length(); j++) {
       cells = rows[j].getTableCells();
       for (k = 0; k < cells.length(); k++) {
@@ -185,6 +192,7 @@ function readStructuralElements(element, prevTextRun) {
 }
 
 function readParagraphElement(element) {
+  // Helper for parsing paragraph element
   textRun = element.textRun;
   if (textRun == null || textRun.content == null) {
     // The TextRun can be null if there is an inline object.\
@@ -194,11 +202,15 @@ function readParagraphElement(element) {
 }
 
 function readParagraphElementStyle(element) {
+  // Helper for parsing paragraph font style
   var style = {
     "bold" : false,
     "italic" : false,
     "underline" : false,
   }
+  // Fixes issue of style attributes being undefined
+  // One issue to address: code does not work for varying styles
+  // within a text run 
   style.bold = element.textRun.textStyle.bold == true;
   style.italic = element.textRun.textStyle.italic == true;
   style.underline = element.textRun.textStyle.underline == true;
@@ -206,6 +218,7 @@ function readParagraphElementStyle(element) {
 }
 
 function readParagraphElementListStyle(bullet, prevListStyle) {
+  // Helper for parsing paragraph list style
   var listStyle = {
     "isList" : false,
     "nestingLevel" : 0,
@@ -213,9 +226,13 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
   }
   listStyle.isList = bullet != null;
   listStyle.numberInList = + (bullet != null);
+  // increments the nesting level within the listStyle JSON 
+  // to match the bullet's nesting level
   if (bullet != null && bullet.nestingLevel != null){
     listStyle.nestingLevel = bullet.nestingLevel;
   }
+  // Google Docs API does not differentiate between ordered and unordered
+  // lists, so we created our own numbering system below
   if (prevListStyle.isList){
     listStyle.numberInList = prevListStyle.numberInList + 1;
     console.log(prevListStyle)

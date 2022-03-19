@@ -20,7 +20,6 @@ function App() {
     <>
       <h1>EARTH LAW CENTER x H4I INITIAL CODE</h1>
       {/* <p>Data from server: {data}</p> */}
-      <p>Heyyy</p>
     </>
 
   );
