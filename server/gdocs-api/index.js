@@ -25,9 +25,8 @@ function authorize(callback) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
   const redirect_uris = process.env.REDIRECT_URIS;
-  // const { client_secret, client_id, redirect_uris } = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
-    client_id, client_secret, redirect_uris[0]);
+  client_id, client_secret, redirect_uris[0]);
 
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, (err, token) => {
@@ -41,7 +40,6 @@ function authorizeGetAllText(callback, docID) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
   const redirect_uris = process.env.REDIRECT_URIS;
-  // const { client_secret, client_id, redirect_uris } = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
 
@@ -63,7 +61,6 @@ function authorizeReplaceAllTexts(callback, docId, replaceText, containsText) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
   const redirect_uris = process.env.REDIRECT_URIS;
-  // const { client_secret, client_id, redirect_uris } = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
 
@@ -85,7 +82,6 @@ function authorizeInsertText(callback, docID, text, location) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
   const redirect_uris = process.env.REDIRECT_URIS;
-  // const { client_secret, client_id, redirect_uris } = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
   // Check if we have previously stored a token.
@@ -184,7 +180,7 @@ function printDocInfo(auth) {
     for (i = 1; i < res.data.body.content.length; i++) {
       allText["textRun" + i] = readStructuralElements(res.data.body.content[i], allText["textRun" + (i-1)]);
     }
-    console.log(allText);
+    // Testing: console.log(allText);
     return allText;
   });
 }
@@ -278,7 +274,7 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
   // lists, so we created our own numbering system below
   if (prevListStyle.isList){
     listStyle.numberInList = prevListStyle.numberInList + 1;
-    console.log(prevListStyle)
+    // Testing: console.log(prevListStyle)
   }
   return listStyle;
 }
