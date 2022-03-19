@@ -12,9 +12,15 @@ const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.google
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first time. 
 const TOKEN_PATH = 'token.json';
-// This calls the function inside of the authorize function. 
-// authorize(printDocInfo);
+
+
+// TESTING FOR COPY & BATCHUPDATE
+const docId = "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os"
+authorizeReplaceAllTexts(replaceAllTexts, docId, "Insomnia","Synesthesia");
+authorizeInsertText(insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
+
  authorizeGetAllText(getAllText, '1OZrCP-jvxxlZim6uInLzR0UjPxmJnLcl88oDToTHmmw');
+
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
@@ -154,8 +160,44 @@ function printDocInfo(auth) {
  * @param location is the location in the document we want to insert the data at
  * 
  */
- function insertText(auth, docID, text, location) {
-  
+
+function insertText(auth, docID, text, location) {
+  //Authorize docs and drive
+  const docs = google.docs({ version: 'v1', auth });
+  const drive = google.drive({ version: 'v2', auth });
+  //Copy file and store id in docCopyId
+  var copyTitle = "Copy Title";
+  var docCopyId;
+  drive.files.copy({
+    fileId: docID,
+    resource: {
+      name: copyTitle,
+    }
+  }, (err, res) => {
+    docCopyId = res.data.id;
+    // JSON request body for batchupdate with docCopyId
+    var updateObject = {
+      documentId: docCopyId,
+      "resource": {
+        "requests": [{
+          "insertText": {
+            "text": text,
+            "location": location,
+          },
+        }],
+      },
+      "writeControl": {}
+    }
+    // Send the JSON object in a batchUpdate request
+    docs.documents.batchUpdate(updateObject, (err, res) => {
+      if (err) {
+        return console.log(`The API returned an error: ` + err)
+      } else {
+        // console.log(`The copied file for insertion is accessible at ` + docCopyId);
+        return docCopyId;
+      } 
+    });
+  });
 }
 
 /**
@@ -287,6 +329,44 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
  * @param containsText is the text in the document matching this substring that will be replaced by replaceText.
  * 
  */
- function replaceText(auth, docID, replaceText, containsText) {
-  
+function replaceAllTexts(auth, docID, replaceText, containsText) {
+  //Authorize docs and drive
+  const docs = google.docs({ version: 'v1', auth });
+  const drive = google.drive({ version: 'v2', auth });
+  //Copy file and store id in docCopyId
+  var copyTitle = "Copy Title";
+  var docCopyId;
+  drive.files.copy({
+    fileId: docID,
+    resource: {
+      name: copyTitle,
+    }
+  }, (err, res) => {
+    docCopyId = res.data.id;
+    // JSON request body for batchupdate with docCopyId
+    var updateObject = {
+      "documentId": docCopyId,
+      "resource": {
+        "requests": [{
+          "replaceAllText":
+          {
+            "replaceText": replaceText,
+            "containsText": {
+              "text": containsText,
+              "matchCase": false
+            }
+          }
+        }],
+      },
+    };
+    // Send the JSON object in a batchUpdate request
+    docs.documents.batchUpdate(updateObject, (err, res) => {
+      if (err) {
+        return console.log(`The API returned an error: ` + err)
+      } else {
+        // console.log(`The copied file for replacement is accessible at ` + docCopyId);
+        return docCopyId;
+      } 
+    });
+  });
 }
