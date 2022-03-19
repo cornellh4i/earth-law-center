@@ -11,6 +11,8 @@ const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.google
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first time. 
 const TOKEN_PATH = 'token.json';
+authorizeInsertText(functions.insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
+
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -66,6 +68,7 @@ function authorizeInsertText(callback, docID, text, location) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
   const redirect_uris = process.env.REDIRECT_URIS;
+  console.log(`REDIRECT URI: ${redirect_uris}`)
   // const { client_secret, client_id, redirect_uris } = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
@@ -107,3 +110,6 @@ function getNewToken(oAuth2Client, callback) {
     });
   });
 }
+
+// Exporting authorize functions
+module.exports = { authorize, authorizeInsertText, authorizeReplaceAllTexts };
