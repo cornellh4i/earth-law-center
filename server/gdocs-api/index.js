@@ -67,7 +67,7 @@ function authorizeReplaceAllTexts(callback, docId, replaceText, containsText) {
 function authorizeInsertText(callback, docID, text, location) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
-  const redirect_uris = process.env.REDIRECT_URIS;
+  const redirect_uris = ["urn:ietf:wg:oauth:2.0:oob","http://localhost"];
   console.log(`REDIRECT URI: ${redirect_uris}`)
   // const { client_secret, client_id, redirect_uris } = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
