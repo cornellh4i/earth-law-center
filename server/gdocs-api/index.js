@@ -3,6 +3,7 @@ const readline = require('readline');
 const { google } = require('googleapis');
 // The dotenv package allows us to use the .env file located in the gdocs-api folder.
 const dotenv = require('dotenv');
+const { run } = require('googleapis/build/src/apis/run');
 const functions = require('./functions.js');
 dotenv.config();
 
@@ -35,6 +36,21 @@ function authorize(callback) {
   });
 }
 
+function authorizeGetAllText(callback, docID) {
+  const client_id = process.env.CLIENT_ID;
+  const client_secret = process.env.CLIENT_SECRET;
+  const redirect_uris = process.env.REDIRECT_URIS;
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id, client_secret, redirect_uris[0]);
+
+  // Check if we have previously stored a token.
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return getNewToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(JSON.parse(token));
+    callback(oAuth2Client, docID);
+  });
+}
+
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
@@ -62,7 +78,7 @@ function authorizeReplaceAllTexts(callback, docId, replaceText, containsText) {
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorizeInsertText(callback, docID, text, location) {
+function authorizeInsertText(docID, text, location) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
   const redirect_uris = ["urn:ietf:wg:oauth:2.0:oob","http://localhost"];
@@ -72,9 +88,16 @@ function authorizeInsertText(callback, docID, text, location) {
   fs.readFile(TOKEN_PATH, (err, token) => {
     if (err) return getNewToken(oAuth2Client, callback);
     oAuth2Client.setCredentials(JSON.parse(token));
-    callback(oAuth2Client, docID, text, location);
+    try {
+      let result = await functions.insertText(oAuth2Client, docID, text, location);
+      return result 
+    } catch (e) {
+      console.log(`The API returned an error: ` + e)
+    }
+    console.log("copied doc accessed through authorize function: ", docCopyID)
   });
 }
+// authorizeInsertText(functions.insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
 
 /**
  * Get and store new token after prompting for user authorization, and then
