@@ -101,7 +101,6 @@ function replaceAllTexts(auth, docID, replaceText, containsText) {
   // make the google doc api call passing in the update request object
   docs.documents.batchUpdate(updateObject)
     .then(function (res) {
-      // console.log(res);
     }, function (err) {
       console.error(err);
     });

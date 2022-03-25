@@ -66,7 +66,6 @@ function authorizeInsertText(callback, docID, text, location) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
   const redirect_uris = ["urn:ietf:wg:oauth:2.0:oob","http://localhost"];
-  console.log(`REDIRECT URI: ${redirect_uris}`)
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris);
   // Check if we have previously stored a token.
