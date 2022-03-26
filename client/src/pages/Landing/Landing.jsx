@@ -1,6 +1,6 @@
 import React from 'react';
 import ResourceBox from '../../components/ResourceBox/ResourceBox';
-import TemplateBox from '../../components/TemplateBoxes/TemplateBox';
+import LandingCard from '../../components/LandingCard/LandingCard';
 
 import './Landing.css';
 
@@ -10,21 +10,16 @@ const Landing = () => {
 
   return (
     <div>
-      {/*We have two template boxes for now*/}
-      <TemplateBox 
-        titleLaw = {"Law Templates"} 
-        descriptionLaw = {"One sentence Description of what is on this webpage"}>
-      </TemplateBox>
-
-      <TemplateBox 
-        titleLetter = {"Letter Templates"} 
-        descriptionLetter = {"One sentence Description of what is on this webpage"} >
-       </TemplateBox>
+      {/*We have two Landing boxes for now*/}
+      <div className='box'>
+        <LandingCard title = {"Law Template"} description= {"One sentence description of what is on this webpage"}></LandingCard>
+        <LandingCard title = {"Letter Template"} description = {"One sentence description of what is on this webpage"}></LandingCard>
+      </div>
 
       {/*Three resource boxes I believe. We can probably useState to fix them later*/}
+      {/* <ResourceBox></ResourceBox>
       <ResourceBox></ResourceBox>
-      <ResourceBox></ResourceBox>
-      <ResourceBox></ResourceBox>
+      <ResourceBox></ResourceBox> */}
     </div>
   );
 };
