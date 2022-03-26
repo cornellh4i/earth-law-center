@@ -26,13 +26,14 @@ function printDocInfo(auth) {
     console.log(`The text of the document is: ${someText}`);
   });
 }
+
 /**
  * Inserts text at a location in a google doc
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param docID is the document id of the google doc we want to insert data in
  * @param text is the text to be inserted into the document with id docID
  * @param location is the location in the document we want to insert the data at
- * 
+ * @returns the docID of the copied document with the new changes 
  */
 
  function insertText(auth, docID, text, location) {
@@ -75,9 +76,10 @@ function printDocInfo(auth) {
 }
 
 /**
- * Get data from a google doc and return
+ * Get data from a google doc 
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param docID is the document id of the google doc we want get data from 
+ * @returns all the data from a google doc in the form of a json object 
  */
  function getAllText(auth, docID) {
   const docs = google.docs({ version: 'v1', auth });
@@ -201,7 +203,7 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
  * @param docID is the document id of the google doc we want to insert data in
  * @param replaceText is the text that will replace the matched text.
  * @param containsText is the text in the document matching this substring that will be replaced by replaceText.
- * 
+ * @returns the docID of the copied document with the new changes 
  */
 function replaceAllTexts(auth, docID, replaceText, containsText) {
   //Authorize docs and drive
