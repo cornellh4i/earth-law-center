@@ -1,13 +1,13 @@
 import React from 'react';
-import './Letters.css';
+import './LettersDisplay.css';
 
 /** Component for Letters Page */
 
-const Letters = () => {
+const LettersDisplay = () => {
   return (
     <div>
-      <h1>Letters</h1>
+      <h1>LettersDisplay</h1>
     </div>
   );
 };
-export default Letters;
+export default LettersDisplay;

@@ -1,13 +1,13 @@
 import React from 'react';
-import './Laws.css';
+import './LawsDisplay.css';
 
 /** Component for Laws Page */
 
-const Laws = () => {
+const LawsDisplay = () => {
   return (
     <div>
-      <h1>Laws</h1>
+      <h1>LawsDisplay</h1>
     </div>
   );
 };
-export default Laws;
+export default LawsDisplay;

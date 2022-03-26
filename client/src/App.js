@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing/Landing';
+import LawsDisplay from './pages/LawsDisplay/LawsDisplay'; 
+import LettersDisplay from './pages/LettersDisplay/LettersDisplay'; 
 import NavBar from './components/NavBar/NavBar';
 import Button from './components/Button/Button.jsx';
-
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -28,6 +29,8 @@ function App() {
       <Routes>
         {/* add logged in variables to each game page  */}
         <Route path='/landing' element={<Landing/>} />
+        <Route path='/laws' element={<LawsDisplay/>} />
+        <Route path='/letters' element={<LettersDisplay/>} />
       </Routes>
       
       {/* Edit this all to Button by passing in the props you create! */}
