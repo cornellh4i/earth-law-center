@@ -1,3 +1,10 @@
 .sidebar-ul {
   list-style-type: none;
 }
+.sidebar-container {
+  max-width: 10%;
+  height: 100%;
+  margin-left: -2%;
+  border-right: solid;
+  border-width: 1px;
+}
