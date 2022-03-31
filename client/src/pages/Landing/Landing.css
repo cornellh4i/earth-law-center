@@ -1,5 +1,3 @@
-.box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.content {
+  margin: 80px;
+}
