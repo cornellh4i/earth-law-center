@@ -35,7 +35,7 @@ function printDocInfo(auth) {
  * 
  */
 
- async function insertText(auth, docID, text, location) {
+function insertText(auth, docID, text, location) {
   //Authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
   const drive = google.drive({ version: 'v2', auth });
@@ -69,10 +69,10 @@ function printDocInfo(auth) {
         return console.log(`The API returned an error: ` + err)
       } else {
         console.log(`The copied file for insertion is accessible at ` + docCopyId);
-        return docCopyId;
       } 
     });
   });
+  return docCopyId;
 }
 
 /**

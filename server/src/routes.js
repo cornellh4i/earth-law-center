@@ -29,7 +29,7 @@ module.exports = () => {
     // res.json({ msg: `My favorite food is, ${req.params.foodfav}` });
   });
 
-  // index.authorizeInsertText(functions.insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
+  index.authorizeInsertText(functions.insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
   // Endpoint for insertText()
   router.get('/insertText/:docID/:text/:location', async (req, res) => {
     const docID = index.authorizeInsertText(req.params.docID, req.params.text, { index: req.params.location});
