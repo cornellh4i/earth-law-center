@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-/** Component for a Resource card used by template law/letter cards
+/** Component for a Resource card
 */
 const ResourceBox = (props) => {
   return (
