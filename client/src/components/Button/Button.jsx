@@ -1,15 +1,15 @@
 import React from 'react';
-import styles from './Button.css';
+import './Button.css';
 
-/** Component for a general button to be used all over the webiste */
+/** Component for a general button to be used all over the webiste 
+ *  @param text is the text on the button 
+ *  @param handleClick is the function that called when the button is clicked
+ *  @param css is a css class that can be found in Button.css 
+*/
 
-// TODO: Add 3 props to this button so that it takes in a text that would be in the place of "Simple Button", 
-//       function to replace the console.log("here"), and a css class that will style the button
-//       (the names of the css classes that the button can take in are in Button.css)
-
-const Button = () => {
+const Button = ({ text, handleClick, css }) => {  
   return (
-    <button onClick={console.log("clicked!")}>Simple Button</button>
+    <button className={css} onClick={handleClick}>{text}</button>
   );
 };
 export default Button;
