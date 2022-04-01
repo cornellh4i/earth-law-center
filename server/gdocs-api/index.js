@@ -34,20 +34,30 @@ function authorize(callback) {
   });
 }
 
-function authorizeGetAllText(callback, docID) {
+/**
+ * Create an OAuth2 client with the given credentials, and then executes the
+ * given callback function with the given docID as a parameter.
+ * @param {callback} is the function that will be called.
+ * @param {docID} is the docID that will be passed into the callback function.
+ */
+async function authorizeDocID(callback, docID) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
-  const redirect_uris = process.env.REDIRECT_URIS;
+  const redirect_uris = ["urn:ietf:wg:oauth:2.0:oob","http://localhost"];
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
-
   // Check if we have previously stored a token.
-  fs.readFile(TOKEN_PATH, (err, token) => {
-    if (err) return getNewToken(oAuth2Client, callback);
-    oAuth2Client.setCredentials(JSON.parse(token));
-    callback(oAuth2Client, docID);
+  return new Promise((resolve) => {
+    (fs.readFile(TOKEN_PATH, async (err, token) => {
+      if (err) return getNewToken(oAuth2Client, callback);
+      oAuth2Client.setCredentials(JSON.parse(token));
+      console.log("HERE")
+      await callback(oAuth2Client, docID).then((res) => {resolve(res)})
+    }))
   });
 }
+
+// authorizeDocID(functions.docCopy, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os").then((res) => {console.log("FINAL RES", res)} )
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -87,7 +97,7 @@ function authorizeInsertText(docID, text, location) {
     if (err) return getNewToken(oAuth2Client, callback);
     oAuth2Client.setCredentials(JSON.parse(token));
     try {
-      let result = await functions.insertText(oAuth2Client, docID, text, location);
+      let result = functions.insertText(oAuth2Client, docID, text, location);
       // console.log("NewIDInAUTH", result)
       return result 
     } catch (e) {
@@ -95,8 +105,6 @@ function authorizeInsertText(docID, text, location) {
     }
   });
 }
-
-authorizeInsertText(functions.insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
 
 /**
  * Get and store new token after prompting for user authorization, and then
@@ -132,4 +140,4 @@ function getNewToken(oAuth2Client, callback) {
 
 
 // Exporting authorize functions
-module.exports = { authorize, authorizeInsertText, authorizeReplaceAllTexts };
+module.exports = { authorize, authorizeInsertText, authorizeReplaceAllTexts, authorizeDocID};
