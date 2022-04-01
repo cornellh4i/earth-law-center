@@ -25,17 +25,39 @@ function printDocInfo(auth) {
     console.log(`The length of the document is: ${len_contents}`);
     console.log(`The text of the document is: ${someText}`);
   });
+}  
+
+/**
+ * Creates a copy of a google doc
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {docID} is the document id of the google doc we want to copy
+ * @returns the docID of the copied document
+ */
+async function docCopy(auth, docID){ 
+  const drive = google.drive({ version: 'v2', auth });
+  //Copy file and store id in docCopyId
+  var copyTitle = "Copy Title";
+  var docCopyId;
+  await drive.files.copy({
+    fileId: docID,
+    resource: {
+      name: copyTitle,
+    }
+  }).then(function(response) {
+    docCopyId = response.data.id
+  },
+  function(err) { console.error("Execute error", err); });
+  return docCopyId
 }
 
 /**
  * Inserts text at a location in a google doc
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
- * @param docID is the document id of the google doc we want to insert data in
- * @param text is the text to be inserted into the document with id docID
- * @param location is the location in the document we want to insert the data at
+ * @param {docID} is the document id of the google doc we want to insert data in
+ * @param {text} is the text to be inserted into the document with id docID
+ * @param {location} is the location in the document we want to insert the data at
  * @returns the docID of the copied document with the new changes 
  */
-
  function insertText(auth, docID, text, location) {
   //Authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
@@ -78,7 +100,7 @@ function printDocInfo(auth) {
 /**
  * Get data from a google doc 
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
- * @param docID is the document id of the google doc we want get data from 
+ * @param {docID} is the document id of the google doc we want get data from 
  * @returns all the data from a google doc in the form of a json object 
  */
  function getAllText(auth, docID) {
@@ -107,8 +129,8 @@ function printDocInfo(auth) {
  * Helper function to initialize textRun JSON, determines what type of structural element is being parsed, and stores
  * respective data (list style, text, and font style for paragraph elements; rows and columns of a table;
  * total content of a table of contents) into the respective textRun's JSON.
- * @param element is the text run of the Google Doc being parsed
- * @param prevTextRun is the previous text run before the one being parsed
+ * @param {element} is the text run of the Google Doc being parsed
+ * @param {prevTextRun} is the previous text run before the one being parsed
  * @returns the textRun JSON 
  */
 function readStructuralElements(element, prevTextRun) {
@@ -224,9 +246,9 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 /**
  * Replaces all instances of containsText with replaceText in document specified by docID
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
- * @param docID is the document id of the google doc we want to insert data in
- * @param replaceText is the text that will replace the matched text.
- * @param containsText is the text in the document matching this substring that will be replaced by replaceText.
+ * @param {docID} is the document id of the google doc we want to insert data in
+ * @param {replaceText} is the text that will replace the matched text.
+ * @param {containsText} is the text in the document matching this substring that will be replaced by replaceText.
  * @returns the docID of the copied document with the new changes 
  */
 function replaceAllTexts(auth, docID, replaceText, containsText) {
@@ -272,4 +294,4 @@ function replaceAllTexts(auth, docID, replaceText, containsText) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts};
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy};
