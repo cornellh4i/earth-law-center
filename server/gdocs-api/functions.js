@@ -2,6 +2,7 @@
  * Contains basic CRUD operations to alter a google doc.
  */
 const { google } = require('googleapis');
+const index = require('../gdocs-api/index.js');
 
 /**
  * THIS IS A SAMPLE FUNCTION
@@ -28,29 +29,6 @@ function printDocInfo(auth) {
 }  
 
 /**
- * Creates a copy of a google doc
- * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
- * @param {docID} is the document id of the google doc we want to copy
- * @returns the docID of the copied document
- */
-async function docCopy(auth, docID){ 
-  const drive = google.drive({ version: 'v2', auth });
-  //Copy file and store id in docCopyId
-  var copyTitle = "Copy Title";
-  var docCopyId;
-  await drive.files.copy({
-    fileId: docID,
-    resource: {
-      name: copyTitle,
-    }
-  }).then(function(response) {
-    docCopyId = response.data.id
-  },
-  function(err) { console.error("Execute error", err); });
-  return docCopyId
-}
-
-/**
  * Inserts text at a location in a google doc
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param {docID} is the document id of the google doc we want to insert data in
@@ -61,18 +39,20 @@ async function docCopy(auth, docID){
  function insertText(auth, docID, text, location) {
   //Authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
-  const drive = google.drive({ version: 'v2', auth });
+  // const drive = google.drive({ version: 'v2', auth });
   //Copy file and store id in docCopyId
-  var copyTitle = "Copy Title";
+  // var copyTitle = "Copy Title";
   var docCopyId;
-  drive.files.copy({
-    fileId: docID,
-    resource: {
-      name: copyTitle,
-    }
-  }, (err, res) => {
-    docCopyId = res.data.id;
+  // drive.files.copy({
+  //   fileId: docID,
+  //   resource: {
+  //     name: copyTitle,
+  //   }
+  // }, (err, res) => {
+  //   docCopyId = res.data.id;
     // JSON request body for batchupdate with docCopyId
+    index.authorizeDocID("1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os").then(
+      (res) => {docCopyId = res}); 
     var updateObject = {
       documentId: docCopyId,
       "resource": {
@@ -94,7 +74,7 @@ async function docCopy(auth, docID){
         return docCopyId;
       } 
     });
-  });
+  // });
 }
 
 /**
@@ -294,4 +274,4 @@ function replaceAllTexts(auth, docID, replaceText, containsText) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy};
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts};

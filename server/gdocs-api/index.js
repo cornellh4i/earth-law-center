@@ -13,6 +13,30 @@ const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.google
 // created automatically when the authorization flow completes for the first time. 
 const TOKEN_PATH = 'token.json';
 
+// authorizeInsertText(functions.insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
+/**
+ * Creates a copy of a google doc
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {docID} is the document id of the google doc we want to copy
+ * @returns the docID of the copied document
+ */
+ async function docCopy(auth, docID){ 
+  const drive = google.drive({ version: 'v2', auth });
+  //Copy file and store id in docCopyId
+  var copyTitle = "Copy Title";
+  var docCopyId;
+  await drive.files.copy({
+    fileId: docID,
+    resource: {
+      name: copyTitle,
+    }
+  }).then(function(response) {
+    docCopyId = response.data.id
+  },
+  function(err) { console.error("Execute error", err); });
+  return docCopyId
+}
+
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
@@ -40,7 +64,7 @@ function authorize(callback) {
  * @param {callback} is the function that will be called.
  * @param {docID} is the docID that will be passed into the callback function.
  */
-async function authorizeDocID(callback, docID) {
+async function authorizeDocID(docID) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
   const redirect_uris = ["urn:ietf:wg:oauth:2.0:oob","http://localhost"];
@@ -52,12 +76,12 @@ async function authorizeDocID(callback, docID) {
       if (err) return getNewToken(oAuth2Client, callback);
       oAuth2Client.setCredentials(JSON.parse(token));
       console.log("HERE")
-      await callback(oAuth2Client, docID).then((res) => {resolve(res)})
+      await docCopy(oAuth2Client, docID).then((res) => {resolve(res)})
     }))
   });
 }
 
-// authorizeDocID(functions.docCopy, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os").then((res) => {console.log("FINAL RES", res)} )
+authorizeDocID("1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os").then((res) => {console.log("FINAL RES", res)} )
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -136,8 +160,6 @@ function getNewToken(oAuth2Client, callback) {
     });
   });
 }
-
-
 
 // Exporting authorize functions
 module.exports = { authorize, authorizeInsertText, authorizeReplaceAllTexts, authorizeDocID};
