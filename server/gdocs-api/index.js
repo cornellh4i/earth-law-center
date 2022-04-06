@@ -67,7 +67,7 @@ function authorize(callback) {
 async function authorizeDocID(docID) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
-  const redirect_uris = ["urn:ietf:wg:oauth:2.0:oob","http://localhost"];
+  const redirect_uris = process.env.REDIRECT_URIS;
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
   // Check if we have previously stored a token.
@@ -81,7 +81,7 @@ async function authorizeDocID(docID) {
   });
 }
 
-authorizeDocID("1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os").then((res) => {console.log("FINAL RES", res)} )
+// authorizeDocID("1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os").then((res) => {console.log("FINAL RES", res)} )
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -104,7 +104,7 @@ function authorizeReplaceAllTexts(callback, docId, replaceText, containsText) {
   });
 }
 
-authorizeReplaceAllTexts(functions.replaceAllTexts, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "Insomnia","Synesthesia");
+// authorizeReplaceAllTexts(functions.replaceAllTexts, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "Insomnia","Synesthesia");
 
 
 /**
@@ -132,6 +132,8 @@ function authorizeInsertText(docID, text, location) {
     }
   });
 }
+authorizeInsertText(functions.insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "This text is up!", { index: 1 });
+
 
 /**
  * Get and store new token after prompting for user authorization, and then

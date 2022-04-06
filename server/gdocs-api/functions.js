@@ -2,7 +2,7 @@
  * Contains basic CRUD operations to alter a google doc.
  */
 const { google } = require('googleapis');
-const index = require('./index.js');
+const index = require('./index1.js');
 
 /**
  * THIS IS A SAMPLE FUNCTION
@@ -50,9 +50,10 @@ function printDocInfo(auth) {
   //   }
   // }, (err, res) => {
   //   docCopyId = res.data.id;
-    // JSON request body for batchupdate with docCopyId
+    // Below is the function that generates a new docID (it does not currently work because of a circular dependency)
     index.authorizeDocID("1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os").then(
       (res) => {docCopyId = res}); 
+    // JSON request body for batchupdate with docCopyId
     var updateObject = {
       documentId: docCopyId,
       "resource": {
