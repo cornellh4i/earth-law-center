@@ -2,7 +2,7 @@
  * Contains basic CRUD operations to alter a google doc.
  */
 const { google } = require('googleapis');
-const index = require('../gdocs-api/index.js');
+const index = require('./index.js');
 
 /**
  * THIS IS A SAMPLE FUNCTION
