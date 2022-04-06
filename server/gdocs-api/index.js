@@ -104,6 +104,9 @@ function authorizeReplaceAllTexts(callback, docId, replaceText, containsText) {
   });
 }
 
+authorizeReplaceAllTexts(functions.replaceAllTexts, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "Insomnia","Synesthesia");
+
+
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
