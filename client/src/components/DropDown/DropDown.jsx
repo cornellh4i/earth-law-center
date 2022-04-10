@@ -64,7 +64,7 @@ const DropDown = () => {
           onChange={handleChangeJuris}
           input={<OutlinedInput label="Jurisdiction" />}
           renderValue={(selected) => selected.join(', ')}
-          MenuProps={MenuProps}
+        // MenuProps={MenuProps}
         >
           {jurisdictions.map((juri) => (
             <MenuItem key={juri} value={juri}>
@@ -81,9 +81,7 @@ const DropDown = () => {
           multiple
           value={law}
           onChange={handleChangeLaw}
-          input={<OutlinedInput label="law" />}
           renderValue={(selected) => selected.join(', ')}
-          MenuProps={MenuProps}
         >
           {lawTypes.map((name) => (
             <MenuItem key={name} value={name}>
