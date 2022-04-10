@@ -45,6 +45,16 @@ function App() {
       handleClick={()=>{console.log("clicked")}}
       css="back-btn" />
 
+      <Button 
+      text="SKIP"
+      handleClick={()=>{console.log("clicked")}}
+      css="white-median-btn" />
+
+      <Button 
+      text="CONTINUE"
+      handleClick={()=>{console.log("clicked")}}
+      css="continue-btn" />
+
     </Router>
   );
 }
