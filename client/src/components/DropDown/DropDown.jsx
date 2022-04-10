@@ -25,14 +25,13 @@ const MenuProps = {
 /** Component for Drop Down */
 const jurisdictions = [
   'National',
-  'Reginal/State',
+  'Regional/State',
   'Local',
   'International'
 ];
 const lawTypes = [
-  "Forest Protection",
-  "Rights of Nature",
-  "Wildlife Protection"
+  "Ordinance (binding)",
+  "Resolution (non-binding)"
 ];
 const DropDown = () => {
   const [jurisdiction, setJurisdiction] = React.useState([]);
