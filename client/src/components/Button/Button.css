@@ -1,3 +1,55 @@
 .navbar-btn{
   margin: 2%;
 }
+
+
+.back-btn{
+  margin: 2%;
+  padding: 0.3% 1%;
+  color:#000 ;
+  font-weight:bold;
+  font-size:0.8em ;
+  background-color: #fff;
+  border-color:#000;
+  border-width:0.2%;
+  border-style:solid;
+  border-radius:0.9em;
+}
+
+.back-btn::before{
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.white-median-btn{
+  margin: 2%;
+  padding: 2%;
+  color:#484848 ;
+  background-color: #fff;
+  border-style:none;
+  border-radius:0.6em;
+}
+
+
+.grey-large-btn{
+  margin: 2%;
+  padding: 1% 2% 0.9%;
+  color: #fff;
+  font-weight:bold;
+  font-size:0.9em ;
+  background-color:#484848 ;
+  border-style:none;
+  border-radius:0.6em;
+}
+
+
+.continue-btn{
+  margin: 2%;
+  padding: 2%;
+  color: #fff;
+  background-color:#484848 ;
+  border-style:none;
+  border-radius:0.6em;
+}
