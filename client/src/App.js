@@ -5,6 +5,7 @@ import LawsDisplay from './pages/LawsDisplay/LawsDisplay';
 import LettersDisplay from './pages/LettersDisplay/LettersDisplay'; 
 import NavBar from './components/NavBar/NavBar';
 import Button from './components/Button/Button.jsx';
+import TemplateCard from "./components/TemplateCard/TemplateCard";
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -34,8 +35,9 @@ function App() {
       </Routes>
       
       {/* Edit this all to Button by passing in the props you create! */}
-      
+      <TemplateCard/>
     </Router>
+    
   );
 }
 
