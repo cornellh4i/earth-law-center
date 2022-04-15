@@ -36,6 +36,11 @@ function App() {
       </Routes>
       
       {/* Edit this all to Button by passing in the props you create! */}
+      <div className="testBox">
+        <TemplateCard title="title 3" summary="test summary ahhahahahahahahahah"/>
+        <TemplateCard title="title 2" summary="test summary numbah 2 ahhahahahahahahahah"/>
+        <TemplateCard title="title 3" summary="test summary numbah 3 oh baby"/>
+      </div>
     </Router>
     
   );
