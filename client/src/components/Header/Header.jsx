@@ -11,7 +11,7 @@ const Header = () => {
   <div className="banner">
     <div className="content">
       {/* For Jason and Akin --> Do we need this box here? */}
-      <Box height='80px'></Box>
+      {/* <Box height='80px'></Box> */}
       <Typography variant='h2' component='div' sx={{ fontWeight: 'bold' }}>
         Nature Templates &#38; Resources
       </Typography>
