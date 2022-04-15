@@ -2,4 +2,79 @@
   color: black;
   font-weight: bold;
   margin: 10px;
+  margin: 2%;
+}
+
+/* Grey large button with white text */
+.grey-large-btn{
+  margin: 2%;
+  padding: 1% 2% 0.9%;
+  color: #fff;
+  font-weight:bold;
+  font-size:0.9rem ;
+  background-color:#484848 ;
+  border-style:none;
+  border-radius:0.6rem;
+  cursor: pointer;
+}
+
+/* White median with black text, black border, and left pointing arrow */
+.back-btn{
+  margin: 2%;
+  padding: 0.5% 0.9% 0.37% 1.6%;
+  color:#000 ;
+  font-weight:bold;
+  font-size:0.8rem ;
+  background-color: #fff;
+  border-color:#000;
+  border-width:0.05rem;
+  border-style:solid;
+  border-radius:0.7rem;
+  cursor: pointer;
+}
+
+.back-btn::before{
+  padding:0.17rem;
+  margin: 2% 0%;
+  content:" ";
+  border-bottom: 0.12rem solid #000;
+  border-left: 0.12rem solid #000;
+  transform: translateX(-50%) rotate(45deg);
+  display: inline-block;
+}
+
+/* Grey median button with white text and right pointing arrow */
+.continue-btn{
+  margin: 2%;
+  padding: 0.55% 1.7% 0.4% 1.0%;
+  color:#fff ;
+  font-weight:bold;
+  font-size:0.8rem ;
+  background-color: #484848;
+  border-width:0.05rem;
+  border-style:none;
+  border-radius:0.7rem;
+  cursor: pointer;
+}
+
+.continue-btn::after{
+  padding:0.17rem;
+  margin: 2% 0%;
+  content:" ";
+  border-bottom: 0.12rem solid #fff;
+  border-left: 0.12rem solid #fff;
+  transform: translateX(100%) rotate(225deg);
+  display: inline-block;
+}
+
+/* White median button with grey text */
+.white-median-btn{
+  margin: 2%;
+  padding: 0.5%;
+  color:#484848 ;
+  font-weight:bold;
+  font-size:0.8rem ;
+  background-color: #fff;
+  border-style:none;
+  cursor: pointer;
 }
