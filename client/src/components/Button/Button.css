@@ -1,8 +1,12 @@
 .navbar-btn{
-  color: black;
   font-weight: bold;
-  margin: 10px;
-  margin: 2%;
+  margin-right: 40px;
+  border: none;
+  background: none;
+  text-align: center;
+  cursor: pointer;
+
+
 }
 
 /* Grey large button with white text */

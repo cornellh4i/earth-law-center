@@ -11,9 +11,9 @@ const NavBar = () => {
   return (
     <div className="navbar-container">
       <Grid container justifyContent="flex-end">
-        <Link to="/laws"><Button text="Laws" css="navbar-btn" /></Link>
-        <Link to="/letters"><Button text="Letters" css="navbar-btn" /></Link>
-        <Link to="/landing"><Button text="About" css="navbar-btn" /></Link>
+        <Link to="/laws"><Button text="LAWS" css="navbar-btn" /></Link>
+        <Link to="/letters"><Button text="LETTERS" css="navbar-btn" /></Link>
+        <Link to="/landing"><Button text="ABOUT" css="navbar-btn" /></Link>
       </Grid>
     </div>
   );
