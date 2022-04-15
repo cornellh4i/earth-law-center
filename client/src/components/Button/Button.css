@@ -1,12 +1,18 @@
-.navbar-btn{
+.navbar-btn {
   font-weight: bold;
   margin-right: 40px;
   border: none;
   background: none;
   text-align: center;
   cursor: pointer;
+}
 
+.navbar-btn:hover {
+  color: gray;
+}
 
+.navbar-btn:active {
+  color: black;
 }
 
 /* Grey large button with white text */
