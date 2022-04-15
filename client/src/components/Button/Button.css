@@ -2,6 +2,7 @@
   margin: 2%;
 }
 
+/* Grey large button with white text */
 .grey-large-btn{
   margin: 2%;
   padding: 1% 2% 0.9%;
@@ -14,6 +15,7 @@
   cursor: pointer;
 }
 
+/* White median with black text, black border, and left pointing arrow */
 .back-btn{
   margin: 2%;
   padding: 0.5% 0.9% 0.37% 1.6%;
@@ -38,6 +40,7 @@
   display: inline-block;
 }
 
+/* Grey median button with white text and right pointing arrow */
 .continue-btn{
   margin: 2%;
   padding: 0.55% 1.7% 0.4% 1.0%;
@@ -61,6 +64,7 @@
   display: inline-block;
 }
 
+/* White median button with grey text */
 .white-median-btn{
   margin: 2%;
   padding: 0.5%;
