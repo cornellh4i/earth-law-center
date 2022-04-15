@@ -1,21 +1,22 @@
 import React from 'react';
 import './TemplateCard.css';
-import Button from '../Button/Button';
+import downloadbtn from './assets/download-btn.png';
 
 /** Component for TemplateCard Page */
 
-const TemplateCard = () => {
+const TemplateCard = (props) => {
   return (
-    <div className='cardContainer'>
-      <div className='cardTextContainer'>
-        <h1>Title</h1>
-        <p>summary of law Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <div className='card-container'>
+      <div className='card-text-container'>
+        <h1 className='card-title'>{props.title}</h1>
+        <p className='card-summary'>{props.summary}</p>
       </div>
-      <div className='cardButtonContainer'>
-        <Button className='cardEditButton' text="EDIT"/>
-        <Button className='cardDownloadButton'/>
+      <div className='card-btn-container'>
+        <button className='card-edit-btn' onClick={props.edit}>EDIT</button>
+        <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
       </div>
     </div>
+    
   );
 };
 export default TemplateCard;
