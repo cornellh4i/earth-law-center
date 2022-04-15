@@ -16,10 +16,9 @@ const Landing = () => {
   return (
     <div>
       <Header/>
-      <Box height='80px'></Box>
       <div className="content">
         {/*We have two Landing boxes for now*/}
-        <Grid container spacing={4}>
+        <Grid container spacing={4} mt={5}>
           <Grid item xs={12} md={5.5}>
             <LandingCard
               title={"Law Template"}
