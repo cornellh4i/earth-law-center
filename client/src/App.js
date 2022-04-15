@@ -28,13 +28,33 @@ function App() {
       <NavBar/>
       <Routes>
         {/* add logged in variables to each game page  */}
-        <Route path='/landing' element={<Landing/>} />
+        {/* <Route path='/landing' element={<Landing/>} />
         <Route path='/laws' element={<LawsDisplay/>} />
-        <Route path='/letters' element={<LettersDisplay/>} />
+        <Route path='/letters' element={<LettersDisplay/>} /> */}
+        <Route path='/button' element={<Button/>} />
       </Routes>
       
       {/* Edit this all to Button by passing in the props you create! */}
-      
+      <Button 
+      text="SEE MORE" 
+      handleClick={()=>{console.log("clicked")}}
+      css="grey-large-btn" />
+       
+      <Button 
+      text="BACK"
+      handleClick={()=>{console.log("clicked")}}
+      css="back-btn" />
+
+      <Button 
+      text="SKIP"
+      handleClick={()=>{console.log("clicked")}}
+      css="white-median-btn" />
+
+      <Button 
+      text="CONTINUE"
+      handleClick={()=>{console.log("clicked")}}
+      css="continue-btn" />
+
     </Router>
   );
 }
