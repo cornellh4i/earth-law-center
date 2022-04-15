@@ -2,8 +2,8 @@
   "name": "mern-app",
   "version": "1.0.0",
   "scripts": {
-    "gdocs": "cd server && cd gdocs-api && node .",
-    "start-backend": "npm run gdocs && cd server && npm start ",
+    "gdocs": "cd server && cd gdocs-api && concurrently \"node functions.js\" \"node index.js\"",
+    "start-backend": "cd server && npm start",
     "start": "concurrently \"npm run start-backend\" \"npm run react-dev\"",
     "react-dev": "cd client && npm start",
     "test": "cd server && npm test",

@@ -2,7 +2,10 @@
  * Contains basic CRUD operations to alter a google doc.
  */
 const { google } = require('googleapis');
-const index = require('./index1.js');
+const index = require('./index.js');
+
+// index.authorizeInsertText(insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "HELLOOOO", { index: 1 });
+// index.authorizeDocID(index.docCopy, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os").then((res) => {console.log("FINAL RES", res)} )
 
 /**
  * THIS IS A SAMPLE FUNCTION
@@ -25,8 +28,10 @@ function printDocInfo(auth) {
     var someText = res.data.body.content[4].paragraph.elements[0].textRun.content;
     console.log(`The length of the document is: ${len_contents}`);
     console.log(`The text of the document is: ${someText}`);
+    return someText
   });
 }  
+
 
 /**
  * Inserts text at a location in a google doc
@@ -36,46 +41,34 @@ function printDocInfo(auth) {
  * @param {location} is the location in the document we want to insert the data at
  * @returns the docID of the copied document with the new changes 
  */
- function insertText(auth, docID, text, location) {
+ async function insertText(auth, docID, text, location) {
   //Authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
-  // const drive = google.drive({ version: 'v2', auth });
-  //Copy file and store id in docCopyId
-  // var copyTitle = "Copy Title";
   var docCopyId;
-  // drive.files.copy({
-  //   fileId: docID,
-  //   resource: {
-  //     name: copyTitle,
-  //   }
-  // }, (err, res) => {
-  //   docCopyId = res.data.id;
     // Below is the function that generates a new docID (it does not currently work because of a circular dependency)
-    index.authorizeDocID("1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os").then(
-      (res) => {docCopyId = res}); 
-    // JSON request body for batchupdate with docCopyId
-    var updateObject = {
-      documentId: docCopyId,
-      "resource": {
-        "requests": [{
-          "insertText": {
-            "text": text,
-            "location": location,
-          },
-        }],
-      },
-      "writeControl": {}
-    }
-    // Send the JSON object in a batchUpdate request
-    docs.documents.batchUpdate(updateObject, (err, res) => {
-      if (err) {
-        return console.log(`The API returned an error: ` + err)
-      } else {
-        // console.log(`The copied file for insertion is accessible at ` + docCopyId);
-        return docCopyId;
-      } 
-    });
-  // });
+  await index.authorizeDocID(index.docCopy, docID).then(
+    (res) => {console.log("result from copying doc in insert text function", res); docCopyId = res}); 
+  // JSON request body for batchupdate with docCopyId
+  var updateObject = {
+    documentId: docCopyId,
+    "resource": {
+      "requests": [{
+        "insertText": {
+          "text": text,
+          "location": location,
+        },
+      }],
+    },
+    "writeControl": {}
+  }
+  // Send the JSON object in a batchUpdate request
+  docs.documents.batchUpdate(updateObject, (err, res) => {
+    if (err) {
+      return console.log(`The API returned an error: ` + err)
+    } else {
+      return docCopyId;
+    } 
+  });
 }
 
 /**
