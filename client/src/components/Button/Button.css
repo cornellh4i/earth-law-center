@@ -54,19 +54,20 @@
 .grey-large-btn{
   margin: 2%;
 }
+
+/* Edit button for TemplateCard */
 .card-edit-btn{
   width: 27%;
   height: 100%;
   padding: 16px;
-
   background: #484848;
   color: white;
   border-radius: 15px;
   border: none;
-
   margin-right: 5%;
 }
 
+/* Download button for TemplateCard */
 .card-download-btn{
   border: none;
   background-color: transparent;
@@ -131,5 +132,10 @@
   font-size:0.8rem ;
   background-color: #fff;
   border-style:none;
+}
+
+/* Hovering buttons in TemplateCard */
+.card-download-btn:hover, .card-edit-btn:hover{
+  opacity: 70%;
   cursor: pointer;
 }
