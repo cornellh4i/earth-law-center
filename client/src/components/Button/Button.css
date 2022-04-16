@@ -1,6 +1,8 @@
 .navbar-btn{
   margin: 2%;
 }
+
+/* Edit button for TemplateCard */
 .card-edit-btn{
   width: 27%;
   height: 100%;
@@ -12,11 +14,14 @@
   margin-right: 5%;
 }
 
+/* Download button for TemplateCard */
 .card-download-btn{
   border: none;
   background-color: transparent;
   margin-left: -10%;
 }
+
+/* Hovering buttons in TemplateCard */
 .card-download-btn:hover, .card-edit-btn:hover{
   opacity: 70%;
   cursor: pointer;
