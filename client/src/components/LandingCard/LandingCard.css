@@ -1,5 +1,4 @@
 .card {
-    height: 400px !important;
     box-shadow: none !important;
     border-radius: 20px !important;
 }
@@ -7,4 +6,6 @@
 .card-content {
     background-color: #d7d7d7 !important;
     height: 400px !important;
+    display: flex;
+    flex-wrap: wrap;
 }
