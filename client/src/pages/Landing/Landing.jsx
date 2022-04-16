@@ -8,6 +8,7 @@ import ResourceBox from '../../components/ResourceBox/ResourceBox';
 import LandingCard from '../../components/LandingCard/LandingCard';
 import Header from '../../components/Header/Header'; 
 import './Landing.css';
+import { Link } from 'react-router-dom'
 
 /** Component for Landing Page */
 
@@ -20,17 +21,17 @@ const Landing = () => {
         {/*We have two Landing boxes for now*/}
         <Grid container spacing={4} pt={5}>
           <Grid item xs={12} md={5.5}>
-            <LandingCard
+            <Link to='/laws' style = {{textDecoration: 'none'}}><LandingCard
               title={"Law Template"}
               text={"One sentence description of what is on this webpage"}>
-            </LandingCard>
+            </LandingCard></Link>
           </Grid>
           <Grid item xs={12} md={1}></Grid>
           <Grid item xs={12} md={5.5}>
-            <LandingCard
+          <Link to='/letters' style = {{textDecoration: 'none'}}><LandingCard
               title={"Letter Template"}
               text={"One sentence description of what is on this webpage"}>
-            </LandingCard>
+            </LandingCard></Link>
           </Grid>
         </Grid>
 
