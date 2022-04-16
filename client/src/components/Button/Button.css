@@ -1,5 +1,21 @@
-.navbar-btn{
-  margin: 2%;
+.navbar-btn {
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 50px;
+  border: none;
+  background: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.navbar-btn:hover {
+  color: gray;
+}
+
+.navbar-btn:active {
+  color: black;
 }
 
 /* Grey large button with white text */

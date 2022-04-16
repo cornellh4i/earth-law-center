@@ -4,6 +4,7 @@ import Landing from './pages/Landing/Landing';
 import LawsDisplay from './pages/LawsDisplay/LawsDisplay'; 
 import LettersDisplay from './pages/LettersDisplay/LettersDisplay'; 
 import NavBar from './components/NavBar/NavBar';
+import About from './pages/About/About.jsx';
 import ResourceDisplay from './pages/ResourceDisplay/ResourceDisplay'; 
 import TemplateFiller from './pages/TemplateFiller/TemplateFiller'; 
 
@@ -29,13 +30,11 @@ function App() {
       <NavBar/>
       <Routes>
         {/* add logged in variables to each game page  */}
-        <Route path='/' element={<Landing/>} />
+        <Route path='/landing' element={<Landing/>} />
         <Route path='/laws' element={<LawsDisplay/>} />
         <Route path='/letters' element={<LettersDisplay/>} />
-        <Route path='/resources' element={<ResourceDisplay/>} />
-        <Route path='/template-filler' element={<TemplateFiller/>} />
+        <Route path='/about' element={<About/>} />
       </Routes>
-
     </Router>
   );
 }
