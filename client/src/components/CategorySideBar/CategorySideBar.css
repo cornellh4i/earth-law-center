@@ -1,0 +1,11 @@
+.sidebar-ul {
+  list-style-type: none;
+}
+.sidebar-container {
+  width: 10%;
+  min-width: 200px;
+  height: 100%;
+  margin-left: -2%;
+  border-right: solid;
+  border-width: 0.063rem;
+}

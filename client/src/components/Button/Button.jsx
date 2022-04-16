@@ -7,7 +7,7 @@ import './Button.css';
  *  @param css is a css class that can be found in Button.css 
 */
 
-const Button = ({ text, handleClick, css }) => {  
+const Button = ({ text, handleClick, css }) => {
   return (
     <button className={css} onClick={handleClick}>{text}</button>
   );
