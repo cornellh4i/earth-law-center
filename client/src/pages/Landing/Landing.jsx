@@ -15,10 +15,10 @@ const Landing = () => {
 
   return (
     <div>
-      <Header/>
+      <Header />
       <div className="content">
         {/*We have two Landing boxes for now*/}
-        <Grid container spacing={4} mt={5}>
+        <Grid container spacing={4} pt={5}>
           <Grid item xs={12} md={5.5}>
             <LandingCard
               title={"Law Template"}
@@ -35,7 +35,7 @@ const Landing = () => {
         </Grid>
 
         {/*Three resource boxes I believe. We can probably useState to fix them later*/}
-        <Typography mt={10} mb={2} align='center' variant='h5' component='div' sx={{ fontWeight: 'bold' }}>Resources</Typography>
+        <Typography pt={10} pb={2} align='center' variant='h5' component='div' sx={{ fontWeight: 'bold' }}>Resources</Typography>
 
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
