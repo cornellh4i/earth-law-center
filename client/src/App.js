@@ -5,6 +5,8 @@ import LawsDisplay from './pages/LawsDisplay/LawsDisplay';
 import LettersDisplay from './pages/LettersDisplay/LettersDisplay'; 
 import NavBar from './components/NavBar/NavBar';
 import About from './pages/About/About.jsx';
+import ResourceDisplay from './pages/ResourceDisplay/ResourceDisplay'; 
+import TemplateFiller from './pages/TemplateFiller/TemplateFiller'; 
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -33,9 +35,6 @@ function App() {
         <Route path='/letters' element={<LettersDisplay/>} />
         <Route path='/about' element={<About/>} />
       </Routes>
-      
-      {/* Edit this all to Button by passing in the props you create! */}
-
     </Router>
   );
 }
