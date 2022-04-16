@@ -10,7 +10,7 @@ import { CardActionArea } from '@mui/material';
 */
 const ResourceBox = (props) => {
   return (
-      <Card classname='box'>
+      <Card className='box'>
         <CardActionArea>
           <CardContent className='box-content'></CardContent>
         </CardActionArea>
