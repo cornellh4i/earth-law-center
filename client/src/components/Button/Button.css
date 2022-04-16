@@ -1,4 +1,20 @@
 .navbar-btn {
+  margin: 2%;
+}
+
+.sidebar-btn,
+.sidebar-btn-highlighted {
+  padding-top: 10%;
+  color: grey;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  background-color: transparent;
+  text-align: left;
+}
+
+.sidebar-btn-highlighted {
+  font-weight: bold;
   font-weight: bold;
   font-size: 16px;
   margin-top: 10px;
