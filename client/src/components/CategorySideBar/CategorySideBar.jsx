@@ -4,7 +4,7 @@ import './CategorySideBar.css';
 /** Component for CategorySideBar Page */
 
 
-const CategorySideBar = (props) => {
+const CategorySideBar = () => {
   const [category, setCategory] = useState("View-All");
 
   return (
