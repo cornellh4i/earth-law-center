@@ -10,7 +10,6 @@ import './Landing.css';
 import { Link } from 'react-router-dom'
 
 /** Component for Landing Page */
-
 const Landing = () => {
   return (
     <div>
