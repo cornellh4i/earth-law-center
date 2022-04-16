@@ -30,7 +30,7 @@ function App() {
       <NavBar/>
       <Routes>
         {/* add logged in variables to each game page  */}
-        <Route path='/landing' element={<Landing/>} />
+        <Route path='/' element={<Landing/>} />
         <Route path='/laws' element={<LawsDisplay/>} />
         <Route path='/letters' element={<LettersDisplay/>} />
         <Route path='/about' element={<About/>} />
