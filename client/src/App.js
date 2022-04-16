@@ -14,15 +14,15 @@ function App() {
   const [data, setData] = useState("No data :(");
 
   // This is from the sample code!
-  // useEffect(() => {
-  //   async function getData() {
-  //     const url = `${API_URL}/hello`;
-  //     const response = await fetch(url);
-  //     const data = await response.json();
-  //     setData(data.msg);
-  //   }
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    async function getData() {
+      const url = `${API_URL}/hello`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setData(data.msg);
+    }
+    getData();
+  }, []);
 
   return (
     <Router>
