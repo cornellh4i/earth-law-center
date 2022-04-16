@@ -13,10 +13,10 @@ import Box from '@mui/material/Box';
 */
 const LandingCard = (props) => {
   return (
-      <Card sx={{ height: 300 }}>
+      <Card className='card'>
         <CardActionArea>
           {/* <CardMedia component='img' alt='template img' height='200' src = {props.imgsrc}/> */}
-          <CardContent sx={{ bgcolor: '#d7d7d7', height: 300 }}>
+          <CardContent className='card-content'>
             <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold' }}>
               {props.title}
             </Typography>
