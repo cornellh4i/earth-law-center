@@ -1,8 +1,3 @@
 h1 {
   color: purple
 }
-.testBox{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}

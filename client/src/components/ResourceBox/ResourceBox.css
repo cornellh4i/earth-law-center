@@ -1,0 +1,9 @@
+.box {
+    box-shadow: none !important;
+    border-radius: 20px !important;
+}
+
+.box-content {
+    background-color: #d7d7d7 !important;
+    height: 400px !important;
+}
