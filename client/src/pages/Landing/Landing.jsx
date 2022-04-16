@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-
 import ResourceBox from '../../components/ResourceBox/ResourceBox';
 import LandingCard from '../../components/LandingCard/LandingCard';
 import Header from '../../components/Header/Header'; 
@@ -11,9 +10,7 @@ import './Landing.css';
 import { Link } from 'react-router-dom'
 
 /** Component for Landing Page */
-
 const Landing = () => {
-
   return (
     <div>
       <Header />
