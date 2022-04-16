@@ -53,14 +53,25 @@
 /* Grey large button with white text */
 .grey-large-btn{
   margin: 2%;
-  padding: 1% 2% 0.9%;
-  color: #fff;
-  font-weight:bold;
-  font-size:0.9rem ;
-  background-color:#484848 ;
-  border-style:none;
-  border-radius:0.6rem;
-  cursor: pointer;
+}
+
+/* Edit button for TemplateCard */
+.card-edit-btn{
+  width: 27%;
+  height: 100%;
+  padding: 16px;
+  background: #484848;
+  color: white;
+  border-radius: 15px;
+  border: none;
+  margin-right: 5%;
+}
+
+/* Download button for TemplateCard */
+.card-download-btn{
+  border: none;
+  background-color: transparent;
+  margin-left: -10%;
 }
 
 /* White median with black text, black border, and left pointing arrow */
@@ -121,5 +132,10 @@
   font-size:0.8rem ;
   background-color: #fff;
   border-style:none;
+}
+
+/* Hovering buttons in TemplateCard */
+.card-download-btn:hover, .card-edit-btn:hover{
+  opacity: 70%;
   cursor: pointer;
 }

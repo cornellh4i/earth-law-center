@@ -4,6 +4,8 @@ import Landing from './pages/Landing/Landing';
 import LawsDisplay from './pages/LawsDisplay/LawsDisplay'; 
 import LettersDisplay from './pages/LettersDisplay/LettersDisplay'; 
 import NavBar from './components/NavBar/NavBar';
+import TemplateCard from "./components/TemplateCard/TemplateCard";
+import './App.css';
 import About from './pages/About/About.jsx';
 import ResourceDisplay from './pages/ResourceDisplay/ResourceDisplay'; 
 import TemplateFiller from './pages/TemplateFiller/TemplateFiller'; 
@@ -34,9 +36,8 @@ function App() {
         <Route path='/laws' element={<LawsDisplay/>} />
         <Route path='/letters' element={<LettersDisplay/>} />
         <Route path='/about' element={<About/>} />
-      </Routes>
-    </Router>
-    
+      </Routes>     
+    </Router>    
     
   );
 }
