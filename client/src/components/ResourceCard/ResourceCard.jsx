@@ -21,7 +21,7 @@ const ResourceCard = (props) => {
       <CardActionArea>
 
 
-        
+
         <CardContent className='card-content'>
           <Box component={Stack} direction="column" justifyContent="center">
             <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold' }}>
@@ -29,12 +29,18 @@ const ResourceCard = (props) => {
             </Typography>
 
             <Grid container spacing={2}>
-              <Grid item xs={6} md={6}>
-                <CardMedia component='img' alt="first" height='200' image={link_to_resource} />
-              </Grid>
-              <Grid item xs={6} md={6}>
+              {resource_type === "Video" &&
+                <Grid item xs={6}>
+                  <CardMedia component='img' alt="first" height='15%' image={link_to_resource} />
+                </Grid>}
+              {resource_type === "Doc" &&
+                <Grid item xs={6}>
+                  This is doc
+                  <CardMedia component='img' alt="first" height='20%' image={link_to_resource} />
+                </Grid>}
+              <Grid item xs={6}>
                 <Typography variant='body2' color='text.secondary' sx={{ fontSize: 18 }} >
-                {description}
+                  {description}
                 </Typography>
               </Grid>
             </Grid>
