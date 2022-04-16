@@ -5,12 +5,10 @@
   width: 27%;
   height: 100%;
   padding: 16px;
-
   background: #484848;
   color: white;
   border-radius: 15px;
   border: none;
-
   margin-right: 5%;
 }
 
@@ -18,4 +16,8 @@
   border: none;
   background-color: transparent;
   margin-left: -10%;
+}
+.card-download-btn:hover, .card-edit-btn:hover{
+  opacity: 70%;
+  cursor: pointer;
 }
