@@ -27,8 +27,8 @@ import Checkbox from "@mui/material/Checkbox";
 */
 
 /** Component for Drop Down 
- * @param placeholder is the placeholder for the dropdown 
- * @param options are the choices that the dropdown will display
+ * @param {placeholder} is the placeholder for the dropdown 
+ * @param {options} are the choices that the dropdown will display
 */
 const DropDown = ({ placeholder, options }) => {
 

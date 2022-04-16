@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
 import Landing from './pages/Landing/Landing';
 import LawsDisplay from './pages/LawsDisplay/LawsDisplay'; 
 import LettersDisplay from './pages/LettersDisplay/LettersDisplay'; 
 import NavBar from './components/NavBar/NavBar';
-import TemplateCard from "./components/TemplateCard/TemplateCard";
-import './App.css';
 import About from './pages/About/About.jsx';
 import ResourceDisplay from './pages/ResourceDisplay/ResourceDisplay'; 
 import TemplateFiller from './pages/TemplateFiller/TemplateFiller'; 
@@ -28,14 +27,16 @@ function App() {
 
   return (
     <Router>
-      {/* all the pages */}
+      {/* navigation bar that shows up on all pages */}
       <NavBar/>
       <Routes>
-        {/* add logged in variables to each game page  */}
+        {/* All pages below */}
         <Route path='/' element={<Landing/>} />
         <Route path='/laws' element={<LawsDisplay/>} />
         <Route path='/letters' element={<LettersDisplay/>} />
         <Route path='/about' element={<About/>} />
+        <Route path='/resources' element={<ResourceDisplay/>} />
+        <Route path='/template-filler' element={<TemplateFiller/>} />
       </Routes>     
     </Router>    
     

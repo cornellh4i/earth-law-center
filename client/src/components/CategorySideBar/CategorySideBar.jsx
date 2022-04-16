@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import './CategorySideBar.css';
 
 /** Component for CategorySideBar Page */
-
-
 const CategorySideBar = () => {
   const [category, setCategory] = useState("View-All");
 

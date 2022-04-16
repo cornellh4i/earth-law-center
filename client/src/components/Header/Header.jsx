@@ -4,6 +4,7 @@ import './Header.css'
 
 /**
  * Component for a general header to be used all over the webiste
+ * @param (add in props that create here!)
  */
 const Header = () => {
   return (

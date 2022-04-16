@@ -16,7 +16,6 @@ const LawsDisplay = () => {
         <TemplateCard title="title 3" summary="test summary numbah 3 oh baby"/>
       </div>
     </div>
-
   );
 };
 export default LawsDisplay;
