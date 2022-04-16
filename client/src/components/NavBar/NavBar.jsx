@@ -13,7 +13,7 @@ const NavBar = () => {
       <Grid container justifyContent="flex-end">
         <Link to="/laws"><Button text="LAWS" css="navbar-btn" /></Link>
         <Link to="/letters"><Button text="LETTERS" css="navbar-btn" /></Link>
-        <Link to="/landing"><Button text="ABOUT" css="navbar-btn" /></Link>
+        <Link to="/about"><Button text="ABOUT" css="navbar-btn" /></Link>
       </Grid>
     </div>
   );
