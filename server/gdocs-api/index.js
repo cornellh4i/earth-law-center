@@ -21,7 +21,7 @@ const TOKEN_PATH = 'token.json';
  * @returns the docID of the copied document
  */
  async function docCopy(auth, docID){ 
-  const drive = google.drive({ version: 'v2', auth });
+  const drive = google.drive({ version: 'v3', auth });
   console.log("IN DOC COPY")
   //Copy file and store id in docCopyId
   var copyTitle = "Copy Title";
