@@ -1,0 +1,34 @@
+.body{
+    margin: 0;
+}
+
+.sidebar-component{
+    height: 100%;
+    background-color: lightgray;
+    max-width: 25%;
+}
+
+.bar-ul{
+    list-style-type: none;
+    margin: 0;
+    padding: .5rem;
+    text-align: justify;
+    inline-size: min-content;
+    inline-size: 100%;
+}
+
+
+.side-btn{
+    border: none;
+    background: none;
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.side-btn:hover{
+    font-weight: bold;
+}
+
+.side-btn::after{
+    font-weight: bold;
+}
