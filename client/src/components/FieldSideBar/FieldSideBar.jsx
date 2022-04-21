@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
+import Typography from '@mui/material/Typography';
 import './FieldSideBar.css';
 
 /** Component for a Field Side Bar
+ * @param {title} is the title header of the sidebar
  * @param {field} is a list of strings containing all fields in a Google Doc
 */
 
 const FieldSideBar = (props) => {
   const [click, setClick] = useState('');
   const fieldItem = props.field.map((field) =>
-    <li>
-      <button className='side-btn' onClick={() => setClick(field)}>{field}</button>
-    </li>
+    <div>
+      <div className='side-btn' onClick={() => setClick(field)}>{field}</div>
+    </div>
   )
 
   // To test if state works
@@ -20,13 +22,12 @@ const FieldSideBar = (props) => {
   }
 
   return (
-    <div className='sidebar-component'>
+    <div className='fieldsidebar'>
       {/* Space for progress bar */}
       <div>
-        <h1>Progress Bar</h1>
+        <Typography pt={1} pb={5} variant='h5' component='div' sx={{ fontWeight: 'bold' }}>{props.title}</Typography>
       </div>
-      {/* *** */}
-      <ul className='bar-ul'>{fieldItem}</ul>
+      <div className='bar-div'>{fieldItem}</div>
 
       {/* Testing clicked saved correctly */}
       <TestState />

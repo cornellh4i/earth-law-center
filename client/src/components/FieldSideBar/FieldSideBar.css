@@ -2,26 +2,16 @@
     margin: 0;
 }
 
-.sidebar-component {
-    height: 100%;
+.fieldsidebar {
     background-color: lightgray;
-    max-width: 25%;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
-
-.bar-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: .5rem;
-    text-align: justify;
-    inline-size: min-content;
-    inline-size: 100%;
-}
-
 
 .side-btn {
-    border: none;
-    background: none;
-    padding: .5rem;
+    font-size: 12px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     cursor: pointer;
 }
 
