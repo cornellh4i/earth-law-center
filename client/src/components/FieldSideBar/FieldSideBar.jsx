@@ -12,9 +12,14 @@ const FieldSideBar = (props) => {
   const [click, setClick] = useState('');
   const fieldItem = props.field.map((field) =>
     <div>
-      <div className='side-btn' onClick={() => setClick(field)}>{field}</div>
+      <div className='side-btn' onClick={(e) => handleClick(e, field)}>{field}</div>
     </div>
   )
+
+  const handleClick = (e, field) => {
+    // e.target.style.fontWeight = 'bold';
+    setClick(field);
+  }
 
   // To test if state works
   const TestState = () => {

@@ -9,7 +9,7 @@ const TemplateFiller = () => {
     <div>
       {/* Entries to field prop is temporary for testing */}
       <Grid container spacing={4}>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={2}>
           <FieldSideBar
             title='EarthLegislator'
             field={[
@@ -18,7 +18,14 @@ const TemplateFiller = () => {
               'City & State',
               'Activites Your Community Engages in',
               'Specific Indegenous Peoples',
-              'Types of Impact'
+              'Types of Impact',
+              'Types of Infrastructure Impacts',
+              'Number of Members in Guardianship Body',
+              'City\'s Environmental Advisory Board or Other Appropriate Body',
+              'Recommended Categories of Guardians',
+              'Guardian Terms & Vacancies',
+              'Annual City Report & Hearing',
+              'Enactment'
             ]} />
         </Grid>
       </Grid>

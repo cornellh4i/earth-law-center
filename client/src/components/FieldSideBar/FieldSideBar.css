@@ -4,13 +4,14 @@
 
 .fieldsidebar {
     height: 100vh;
+    min-width: 20rem;
     background-color: lightgray;
     padding-left: 1rem;
     padding-right: 1rem;
 }
 
 .side-btn {
-    font-size: 12px;
+    font-size: 14px;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     cursor: pointer;
@@ -20,6 +21,6 @@
     font-weight: bold;
 }
 
-.side-btn::after {
+/* .side-btn.active {
     font-weight: bold;
-}
+} */
