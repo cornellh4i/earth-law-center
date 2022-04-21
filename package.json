@@ -10,7 +10,6 @@
     "preinstall": "cd server && npm install",
     "install": "cd client && npm install",
     "build": "cd client && npm run build"
-    
   },
   "license": "ISC",
   "dependencies": {
