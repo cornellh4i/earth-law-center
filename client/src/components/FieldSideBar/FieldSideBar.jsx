@@ -29,10 +29,8 @@ const FieldSideBar = (props) => {
 
   return (
     <div className='fieldsidebar'>
+      <Typography pt={5} pb={5} variant='h5' component='div' sx={{ fontWeight: 'bold' }}>{props.title}</Typography>
       {/* Space for progress bar */}
-      <div>
-        <Typography pt={5} pb={5} variant='h5' component='div' sx={{ fontWeight: 'bold' }}>{props.title}</Typography>
-      </div>
       <div className='bar-div'>{fieldItem}</div>
 
       {/* Testing clicked saved correctly */}
