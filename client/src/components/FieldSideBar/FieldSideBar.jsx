@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Typography from '@mui/material/Typography';
+import { useRef } from 'react'
 import './FieldSideBar.css';
 
 /** Component for a Field Side Bar
@@ -25,7 +26,7 @@ const FieldSideBar = (props) => {
     <div className='fieldsidebar'>
       {/* Space for progress bar */}
       <div>
-        <Typography pt={1} pb={5} variant='h5' component='div' sx={{ fontWeight: 'bold' }}>{props.title}</Typography>
+        <Typography pt={5} pb={5} variant='h5' component='div' sx={{ fontWeight: 'bold' }}>{props.title}</Typography>
       </div>
       <div className='bar-div'>{fieldItem}</div>
 
