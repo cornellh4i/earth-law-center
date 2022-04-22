@@ -8,7 +8,8 @@ import './QuestionAnswer.css';
  * of the following format: ["<input type>", "<question content"]. Valid input
  * types currently include "text input", "dropdown select", "states dropdown select"
 */
-const QuestionAnswer = () => {
+
+const QuestionAnswer = (props) => {
   return (
       <div></div>
   );
