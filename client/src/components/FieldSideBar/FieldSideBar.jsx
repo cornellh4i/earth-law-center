@@ -24,7 +24,7 @@ const FieldSideBar = (props) => {
   // To test if state works
   const TestState = () => {
     // Clicked button should show up on the screen 
-    return <h1>{click}</h1>
+    // return <h1>{click}</h1>
   }
 
   return (
