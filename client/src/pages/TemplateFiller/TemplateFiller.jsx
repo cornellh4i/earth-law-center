@@ -13,6 +13,7 @@ const TemplateFiller = () => {
         title={"Right of Nature Ordonnance Template"}
         questions={[
           ['states dropdown select', 'What state does this ordonnance apply to?'],
+          ['dropdown select', 'Is this a dropdown select?'],
           ['text input', 'What city does this ordonnance apply to?'],
         ]}
       />
