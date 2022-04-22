@@ -15,31 +15,6 @@ const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.google
 const TOKEN_PATH = 'token.json';
 
 /**
- * Creates a copy of a google doc
- * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
- * @param {docID} is the document id of the google doc we want to copy
- * @returns the docID of the copied document
- */
- async function docCopy(auth, docID){ 
-  const drive = google.drive({ version: 'v3', auth });
-  console.log("IN DOC COPY")
-  //Copy file and store id in docCopyId
-  var copyTitle = "Copy Title";
-  var docCopyId;
-  await drive.files.copy({
-    fileId: docID,
-    resource: {
-      name: copyTitle,
-    }
-  }).then(function(response) {
-    docCopyId = response.data.id
-    console.log("copy of doc", docCopyId)
-  },
-  function(err) { console.error("Execute error", err); });
-  return docCopyId
-}
-
-/**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
  * @param {Object} credentials The authorization client credentials.
@@ -67,7 +42,6 @@ function authorize(callback) {
  * @param {docID} is the docID that will be passed into the callback function.
  */
 async function authorizeDocID(callback, docID) {
-
   const client_id = "454620567847-jsntbbqhlc4pvtda5cmfi18eqb4jff94.apps.googleusercontent.com";
   const client_secret = "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";
   const redirect_uris = ["http://localhost:8080/api/docCopy"];
@@ -167,4 +141,4 @@ function getNewToken(oAuth2Client, callback) {
 }
 
 // Exporting authorize functions
-module.exports = { authorize, authorizeInsertText, authorizeReplaceAllTexts, authorizeDocID, docCopy};
+module.exports = { authorize, authorizeInsertText, authorizeReplaceAllTexts, authorizeDocID};

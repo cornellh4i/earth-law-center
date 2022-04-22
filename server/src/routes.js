@@ -1,3 +1,5 @@
+const { authorizedbuyersmarketplace } = require("googleapis/build/src/apis/authorizedbuyersmarketplace");
+
 module.exports = () => {
 
 
@@ -7,6 +9,7 @@ module.exports = () => {
   // Imported functions
   const functions = require('../gdocs-api/functions.js');
   const index = require('../gdocs-api/index.js');
+  const authsamp = require('../gdocs-api/auth_sample.js')
   // const dotenv = require('dotenv');
   // // dotenv.config({ path: '../gdocs-api/.env' });
   // const path = require('path')
@@ -26,11 +29,12 @@ module.exports = () => {
   router.get('/docCopy/:docID', async (req, res) => {
     console.log("REQUEST", req.params)
     try {
-      const docID = await index.authorizeDocID(index.docCopy, req.params.docID).then((response) => {
-      console.log("RES", response)
-      return response;
-    });
-    res.json({ msg: `docid: ${docID}`});
+      authsamp.authenticate((client) => functions.docCopy(client, req.params.docID).then((response) => res.json({ msg: `docid: ${response}`})))
+      // const docID = await index.authorizeDocID(index.docCopy, req.params.docID).then((response) => {
+      // console.log("RES", response)
+      // return response;
+      // });
+    // res.json({ msg: `docid: ${docID}`});
   }
   catch(err){
     res.json({error:err.message || err.toString()})

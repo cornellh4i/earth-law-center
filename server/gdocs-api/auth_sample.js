@@ -22,7 +22,7 @@ const destroyer = require('server-destroy');
 
 const {google} = require('googleapis');
 const people = google.people('v1');
-
+const functions= require('./functions.js');
 /**
  * To use OAuth2 authentication, we need access to a CLIENT_ID, CLIENT_SECRET, AND REDIRECT_URI.  To get these credentials for your application, visit https://console.cloud.google.com/apis/credentials.
  */
@@ -51,6 +51,7 @@ google.options({auth: oauth2Client});
  */
 async function authenticate(scopes) {
   return new Promise((resolve, reject) => {
+    console.log("In promise")
     // grab the url that will be used for authorization
     const authorizeUrl = oauth2Client.generateAuthUrl({
       access_type: 'offline',
@@ -59,8 +60,9 @@ async function authenticate(scopes) {
     const server = http
       .createServer(async (req, res) => {
         try {
+          console.log("HERE")
           if (req.url.indexOf('/oauth2callback') > -1) {
-            const qs = new url.URL(req.url, 'http://localhost:3000')
+            const qs = new url.URL(req.url, 'http://localhost:8080')
               .searchParams;
             res.end('Authentication successful! Please return to the console.');
             server.destroy();
@@ -72,8 +74,9 @@ async function authenticate(scopes) {
           reject(e);
         }
       })
-      .listen(3000, () => {
+      .listen(8080, () => {
         // open the browser to the authorize url to start the workflow
+        console.log("listening")
         opn(authorizeUrl, {wait: false}).then(cp => cp.unref());
       });
     destroyer(server);
@@ -81,25 +84,16 @@ async function authenticate(scopes) {
 }
 
 async function runSample() {
-  // retrieve user profile
-  const res = await people.people.get({
-    resourceName: 'people/me',
-    personFields: 'emailAddresses',
-  });
-  console.log(res.data);
+  const scopes = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive'];
+  return await authenticate(scopes)
+  .then((client) => functions.docCopy(client, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os")
+                    .then((response) => response))
+  .catch(console.error);  
 }
 
-// This will provide an object with the access_token and refresh_token.
-// Save these somewhere safe so they can be used at a later time.
-const {tokens} = await oauth2Client.getToken('4/0AX4XfWieRs3TuSrHPgFKatWTqTezPkffZ6gwfwX7-BVmk0CqjwXYp9hO7WchR_mZnzsjDg')
-oauth2Client.setCredentials(tokens);
 
-const scopes = [
-  'https://www.googleapis.com/auth/contacts.readonly',
-  'https://www.googleapis.com/auth/user.emails.read',
-  'profile',
-];
-authenticate(scopes)
-  .then(client => runSample(client))
-  .catch(console.error);
+runSample().then((response) => console.log("response", response))
+
+module.exports = {authenticate};
+
 

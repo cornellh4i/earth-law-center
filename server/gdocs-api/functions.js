@@ -34,6 +34,32 @@ function printDocInfo(auth) {
 
 
 /**
+ * Creates a copy of a google doc
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {docID} is the document id of the google doc we want to copy
+ * @returns the docID of the copied document
+ */
+ async function docCopy(auth, docID){ 
+  const drive = google.drive({ version: 'v3', auth });
+  console.log("IN DOC COPY")
+  //Copy file and store id in docCopyId
+  var copyTitle = "Copy Title";
+  var docCopyId;
+  await drive.files.copy({
+    fileId: docID,
+    resource: {
+      name: copyTitle,
+    }
+  }).then(function(response) {
+    docCopyId = response.data.id
+    console.log("copy of doc", docCopyId)
+  },
+  function(err) { console.error("Execute error", err); });
+  return docCopyId
+}
+
+
+/**
  * Inserts text at a location in a google doc
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param {docID} is the document id of the google doc we want to insert data in
@@ -46,7 +72,7 @@ function printDocInfo(auth) {
   const docs = google.docs({ version: 'v1', auth });
   var docCopyId;
     // Below is the function that generates a new docID (it does not currently work because of a circular dependency)
-  await index.authorizeDocID(index.docCopy, docID).then(
+  await docCopy(auth, docID).then(
     (res) => {console.log("result from copying doc in insert text function", res); docCopyId = res}); 
   // JSON request body for batchupdate with docCopyId
   var updateObject = {
@@ -62,10 +88,11 @@ function printDocInfo(auth) {
     "writeControl": {}
   }
   // Send the JSON object in a batchUpdate request
-  docs.documents.batchUpdate(updateObject, (err, res) => {
+   docs.documents.batchUpdate(updateObject, (err, res) => {
     if (err) {
       return console.log(`The API returned an error: ` + err)
     } else {
+      console.log("end of insert text, ", docCopyId)
       return docCopyId;
     } 
   });
@@ -268,4 +295,4 @@ function replaceAllTexts(auth, docID, replaceText, containsText) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts};
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy};
