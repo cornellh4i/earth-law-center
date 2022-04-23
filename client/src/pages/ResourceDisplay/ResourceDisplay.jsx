@@ -1,11 +1,10 @@
 import React from 'react';
 import './ResourceDisplay.css';
-// import Header from '../../components/Header/Header'; 
 import ResourceCard from '../../components/ResourceCard/ResourceCard';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-/** Component for Resource Display Page */
 
+/** Component for Resource Display Page */
 const ResourceDisplay = () => {
   return (
     <div>

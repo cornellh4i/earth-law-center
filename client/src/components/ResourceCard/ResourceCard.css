@@ -5,7 +5,7 @@
   background-color: #fff;
   border-radius: 0.5rem;
   margin: 2%;
-  padding: 0% 0% 0% 0.5%
+  padding: 1.2rem
 }
 
 .button {
@@ -18,12 +18,4 @@
 .text {
   font-size: 13;
   color: #000
-}
-
-/* .card_content{
-  p: '1', '&:last-child': { pb: 2 }
-} */
-
-.card-content {
-  padding: 0px
 }
