@@ -41,9 +41,8 @@ function printDocInfo(auth) {
  */
  async function docCopy(auth, docID){ 
   const drive = google.drive({ version: 'v3', auth });
-  console.log("IN DOC COPY")
   //Copy file and store id in docCopyId
-  var copyTitle = "Copy Title";
+  var copyTitle = "ELC COPY";
   var docCopyId;
   await drive.files.copy({
     fileId: docID,
@@ -52,7 +51,6 @@ function printDocInfo(auth) {
     }
   }).then(function(response) {
     docCopyId = response.data.id
-    console.log("copy of doc", docCopyId)
   },
   function(err) { console.error("Execute error", err); });
   return docCopyId
@@ -71,32 +69,30 @@ function printDocInfo(auth) {
   //Authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
   var docCopyId;
+  var updateObject
     // Below is the function that generates a new docID (it does not currently work because of a circular dependency)
   await docCopy(auth, docID).then(
-    (res) => {console.log("result from copying doc in insert text function", res); docCopyId = res}); 
-  // JSON request body for batchupdate with docCopyId
-  var updateObject = {
-    documentId: docCopyId,
-    "resource": {
-      "requests": [{
-        "insertText": {
-          "text": text,
-          "location": location,
+    (docCopy) => {
+      docCopyId = docCopy; 
+      // JSON request body for batchupdate with docCopyId 
+      updateObject = {
+        documentId: docCopyId,
+        "resource": {
+          "requests": [{
+            "insertText": {
+              "text": text,
+              "location": location,
+            },
+          }],
         },
-      }],
-    },
-    "writeControl": {}
+        "writeControl": {}
+      }
+    }); 
+    // Send the JSON object in a batchUpdate request
+    await docs.documents.batchUpdate(updateObject)
+    return docCopyId 
   }
-  // Send the JSON object in a batchUpdate request
-   docs.documents.batchUpdate(updateObject, (err, res) => {
-    if (err) {
-      return console.log(`The API returned an error: ` + err)
-    } else {
-      console.log("end of insert text, ", docCopyId)
-      return docCopyId;
-    } 
-  });
-}
+
 
 /**
  * Get data from a google doc 
@@ -104,26 +100,28 @@ function printDocInfo(auth) {
  * @param {docID} is the document id of the google doc we want get data from 
  * @returns all the data from a google doc in the form of a json object 
  */
- function getAllText(auth, docID) {
+ async function getAllText(auth, docID) {
   const docs = google.docs({ version: 'v1', auth });
+  var allText;
   // We are using a GET request here
-  docs.documents.get({
+  const res = await docs.documents.get({
     // This document ID is found in the url after the /d
     documentId: docID,
-  }, (err, res) => {
-    if (err) return console.log('The API returned an error: ' + err);
-    // Adds title of doc to JSON 
-    var allText = {
-      "title" : res.data.title
-    }
-    // Creates an attribute for each text run in the doc
-    allText["textRun0"] = readStructuralElements(res.data.body.content[0]);
-    for (i = 1; i < res.data.body.content.length; i++) {
-      allText["textRun" + i] = readStructuralElements(res.data.body.content[i], allText["textRun" + (i-1)]);
-    }
-    // Testing: console.log(allText);
-    return allText;
   });
+  console.log("get all text res", res)
+  // , (err, res) => {
+  // if (err) return console.log('The API returned an error: ' + err);
+  // Adds title of doc to JSON 
+  allText = {
+    "title" : res.data.title
+  }
+  // Creates an attribute for each text run in the doc
+  allText["textRun0"] = readStructuralElements(res.data.body.content[0]);
+  for (i = 1; i < res.data.body.content.length; i++) {
+    allText["textRun" + i] = readStructuralElements(res.data.body.content[i], allText["textRun" + (i-1)]);
+  }
+  // });
+  return allText;
 }
 
 /**
