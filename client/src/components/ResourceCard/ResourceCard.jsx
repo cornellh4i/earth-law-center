@@ -9,6 +9,15 @@ import CardMedia from '@mui/material/CardMedia';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { styled } from "@mui/material/styles";
+
+const CardContentNoPadding = styled(CardContent)(`
+  padding: 0;
+  &:last-child {
+    padding-bottom: 0;
+  }
+`);
+
 
 const styles = {
   card: {
@@ -23,13 +32,17 @@ const styles = {
   button: {
     display: 'flex',
     justifyContent: 'right',
-    // backgroundColor: '#B4E197',
     width: '100%',
     margin: '5% 0% 0%'
   },
   text: {
     fontSize: 13,
     color: "#000"
+  },
+  card_content:
+  {
+    p: '1'
+    , '&:last-child': { pb: 2 }
   }
 };
 
@@ -42,17 +55,19 @@ const ResourceCard = (props) => {
   const { title, resource_type, link_to_resource, description } = props;
   return (
     <Card sx={styles.card} elevation={0}>
-      <CardContent>
+      <CardContent sx={styles.card_content}>
         <Box component={Stack} direction='column' justifyContent='center'>
           <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold' }}>
             {title}
           </Typography>
 
           <Grid container spacing={1}>
+
+            {/* Document card with portrait image and text */}
             {resource_type === 'Doc' &&
               <>
                 <Grid item xs={5}>
-                  <CardMedia component='img' alt='first' height='15%' image={link_to_resource} />
+                  <CardMedia component='img' alt='image' height='15%' image={link_to_resource} />
                 </Grid>
 
                 <Grid item xs={7}>
@@ -64,10 +79,11 @@ const ResourceCard = (props) => {
                       text='VIEW'
                       css='grey-median-btn' />
                   </div>
-
                 </Grid>
               </>
             }
+
+            {/* Video card with landscape image and text */}
             {resource_type === 'Video' &&
               <>
                 <Grid item xs={6}>
@@ -84,9 +100,9 @@ const ResourceCard = (props) => {
                     css='grey-median-btn' />
                 </div>
               </>
-
             }
 
+            {/* Website card with text */}
             {resource_type === 'Website' &&
               <>
                 <Grid item xs={12}>
