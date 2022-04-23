@@ -6,7 +6,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import './ResourceCard.css';
 
-
 /** Component for a landing card used by template law/letter cards
  *  @param {title} is the title on the card
  *  @param {text} is the text in the card
