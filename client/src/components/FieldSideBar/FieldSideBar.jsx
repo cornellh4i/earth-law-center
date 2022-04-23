@@ -9,32 +9,22 @@ import './FieldSideBar.css';
 */
 
 const FieldSideBar = (props) => {
-  const [click, setClick] = useState('');
+  const [clickedField, setClickedField] = useState('');
   const fieldItem = props.field.map((field) =>
     <div>
-      <div className='side-btn' onClick={(e) => handleClick(e, field)}>{field}</div>
+      <div className='side-btn' onClick={() => handleClick(field)}>{field}</div>
     </div>
   )
 
-  const handleClick = (e, field) => {
-    // e.target.style.fontWeight = 'bold';
-    setClick(field);
+  const handleClick = (field) => {
+    setClickedField(field);
   }
-
-  // To test if state works
-  // const TestState = () => {
-  //   // Clicked button should show up on the screen 
-  //   return <h1>{click}</h1>
-  // }
 
   return (
     <div className='fieldsidebar'>
       <Typography pt={5} pb={5} variant='h5' component='div' sx={{ fontWeight: 'bold' }}>{props.title}</Typography>
       {/* Space for progress bar */}
       <div className='bar-div'>{fieldItem}</div>
-
-      {/* Testing clicked saved correctly */}
-      {/* <TestState /> */}
     </div>
   );
 };
