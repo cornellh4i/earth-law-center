@@ -10,6 +10,7 @@ module.exports = () => {
   const functions = require('../gdocs-api/functions.js');
   const index = require('../gdocs-api/index.js');
   const authsamp = require('../gdocs-api/auth_sample.js')
+  const scopes = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive'];
   // const dotenv = require('dotenv');
   // // dotenv.config({ path: '../gdocs-api/.env' });
   // const path = require('path')
@@ -29,7 +30,7 @@ module.exports = () => {
   router.get('/docCopy/:docID', async (req, res) => {
     console.log("REQUEST", req.params)
     try {
-      authsamp.authenticate((client) => functions.docCopy(client, req.params.docID).then((response) => res.json({ msg: `docid: ${response}`})))
+      authsamp.authenticate(scopes).then((client) => functions.docCopy(client, req.params.docID).then((response) => res.json({ msg: `docid: ${response}`})))
       // const docID = await index.authorizeDocID(index.docCopy, req.params.docID).then((response) => {
       // console.log("RES", response)
       // return response;

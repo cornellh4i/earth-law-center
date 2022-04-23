@@ -92,7 +92,7 @@ async function runSample() {
 }
 
 
-runSample().then((response) => console.log("response", response))
+// runSample().then((response) => console.log("response", response))
 
 module.exports = {authenticate};
 
