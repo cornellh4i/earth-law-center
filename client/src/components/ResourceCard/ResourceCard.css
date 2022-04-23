@@ -1,4 +1,4 @@
-.card {
+.resource-card {
   max-width: 40%;
   max-height: 100%;
   border: 0.05rem solid black;
@@ -8,14 +8,14 @@
   padding: 1.2rem
 }
 
-.button {
+.resource-button {
   display: flex;
   justify-content: right;
   width: 100%;
   margin: 5% 0% 0%
 }
 
-.text {
+.resource-text {
   font-size: 13;
   color: #000
 }

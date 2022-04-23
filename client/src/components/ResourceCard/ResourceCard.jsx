@@ -16,7 +16,7 @@ import './ResourceCard.css';
 const ResourceCard = (props) => {
   const { title, resource_type, link_to_resource, description, url } = props;
   return (
-    <div className='card'>
+    <div className='resource-card'>
       <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold' }}>
         {title}
       </Typography>
@@ -31,10 +31,10 @@ const ResourceCard = (props) => {
             </Grid>
 
             <Grid item xs={7}>
-              <Typography variant='body2' className='text' >
+              <Typography variant='body2' className='resource-text' >
                 {description}
               </Typography>
-              <div className='button'>
+              <div className='resource-button'>
                 <Button
                   text='VIEW'
                   css='grey-median-btn'
@@ -53,11 +53,11 @@ const ResourceCard = (props) => {
               <CardMedia component='img' alt='first' height='20%' image={link_to_resource} />
             </Grid>
             <Grid item xs={6}>
-              <Typography variant='body2' className='text' >
+              <Typography variant='body2' className='resource-text' >
                 {description}
               </Typography>
             </Grid>
-            <div className='button'>
+            <div className='resource-button'>
               <Button
                 text='VIEW'
                 css='grey-median-btn'
@@ -72,12 +72,12 @@ const ResourceCard = (props) => {
         {resource_type === 'Website' &&
           <>
             <Grid item xs={12}>
-              <Typography variant='body2' className='text' >
+              <Typography variant='body2' className='resource-text' >
                 {description}
               </Typography>
             </Grid>
 
-            <div className='button'>
+            <div className='resource-button'>
               <Button
                 text='VIEW'
                 css='grey-median-btn'
