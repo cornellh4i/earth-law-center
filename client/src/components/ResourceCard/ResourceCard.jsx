@@ -52,7 +52,7 @@ const styles = {
  *  @param {text} is the text in the card
 */
 const ResourceCard = (props) => {
-  const { title, resource_type, link_to_resource, description } = props;
+  const { title, resource_type, link_to_resource, description, url } = props;
   return (
     <Card sx={styles.card} elevation={0}>
       <CardContent sx={styles.card_content}>
@@ -77,7 +77,10 @@ const ResourceCard = (props) => {
                   <div style={styles.button}>
                     <Button
                       text='VIEW'
-                      css='grey-median-btn' />
+                      css='grey-median-btn'
+                      handleClick={() => {
+                        window.open(url, "_blank");
+                      }} />
                   </div>
                 </Grid>
               </>
@@ -97,7 +100,10 @@ const ResourceCard = (props) => {
                 <div style={styles.button}>
                   <Button
                     text='VIEW'
-                    css='grey-median-btn' />
+                    css='grey-median-btn'
+                    handleClick={() => {
+                      window.open(url, "_blank");
+                    }} />
                 </div>
               </>
             }
@@ -114,7 +120,10 @@ const ResourceCard = (props) => {
                 <div style={styles.button}>
                   <Button
                     text='VIEW'
-                    css='grey-median-btn' />
+                    css='grey-median-btn'
+                    handleClick={() => {
+                      window.open(url, "_blank");
+                    }} />
                 </div>
               </>
             }
