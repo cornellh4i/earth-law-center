@@ -9,11 +9,12 @@ const LawsDisplay = () => {
   return (
     <div>
       <h1>LawsDisplay</h1>
-      <CategorySideBar/>
+      <CategorySideBar categories = {["ALL CATEGORIES", "RIGHTS OF NATURE", "RIGHTS OF FUTURE GENERATIONS", "HUMAN ENVIRONMENTAL RIGHTS", 
+                                    "ECOCIDE", "LEGAL GUARDIANSHIP", "ECOCENTRIC CORPORATE GOVERNANCE", "ECOCENTRIC LAND MODELS"]}/>
       <div className="testBox">
-        <TemplateCard title="title 3" summary="test summary ahhahahahahahahahah"/>
-        <TemplateCard title="title 2" summary="test summary numbah 2 ahhahahahahahahahah"/>
-        <TemplateCard title="title 3" summary="test summary numbah 3 oh baby"/>
+        <TemplateCard title="title 3" summary="test summary 1"/>
+        <TemplateCard title="title 2" summary="test summary number 2 "/>
+        <TemplateCard title="title 3" summary="test summary number 3 "/>
       </div>
     </div>
   );

@@ -21,7 +21,7 @@
 .sidebar-btn,
 .sidebar-btn-highlighted {
   padding-top: 10%;
-  color: grey;
+  color: black;
   cursor: pointer;
   border: none;
   font-size: 14px;
@@ -31,14 +31,12 @@
 
 .sidebar-btn-highlighted {
   font-weight: bold;
-  font-weight: bold;
-  font-size: 16px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: 50px;
+  font-size: 14px;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+  margin-right: 3.125rem;
   border: none;
   background: none;
-  text-align: center;
   cursor: pointer;
 }
 
