@@ -1,0 +1,22 @@
+.body {
+    margin: 0;
+}
+
+.fieldsidebar {
+    height: 100vh;
+    min-width: 20rem;
+    background-color: lightgray;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.side-btn {
+    font-size: 14px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.side-btn:hover {
+    font-weight: bold;
+}
