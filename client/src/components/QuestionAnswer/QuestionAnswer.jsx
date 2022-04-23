@@ -12,29 +12,35 @@ import Typography from '@mui/material/Typography';
 */
 
 const QuestionAnswer = (props) => {
-  // Each answer consists of a list of the following format: ["<question asked>", "user response"]
+  /** The user's answers to the field questions. Each answer consists of a list of
+   * the following format: ["<question asked>", "<user response>"] */
   const [inputs, setInputs] = useState({});
 
+  /** Handles user field changes and updates the inputs variable */
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInputs(values => ({ ...values, [name]: value }))
   }
 
+  /** Handles user pressing the 'Next' button */
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(inputs);
   }
-  
+
+  /** Handles user pressing the 'Back' button */
   const handleBack = (e) => {
     // Code here
   }
-  
+
+  /** Handles user pressing the 'Skip' button */
   const handleSkip = (e) => {
     // Code here
   }
 
-  // Note: question[0] = <input type> and question[1] = <question content>
+  /** A component consisting of all questions from props.questions.
+   * Note: question[0] = <input type> and question[1] = <question content> */
   const questionItems = props.questions.map((question) =>
     <div>
       {/* Question component */}
@@ -116,10 +122,10 @@ const QuestionAnswer = (props) => {
     <div>
       <Typography pt={1} pb={1} variant='h6'>{props.title}</Typography>
       <Typography pt={1} pb={1} variant='h4' sx={{ fontWeight: 'bold' }}>{props.field}</Typography>
-        {questionItems}
-        <Button text="Back" handleClick={handleBack} css="back-btn" />
-        <Button text="Skip" handleClick={handleSkip} css="grey-large-btn" />
-        <Button text="Next" handleClick={handleSubmit} css="continue-btn" />
+      {questionItems}
+      <Button text="Back" handleClick={handleBack} css="back-btn" />
+      <Button text="Skip" handleClick={handleSkip} css="grey-large-btn" />
+      <Button text="Next" handleClick={handleSubmit} css="continue-btn" />
     </div>
   );
 };
