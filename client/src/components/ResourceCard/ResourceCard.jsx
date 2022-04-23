@@ -4,7 +4,6 @@ import Button from '../Button/Button';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
-import { styled } from "@mui/material/styles";
 import './ResourceCard.css';
 
 
