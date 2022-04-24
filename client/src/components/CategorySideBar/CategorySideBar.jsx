@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './CategorySideBar.css';
 
 /** Component for CategorySideBar Page 
