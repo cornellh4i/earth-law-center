@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import './QuestionAnswer.css';
 import Button from '../Button/Button';
 import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 /** Component for a Q&A component on the Template Form Filler page
  * @param {field} is the field name selected in the navigation sidebar
@@ -42,84 +50,90 @@ const QuestionAnswer = (props) => {
   /** A component consisting of all questions from props.questions.
    * Note: question[0] = <input type> and question[1] = <question content> */
   const questionItems = props.questions.map((question) =>
-    <div>
+    <div className='question-items'>
       {/* Question component */}
-      <b>{question[1]}</b>
+      <p>{question[1]}</p>
 
       {/* Text input answer component */}
       {question[0] === "text input" &&
         <div>
-          <input type="text" name={question[1]} value={inputs[question[1]] || ""} onChange={handleChange} />
+          <TextField type="text" name={question[1]} value={inputs[question[1]] || ""} label= 'type answer here'
+           sx = {{border:'gray', width: '40ch'}} size = 'small' onChange={handleChange} />
         </div>
       }
 
       {/* States dropdown select answer component */}
       {question[0] === "states dropdown select" &&
-        <div>
-          <select name={question[1]} value={inputs[question[1]] || ""} onChange={handleChange}>
-            <option value="Alabama">Alabama</option>
-            <option value="Alaska">Alaska</option>
-            <option value="Arizona">Arizona</option>
-            <option value="Arkansas">Arkansas</option>
-            <option value="California">California</option>
-            <option value="Canal Zone">Canal Zone</option>
-            <option value="Colorado">Colorado</option>
-            <option value="Connecticut">Connecticut</option>
-            <option value="Delaware">Delaware</option>
-            <option value="District of Columbia">District of Columbia</option>
-            <option value="Florida">Florida</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Guam">Guam</option>
-            <option value="Hawaii">Hawaii</option>
-            <option value="Idaho">Idaho</option>
-            <option value="Illinois">Illinois</option>
-            <option value="Indiana">Indiana</option>
-            <option value="Iowa">Iowa</option>
-            <option value="Kansas">Kansas</option>
-            <option value="Kentucky">Kentucky</option>
-            <option value="Louisiana">Louisiana</option>
-            <option value="Maine">Maine</option>
-            <option value="Maryland">Maryland</option>
-            <option value="Massachusetts">Massachusetts</option>
-            <option value="Michigan">Michigan</option>
-            <option value="Minnesota">Minnesota</option>
-            <option value="Mississippi">Mississippi</option>
-            <option value="Missouri">Missouri</option>
-            <option value="Montana">Montana</option>
-            <option value="Nebraska">Nebraska</option>
-            <option value="Nevada">Nevada</option>
-            <option value="New Hampshire">New Hampshire</option>
-            <option value="New Jersey">New Jersey</option>
-            <option value="New Mexico">New Mexico</option>
-            <option value="New York">New York</option>
-            <option value="North Carolina">North Carolina</option>
-            <option value="North Dakota">North Dakota</option>
-            <option value="Ohio">Ohio</option>
-            <option value="Oklahoma">Oklahoma</option>
-            <option value="Oregon">Oregon</option>
-            <option value="Pennsylvania">Pennsylvania</option>
-            <option value="Puerto Rico">Puerto Rico</option>
-            <option value="Rhode Island">Rhode Island</option>
-            <option value="South Carolina">South Carolina</option>
-            <option value="South Dakota">South Dakota</option>
-            <option value="Tennessee">Tennessee</option>
-            <option value="Texas">Texas</option>
-            <option value="Utah">Utah</option>
-            <option value="Vermont">Vermont</option>
-            <option value="Virgin Islands">Virgin Islands</option>
-            <option value="Virginia">Virginia</option>
-            <option value="Washington">Washington</option>
-            <option value="West Virginia">West Virginia</option>
-            <option value="Wisconsin">Wisconsin</option>
-            <option value="Wyoming">Wyoming</option>
-          </select>
-        </div>
+        <Box> 
+          <FormControl className='state-dropdown'>   
+            <InputLabel id = 'select-state'>Select State</InputLabel>  
+            <Select labelId = 'select-state' name={question[1]} value={inputs[question[1]] || ""} onChange={handleChange}
+            label = 'Select State' variant='outlined' sx = {{borderRadius:'16px', width:'20ch'}}>
+              <MenuItem value="Alabama">Alabama</MenuItem>
+              <MenuItem value="Alaska">Alaska</MenuItem>
+              <MenuItem value="Arizona">Arizona</MenuItem>
+              <MenuItem value="Arkansas">Arkansas</MenuItem>
+              <MenuItem value="California">California</MenuItem>
+              <MenuItem value="Canal Zone">Canal Zone</MenuItem>
+              <MenuItem value="Colorado">Colorado</MenuItem>
+              <MenuItem value="Connecticut">Connecticut</MenuItem>
+              <MenuItem value="Delaware">Delaware</MenuItem>
+              <MenuItem value="District of Columbia">District of Columbia</MenuItem>
+              <MenuItem value="Florida">Florida</MenuItem>
+              <MenuItem value="Georgia">Georgia</MenuItem>
+              <MenuItem value="Guam">Guam</MenuItem>
+              <MenuItem value="Hawaii">Hawaii</MenuItem>
+              <MenuItem value="Idaho">Idaho</MenuItem>
+              <MenuItem value="Illinois">Illinois</MenuItem>
+              <MenuItem value="Indiana">Indiana</MenuItem>
+              <MenuItem value="Iowa">Iowa</MenuItem>
+              <MenuItem value="Kansas">Kansas</MenuItem>
+              <MenuItem value="Kentucky">Kentucky</MenuItem>
+              <MenuItem value="Louisiana">Louisiana</MenuItem>
+              <MenuItem value="Maine">Maine</MenuItem>
+              <MenuItem value="Maryland">Maryland</MenuItem>
+              <MenuItem value="Massachusetts">Massachusetts</MenuItem>
+              <MenuItem value="Michigan">Michigan</MenuItem>
+              <MenuItem value="Minnesota">Minnesota</MenuItem>
+              <MenuItem value="Mississippi">Mississippi</MenuItem>
+              <MenuItem value="Missouri">Missouri</MenuItem>
+              <MenuItem value="Montana">Montana</MenuItem>
+              <MenuItem value="Nebraska">Nebraska</MenuItem>
+              <MenuItem value="Nevada">Nevada</MenuItem>
+              <MenuItem value="New Hampshire">New Hampshire</MenuItem>
+              <MenuItem value="New Jersey">New Jersey</MenuItem>
+              <MenuItem value="New Mexico">New Mexico</MenuItem>
+              <MenuItem value="New York">New York</MenuItem>
+              <MenuItem value="North Carolina">North Carolina</MenuItem>
+              <MenuItem value="North Dakota">North Dakota</MenuItem>
+              <MenuItem value="Ohio">Ohio</MenuItem>
+              <MenuItem value="Oklahoma">Oklahoma</MenuItem>
+              <MenuItem value="Oregon">Oregon</MenuItem>
+              <MenuItem value="Pennsylvania">Pennsylvania</MenuItem>
+              <MenuItem value="Puerto Rico">Puerto Rico</MenuItem>
+              <MenuItem value="Rhode Island">Rhode Island</MenuItem>
+              <MenuItem value="South Carolina">South Carolina</MenuItem>
+              <MenuItem value="South Dakota">South Dakota</MenuItem>
+              <MenuItem value="Tennessee">Tennessee</MenuItem>
+              <MenuItem value="Texas">Texas</MenuItem>
+              <MenuItem value="Utah">Utah</MenuItem>
+              <MenuItem value="Vermont">Vermont</MenuItem>
+              <MenuItem value="Virgin Islands">Virgin Islands</MenuItem>
+              <MenuItem value="Virginia">Virginia</MenuItem>
+              <MenuItem value="Washington">Washington</MenuItem>
+              <MenuItem value="West Virginia">West Virginia</MenuItem>
+              <MenuItem value="Wisconsin">Wisconsin</MenuItem>
+              <MenuItem value="Wyoming">Wyoming</MenuItem>
+            </Select>
+          </FormControl>  
+        </Box>
       }
     </div>
   )
 
   return (
-    <div>
+    // The div wrapping the entire component is yet to be styled. It's className is <question-component>
+    <div className='question-component'>
       <Typography pt={1} pb={1} variant='h6'>{props.title}</Typography>
       <Typography pt={1} pb={1} variant='h4' sx={{ fontWeight: 'bold' }}>{props.field}</Typography>
       {questionItems}
