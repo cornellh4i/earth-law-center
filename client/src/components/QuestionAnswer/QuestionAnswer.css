@@ -1,24 +1,9 @@
-/* .dropdown{
-    background-color: #fff;
-    border-color:#000;
-    border-width:0.05rem;
-    border-style:solid;
-    border-radius: 0.8rem;
-} */
 
-
-/* .select-state{
-    border-radius: 0.8rem;
-    width: 10rem;
-    height: 10rem;
-} */
-
-.question-items{
-    padding-bottom: 2em;
-
+.text-input .MuiOutlinedInput-root{
+    border-radius: 14px;
 }
 
-
-.state-dropdown{
-    width: 12rem;
+/* Gave this some margin so that we can see it as if the side bar was there. It is just for testing */
+.question-component{
+    margin-left: 100px;
 }

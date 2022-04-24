@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import './QuestionAnswer.css';
 import Button from '../Button/Button';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -50,25 +47,26 @@ const QuestionAnswer = (props) => {
   /** A component consisting of all questions from props.questions.
    * Note: question[0] = <input type> and question[1] = <question content> */
   const questionItems = props.questions.map((question) =>
-    <div className='question-items'>
+    <div>
       {/* Question component */}
-      <p>{question[1]}</p>
+      <Typography pt={3} pb={1} variant='body2'>{question[1]}</Typography>
 
       {/* Text input answer component */}
       {question[0] === "text input" &&
-        <div>
-          <TextField type="text" name={question[1]} value={inputs[question[1]] || ""} label= 'type answer here'
-           sx = {{border:'gray', width: '40ch'}} size = 'small' onChange={handleChange} />
-        </div>
+        <Box>
+          <TextField className='text-input' name={question[1]} value={inputs[question[1]] || ""} 
+          label= 'type answer here' sx = {{border:'gray', width: '50ch'}} 
+          size = 'small' onChange={handleChange} />
+        </Box>
       }
 
       {/* States dropdown select answer component */}
       {question[0] === "states dropdown select" &&
         <Box> 
-          <FormControl className='state-dropdown'>   
-            <InputLabel id = 'select-state'>Select State</InputLabel>  
-            <Select labelId = 'select-state' name={question[1]} value={inputs[question[1]] || ""} onChange={handleChange}
-            label = 'Select State' variant='outlined' sx = {{borderRadius:'16px', width:'20ch'}}>
+          <FormControl>   
+            <TextField select className= 'text-input' name={question[1]} 
+            value={inputs[question[1]] || ""} onChange={handleChange}
+            label = 'Select State' size='small' variant='outlined' sx = {{width:150}}>
               <MenuItem value="Alabama">Alabama</MenuItem>
               <MenuItem value="Alaska">Alaska</MenuItem>
               <MenuItem value="Arizona">Arizona</MenuItem>
@@ -124,7 +122,7 @@ const QuestionAnswer = (props) => {
               <MenuItem value="West Virginia">West Virginia</MenuItem>
               <MenuItem value="Wisconsin">Wisconsin</MenuItem>
               <MenuItem value="Wyoming">Wyoming</MenuItem>
-            </Select>
+            </TextField>
           </FormControl>  
         </Box>
       }
@@ -132,7 +130,7 @@ const QuestionAnswer = (props) => {
   )
 
   return (
-    // The div wrapping the entire component is yet to be styled. It's className is <question-component>
+    // The div wrapping the entire component. It's className is <question-component>
     <div className='question-component'>
       <Typography pt={1} pb={1} variant='h6'>{props.title}</Typography>
       <Typography pt={1} pb={1} variant='h4' sx={{ fontWeight: 'bold' }}>{props.field}</Typography>
