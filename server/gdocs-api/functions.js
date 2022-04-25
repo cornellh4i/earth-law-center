@@ -115,10 +115,11 @@ function printDocInfo(auth) {
   allText = {
     "title" : res.data.title
   }
+  console.log(allText)
   // Creates an attribute for each text run in the doc
-  allText["textRun0"] = readStructuralElements(res.data.body.content[0]);
+  allText["textRun0"] = await readStructuralElements(res.data.body.content[0]);
   for (i = 1; i < res.data.body.content.length; i++) {
-    allText["textRun" + i] = readStructuralElements(res.data.body.content[i], allText["textRun" + (i-1)]);
+    allText["textRun" + i] = await readStructuralElements(res.data.body.content[i], allText["textRun" + (i-1)]);
   }
   // });
   return allText;
@@ -132,7 +133,7 @@ function printDocInfo(auth) {
  * @param {prevTextRun} is the previous text run before the one being parsed
  * @returns the textRun JSON 
  */
-function readStructuralElements(element, prevTextRun) {
+async function readStructuralElements(element, prevTextRun) {
   // code sourced and modified from Google Docs API documentation
   var textRun = {
     "text" : "",
@@ -182,7 +183,7 @@ function readStructuralElements(element, prevTextRun) {
  * element being parsed.
  * @returns the content of the text run within a paragraph element.
  */
-function readParagraphElement(element) {
+async function readParagraphElement(element) {
   // Helper for parsing paragraph element
   textRun = element.textRun;
   if (textRun == null || textRun.content == null) {
