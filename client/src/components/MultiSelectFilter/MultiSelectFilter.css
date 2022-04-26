@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
+.box{
+    width: 332px;
+    height: 372px;
+    background-color: #CCDFDE;
+    display: 'flex';
+}
+
+.text{
+    font-size: 18px;
+    line-height: 24.55px;
+    font-weight: 700, bold;
+    font-family: 'Nunito', sans-serif;
+    color: #000000;
+}
+
+.labels{
+    font-size: 14px;
+    line-height: 24.55px;
+    font-weight: 400, regular;
+    font-family: 'Nunito', sans-serif;
+    color: #000000;
+}
