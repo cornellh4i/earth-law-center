@@ -13,3 +13,11 @@ body {
   margin-left: 80px;
   margin-right: 80px;
 }
+
+.search-bar-container{
+  display: flex;
+  flex-direction: row;
+  width: 35%;
+  padding-top: 5%;
+}
+

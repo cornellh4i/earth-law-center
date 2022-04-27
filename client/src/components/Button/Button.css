@@ -137,3 +137,23 @@
   opacity: 70%;
   cursor: pointer;
 }
+
+.search-btn{
+  width: 8%;
+  min-width: 100px;
+  height: 100%;
+  padding: 1.2rem;
+  background: #484848;
+  color: white;
+  border-radius: 0.9375rem;
+  border: none;
+  margin-left: 4%;
+}
+
+.search-btn:hover{
+  background: #626262;
+}
+
+.search-btn:active{
+  background: #484848;
+}
