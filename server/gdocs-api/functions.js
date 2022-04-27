@@ -108,20 +108,20 @@ function printDocInfo(auth) {
     // This document ID is found in the url after the /d
     documentId: docID,
   });
-  console.log("get all text res", res)
+  // console.log("get all text res", res)
   // , (err, res) => {
   // if (err) return console.log('The API returned an error: ' + err);
   // Adds title of doc to JSON 
   allText = {
     "title" : res.data.title
   }
-  console.log(allText)
   // Creates an attribute for each text run in the doc
   allText["textRun0"] = await readStructuralElements(res.data.body.content[0]);
   for (i = 1; i < res.data.body.content.length; i++) {
     allText["textRun" + i] = await readStructuralElements(res.data.body.content[i], allText["textRun" + (i-1)]);
   }
   // });
+  
   return allText;
 }
 
