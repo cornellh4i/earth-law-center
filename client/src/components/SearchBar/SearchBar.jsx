@@ -22,6 +22,7 @@ const SearchBar = forwardRef((props, _ref) => {
         placeholder={props.placeholder} 
         variant="outlined" 
         sx={{
+            width: "80%",
             minWidth: 150,
         }} 
         onChange={(e) => {
