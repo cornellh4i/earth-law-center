@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './ResourcesSideBar.css';
+import './ResourceSideBar.css';
 
-/** Component for ResourcesSideBar Page 
+/** Component for ResourceSideBar Page 
  * @param {categories} are the categories to be displayed in the sidebar
 */
-const ResourcesSideBar = (props) => {
+const ResourceSideBar = (props) => {
   const [category, setCategory] = useState(props.categories[0]);
   const categoryItems = props.categories.map((inputCategory) =>
     <li>
@@ -12,12 +12,12 @@ const ResourcesSideBar = (props) => {
     </li>
   )
   return (
-    <div className='resources-sidebar-container'>
-      <ul className='resources-sidebar-ul'>
+    <div className='resource-sidebar-container'>
+      <ul className='resource-sidebar-ul'>
         {categoryItems}
       </ul>
     </div>
   );
 };
-export default ResourcesSideBar;
+export default ResourceSideBar;
 

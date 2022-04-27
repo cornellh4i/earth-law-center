@@ -15,7 +15,7 @@ import './ResourceCard.css';
 */
 const ResourceCard = (props) => {
   const { title, resource_type, link_to_resource, description, url } = props;
-  const [category, setCategory] = useState('All resources');
+  // const [category, setCategory] = useState('All resources');
   return (
     <div className='resource-card'>
       <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold' }}>
@@ -96,7 +96,7 @@ const ResourceCard = (props) => {
 
 ResourceCard.defaultProps = {
   description: 'Lorem ipsum dolor sit amet, in sed percipitur eloquentia Lorem ipsum dolor sit amet, in sed',
-  link_to_resource:'../../properties/elc-home-mar2022.jpeg'
+  link_to_resource: '../../properties/elc-home-mar2022.jpeg'
 };
 
 export default ResourceCard;
