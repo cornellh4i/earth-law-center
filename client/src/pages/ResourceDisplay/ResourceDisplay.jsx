@@ -1,28 +1,27 @@
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import './ResourceDisplay.css';
 import ResourceCard from '../../components/ResourceCard/ResourceCard';
 import ResourceData from '../../data/ResourceData';
 import ResourceList from '../../components/ResourceList/ResourceList'
-import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Header from "../../components/Header/Header"
 import ResourceSideBar from "../../components/ResourceSideBar/ResourceSideBar"
 
 /** Component for Resource Display Page */
 const ResourceDisplay = () => {
-  const[resource,setResource]=useState(ResourceData)
-  const[category,setCategory]=useState('All resources')
+  const [category, setCategory] = useState("ALL RESOURCES");
+
   return (
     <>
       <Header />
       <Grid container columns={16}>
         <Grid item xs={4}>
-          <ResourceSideBar categories={["ALL RESOURCES", "VIDEOS", "DOCUMENTS", "WEBSITES"]} />
+          <ResourceSideBar category={category} setCategory={setCategory} />
+
         </Grid>
         <Grid item xs={8}>
-          <Typography pt={2} pb={2} align='left' variant='h5' component='div' sx={{ fontWeight: 'bold' }}>Resources</Typography>
           <>
-            <ResourceList resource={resource} category={category}/>
+            <ResourceList resource={ResourceData} category={category} />
           </>
           {/* <div>
             <Grid container spacing={3}>

@@ -5,8 +5,9 @@ import './ResourceSideBar.css';
  * @param {categories} are the categories to be displayed in the sidebar
 */
 const ResourceSideBar = (props) => {
-  const [category, setCategory] = useState(props.categories[0]);
-  const categoryItems = props.categories.map((inputCategory) =>
+  const categories = ["ALL RESOURCES", "VIDEOS", "DOCUMENTS", "WEBSITES"];
+  const { category, setCategory } = props;
+  const categoryItems = categories.map((inputCategory) =>
     <li>
       <button className={category === inputCategory ? 'sidebar-btn-highlighted' : 'sidebar-btn'} onClick={() => setCategory(inputCategory)}>{inputCategory}</button>
     </li>
