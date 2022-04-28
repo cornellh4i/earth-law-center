@@ -24,6 +24,8 @@ const SearchBar = forwardRef((props, _ref) => {
         sx={{
             width: "80%",
             minWidth: 150,
+            backgroundColor: 'white',
+            borderRadius: 1,
         }} 
         onChange={(e) => {
             setCurrentText(e.target.value);
