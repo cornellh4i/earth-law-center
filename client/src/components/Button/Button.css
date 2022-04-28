@@ -159,3 +159,10 @@
   opacity: 70%;
   cursor: pointer;
 }
+
+/* Clicking buttons in TemplateCard */
+.card-download-btn:active,
+.card-edit-btn:active {
+  opacity: 100%;
+  cursor: pointer;
+}
