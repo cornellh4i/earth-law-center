@@ -20,12 +20,12 @@ const SearchBar = forwardRef((props, _ref) => {
   return (
     <TextField 
         placeholder={props.placeholder} 
-        variant="outlined" 
+        className="search-bar"
         sx={{
             width: "80%",
             minWidth: 150,
             backgroundColor: 'white',
-            borderRadius: 1,
+            borderRadius: '0.9375rem',
         }} 
         onChange={(e) => {
             setCurrentText(e.target.value);
