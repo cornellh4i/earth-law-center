@@ -156,7 +156,7 @@
 /* Hovering buttons in TemplateCard */
 .card-download-btn:hover,
 .card-edit-btn:hover {
-  opacity: 70%;
+  color: #989898;
   cursor: pointer;
 }
 
