@@ -8,12 +8,15 @@ import LinearProgress from '@mui/material/LinearProgress';
 /** Component for a Field Side Bar
  * @param {title} is the title header of the sidebar
  * @param {field} is a list of strings containing all fields in a Google Doc
+ * @param {progress} is an int where 0 < progress < 100, representing how close the user is to completion
 */
 
 const FieldSideBar = (props) => {
+  // Sidebar section currently being viewed by the user
   const [clickedField, setClickedField] = useState('');
-  const [progress, setProgress] = useState(0);
 
+  // Value to render in the progress bar
+  const [progress, setProgress] = useState(props.progress);
 
   const fieldItem = props.field.map((field) =>
     <div>
@@ -26,12 +29,23 @@ const FieldSideBar = (props) => {
   }
 
   return (
-    <div className='fieldsidebar'>
-      <Typography pt={5} pb={5} variant='h5' component='div' sx={{ fontWeight: 'bold' }}>{props.title}</Typography>
-      {/* Space for progress bar */}
-      <Box sx={{ width: '100%' }}>
-      <LinearProgress variant="determinate" value={progress} />
-    </Box>
+    <div className='field-sidebar'>
+      {/* Header title */}
+      <Typography pt={5} pb={3} variant='h5' component='div' sx={{ fontWeight: 'bold' }}>{props.title}</Typography>
+
+      {/* Progress bar */}
+      <Box pb={3} sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ width: '100%', mr: 1 }}>
+          <LinearProgress className='progress-bar' variant='determinate' color='inherit' value={progress} />
+        </Box>
+        <Box sx={{ minWidth: 35 }}>
+          <Typography variant='body2'>{`${Math.round(
+            progress,
+          )}%`}</Typography>
+        </Box>
+      </Box>
+
+      {/* Field items */}
       <div className='bar-div'>{fieldItem}</div>
     </div>
   );
