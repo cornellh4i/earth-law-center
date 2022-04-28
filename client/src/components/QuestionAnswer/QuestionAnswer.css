@@ -1,9 +1,13 @@
-
-.text-input .MuiOutlinedInput-root{
-    border-radius: 14px;
+.text-input .MuiOutlinedInput-root {
+    border-radius: 1rem;
+    width: 30rem;
 }
 
-/* Gave this some margin so that we can see it as if the side bar was there. It is just for testing */
-.question-component{
-    margin-left: 100px;
+.select-input .MuiOutlinedInput-root {
+    border-radius: 1rem;
+    width: 15rem;
+}
+
+.question-component {
+    max-width: 30rem;
 }

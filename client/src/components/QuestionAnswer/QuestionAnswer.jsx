@@ -7,6 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
 
 /** Component for a Q&A component on the Template Form Filler page
  * @param {field} is the field name selected in the navigation sidebar
@@ -54,19 +55,30 @@ const QuestionAnswer = (props) => {
       {/* Text input answer component */}
       {question[0] === "text input" &&
         <Box>
-          <TextField className='text-input' name={question[1]} value={inputs[question[1]] || ""} 
-          label= 'type answer here' sx = {{border:'gray', width: '50ch'}} 
-          size = 'small' onChange={handleChange} />
+          <TextField
+            className='text-input'
+            name={question[1]}
+            value={inputs[question[1]] || ""}
+            label='Type answer here'
+            size='small'
+            onChange={handleChange} />
         </Box>
       }
 
       {/* States dropdown select answer component */}
       {question[0] === "states dropdown select" &&
-        <Box> 
-          <FormControl>   
-            <TextField select className= 'text-input' name={question[1]} 
-            value={inputs[question[1]] || ""} onChange={handleChange}
-            label = 'Select State' size='small' variant='outlined' sx = {{width:150}}>
+        <Box>
+          <FormControl>
+            <TextField
+              select
+              className='select-input'
+              name={question[1]}
+              value={inputs[question[1]] || ""}
+              onChange={handleChange}
+              label='Select State'
+              size='small'
+              variant='outlined'
+            >
               <MenuItem value="Alabama">Alabama</MenuItem>
               <MenuItem value="Alaska">Alaska</MenuItem>
               <MenuItem value="Arizona">Arizona</MenuItem>
@@ -123,7 +135,7 @@ const QuestionAnswer = (props) => {
               <MenuItem value="Wisconsin">Wisconsin</MenuItem>
               <MenuItem value="Wyoming">Wyoming</MenuItem>
             </TextField>
-          </FormControl>  
+          </FormControl>
         </Box>
       }
     </div>
@@ -135,9 +147,19 @@ const QuestionAnswer = (props) => {
       <Typography pt={1} pb={1} variant='h6'>{props.title}</Typography>
       <Typography pt={1} pb={1} variant='h4' sx={{ fontWeight: 'bold' }}>{props.field}</Typography>
       {questionItems}
-      <Button text="Back" handleClick={handleBack} css="back-btn" />
-      <Button text="Skip" handleClick={handleSkip} css="grey-large-btn" />
-      <Button text="Next" handleClick={handleSubmit} css="continue-btn" />
+
+      {/* Buttons */}
+      <Grid container direction="row" spacing={4} pt={2} justifyContent="flex-end">
+        <Grid item xs={6}>
+          <Button text="Back" handleClick={handleBack} css="back-btn" />
+        </Grid>
+        <Grid item xs={6}>
+          <Box display="flex" justifyContent="flex-end">
+            <Button text="Skip" handleClick={handleSkip} css="grey-large-btn" />
+            <Button text="Next" handleClick={handleSubmit} css="continue-btn" />
+          </Box>
+        </Grid>
+      </Grid>
     </div>
   );
 };
