@@ -3,6 +3,7 @@ import './LawsDisplay.css';
 import '../../components/CategorySideBar/CategorySideBar'; 
 import CategorySideBar from '../../components/CategorySideBar/CategorySideBar';
 import TemplateCard from '../../components/TemplateCard/TemplateCard'; 
+import MultiSelectFilter from '../../components/MultiSelectFilter/MultiSelectFilter'
 
 /** Component for Laws Page */
 const LawsDisplay = () => {
