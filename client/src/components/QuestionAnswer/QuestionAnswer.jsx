@@ -61,6 +61,7 @@ const QuestionAnswer = (props) => {
             value={inputs[question[1]] || ""}
             label='Type answer here'
             size='small'
+            fullWidth
             onChange={handleChange}
           />
         </Box>
