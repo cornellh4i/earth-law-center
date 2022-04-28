@@ -1,9 +1,6 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-
 import ResourceBox from '../../components/ResourceBox/ResourceBox';
 import LandingCard from '../../components/LandingCard/LandingCard';
 import Header from '../../components/Header/Header'; 
@@ -11,12 +8,10 @@ import './Landing.css';
 import { Link } from 'react-router-dom'
 
 /** Component for Landing Page */
-
 const Landing = () => {
-
   return (
     <div>
-      <Header />
+      <Header title="Lorem Ipsum" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." hasSearch={true} searchBarPlaceholder="Search Lorem Ipsum"/>
       <div className="content">
         {/*We have two Landing boxes for now*/}
         <Grid container spacing={4} pt={5}>

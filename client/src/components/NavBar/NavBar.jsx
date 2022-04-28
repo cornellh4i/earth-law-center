@@ -2,7 +2,6 @@ import React from 'react';
 import './NavBar.css';
 import Button from '../Button/Button';
 import Grid from '@mui/material/Grid';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 

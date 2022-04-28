@@ -3,7 +3,12 @@ import './TemplateCard.css';
 import Button from '../Button/Button.jsx';
 import downloadbtn from './assets/download-btn.png';
 
-/** Component for TemplateCard Page */
+/** Component for TemplateCard Page 
+ * @param {title} is the title of the card
+ * @param {summary} is the summary of the card 
+ * @param {edit} is the function that allows you to edit the template
+ * @param {download} is the function that allows you to download a template 
+*/
 
 const TemplateCard = (props) => {
   return (
