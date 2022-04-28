@@ -9,8 +9,8 @@ const TemplateFiller = () => {
     <div>
       <h1>TemplateFiller</h1>
       <QuestionAnswer
-        field={"City & State"}
-        title={"Right of Nature Ordonnance Template"}
+        field={'City & State'}
+        title={'Right of Nature Ordonnance Template'}
         questions={[
           ['states dropdown select', 'What state does this ordonnance apply to?'],
           ['text input', 'What city does this ordonnance apply to?'],
