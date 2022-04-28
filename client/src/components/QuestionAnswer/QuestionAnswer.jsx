@@ -61,7 +61,8 @@ const QuestionAnswer = (props) => {
             value={inputs[question[1]] || ""}
             label='Type answer here'
             size='small'
-            onChange={handleChange} />
+            onChange={handleChange}
+          />
         </Box>
       }
 
@@ -148,7 +149,7 @@ const QuestionAnswer = (props) => {
       <Typography pt={1} pb={1} variant='h4' sx={{ fontWeight: 'bold' }}>{props.field}</Typography>
       {questionItems}
 
-      {/* Buttons */}
+      {/* Button positioning */}
       <Grid container direction="row" spacing={4} pt={2} justifyContent="flex-end">
         <Grid item xs={6}>
           <Button text="Back" handleClick={handleBack} css="back-btn" />
