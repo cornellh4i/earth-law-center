@@ -1,4 +1,3 @@
-import React from 'react';
 import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
 import React, { useState } from 'react';
 import './TemplateFiller.css';
@@ -12,20 +11,9 @@ const TemplateFiller = () => {
 
   return (
     <div>
-
-      <h1>TemplateFiller</h1>
-      <QuestionAnswer
-        field={'City & State'}
-        title={'Right of Nature Ordonnance Template'}
-        questions={[
-          ['states dropdown select', 'What state does this ordonnance apply to?'],
-          ['text input', 'What city does this ordonnance apply to?'],
-        ]}
-      />
-
       {/* Entries to field prop is temporary for testing */}
       <Grid container spacing={4}>
-        <Grid item xs={12} md={2}>
+        <Grid item xs={6} md={4}>
           <FieldSideBar
             title='EarthLegislator'
             progress={progress}
@@ -45,7 +33,27 @@ const TemplateFiller = () => {
               'Enactment'
             ]} />
         </Grid>
+        <Grid item xs={6} md={8} >
+          <QuestionAnswer
+              field={'City & State'}
+              title={'Right of Nature Ordonnance Template'}
+              questions={[
+                ['states dropdown select', 'What state does this ordonnance apply to?'],
+                ['text input', 'What city does this ordonnance apply to?'],
+              ]}
+            />  
+
+        </Grid>
       </Grid>
+
+    {/* <QuestionAnswer
+            field={'City & State'}
+            title={'Right of Nature Ordonnance Template'}
+            questions={[
+              ['states dropdown select', 'What state does this ordonnance apply to?'],
+              ['text input', 'What city does this ordonnance apply to?'],
+            ]}
+          />   */}
 
     </div>
   );
