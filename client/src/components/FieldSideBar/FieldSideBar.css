@@ -2,7 +2,13 @@
     margin: 0;
 }
 
-.fieldsidebar {
+.progress-bar {
+    border-radius: 0.5rem !important;
+    height: 0.6rem !important;
+    color: #585858;
+}
+
+.field-sidebar {
     height: 100vh;
     min-width: 20rem;
     background-color: lightgray;
