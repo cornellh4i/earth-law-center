@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './TemplateFiller.css';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import Grid from '@mui/material/Grid';
 
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
+  // Value to render in the progress bar for the navigation sidebar
+  const [progress, setProgress] = useState(30)
+
   return (
     <div>
       {/* Entries to field prop is temporary for testing */}
@@ -12,6 +15,7 @@ const TemplateFiller = () => {
         <Grid item xs={12} md={2}>
           <FieldSideBar
             title='EarthLegislator'
+            progress={progress}
             field={[
               'Name of Local Ecosystem(s)',
               'Municipality',
