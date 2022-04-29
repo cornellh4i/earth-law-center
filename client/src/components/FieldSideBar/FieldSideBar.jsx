@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import Typography from '@mui/material/Typography';
 import './FieldSideBar.css';
 import LinearProgressWithLabel from './ProgressBar';
 import Box from '@mui/material/Box';
+import { useBetween } from "use-between";
 
 /** Component for a Field Side Bar
  * @param {title} is the title header of the sidebar
@@ -12,7 +13,11 @@ import Box from '@mui/material/Box';
 
 const FieldSideBar = (props) => {
   // Sidebar section currently being viewed by the user
+
   const [clickedField, setClickedField] = useState('');
+
+
+  
 
   // Value to render in the progress bar
   const [progress, setProgress] = useState(props.progress);

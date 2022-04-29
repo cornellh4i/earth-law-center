@@ -21,6 +21,7 @@ const QuestionAnswer = (props) => {
   /** The user's answers to the field questions. Each answer consists of a list of
    * the following format: ['<question asked>', '<user response>'] */
   const [inputs, setInputs] = useState({});
+  // const {clickedField, setClickedField} = useSharedFormState();
 
   /** List of all US states and territories; used for the states dropdown select */
   const us_states = [

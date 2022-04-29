@@ -3,17 +3,19 @@ import React, { useState } from 'react';
 import './TemplateFiller.css';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import Grid from '@mui/material/Grid';
+import { useBetween } from 'use-between';
 
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
   // Value to render in the progress bar for the navigation sidebar
   const [progress, setProgress] = useState(30)
 
+
   return (
     <div>
       {/* Entries to field prop is temporary for testing */}
       <Grid container spacing={4}>
-        <Grid item xs={6} md={4}>
+        <Grid item xs={6} md={4} sx={{maxWidth:1/4}}>
           <FieldSideBar
             title='EarthLegislator'
             progress={progress}
@@ -33,7 +35,7 @@ const TemplateFiller = () => {
               'Enactment'
             ]} />
         </Grid>
-        <Grid item xs={6} md={8} >
+        <Grid item xs={6} md={4} >
           <QuestionAnswer
               field={'City & State'}
               title={'Right of Nature Ordonnance Template'}
