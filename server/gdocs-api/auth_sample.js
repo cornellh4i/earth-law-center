@@ -51,7 +51,6 @@ google.options({auth: oauth2Client});
  */
 async function authenticate(scopes) {
   return new Promise((resolve, reject) => {
-    console.log("In promise")
     // grab the url that will be used for authorization
     const authorizeUrl = oauth2Client.generateAuthUrl({
       access_type: 'offline',
@@ -60,7 +59,6 @@ async function authenticate(scopes) {
     const server = http
       .createServer(async (req, res) => {
         try {
-          console.log("HERE")
           if (req.url.indexOf('/oauth2callback') > -1) {
             const qs = new url.URL(req.url, 'http://localhost:8080')
               .searchParams;
@@ -76,23 +74,11 @@ async function authenticate(scopes) {
       })
       .listen(8080, () => {
         // open the browser to the authorize url to start the workflow
-        console.log("listening")
         opn(authorizeUrl, {wait: false}).then(cp => cp.unref());
       });
     destroyer(server);
   });
 }
-
-async function runSample() {
-  const scopes = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive'];
-  return await authenticate(scopes)
-  .then((client) => functions.docCopy(client, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os")
-                    .then((response) => response))
-  .catch(console.error);  
-}
-
-
-// runSample().then((response) => console.log("response", response))
 
 module.exports = {authenticate};
 
