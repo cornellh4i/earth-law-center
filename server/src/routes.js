@@ -4,10 +4,10 @@ module.exports = () => {
 
   // Imported functions
   const functions = require('../gdocs-api/functions.js');
-  const authsamp = require('../gdocs-api/auth_sample.js')
+  const authsamp = require('../gdocs-api/web_index.js')
   const scopes = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive'];
 
-  /**** Below are Example Routes from the starter code ****/
+  /**** Below are Example Routes from the starter code *****/
   router.get('/hello', async (res) => {
     res.json({ msg: "Hello, world!" });
   });
@@ -15,6 +15,7 @@ module.exports = () => {
   router.get('/hello/:name', async (req, res) => {
     res.json({ msg: `Hello, ${req.params.name}` });
   });
+  /*********************************************************/
 
   // Endpoint for docCopy 
   router.get('/docCopy/:docID', async (req, res) => {
