@@ -1,3 +1,5 @@
+import React from 'react';
+import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
 import React, { useState } from 'react';
 import './TemplateFiller.css';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
@@ -10,6 +12,17 @@ const TemplateFiller = () => {
 
   return (
     <div>
+
+      <h1>TemplateFiller</h1>
+      <QuestionAnswer
+        field={'City & State'}
+        title={'Right of Nature Ordonnance Template'}
+        questions={[
+          ['states dropdown select', 'What state does this ordonnance apply to?'],
+          ['text input', 'What city does this ordonnance apply to?'],
+        ]}
+      />
+
       {/* Entries to field prop is temporary for testing */}
       <Grid container spacing={4}>
         <Grid item xs={12} md={2}>
@@ -33,6 +46,7 @@ const TemplateFiller = () => {
             ]} />
         </Grid>
       </Grid>
+
     </div>
   );
 };
