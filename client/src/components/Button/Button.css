@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
 .navbar-btn {
   font-weight: bold;
   font-size: 16px;
@@ -24,16 +26,19 @@
   color: black;
   cursor: pointer;
   border: none;
+  font-family: 'Nunito', sans-serif;
   font-size: 14px;
+  line-height: 1.534rem;
+  font-weight: 700, bold;
   background-color: transparent;
   text-align: left;
+  margin-top: -3%;
 }
 
 .sidebar-btn-highlighted {
   font-weight: bold;
   font-size: 14px;
   margin-top: 0.625rem;
-  margin-bottom: 0.625rem;
   margin-right: 3.125rem;
   border: none;
   background: none;
@@ -76,11 +81,12 @@
 
 /* Edit button for TemplateCard */
 .card-edit-btn {
-  width: 27%;
-  height: 100%;
+  width: 343px;
+  height: 57px;
   padding: 16px;
   background: #484848;
   color: white;
+  font-family: 'Nunito', sans-serif;
   border-radius: 15px;
   border: none;
   margin-right: 5%;

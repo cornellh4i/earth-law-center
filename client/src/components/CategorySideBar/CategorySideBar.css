@@ -8,10 +8,11 @@
 }
 .sidebar-container {
   margin: 2%;
-  width: 20.75rem;
+  width: 22.75rem;
   height: 23.25rem;
   border: solid;
+  border-color: white;
   border-radius: 0.9375rem;
   border-width: 0.063rem;
-  background-color: #EAEAEA;
+  background-color: #CCDFDE;
 }

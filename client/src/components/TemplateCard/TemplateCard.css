@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
 .card-container{
-    width: 20vw;
-    height: 26.5vh;
+    width: 475px;
+    height: 318px;
     border-style: solid;
     border-width: 1px;
     border-color: black;
@@ -38,6 +40,10 @@
 }
 .card-title{
     margin:0;
+    font-family: 'Nunito', sans-serif;
+    color: #59705F;
+    font-size: 36px;
+    font-weight: bold;
 }
 .download-img{
     width: 30%;
