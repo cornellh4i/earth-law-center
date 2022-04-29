@@ -1,11 +1,14 @@
 .sidebar-ul {
   list-style-type: none;
+  margin-left: -8%;
+  margin-top: -1%;
 }
 .sidebar-container {
-  width: 10%;
-  min-width: 200px;
+  margin: 5%;
+  width: 16%;
   height: 100%;
-  margin-left: -2%;
-  border-right: solid;
+  border: solid;
+  border-radius: 0.9375rem;
   border-width: 0.063rem;
+  background-color: #EAEAEA;
 }

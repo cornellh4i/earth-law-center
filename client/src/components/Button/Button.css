@@ -21,7 +21,7 @@
 .sidebar-btn,
 .sidebar-btn-highlighted {
   padding-top: 10%;
-  color: grey;
+  color: black;
   cursor: pointer;
   border: none;
   font-size: 14px;
@@ -31,14 +31,12 @@
 
 .sidebar-btn-highlighted {
   font-weight: bold;
-  font-weight: bold;
-  font-size: 16px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: 50px;
+  font-size: 14px;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+  margin-right: 3.125rem;
   border: none;
   background: none;
-  text-align: center;
   cursor: pointer;
 }
 
@@ -51,12 +49,33 @@
 }
 
 /* Grey large button with white text */
-.grey-large-btn{
+.grey-large-btn {
   margin: 2%;
+  padding: 1% 2% 0.9%;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.9rem;
+  background-color: #484848;
+  border-style: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+
+/* Grey median button with white text */
+.grey-median-btn {
+  height: 1.8rem;
+  width: 5.0rem;
+  color: #fff;
+  font-weight: lighter;
+  font-size: 0.8rem;
+  background-color: #484848;
+  border-style: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
 }
 
 /* Edit button for TemplateCard */
-.card-edit-btn{
+.card-edit-btn {
   width: 27%;
   height: 100%;
   padding: 16px;
@@ -68,31 +87,31 @@
 }
 
 /* Download button for TemplateCard */
-.card-download-btn{
+.card-download-btn {
   border: none;
   background-color: transparent;
   margin-left: -10%;
 }
 
 /* White median with black text, black border, and left pointing arrow */
-.back-btn{
+.back-btn {
   margin: 2%;
   padding: 0.5% 0.9% 0.37% 1.6%;
-  color:#000 ;
-  font-weight:bold;
-  font-size:0.8rem ;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.8rem;
   background-color: #fff;
-  border-color:#000;
-  border-width:0.05rem;
-  border-style:solid;
-  border-radius:0.7rem;
+  border-color: #000;
+  border-width: 0.05rem;
+  border-style: solid;
+  border-radius: 0.7rem;
   cursor: pointer;
 }
 
-.back-btn::before{
-  padding:0.17rem;
+.back-btn::before {
+  padding: 0.17rem;
   margin: 2% 0%;
-  content:" ";
+  content: " ";
   border-bottom: 0.12rem solid #000;
   border-left: 0.12rem solid #000;
   transform: translateX(-50%) rotate(45deg);
@@ -100,23 +119,23 @@
 }
 
 /* Grey median button with white text and right pointing arrow */
-.continue-btn{
+.continue-btn {
   margin: 2%;
   padding: 0.55% 1.7% 0.4% 1.0%;
-  color:#fff ;
-  font-weight:bold;
-  font-size:0.8rem ;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.8rem;
   background-color: #484848;
-  border-width:0.05rem;
-  border-style:none;
-  border-radius:0.7rem;
+  border-width: 0.05rem;
+  border-style: none;
+  border-radius: 0.7rem;
   cursor: pointer;
 }
 
-.continue-btn::after{
-  padding:0.17rem;
+.continue-btn::after {
+  padding: 0.17rem;
   margin: 2% 0%;
-  content:" ";
+  content: " ";
   border-bottom: 0.12rem solid #fff;
   border-left: 0.12rem solid #fff;
   transform: translateX(100%) rotate(225deg);
@@ -124,18 +143,39 @@
 }
 
 /* White median button with grey text */
-.white-median-btn{
+.white-median-btn {
   margin: 2%;
   padding: 0.5%;
-  color:#484848 ;
-  font-weight:bold;
-  font-size:0.8rem ;
+  color: #484848;
+  font-weight: bold;
+  font-size: 0.8rem;
   background-color: #fff;
-  border-style:none;
+  border-style: none;
 }
 
 /* Hovering buttons in TemplateCard */
-.card-download-btn:hover, .card-edit-btn:hover{
+.card-download-btn:hover,
+.card-edit-btn:hover {
   opacity: 70%;
   cursor: pointer;
+}
+
+.search-btn{
+  width: 20%;
+  min-width: 100px;
+  height: 100%;
+  padding: 1.2rem;
+  background: #484848;
+  color: white;
+  border-radius: 0.9375rem;
+  border: none;
+  margin-left: 4%;
+}
+
+.search-btn:hover{
+  background: #626262;
+}
+
+.search-btn:active{
+  background: #484848;
 }
