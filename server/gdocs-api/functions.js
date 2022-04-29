@@ -1,11 +1,9 @@
 /** 
- * Contains basic CRUD operations to alter a google doc.
+ * The below functions are basic CRUD operations to alter a google doc.
  */
-const { google } = require('googleapis');
-const index = require('./index.js');
 
-// index.authorizeInsertText(insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "HELLOOOO", { index: 1 });
-// index.authorizeDocID(index.docCopy, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os").then((res) => {console.log("FINAL RES", res)} )
+// Add Imports Below
+const { google } = require('googleapis');
 
 /**
  * THIS IS A SAMPLE FUNCTION
@@ -31,7 +29,6 @@ function printDocInfo(auth) {
     return someText
   });
 }  
-
 
 /**
  * Creates a copy of a google doc
@@ -91,8 +88,48 @@ function printDocInfo(auth) {
     // Send the JSON object in a batchUpdate request
     await docs.documents.batchUpdate(updateObject)
     return docCopyId 
-  }
+}
 
+/**
+ * Replaces all instances of containsText with replaceText in document specified by docID
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {docID} is the document id of the google doc we want to insert data in
+ * @param {replaceText} is the text that will replace the matched text.
+ * @param {containsText} is the text in the document matching the substring that will be replaced by replaceText.
+ * @returns the docID of the copied document with the new changes 
+ */
+ async function replaceAllTexts(auth, docID, replaceText, containsText) {
+  //Authorize docs and drive
+  const docs = google.docs({ version: 'v1', auth });
+  var docCopyId;
+  var updateObject;
+  // Below is the function that generates a new docID
+  await docCopy(auth, docID).then(
+    (docCopy) => {
+      docCopyId = docCopy; 
+      // JSON request body for batchupdate with docCopyId 
+      updateObject = {
+        "documentId": docCopyId,
+        "resource": {
+          "requests": [{
+            "replaceAllText":
+            {
+              "replaceText": replaceText,
+              "containsText": {
+                "text": containsText,
+                "matchCase": false
+              }
+            }
+          }],
+        }
+      }
+    }); 
+    // Send the JSON object in a batchUpdate request
+    await docs.documents.batchUpdate(updateObject)
+    return docCopyId 
+}
+
+// BELOW ARE THE GETALLTEXT FUNCTION AND HELPER FUNCTIONS (currently don't work with routes)
 
 /**
  * Get data from a google doc 
@@ -241,56 +278,6 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
     // Testing: console.log(prevListStyle)
   }
   return listStyle;
-}
-
-/**
- * Replaces all instances of containsText with replaceText in document specified by docID
- * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
- * @param {docID} is the document id of the google doc we want to insert data in
- * @param {replaceText} is the text that will replace the matched text.
- * @param {containsText} is the text in the document matching this substring that will be replaced by replaceText.
- * @returns the docID of the copied document with the new changes 
- */
-function replaceAllTexts(auth, docID, replaceText, containsText) {
-  //Authorize docs and drive
-  const docs = google.docs({ version: 'v1', auth });
-  const drive = google.drive({ version: 'v2', auth });
-  //Copy file and store id in docCopyId
-  var copyTitle = "Copy Title";
-  var docCopyId;
-  drive.files.copy({
-    fileId: docID,
-    resource: {
-      name: copyTitle,
-    }
-  }, (err, res) => {
-    docCopyId = res.data.id;
-    // JSON request body for batchupdate with docCopyId
-    var updateObject = {
-      "documentId": docCopyId,
-      "resource": {
-        "requests": [{
-          "replaceAllText":
-          {
-            "replaceText": replaceText,
-            "containsText": {
-              "text": containsText,
-              "matchCase": false
-            }
-          }
-        }],
-      },
-    };
-    // Send the JSON object in a batchUpdate request
-    docs.documents.batchUpdate(updateObject, (err, res) => {
-      if (err) {
-        return console.log(`The API returned an error: ` + err)
-      } else {
-        // console.log(`The copied file for replacement is accessible at ` + docCopyId);
-        return docCopyId;
-      } 
-    });
-  });
 }
 
 // Exporting functions

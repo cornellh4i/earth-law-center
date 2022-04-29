@@ -58,8 +58,13 @@ module.exports = () => {
   });
 
   // Endpoint for replaceAllText() -- TODO
-  router.get('/replaceAllText/:foodleast/:foodfav', async (req, res) => {
-    // res.json({ msg: `My favorite food is, ${req.params.foodfav}` });
+  router.get('/replaceAllText/:docID/:replaceText/:containsText', async (req, res) => {
+    try {
+      authsamp.authenticate(scopes).then((client) => functions.replaceAllTexts(client, req.params.docID, req.params.replaceText, req.params.containsText).then((response) => res.json({ msg: `docid: ${response}`})))
+    }
+    catch(err){
+      res.json({error:err.message || err.toString()})
+    }
   });
 
   return router;
