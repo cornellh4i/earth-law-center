@@ -1,6 +1,8 @@
 /** 
- * Contains basic CRUD operations to alter a google doc.
+ * The below functions are basic CRUD operations to alter a google doc.
  */
+
+// Add Imports Below
 const { google } = require('googleapis');
 
 /**
@@ -24,6 +26,7 @@ function printDocInfo(auth) {
     var someText = res.data.body.content[4].paragraph.elements[0].textRun.content;
     console.log(`The length of the document is: ${len_contents}`);
     console.log(`The text of the document is: ${someText}`);
+    return someText
   });
 }  
 
@@ -33,10 +36,10 @@ function printDocInfo(auth) {
  * @param {docID} is the document id of the google doc we want to copy
  * @returns the docID of the copied document
  */
-async function docCopy(auth, docID){ 
-  const drive = google.drive({ version: 'v2', auth });
+ async function docCopy(auth, docID){ 
+  const drive = google.drive({ version: 'v3', auth });
   //Copy file and store id in docCopyId
-  var copyTitle = "Copy Title";
+  var copyTitle = "ELC COPY";
   var docCopyId;
   await drive.files.copy({
     fileId: docID,
@@ -50,6 +53,7 @@ async function docCopy(auth, docID){
   return docCopyId
 }
 
+
 /**
  * Inserts text at a location in a google doc
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
@@ -58,44 +62,74 @@ async function docCopy(auth, docID){
  * @param {location} is the location in the document we want to insert the data at
  * @returns the docID of the copied document with the new changes 
  */
- function insertText(auth, docID, text, location) {
+ async function insertText(auth, docID, text, location) {
   //Authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
-  const drive = google.drive({ version: 'v2', auth });
-  //Copy file and store id in docCopyId
-  var copyTitle = "Copy Title";
   var docCopyId;
-  drive.files.copy({
-    fileId: docID,
-    resource: {
-      name: copyTitle,
-    }
-  }, (err, res) => {
-    docCopyId = res.data.id;
-    // JSON request body for batchupdate with docCopyId
-    var updateObject = {
-      documentId: docCopyId,
-      "resource": {
-        "requests": [{
-          "insertText": {
-            "text": text,
-            "location": location,
-          },
-        }],
-      },
-      "writeControl": {}
-    }
+  var updateObject
+    // Below is the function that generates a new docID (it does not currently work because of a circular dependency)
+  await docCopy(auth, docID).then(
+    (docCopy) => {
+      docCopyId = docCopy; 
+      // JSON request body for batchupdate with docCopyId 
+      updateObject = {
+        documentId: docCopyId,
+        "resource": {
+          "requests": [{
+            "insertText": {
+              "text": text,
+              "location": location,
+            },
+          }],
+        },
+        "writeControl": {}
+      }
+    }); 
     // Send the JSON object in a batchUpdate request
-    docs.documents.batchUpdate(updateObject, (err, res) => {
-      if (err) {
-        return console.log(`The API returned an error: ` + err)
-      } else {
-        // console.log(`The copied file for insertion is accessible at ` + docCopyId);
-        return docCopyId;
-      } 
-    });
-  });
+    await docs.documents.batchUpdate(updateObject)
+    return docCopyId 
 }
+
+/**
+ * Replaces all instances of containsText with replaceText in document specified by docID
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {docID} is the document id of the google doc we want to insert data in
+ * @param {replaceText} is the text that will replace the matched text.
+ * @param {containsText} is the text in the document matching the substring that will be replaced by replaceText.
+ * @returns the docID of the copied document with the new changes 
+ */
+ async function replaceAllTexts(auth, docID, replaceText, containsText) {
+  //Authorize docs and drive
+  const docs = google.docs({ version: 'v1', auth });
+  var docCopyId;
+  var updateObject;
+  // Below is the function that generates a new docID
+  await docCopy(auth, docID).then(
+    (docCopy) => {
+      docCopyId = docCopy; 
+      // JSON request body for batchupdate with docCopyId 
+      updateObject = {
+        "documentId": docCopyId,
+        "resource": {
+          "requests": [{
+            "replaceAllText":
+            {
+              "replaceText": replaceText,
+              "containsText": {
+                "text": containsText,
+                "matchCase": false
+              }
+            }
+          }],
+        }
+      }
+    }); 
+    // Send the JSON object in a batchUpdate request
+    await docs.documents.batchUpdate(updateObject)
+    return docCopyId 
+}
+
+// BELOW ARE THE GETALLTEXT FUNCTION AND HELPER FUNCTIONS (currently don't work with routes)
 
 /**
  * Get data from a google doc 
@@ -103,26 +137,29 @@ async function docCopy(auth, docID){
  * @param {docID} is the document id of the google doc we want get data from 
  * @returns all the data from a google doc in the form of a json object 
  */
- function getAllText(auth, docID) {
+ async function getAllText(auth, docID) {
   const docs = google.docs({ version: 'v1', auth });
+  var allText;
   // We are using a GET request here
-  docs.documents.get({
+  const res = await docs.documents.get({
     // This document ID is found in the url after the /d
     documentId: docID,
-  }, (err, res) => {
-    if (err) return console.log('The API returned an error: ' + err);
-    // Adds title of doc to JSON 
-    var allText = {
-      "title" : res.data.title
-    }
-    // Creates an attribute for each text run in the doc
-    allText["textRun0"] = readStructuralElements(res.data.body.content[0]);
-    for (i = 1; i < res.data.body.content.length; i++) {
-      allText["textRun" + i] = readStructuralElements(res.data.body.content[i], allText["textRun" + (i-1)]);
-    }
-    // Testing: console.log(allText);
-    return allText;
   });
+  // console.log("get all text res", res)
+  // , (err, res) => {
+  // if (err) return console.log('The API returned an error: ' + err);
+  // Adds title of doc to JSON 
+  allText = {
+    "title" : res.data.title
+  }
+  // Creates an attribute for each text run in the doc
+  allText["textRun0"] = await readStructuralElements(res.data.body.content[0]);
+  for (i = 1; i < res.data.body.content.length; i++) {
+    allText["textRun" + i] = await readStructuralElements(res.data.body.content[i], allText["textRun" + (i-1)]);
+  }
+  // });
+  
+  return allText;
 }
 
 /**
@@ -133,7 +170,7 @@ async function docCopy(auth, docID){
  * @param {prevTextRun} is the previous text run before the one being parsed
  * @returns the textRun JSON 
  */
-function readStructuralElements(element, prevTextRun) {
+async function readStructuralElements(element, prevTextRun) {
   // code sourced and modified from Google Docs API documentation
   var textRun = {
     "text" : "",
@@ -183,7 +220,7 @@ function readStructuralElements(element, prevTextRun) {
  * element being parsed.
  * @returns the content of the text run within a paragraph element.
  */
-function readParagraphElement(element) {
+async function readParagraphElement(element) {
   // Helper for parsing paragraph element
   textRun = element.textRun;
   if (textRun == null || textRun.content == null) {
@@ -241,56 +278,6 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
     // Testing: console.log(prevListStyle)
   }
   return listStyle;
-}
-
-/**
- * Replaces all instances of containsText with replaceText in document specified by docID
- * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
- * @param {docID} is the document id of the google doc we want to insert data in
- * @param {replaceText} is the text that will replace the matched text.
- * @param {containsText} is the text in the document matching this substring that will be replaced by replaceText.
- * @returns the docID of the copied document with the new changes 
- */
-function replaceAllTexts(auth, docID, replaceText, containsText) {
-  //Authorize docs and drive
-  const docs = google.docs({ version: 'v1', auth });
-  const drive = google.drive({ version: 'v2', auth });
-  //Copy file and store id in docCopyId
-  var copyTitle = "Copy Title";
-  var docCopyId;
-  drive.files.copy({
-    fileId: docID,
-    resource: {
-      name: copyTitle,
-    }
-  }, (err, res) => {
-    docCopyId = res.data.id;
-    // JSON request body for batchupdate with docCopyId
-    var updateObject = {
-      "documentId": docCopyId,
-      "resource": {
-        "requests": [{
-          "replaceAllText":
-          {
-            "replaceText": replaceText,
-            "containsText": {
-              "text": containsText,
-              "matchCase": false
-            }
-          }
-        }],
-      },
-    };
-    // Send the JSON object in a batchUpdate request
-    docs.documents.batchUpdate(updateObject, (err, res) => {
-      if (err) {
-        return console.log(`The API returned an error: ` + err)
-      } else {
-        // console.log(`The copied file for replacement is accessible at ` + docCopyId);
-        return docCopyId;
-      } 
-    });
-  });
 }
 
 // Exporting functions

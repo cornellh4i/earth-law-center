@@ -1,0 +1,13 @@
+.text-input .MuiOutlinedInput-root {
+    border-radius: 1rem;
+}
+
+.select-input .MuiOutlinedInput-root {
+    border-radius: 1rem;
+    width: 15rem;
+}
+
+.question-component {
+    max-width: 30rem;
+    padding: 1rem;
+}

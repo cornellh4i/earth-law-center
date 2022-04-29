@@ -4,8 +4,9 @@ const { google } = require('googleapis');
 // The dotenv package allows us to use the .env file located in the gdocs-api folder.
 const dotenv = require('dotenv');
 const { run } = require('googleapis/build/src/apis/run');
-const functions = require('./functions.js');
+// const functions = require('./functions.js');
 dotenv.config();
+console.log("ENV", process.env.CLIENT_ID)
 
 const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive'];
 
@@ -41,9 +42,9 @@ function authorize(callback) {
  * @param {docID} is the docID that will be passed into the callback function.
  */
 async function authorizeDocID(callback, docID) {
-  const client_id = process.env.CLIENT_ID;
-  const client_secret = process.env.CLIENT_SECRET;
-  const redirect_uris = ["urn:ietf:wg:oauth:2.0:oob","http://localhost"];
+  const client_id = "454620567847-jsntbbqhlc4pvtda5cmfi18eqb4jff94.apps.googleusercontent.com";
+  const client_secret = "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";
+  const redirect_uris = ["http://localhost:8080/api/docCopy"];
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
   // Check if we have previously stored a token.
@@ -51,13 +52,12 @@ async function authorizeDocID(callback, docID) {
     (fs.readFile(TOKEN_PATH, async (err, token) => {
       if (err) return getNewToken(oAuth2Client, callback);
       oAuth2Client.setCredentials(JSON.parse(token));
-      console.log("HERE")
-      await callback(oAuth2Client, docID).then((res) => {resolve(res)})
+      await callback(oAuth2Client, docID).then((res) => {console.log("INDEX RESULT", res); resolve(res)})
     }))
   });
 }
 
-// authorizeDocID(functions.docCopy, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os").then((res) => {console.log("FINAL RES", res)} )
+// authorizeDocID(docCopy, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os").then((res) => {console.log("FINAL RES", res)} )
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -80,24 +80,27 @@ function authorizeReplaceAllTexts(callback, docId, replaceText, containsText) {
   });
 }
 
+// authorizeReplaceAllTexts(functions.replaceAllTexts, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os", "Insomnia","Synesthesia");
+
+
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorizeInsertText(docID, text, location) {
+function authorizeInsertText(callback, docID, text, location) {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
-  const redirect_uris = ["urn:ietf:wg:oauth:2.0:oob","http://localhost"];
+  const redirect_uris = ["http://localhost:8080"];
   const oAuth2Client = new google.auth.OAuth2(
-    client_id, client_secret, redirect_uris);
+    client_id, client_secret, redirect_uris[0]);
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, async (err, token) => {
     if (err) return getNewToken(oAuth2Client, callback);
     oAuth2Client.setCredentials(JSON.parse(token));
     try {
-      let result = functions.insertText(oAuth2Client, docID, text, location);
+      let result = callback(oAuth2Client, docID, text, location);
       // console.log("NewIDInAUTH", result)
       return result 
     } catch (e) {
@@ -136,8 +139,6 @@ function getNewToken(oAuth2Client, callback) {
     });
   });
 }
-
-
 
 // Exporting authorize functions
 module.exports = { authorize, authorizeInsertText, authorizeReplaceAllTexts, authorizeDocID};
