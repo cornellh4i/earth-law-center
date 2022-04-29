@@ -21,6 +21,8 @@ function createServer() {
 
   /**** Add routes ****/
   app.use("/api", routes);
+  // app.use("/", routes);
+
 
   // "Redirect" all non-API GET requests to React's entry point (index.html)
   app.get('*', (req, res) =>
