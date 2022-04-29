@@ -1,12 +1,11 @@
-import React from 'react';
 import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
-import { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import './TemplateFiller.css';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import Grid from '@mui/material/Grid';
 
 /** Component for Template Filler Page */
-const TemplateFiller = () => {
+const TemplateFiller = forwardRef((props, _ref) => {
   // Value to render in the progress bar for the navigation sidebar
   const [progress, setProgress] = useState(30)
 
@@ -49,5 +48,5 @@ const TemplateFiller = () => {
 
     </div>
   );
-};
+});
 export default TemplateFiller;
