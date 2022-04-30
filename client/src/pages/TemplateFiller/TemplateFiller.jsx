@@ -3,13 +3,41 @@ import React, { useState } from 'react';
 import './TemplateFiller.css';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import Grid from '@mui/material/Grid';
-import { useBetween } from 'use-between';
+
 
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
   // Value to render in the progress bar for the navigation sidebar
   const [progress, setProgress] = useState(30)
+  
 
+  const allField = [
+    'Name of Local Ecosystem(s)',
+    'Municipality',
+    'City & State',
+    'Activites Your Community Engages in',
+    'Specific Indegenous Peoples',
+    'Types of Impact',
+    'Types of Infrastructure Impacts',
+    'Number of Members in Guardianship Body',
+    'City\'s Environmental Advisory Board or Other Appropriate Body',
+    'Recommended Categories of Guardians',
+    'Guardian Terms & Vacancies',
+    'Annual City Report & Hearing',
+    'Enactment'
+  ]
+
+  const [clicked, setClicked] = useState(allField[0])
+
+  const fieldItem = allField.map((field) =>
+  <div>
+    <div className='side-btn' onClick={() => handleClick(field)}>{field}</div>
+  </div>
+  )
+
+  const handleClick = (field) => {
+    setClicked(field);
+  }
 
   return (
     <div>
@@ -19,25 +47,12 @@ const TemplateFiller = () => {
           <FieldSideBar
             title='EarthLegislator'
             progress={progress}
-            field={[
-              'Name of Local Ecosystem(s)',
-              'Municipality',
-              'City & State',
-              'Activites Your Community Engages in',
-              'Specific Indegenous Peoples',
-              'Types of Impact',
-              'Types of Infrastructure Impacts',
-              'Number of Members in Guardianship Body',
-              'City\'s Environmental Advisory Board or Other Appropriate Body',
-              'Recommended Categories of Guardians',
-              'Guardian Terms & Vacancies',
-              'Annual City Report & Hearing',
-              'Enactment'
-            ]} />
+            clicked ={clicked}
+            fieldItem={fieldItem} />
         </Grid>
         <Grid item xs={6} md={4} >
           <QuestionAnswer
-              field={'City & State'}
+              field={clicked}
               title={'Right of Nature Ordonnance Template'}
               questions={[
                 ['states dropdown select', 'What state does this ordonnance apply to?'],
@@ -47,15 +62,6 @@ const TemplateFiller = () => {
 
         </Grid>
       </Grid>
-
-    {/* <QuestionAnswer
-            field={'City & State'}
-            title={'Right of Nature Ordonnance Template'}
-            questions={[
-              ['states dropdown select', 'What state does this ordonnance apply to?'],
-              ['text input', 'What city does this ordonnance apply to?'],
-            ]}
-          />   */}
 
     </div>
   );

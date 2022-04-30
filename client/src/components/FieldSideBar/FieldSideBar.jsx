@@ -3,7 +3,6 @@ import Typography from '@mui/material/Typography';
 import './FieldSideBar.css';
 import LinearProgressWithLabel from './ProgressBar';
 import Box from '@mui/material/Box';
-import { useBetween } from "use-between";
 
 /** Component for a Field Side Bar
  * @param {title} is the title header of the sidebar
@@ -12,25 +11,9 @@ import { useBetween } from "use-between";
 */
 
 const FieldSideBar = (props) => {
-  // Sidebar section currently being viewed by the user
-
-  const [clickedField, setClickedField] = useState('');
-
-
-  
 
   // Value to render in the progress bar
   const [progress, setProgress] = useState(props.progress);
-
-  const fieldItem = props.field.map((field) =>
-    <div>
-      <div className='side-btn' onClick={() => handleClick(field)}>{field}</div>
-    </div>
-  )
-
-  const handleClick = (field) => {
-    setClickedField(field);
-  }
 
   return (
     <div className='field-sidebar'>
@@ -43,7 +26,7 @@ const FieldSideBar = (props) => {
       </Box>
 
       {/* Field items */}
-      <div className='bar-div'>{fieldItem}</div>
+      <div className='bar-div'>{props.fieldItem}</div>
     </div>
   );
 };
