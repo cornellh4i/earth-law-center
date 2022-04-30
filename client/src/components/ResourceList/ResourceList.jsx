@@ -3,12 +3,15 @@ import Typography from '@mui/material/Typography';
 import Masonry from '@mui/lab/Masonry';
 import './ResourceList.css';
 
+/** Component for a landing card used by template law/letter cards
+ *  @param {resource} is the json of resource data
+ *  @param {category} is the category chosen from the side bar
+*/
 function ResourceList({ resource, category }) {
   if (!resource || resource.length === 0) {
     return <p>No resources yet</p>
   }
   return <div className="resource-box">
-    
     <Typography pt={2} pb={2} align='left' variant='h5' component='div' sx={{ fontWeight: 'bold' }}>{category}</Typography>
     <Masonry columns={2} spacing={2}>
       {category === "ALL RESOURCES" &&

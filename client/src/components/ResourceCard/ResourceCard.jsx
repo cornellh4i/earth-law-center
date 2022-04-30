@@ -15,7 +15,6 @@ import './ResourceCard.css';
 */
 const ResourceCard = (props) => {
   const { title, resource_type, link_to_resource, description, url } = props;
-  // const [category, setCategory] = useState('All resources');
   return (
     <div className='resource-card'>
       <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold' }}>
