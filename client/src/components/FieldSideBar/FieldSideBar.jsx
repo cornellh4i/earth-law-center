@@ -23,7 +23,7 @@ const FieldSideBar = (props) => {
     >
       <div className='sidebar-content'>
         {/* Header title */}
-        <Typography pb={3} variant='h5' component='div' sx={{ fontWeight: 'bold' }}>{props.title}</Typography>
+        <Typography pt={3} pb={3} variant='h5' component='div' sx={{ fontWeight: 'bold' }}>{props.title}</Typography>
 
         {/* Progress bar */}
         <Box pb={3} sx={{ display: 'flex', alignItems: 'center' }}>
