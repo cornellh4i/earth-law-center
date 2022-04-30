@@ -58,8 +58,7 @@ const TemplateFiller = () => {
   return (
     <div>
       {/* Entries to field prop is temporary for testing */}
-      < Box sx={{ display: 'flex' }
-      }>
+      <Box sx={{ display: 'flex' }}>
         <FieldSideBar
           title='EarthLegislator'
           progress={progress}
