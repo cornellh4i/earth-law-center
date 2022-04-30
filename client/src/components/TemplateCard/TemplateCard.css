@@ -3,9 +3,6 @@
 .card-container{
     width: 40%;
     height: 20rem;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
     border-radius: 5%;
     padding-left: 1%;
     display: flex;
@@ -16,6 +13,10 @@
     margin-right: 3vw;
     margin-top: 3vh;
     margin-bottom: 4%;
+    box-shadow:  0 1px 2px #C6DCCB,
+    0 2px 4px #C6DCCB,
+    0 4px 8px #C6DCCB,
+    0 8px 16px #C6DCCB;
 }
 .card-text-container{
     width: 90%;
@@ -42,7 +43,7 @@
 .card-title{
     margin:0;
     font-family: 'Nunito', sans-serif;
-    color: #59705F;
+    color: #64926E;
     font-size: 36px;
     font-weight: bold;
 }
