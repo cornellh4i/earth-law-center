@@ -3,7 +3,7 @@ const ResourceData = [
     id: 1,
     resource_type: 'Doc',
     title: 'Doc Title1',
-    description: 'hello',
+    description: 'Malesuada proin libero nunc consequat interdum.  ',
   },
   {
     id: 2,
