@@ -1,5 +1,5 @@
 import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './TemplateFiller.css';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import Grid from '@mui/material/Grid';
