@@ -11,12 +11,26 @@ import downloadbtn from './assets/download-btn.png';
 */
 
 const TemplateCard = (props) => {
-  return (
-    <div className='card-container'>
-      <div className='card-text-container'>
+  var card_content = 
+    <div className='card-text-container'>
+        <h1 className='card-title'>{props.title}</h1>
+        <p className='card-summary'>{props.summary}</p>
+    </div>
+  ;
+  if (props.letter){
+    card_content = 
+    <div className='card-image-text-container'>
+      <div className='card-text-container-image'>
         <h1 className='card-title'>{props.title}</h1>
         <p className='card-summary'>{props.summary}</p>
       </div>
+      <img className='card-letter-preview' src={props.preview}/>
+    </div>
+  ;
+  }
+  return (
+    <div className='card-container'>
+      {card_content}
       <div className='card-btn-container'>
         <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
         <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
