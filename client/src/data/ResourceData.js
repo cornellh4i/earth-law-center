@@ -3,7 +3,8 @@ const ResourceData = [
     id: 1,
     resource_type: 'Doc',
     title: 'Doc Title1',
-    description: 'Malesuada proin libero nunc consequat interdum.  ',
+    description: 'Malesuada proin libero nunc consequat interdum.',
+    url: 'https://www.youtube.com/watch?v=0DNZp5yGjDs',
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ const ResourceData = [
     resource_type: 'Video',
     title: 'Video Title1',
     description: 'Consectetur a erat nam at. Faucibus pulvinar elementum integer enim neque.',
+    youtube: '0DNZp5yGjDs',
   },
   {
     id: 4,
@@ -27,6 +29,8 @@ const ResourceData = [
     id: 5,
     resource_type: 'Video',
     title: 'Video Title2',
+    youtube: '0DNZp5yGjDs',
+    url: 'https://www.youtube.com/watch?v=0DNZp5yGjDs',
   },
   {
     id: 6,

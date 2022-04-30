@@ -12,9 +12,10 @@ import './ResourceCard.css';
  *  @param {link_to_resource} is the link_to_resource in the card
  *  @param {description} is the description in the card
  *  @param {url} is the url of the button
+ *  @param {youtube} is the youtube sequence number
 */
 const ResourceCard = (props) => {
-  const { title, resource_type, link_to_resource, description, url } = props;
+  const { title, resource_type, link_to_resource, description, url, youtube } = props;
   return (
     <div className='resource-card'>
       <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold' }}>
@@ -46,11 +47,17 @@ const ResourceCard = (props) => {
           </>
         }
 
-        {/* Video card with landscape image and text */}
+        {/* Video card with youtube iframe and text */}
         {resource_type === 'Video' &&
           <>
+            <p>{youtube}</p>
+            <p>{url}</p>
             <Grid item xs={6}>
-              <CardMedia component='img' alt='first' height='20%' image={link_to_resource} />
+              <iframe id="player" type="text/html"
+                width="100%" 
+                height="85rem"
+                src={"http://www.youtube.com/embed/"+youtube+"?enablejsapi=1&origin=http://example.com"}
+                frameborder="0"></iframe>
             </Grid>
             <Grid item xs={6}>
               <Typography variant='body2' className='resource-text' >
@@ -59,7 +66,7 @@ const ResourceCard = (props) => {
             </Grid>
             <div className='resource-button'>
               <Button
-                text='VIEW'
+                text='WATCH'
                 css='grey-median-btn'
                 handleClick={() => {
                   window.open(url, "_blank");
