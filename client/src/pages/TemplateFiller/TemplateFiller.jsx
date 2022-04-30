@@ -5,25 +5,33 @@ import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
   // Value to render in the progress bar for the navigation sidebar
   const [progress, setProgress] = useState(30)
 
+  const questionsData = {
+    'Name of Local Ecosystem': [
+      ['text input', 'What is the name of the local ecosystem?'],
+    ],
+    'City & State': [
+      ['states dropdown select', 'What state does this ordonnance apply to?'],
+      ['text input', 'What city does this ordonnance apply to?']
+    ],
+    'Number of Members in Guardianship Body': [
+      ['text input', 'How many members are in the Guardianship Body?']
+    ],
+    'Enactment':[
+      ['text input', 
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.']
+    ]
+  }
 
-  const allField = [
-    'Name of Local Ecosystem',
-    'City & State',
-    'Number of Members in Guardianship Body',
-    'Enactment'
-  ]
+  const [clicked, setClicked] = useState(Object.keys(questionsData)[0])
 
-  const [clicked, setClicked] = useState(allField[0])
-
-  const fieldItem = allField.map((field) =>
+  const fieldItem = Object.keys(questionsData).map(key =>
     <div>
-      <div className='side-btn' onClick={() => handleClick(field)}>{field}</div>
+      <div className='side-btn' onClick={() => handleClick(key)}>{key}</div>
     </div>
   )
 
@@ -47,10 +55,7 @@ const TemplateFiller = () => {
             <QuestionAnswer
               field={clicked}
               title={'Right of Nature Ordonnance Template'}
-              questions={[
-                ['states dropdown select', 'What state does this ordonnance apply to?'],
-                ['text input', 'What city does this ordonnance apply to?'],
-              ]}
+              questions={questionsData[clicked]}
             />
           </Grid>
           <Grid item xs={1} />
@@ -59,4 +64,5 @@ const TemplateFiller = () => {
     </div>
   );
 };
+
 export default TemplateFiller;
