@@ -21,6 +21,7 @@ const QuestionAnswer = (props) => {
   /** The user's answers to the field questions. Each answer consists of a list of
    * the following format: ['<question asked>', '<user response>'] */
   const [inputs, setInputs] = useState({});
+  // const {clickedField, setClickedField} = useSharedFormState();
 
   /** List of all US states and territories; used for the states dropdown select */
   const us_states = [
@@ -118,7 +119,7 @@ const QuestionAnswer = (props) => {
         <Grid item xs={6}>
           <Box display='flex' justifyContent='flex-end'>
             {/* TODO: Button CSS needs to be fixed in the future */}
-            <Button text='Skip' handleClick={handleSkip} css='grey-large-btn' />
+            <Button text='Skip' handleClick={handleSkip} css='white-median-btn' />
             <Button text='Next' handleClick={handleSubmit} css='continue-btn' />
           </Box>
         </Grid>
