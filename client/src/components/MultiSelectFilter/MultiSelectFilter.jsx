@@ -27,7 +27,7 @@ export default function MultiSelectFilter() {
   const { local, regional, national, international, ordinance, resolution } = state;
   return (
 <Box className='box' component="span" sx={{ p: 2}}>
-<h1 className='text'>Filter By Jurisdiction</h1>
+<h1 className='text'>FILTER BY JURISDICTION</h1>
 
 <FormGroup>
 <FormControlLabel control={<Checkbox
@@ -66,7 +66,7 @@ name = 'international'
 </FormGroup>
 <br></br>
 
-<h1 className='text'>Filter By Type of Law</h1>
+<h1 className='text'>FILTER BY TYPE OF LAW</h1>
 <FormGroup>
 <FormControlLabel control={<Checkbox
 checked={ordinance}

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
 .navbar-btn {
   font-weight: bold;
   font-size: 16px;
@@ -24,17 +26,18 @@
   color: black;
   cursor: pointer;
   border: none;
-  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  line-height: 1.534rem;
+  font-weight: 100;
   background-color: transparent;
   text-align: left;
+  margin-top: -3%;
 }
 
 .sidebar-btn-highlighted {
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: 0.625rem;
-  margin-bottom: 0.625rem;
-  margin-right: 3.125rem;
+  font-weight: 900;
+  font-size: 18px;
   border: none;
   background: none;
   cursor: pointer;
@@ -76,21 +79,46 @@
 
 /* Edit button for TemplateCard */
 .card-edit-btn {
-  width: 27%;
-  height: 100%;
+  width: 343px;
+  height: 57px;
   padding: 16px;
-  background: #484848;
-  color: white;
+  background: 
+  #64926E;
   border-radius: 15px;
   border: none;
   margin-right: 5%;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #F1F1F3;
+}
+
+.card-type-btn {
+  width: 65px;
+  height: 40px;
+  background: #C6DCCB;
+  border-radius: 15px;
+  border: none;
+  color: #64926E;
+  margin-left: 80%;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
 }
 
 /* Download button for TemplateCard */
 .card-download-btn {
   border: none;
   background-color: transparent;
-  margin-left: -10%;
+  margin-left: -6%;
+}
+
+.card-download-btn img {
+  width: 38%;
 }
 
 /* White median with black text, black border, and left pointing arrow */
