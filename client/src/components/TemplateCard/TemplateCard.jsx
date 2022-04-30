@@ -20,7 +20,7 @@ const TemplateCard = (props) => {
   if (props.letter){
     card_content = 
     <div className='card-image-text-container'>
-      <div className='card-text-container-image'>
+      <div className='card-text-container-letter'>
         <h1 className='card-title'>{props.title}</h1>
         <p className='card-summary'>{props.summary}</p>
       </div>
