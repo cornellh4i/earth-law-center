@@ -12,9 +12,6 @@ import Drawer from '@mui/material/Drawer';
 */
 
 const FieldSideBar = (props) => {
-  // Value to render in the progress bar
-  const [progress, setProgress] = useState(props.progress);
-
   return (
     <Drawer
       className='sidebar'
@@ -27,7 +24,7 @@ const FieldSideBar = (props) => {
 
         {/* Progress bar */}
         <Box pb={3} sx={{ display: 'flex', alignItems: 'center' }}>
-          <LinearProgressWithLabel value={progress} color='inherit' />
+          <LinearProgressWithLabel value={props.progress} color='inherit' sx ={{width:props.progress+'%'}} />
         </Box>
 
         {/* Field items */}
