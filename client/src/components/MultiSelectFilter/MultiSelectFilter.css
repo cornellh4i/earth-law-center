@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
 .box{
-    width: 20.75rem;
+    width: 90%;
     height: 23.25rem;
     background-color: #CCDFDE;
     display: 'flex';

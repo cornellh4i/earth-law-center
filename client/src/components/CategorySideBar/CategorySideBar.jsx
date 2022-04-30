@@ -6,16 +6,12 @@ import './CategorySideBar.css';
 */
 const CategorySideBar = forwardRef((props, _ref) => {
   const [category, setCategory] = useState(props.categories[0]);
+  props.setCategoryParent(category);
   const categoryItems = props.categories.map((inputCategory) =>
     <li>
       <button className={category === inputCategory ? 'sidebar-btn-highlighted' : 'sidebar-btn'} onClick={() => setCategory(inputCategory)}>{inputCategory}</button>
     </li>
   )
-  useImperativeHandle(_ref, () => ({
-    getCategory: () => {
-        return category;
-    },
-  }));
 
   return (
     <div className='sidebar-container'>

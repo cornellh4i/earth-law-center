@@ -6,8 +6,37 @@
 .body-box{
   display: flex;
   flex-direction: row;
+  width: 100%;
+  margin-left: -2%;
+  margin-top: 2%;
 }
 .side-box{
   display: flex;
   flex-direction: column;
+  width: 22%;
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-top: -1%;  
+}
+
+.content-box{
+  width: 78%;
+}
+
+.card-title{
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 49px;
+  color: #59705F;
+}
+
+.card-description{
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  color: #000000;
 }

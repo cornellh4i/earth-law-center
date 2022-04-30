@@ -2,17 +2,18 @@
 
 .sidebar-ul {
   list-style-type: none;
-  margin-left: 2%;
-  margin-top: -8%;
+  margin: 2%;
+  margin-left: -10%;
   
 }
 .sidebar-container {
   margin: 2%;
-  width: 22.75rem;
-  height: 23.25rem;
+  width: 90%;
   border: solid;
   border-color: white;
   border-radius: 0.9375rem;
   border-width: 0.063rem;
   background-color: #CCDFDE;
+  padding: 5%;
+  margin-bottom: 10%;
 }

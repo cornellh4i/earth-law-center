@@ -27,19 +27,16 @@
   cursor: pointer;
   border: none;
   font-family: 'Nunito', sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.534rem;
-  font-weight: 700, bold;
+  font-weight: normal;
   background-color: transparent;
   text-align: left;
   margin-top: -3%;
 }
 
 .sidebar-btn-highlighted {
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: 0.625rem;
-  margin-right: 3.125rem;
+  font-weight: bolder;
   border: none;
   background: none;
   cursor: pointer;
