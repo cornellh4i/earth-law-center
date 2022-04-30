@@ -13,7 +13,7 @@ const TemplateFiller = () => {
 
 
   const allField = [
-    'Name of Local Ecosystem(s)',
+    'Name of Local Ecosystem',
     'City & State',
     'Number of Members in Guardianship Body',
     'Enactment'
