@@ -8,10 +8,20 @@
     color: #585858;
 }
 
-.field-sidebar {
-    height: 100vh;
-    min-width: 20rem;
+/* Sidebar Drawer styling */
+.sidebar {
+    width: 20rem;
+}
+
+.sidebar .MuiDrawer-paper {
+    width: 20rem;
     background-color: lightgray;
+    border: 0;
+}
+
+/* Sidebar content styling */
+.sidebar-content {
+    padding-top: 5rem;
     padding-left: 1rem;
     padding-right: 1rem;
 }
