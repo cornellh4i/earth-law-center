@@ -29,14 +29,15 @@
   font-family: 'Nunito', sans-serif;
   font-size: 18px;
   line-height: 1.534rem;
-  font-weight: normal;
+  font-weight: 100;
   background-color: transparent;
   text-align: left;
   margin-top: -3%;
 }
 
 .sidebar-btn-highlighted {
-  font-weight: bolder;
+  font-weight: 900;
+  font-size: 18px;
   border: none;
   background: none;
   cursor: pointer;
@@ -81,19 +82,27 @@
   width: 343px;
   height: 57px;
   padding: 16px;
-  background: #484848;
-  color: white;
-  font-family: 'Nunito', sans-serif;
+  background: #273B3D;
   border-radius: 15px;
   border: none;
   margin-right: 5%;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #F1F1F3;
 }
 
 /* Download button for TemplateCard */
 .card-download-btn {
   border: none;
   background-color: transparent;
-  margin-left: -10%;
+  margin-left: -6%;
+}
+
+.card-download-btn img {
+  width: 38%;
 }
 
 /* White median with black text, black border, and left pointing arrow */
