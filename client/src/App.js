@@ -12,9 +12,9 @@ import TemplateFiller from './pages/TemplateFiller/TemplateFiller';
 const API_URL = process.env.REACT_APP_API;
 
 function App() {
+  
+  // This is from the sample code!
   // const [data, setData] = useState("No data :(");
-
-  // // This is from the sample code!
   // useEffect(() => {
   //   async function getData() {
   //     const url = `${API_URL}/hello`;
