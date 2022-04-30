@@ -8,6 +8,7 @@ import NavBar from './components/NavBar/NavBar';
 import About from './pages/About/About.jsx';
 import ResourceDisplay from './pages/ResourceDisplay/ResourceDisplay'; 
 import TemplateFiller from './pages/TemplateFiller/TemplateFiller'; 
+import { useLocation } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -25,10 +26,12 @@ function App() {
   //   getData();
   // }, []);
 
+  
+  
   return (
     <Router>
-      {/* navigation bar that shows up on all pages */}
-      <NavBar/>
+      {/* navigation bar that shows up on all pages except template filler*/}
+      {window.location.pathname === '/template-filler' ? null : <NavBar/>}
       <Routes>
         {/* All pages below */}
         <Route path='/' element={<Landing/>} />

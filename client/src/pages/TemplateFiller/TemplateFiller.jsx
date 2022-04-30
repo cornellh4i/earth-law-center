@@ -13,19 +13,9 @@ const TemplateFiller = () => {
 
 
   const allField = [
-    'Overview',
     'Name of Local Ecosystem(s)',
-    'Municipality',
     'City & State',
-    'Activites Your Community Engages in',
-    'Specific Indegenous Peoples',
-    'Types of Impact',
-    'Types of Infrastructure Impacts',
     'Number of Members in Guardianship Body',
-    'City\'s Environmental Advisory Board or Other Appropriate Body',
-    'Recommended Categories of Guardians',
-    'Guardian Terms & Vacancies',
-    'Annual City Report & Hearing',
     'Enactment'
   ]
 
