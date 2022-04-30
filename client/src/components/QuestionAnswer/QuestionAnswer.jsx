@@ -119,7 +119,7 @@ const QuestionAnswer = (props) => {
         <Grid item xs={6}>
           <Box display='flex' justifyContent='flex-end'>
             {/* TODO: Button CSS needs to be fixed in the future */}
-            <Button text='Skip' handleClick={handleSkip} css='grey-large-btn' />
+            <Button text='Skip' handleClick={handleSkip} css='white-median-btn' />
             <Button text='Next' handleClick={handleSubmit} css='continue-btn' />
           </Box>
         </Grid>

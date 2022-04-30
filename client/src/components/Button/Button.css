@@ -96,10 +96,11 @@
 /* White median with black text, black border, and left pointing arrow */
 .back-btn {
   margin: 2%;
-  padding: 0.5% 0.9% 0.37% 1.6%;
+  min-width: 5rem;
+  height:2rem;
   color: #000;
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 1rem;
   background-color: #fff;
   border-color: #000;
   border-width: 0.05rem;
@@ -121,10 +122,11 @@
 /* Grey median button with white text and right pointing arrow */
 .continue-btn {
   margin: 2%;
-  padding: 0.55% 1.7% 0.4% 1.0%;
+  min-width: 5rem;
+  height:2rem;
   color: #fff;
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 1rem;
   background-color: #484848;
   border-width: 0.05rem;
   border-style: none;
@@ -145,10 +147,11 @@
 /* White median button with grey text */
 .white-median-btn {
   margin: 2%;
-  padding: 0.5%;
+  min-width: 5rem;
+  height:2rem;
   color: #484848;
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 1rem;
   background-color: #fff;
   border-style: none;
 }
@@ -160,7 +163,7 @@
   cursor: pointer;
 }
 
-.search-btn{
+.search-btn {
   width: 20%;
   min-width: 100px;
   height: 100%;
@@ -172,10 +175,10 @@
   margin-left: 4%;
 }
 
-.search-btn:hover{
+.search-btn:hover {
   background: #626262;
 }
 
-.search-btn:active{
+.search-btn:active {
   background: #484848;
 }
