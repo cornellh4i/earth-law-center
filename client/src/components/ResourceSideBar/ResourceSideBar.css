@@ -1,0 +1,15 @@
+.resource-sidebar-ul {
+  list-style-type: none;
+  margin-left: -8%;
+  margin-top: -1%;
+}
+
+.resource-sidebar-container {
+  margin: 10%;
+  width: 60%;
+  height: 15rem;
+  border: solid;
+  border-radius: 0.9375rem;
+  border-width: 0.063rem;
+  background-color: #EAEAEA;
+}
