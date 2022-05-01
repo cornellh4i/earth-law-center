@@ -2,11 +2,6 @@
     margin: 0;
 }
 
-.progress-bar {
-    border-radius: 0.5rem !important;
-    height: 0.6rem !important;
-    color: #585858;
-}
 
 /* Sidebar Drawer styling */
 .sidebar {
@@ -36,3 +31,4 @@
 .side-btn:hover {
     font-weight: bold;
 }
+
