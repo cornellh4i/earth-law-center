@@ -15,6 +15,8 @@ import Grid from '@mui/material/Grid';
  * @param {questions} is a list of lists; each nested list is a single question
  * of the following format: ['<input type>', '<question content']. Valid input
  * types currently include 'text input', 'states dropdown select'
+ * @param {progress} is the id of the current selected page; used to measure total progress
+ * @param {length} is the total number of pages that must be completed
 */
 
 const QuestionAnswer = (props) => {
@@ -103,7 +105,6 @@ const QuestionAnswer = (props) => {
   )
 
   return (
-    // The div wrapping the entire component. It's className is <question-component>
     <div className='question-component'>
       <Typography pt={1} pb={1} variant='h6'>{props.title}</Typography>
       <Typography pt={1} pb={1} variant='h4' sx={{ fontWeight: 'bold' }}>{props.field}</Typography>
@@ -112,17 +113,14 @@ const QuestionAnswer = (props) => {
       {/* Button positioning */}
       <Grid container direction='row' spacing={4} pt={2} justifyContent='flex-end'>
         <Grid item xs={6}>
-          {/* TODO: Button CSS needs to be fixed in the future */}
           <Button text='Back' handleClick={handleBack} css='back-btn' />
         </Grid>
         <Grid item xs={6}>
           <Box display='flex' justifyContent='flex-end'>
-            {/* TODO: Button CSS needs to be fixed in the future */}
             <Button text='Skip'
               handleClick={handleSkip}
               css='white-median-btn'
             />
-
             <Button text={props.progress === (props.length - 1) ? 'Finish' : 'Next'}
               handleClick={handleSubmit}
               css='continue-btn'

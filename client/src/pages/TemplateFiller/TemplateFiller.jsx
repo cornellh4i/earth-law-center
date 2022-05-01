@@ -7,10 +7,10 @@ import Box from '@mui/material/Box';
 
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
-  // Value to render in the progress bar for the navigation sidebar
+  /** Value to render in the progress bar for the navigation sidebar */
   const [progress, setProgress] = useState(0)
 
-  // Temporary hardcoded data to pass as props to the Q&A component
+  /** Temporary hardcoded data to pass as props to the Q&A component */
   const questionsData = {
     'Name of Local Ecosystem': {
       id: 0,
@@ -39,17 +39,18 @@ const TemplateFiller = () => {
     }
   }
 
-  // the current page clicked by the user, defaults to the first entry in questionsData
+  /** The current page clicked by the user, defaults to the first entry in questionsData */
   const [clicked, setClicked] = useState(Object.keys(questionsData)[0])
 
-  const fieldItem = Object.keys(questionsData).map(key =>
-    <div>
-      <div className='side-btn' onClick={() => handleClick(key)}>{key}</div>
-    </div>
-  )
-
+  /** The amount of pages in questionsData */
   let length = Object.keys(questionsData).length;
 
+  /** Styling and functionality for sidebar navigation buttons */
+  const fieldItem = Object.keys(questionsData).map(key =>
+    <div className='side-btn' onClick={() => handleClick(key)}>{key}</div>
+  )
+
+  /** Handles user clicking a navigation button in the sidebar */
   const handleClick = (field) => {
     setClicked(field);
     setProgress(Math.floor((questionsData[field].id / (length - 1)) * 100))
