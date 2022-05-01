@@ -17,6 +17,9 @@ import Grid from '@mui/material/Grid';
  * types currently include 'text input', 'states dropdown select'
  * @param {progress} is the id of the current selected page; used to measure total progress
  * @param {length} is the total number of pages that must be completed
+ * @param {handleBack}
+ * @param {handleSkip}
+ * @param {handleSubmit}
 */
 
 const QuestionAnswer = (props) => {
@@ -40,22 +43,6 @@ const QuestionAnswer = (props) => {
     const name = e.target.name;
     const value = e.target.value;
     setInputs(values => ({ ...values, [name]: value }))
-  }
-
-  /** Handles user pressing the 'Next' button */
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(inputs);
-  }
-
-  /** Handles user pressing the 'Back' button */
-  const handleBack = (e) => {
-    // Code here
-  }
-
-  /** Handles user pressing the 'Skip' button */
-  const handleSkip = (e) => {
-    // Code here
   }
 
   /** A component consisting of all questions from props.questions.
@@ -113,16 +100,16 @@ const QuestionAnswer = (props) => {
       {/* Button positioning */}
       <Grid container direction='row' spacing={4} pt={2} justifyContent='flex-end'>
         <Grid item xs={6}>
-          <Button text='Back' handleClick={handleBack} css='back-btn' />
+          <Button text='Back' handleClick={e => props.handleBack(e)} css='back-btn' />
         </Grid>
         <Grid item xs={6}>
           <Box display='flex' justifyContent='flex-end'>
             <Button text='Skip'
-              handleClick={handleSkip}
+              handleClick={e => props.handleSkip(e)}
               css='white-median-btn'
             />
             <Button text={props.progress === (props.length - 1) ? 'Finish' : 'Next'}
-              handleClick={handleSubmit}
+              handleClick={(e) => props.handleSubmit(e, inputs)}
               css='continue-btn'
             />
           </Box>

@@ -7,11 +7,17 @@ import Drawer from '@mui/material/Drawer';
 
 /** Component for a Field Side Bar
  * @param {title} is the title header of the sidebar
- * @param {field} is a list of strings containing all fields in a Google Doc
+ * @param {fields} is a list of strings containing all fields in a Google Doc
  * @param {progress} is an int where 0 < progress < 100, representing how close the user is to completion
+ * @param {handleClick}
 */
 
 const FieldSideBar = (props) => {
+  /** Styling and functionality for sidebar navigation buttons */
+  const fieldItem = props.fields.map(field =>
+    <div className='side-btn' onClick={() => props.handleClick(field)}>{field}</div>
+  )
+
   return (
     <Drawer
       className='sidebar'
@@ -28,7 +34,7 @@ const FieldSideBar = (props) => {
         </Box>
 
         {/* Field items */}
-        <div className='bar-div'>{props.fieldItem}</div>
+        <div className='bar-div'>{fieldItem}</div>
       </div>
     </Drawer>
   );

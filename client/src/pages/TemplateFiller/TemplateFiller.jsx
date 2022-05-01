@@ -7,9 +7,6 @@ import Box from '@mui/material/Box';
 
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
-  /** Value to render in the progress bar for the navigation sidebar */
-  const [progress, setProgress] = useState(0)
-
   /** Temporary hardcoded data to pass as props to the Q&A component */
   const questionsData = {
     'Name of Local Ecosystem': {
@@ -39,21 +36,35 @@ const TemplateFiller = () => {
     }
   }
 
-  /** The current page clicked by the user, defaults to the first entry in questionsData */
-  const [clicked, setClicked] = useState(Object.keys(questionsData)[0])
-
   /** The amount of pages in questionsData */
   let length = Object.keys(questionsData).length;
 
-  /** Styling and functionality for sidebar navigation buttons */
-  const fieldItem = Object.keys(questionsData).map(key =>
-    <div className='side-btn' onClick={() => handleClick(key)}>{key}</div>
-  )
+  /** The current page clicked by the user, defaults to the first entry in questionsData */
+  const [clicked, setClicked] = useState(Object.keys(questionsData)[0])
+
+  /** Value to render in the progress bar for the navigation sidebar */
+  const [progress, setProgress] = useState(0)
 
   /** Handles user clicking a navigation button in the sidebar */
-  const handleClick = (field) => {
+  const handleNavigationClick = (field) => {
     setClicked(field);
     setProgress(Math.floor((questionsData[field].id / (length - 1)) * 100))
+  }
+
+  /** Handles user pressing the 'Next' button */
+  const handleSubmit = (e, inputs) => {
+    e.preventDefault();
+    console.log(inputs);
+  }
+
+  /** Handles user pressing the 'Back' button */
+  const handleBack = (e) => {
+    // Code here
+  }
+
+  /** Handles user pressing the 'Skip' button */
+  const handleSkip = (e) => {
+    // Code here
   }
 
   return (
@@ -62,9 +73,9 @@ const TemplateFiller = () => {
       <Box sx={{ display: 'flex' }}>
         <FieldSideBar
           title='EarthLegislator'
+          fields={Object.keys(questionsData)}
           progress={progress}
-          clicked={clicked}
-          fieldItem={fieldItem}
+          handleClick={handleNavigationClick}
         />
         <Grid pt={2} container spacing={4}>
           <Grid item xs={1} />
@@ -75,6 +86,9 @@ const TemplateFiller = () => {
               questions={questionsData[clicked].questions}
               progress={questionsData[clicked].id}
               length={length}
+              handleBack={handleBack}
+              handleSkip={handleSkip}
+              handleSubmit={handleSubmit}
             />
           </Grid>
           <Grid item xs={1} />
