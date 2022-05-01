@@ -5,13 +5,10 @@ import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
   // Value to render in the progress bar for the navigation sidebar
   const [progress, setProgress] = useState(0)
-
-
 
   // Temporary hardcoded data to pass as props to the Q&A component
   const questionsData = {
@@ -55,8 +52,8 @@ const TemplateFiller = () => {
 
   const handleClick = (field) => {
     setClicked(field);
-    setProgress(Math.floor((questionsData[field].id / (length-1)) * 100))
-   }
+    setProgress(Math.floor((questionsData[field].id / (length - 1)) * 100))
+  }
 
   return (
     <div>
@@ -75,8 +72,8 @@ const TemplateFiller = () => {
               field={clicked}
               title={'Right of Nature Ordonnance Template'}
               questions={questionsData[clicked].questions}
-              progress ={questionsData[clicked].id}
-              length = {length}
+              progress={questionsData[clicked].id}
+              length={length}
             />
           </Grid>
           <Grid item xs={1} />

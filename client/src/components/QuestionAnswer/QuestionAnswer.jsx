@@ -22,7 +22,6 @@ const QuestionAnswer = (props) => {
    * the following format: ['<question asked>', '<user response>'] */
   const [inputs, setInputs] = useState({});
 
-
   /** List of all US states and territories; used for the states dropdown select */
   const us_states = [
     'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Canal Zone', 'Colorado', 'Connecticut',
@@ -59,7 +58,6 @@ const QuestionAnswer = (props) => {
 
   /** A component consisting of all questions from props.questions.
    * Note: question[0] = <input type> and question[1] = <question content> */
-
   const questionItems = props.questions.map((question) =>
     <div>
       {/* Question component */}
@@ -120,13 +118,15 @@ const QuestionAnswer = (props) => {
         <Grid item xs={6}>
           <Box display='flex' justifyContent='flex-end'>
             {/* TODO: Button CSS needs to be fixed in the future */}
-            <Button text='Skip' 
-            handleClick={handleSkip} 
-            css='white-median-btn' />
+            <Button text='Skip'
+              handleClick={handleSkip}
+              css='white-median-btn'
+            />
 
-            <Button text={props.progress === (props.length-1)? 'Finish': 'Next'} 
-            handleClick={handleSubmit} 
-            css='continue-btn' />
+            <Button text={props.progress === (props.length - 1) ? 'Finish' : 'Next'}
+              handleClick={handleSubmit}
+              css='continue-btn'
+            />
           </Box>
         </Grid>
       </Grid>
