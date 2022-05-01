@@ -154,6 +154,7 @@
   font-size: 1rem;
   background-color: #fff;
   border-style: none;
+  cursor: pointer;
 }
 
 /* Hovering buttons in TemplateCard */
