@@ -36,14 +36,16 @@ const TemplateFiller = () => {
     }
   }
 
-  /** The amount of pages in questionsData */
-  let length = Object.keys(questionsData).length;
 
   /** The current page clicked by the user, defaults to the first entry in questionsData */
   const [clicked, setClicked] = useState(Object.keys(questionsData)[0])
 
   /** Value to render in the progress bar for the navigation sidebar */
   const [progress, setProgress] = useState(0)
+
+  /** Temporary variables */
+  let length = Object.keys(questionsData).length;
+  let clicked_id = questionsData[clicked].id
 
   /** Handles user clicking a navigation button in the sidebar */
   const handleNavigationClick = (field) => {
@@ -59,12 +61,12 @@ const TemplateFiller = () => {
 
   /** Handles user pressing the 'Back' button */
   const handleBack = (e) => {
-    // Code here
+    setClicked(Object.keys(questionsData)[clicked_id-1])
   }
 
   /** Handles user pressing the 'Skip' button */
   const handleSkip = (e) => {
-    // Code here
+    setClicked(Object.keys(questionsData)[clicked_id+1])
   }
 
   return (
