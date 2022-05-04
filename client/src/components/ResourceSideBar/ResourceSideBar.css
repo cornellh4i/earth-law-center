@@ -8,8 +8,8 @@
   margin: 10%;
   width: 60%;
   height: 15rem;
-  border: solid;
-  border-radius: 0.9375rem;
-  border-width: 0.063rem;
-  background-color: #EAEAEA;
+  border: none;
+  /* border-radius: 0.9375rem; */
+  /* border-width: 0.063rem; */
+  /* background-color: #EAEAEA; */
 }

@@ -18,7 +18,7 @@ const ResourceCard = (props) => {
   const { title, resource_type, link_to_resource, description, url, youtube } = props;
   return (
     <div className='resource-card'>
-      <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold' }}>
+      <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold', fontFamily:'Nunito', color: '#64926E' }}>
         {title}
       </Typography>
 
@@ -32,13 +32,13 @@ const ResourceCard = (props) => {
             </Grid>
 
             <Grid item xs={7}>
-              <Typography variant='body2' className='resource-text' >
+              <div className='resource-text' >
                 {description}
-              </Typography>
+              </div>
               <div className='resource-button'>
                 <Button
                   text='VIEW'
-                  css='grey-median-btn'
+                  css='green-median-btn'
                   handleClick={() => {
                     window.open(url, "_blank");
                   }} />
@@ -58,14 +58,14 @@ const ResourceCard = (props) => {
                 frameborder="0"></iframe>
             </Grid>
             <Grid item xs={6}>
-              <Typography variant='body2' className='resource-text' >
+              <div className='resource-text' >
                 {description}
-              </Typography>
+              </div>
             </Grid>
             <div className='resource-button'>
               <Button
                 text='WATCH'
-                css='grey-median-btn'
+                css='green-median-btn'
                 handleClick={() => {
                   window.open(url, "_blank");
                 }} />
@@ -77,15 +77,15 @@ const ResourceCard = (props) => {
         {resource_type === 'Website' &&
           <>
             <Grid item xs={12}>
-              <Typography variant='body2' className='resource-text' >
+              <div className='resource-text' >
                 {description}
-              </Typography>
+              </div>
             </Grid>
 
             <div className='resource-button'>
               <Button
                 text='VIEW'
-                css='grey-median-btn'
+                css='green-median-btn'
                 handleClick={() => {
                   window.open(url, "_blank");
                 }} />

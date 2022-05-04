@@ -68,10 +68,25 @@
 .grey-median-btn {
   height: 1.8rem;
   width: 5.0rem;
+  font-family: 'Nunito';
   color: #fff;
   font-weight: lighter;
   font-size: 0.8rem;
   background-color: #484848;
+  border-style: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+
+/* Green median button with white text */
+.green-median-btn {
+  height: 1.8rem;
+  width: 5.0rem;
+  font-family: 'Nunito';
+  color: #fff;
+  font-weight: lighter;
+  font-size: 0.8rem;
+  background-color: #64926E;
   border-style: none;
   border-radius: 0.6rem;
   cursor: pointer;
