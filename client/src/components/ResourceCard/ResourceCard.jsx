@@ -50,8 +50,6 @@ const ResourceCard = (props) => {
         {/* Video card with youtube iframe and text */}
         {resource_type === 'Video' &&
           <>
-            <p>{youtube}</p>
-            <p>{url}</p>
             <Grid item xs={6}>
               <iframe id="player" type="text/html"
                 width="100%" 

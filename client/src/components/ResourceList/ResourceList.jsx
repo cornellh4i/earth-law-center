@@ -16,19 +16,19 @@ function ResourceList({ resource, category }) {
     <Masonry columns={2} spacing={2}>
       {category === "ALL RESOURCES" &&
         resource.map((item) => (
-          <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} />
+          <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} url={item.url} youtube={item.youtube} />
         ))}
       {category === "VIDEOS" &&
         resource.map((item) => (
-          item.resource_type === "Video" && <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} url={item.website} />
+          item.resource_type === "Video" && <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} url={item.url} youtube={item.youtube} />
         ))}
       {category === "DOCUMENTS" &&
         resource.map((item) => (
-          item.resource_type === "Doc" && <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} />
+          item.resource_type === "Doc" && <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} url={item.url} />
         ))}
       {category === "WEBSITES" &&
         resource.map((item) => (
-          item.resource_type === "Website" && <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} />
+          item.resource_type === "Website" && <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} url={item.url} />
         ))}
     </Masonry>
   </div>
