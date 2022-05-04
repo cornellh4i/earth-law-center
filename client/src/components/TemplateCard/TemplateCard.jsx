@@ -21,8 +21,12 @@ const TemplateCard = (props) => {
     card_content = 
     <div className='card-image-text-container'>
       <div className='card-text-container-letter'>
-        <h1 className='card-title'>{props.title}</h1>
-        <p className='card-summary'>{props.summary}</p>
+        <div className='card-title-container'>
+          <h1 className='card-title'>{props.title}</h1>
+        </div>
+        <div className='card-summary-container'>
+          <p className='card-summary'>{props.summary}</p>
+        </div>
       </div>
       <img className='card-letter-preview' src={props.preview}/>
     </div>
