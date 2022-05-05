@@ -12,11 +12,20 @@ import { styled } from '@mui/material/styles';
 function LinearProgressWithLabel(props) {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <Box sx={{ width: '100%', mr: 1 }}>
-        <LinearProgress variant="determinate" {...props} sx={{ borderRadius: 5 }} />
+      <Box sx={{ width: '80%', mr: 1 }}>
+        <LinearProgress variant="determinate" {...props}
+        sx={{ borderRadius: 5, height: 8, [`&.${linearProgressClasses.colorPrimary}`]: {
+            backgroundColor: '#FFFFFF',
+        },
+        [`& .${linearProgressClasses.bar}`]: {
+            borderRadius: 5,
+            backgroundColor: '#64926E',
+        },
+    }
+    } />
       </Box>
       <Box sx={{ minWidth: 35 }}>
-        <Typography variant="body2" color="text.secondary">{`${Math.round(
+        <Typography variant="body2" color="text.secondary" ml={2}sx ={{fontWeight: 'bold', fontSize:18}}>{`${Math.round(
           props.value,
         )}%`}</Typography>
       </Box>
@@ -35,7 +44,7 @@ LinearProgressWithLabel.propTypes = {
 export default function LinearWithValueLabel(props) {
   return (
     <Box sx={{ width: '100%' }}>
-      <LinearProgressWithLabel value={props.value} color='inherit' />
+      <LinearProgressWithLabel variant = 'determinate' value={props.value} />
     </Box>
   );
 }

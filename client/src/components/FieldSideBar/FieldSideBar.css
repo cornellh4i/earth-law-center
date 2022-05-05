@@ -1,16 +1,19 @@
 .body {
     margin: 0;
+
 }
 
 
 /* Sidebar Drawer styling */
 .sidebar {
     width: 20rem;
+    color: #EEF2EF;
+    font-family: 'Nunito', sans-serif;
 }
 
 .sidebar .MuiDrawer-paper {
-    width: 20rem;
-    background-color: lightgray;
+    width: 22.5rem;
+    background-color: #EEF2EF;
     border: 0;
 }
 
@@ -19,4 +22,15 @@
     padding-top: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
+}
+
+.bar-div{
+    color: #817E7E;
+    margin-left: 1rem;
+}
+
+.return .MuiTypography-inherit{
+    color: #000000;
+    margin-left: 1rem;
+    margin-top: 1rem;
 }

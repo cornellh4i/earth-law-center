@@ -48,7 +48,7 @@ const QuestionAnswer = (props) => {
   /** A component consisting of all questions from props.questions.
    * Note: question[0] = <input type> and question[1] = <question content> */
   const questionItems = props.questions.map((question) =>
-    <div>
+    <div className='question-items'>
       {/* Question component */}
       <Typography pt={3} pb={1} variant='body2'>{question[1]}</Typography>
 
@@ -63,6 +63,7 @@ const QuestionAnswer = (props) => {
             size='small'
             fullWidth
             onChange={handleChange}
+            InputLabelProps={{style:{fontFamily: 'Nunito'}}}
           />
         </Box>
       }
@@ -80,6 +81,8 @@ const QuestionAnswer = (props) => {
               label='Select State'
               size='small'
               variant='outlined'
+              InputLabelProps={{style:{fontFamily: 'Nunito'}}}
+
             >
               {us_states.map(state =>
                 <MenuItem value={state}>{state}</MenuItem>
@@ -93,8 +96,11 @@ const QuestionAnswer = (props) => {
 
   return (
     <div className='question-component'>
-      <Typography pt={1} pb={1} variant='h6'>{props.title}</Typography>
-      <Typography pt={1} pb={1} variant='h4' sx={{ fontWeight: 'bold' }}>{props.field}</Typography>
+      <Typography pt={1} pb={1} variant='h6' sx={{fontFamily: 'Nunito'}}>{props.title}</Typography>
+      <Typography pt={1} pb={1} variant='h4'
+      sx={{ fontWeight: 'bold', fontFamily: 'Nunito', color: '#64926E', fontSize:36 }}>
+        {props.field}
+      </Typography>
       {questionItems}
 
       {/* Button positioning */}

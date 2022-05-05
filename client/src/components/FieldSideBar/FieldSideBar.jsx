@@ -4,6 +4,8 @@ import './FieldSideBar.css';
 import LinearProgressWithLabel from './ProgressBar';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
+import Link from '@mui/material/Link';
+
 
 /** Component for a Field Side Bar
  * @param {title} is the title header of the sidebar
@@ -20,15 +22,26 @@ const FieldSideBar = (props) => {
     >
       <div className='sidebar-content'>
         {/* Header title */}
-        <Typography pt={3} pb={3} variant='h5' component='div' sx={{ fontWeight: 'bold' }}>{props.title}</Typography>
+        <Typography
+            pt={3} pb={3} ml={2}
+            variant='h5'
+            component='div'
+            sx={{ fontWeight: 'bold', color: '#64926E', fontFamily: 'Nunito', fontSize:36}}>
+            {props.title}
+        </Typography>
 
         {/* Progress bar */}
-        <Box pb={3} sx={{ display: 'flex', alignItems: 'center' }}>
-          <LinearProgressWithLabel value={props.progress} color='inherit' />
+        <Box pb={3} ml ={2} sx={{ display: 'flex', alignItems: 'center' }}>
+          <LinearProgressWithLabel className= 'progress-bar' value={props.progress} color='inherit' />
         </Box>
 
         {/* Field items */}
-        <div className='bar-div'>{props.fieldItem}</div>
+        <div className = 'bar-div'>
+            {props.fieldItem}
+        </div>
+        <div className='return'>
+            <Link href='/resources' color = 'text.secondary'>Return to Templates </Link>
+        </div>
       </div>
     </Drawer>
   );
