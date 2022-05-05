@@ -36,7 +36,6 @@ const TemplateFiller = () => {
     }
   }
 
-
   /** The current page clicked by the user, defaults to the first entry in questionsData */
   const [clicked, setClicked] = useState(Object.keys(questionsData)[0])
 
@@ -50,18 +49,30 @@ const TemplateFiller = () => {
   /** Handles user clicking a navigation button in the sidebar */
   const handleNavigationClick = (field) => {
     setClicked(field);
-    setProgress(Math.floor((questionsData[field].id / (length - 1)) * 100))
+    changeProgress(questionsData[field].id)
   }
+
+  /** Styling and functionality for sidebar navigation buttons */
+  const fields = Object.keys(questionsData)
+  const fieldItem = fields.map(field =>
+    <div className='side-btn' onClick={() => handleNavigationClick(field)}>{field}</div>
+  )
   
   /** Move user to the previous page */
   const backPage = () => {
     let newClickedId = Math.max(clickedId-1, 0);
+    changeProgress(newClickedId)
     setClicked(Object.keys(questionsData)[newClickedId]);
+  }
+  
+  const changeProgress = (newClickedId) => {
+    setProgress(Math.floor((newClickedId / (length - 1)) * 100))
   }
   
   /** Advances user to the next page */
   const advancePage = () => {
     let newClickedId = Math.min(clickedId+1, length-1)
+    changeProgress(newClickedId)
     setClicked(Object.keys(questionsData)[newClickedId])
   }
 
@@ -87,9 +98,8 @@ const TemplateFiller = () => {
       <Box sx={{ display: 'flex' }}>
         <FieldSideBar
           title='EarthLegislator'
-          fields={Object.keys(questionsData)}
+          fieldItem={fieldItem}
           progress={progress}
-          handleClick={handleNavigationClick}
         />
         <Grid pt={2} container spacing={4}>
           <Grid item xs={1} />
