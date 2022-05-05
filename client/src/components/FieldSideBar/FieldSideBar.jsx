@@ -39,9 +39,9 @@ const FieldSideBar = (props) => {
         <div className = 'bar-div'>
             {props.fieldItem}
         </div>
-        <div className='return'>
+        <Box pt={2} className='return'>
             <Link href='/laws' color = 'text.secondary'>Return to Templates </Link>
-        </div>
+        </Box>
       </div>
     </Drawer>
   );

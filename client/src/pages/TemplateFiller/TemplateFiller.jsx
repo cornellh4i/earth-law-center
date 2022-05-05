@@ -106,7 +106,7 @@ const TemplateFiller = () => {
           fieldItem={fieldItem}
           progress={progress}
         />
-        <Grid pt={2} container spacing={4}>
+        <Grid pt={5} container spacing={4}>
           <Grid item xs={1} />
           <Grid item xs={10} >
             <QuestionAnswer
