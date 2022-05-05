@@ -12,8 +12,8 @@ function ResourceList({ resource, category }) {
     return <p>No resources yet</p>
   }
   return <div className="resource-box">
-    <Typography pt={2} pb={2} align='left' variant='h5' component='div' sx={{ fontWeight:'bold', color:'#64926E', fontFamily:'Nunito' }}>{category}</Typography>
-    <Masonry columns={2} spacing={2}>
+    <div className="resource-title">{category}</div>
+    <Masonry columns={2} spacing={4}>
       {category === "ALL RESOURCES" &&
         resource.map((item) => (
           <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} url={item.url} youtube={item.youtube} />

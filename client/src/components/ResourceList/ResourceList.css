@@ -4,3 +4,12 @@
   justify-content: 'center';
   align-items: 'center';
 }
+
+.resource-title{
+  font-family: 'Nunito';
+  font-weight: bold;
+  color:'#64926E';
+  font-size: 1.875em;
+  margin-top: 5.5%;
+  margin-bottom: 2%;
+}
