@@ -74,11 +74,6 @@ const TemplateFiller = () => {
     setProgress(Math.floor((newClickedId + 1) / length * 100))
   }
 
-  /** Change selected item in navbar to match correct selected page */
-  const changeSelectedPage = (newClicked) => {
-
-  }
-
   /** Advances user to the next page */
   const advancePage = () => {
     let newClickedId = Math.min(clickedId + 1, length - 1)
