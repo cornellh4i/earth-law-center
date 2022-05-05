@@ -66,7 +66,7 @@ const TemplateFiller = () => {
   }
   
   const changeProgress = (newClickedId) => {
-    setProgress(Math.floor((newClickedId / (length - 1)) * 100))
+    setProgress(Math.floor((newClickedId+1) / length * 100))
   }
   
   /** Advances user to the next page */
