@@ -40,7 +40,7 @@ const FieldSideBar = (props) => {
             {props.fieldItem}
         </div>
         <div className='return'>
-            <Link href='/resources' color = 'text.secondary'>Return to Templates </Link>
+            <Link href='/laws' color = 'text.secondary'>Return to Templates </Link>
         </div>
       </div>
     </Drawer>
