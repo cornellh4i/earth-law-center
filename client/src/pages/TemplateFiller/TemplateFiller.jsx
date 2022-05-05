@@ -45,28 +45,40 @@ const TemplateFiller = () => {
 
   /** Temporary variables */
   let length = Object.keys(questionsData).length;
-  let clicked_id = questionsData[clicked].id
+  let clickedId = questionsData[clicked].id
 
   /** Handles user clicking a navigation button in the sidebar */
   const handleNavigationClick = (field) => {
     setClicked(field);
     setProgress(Math.floor((questionsData[field].id / (length - 1)) * 100))
   }
-
-  /** Handles user pressing the 'Next' button */
-  const handleSubmit = (e, inputs) => {
-    e.preventDefault();
-    console.log(inputs);
+  
+  /** Move user to the previous page */
+  const backPage = () => {
+    let newClickedId = Math.max(clickedId-1, 0);
+    setClicked(Object.keys(questionsData)[newClickedId]);
+  }
+  
+  /** Advances user to the next page */
+  const advancePage = () => {
+    let newClickedId = Math.min(clickedId+1, length-1)
+    setClicked(Object.keys(questionsData)[newClickedId])
   }
 
   /** Handles user pressing the 'Back' button */
   const handleBack = (e) => {
-    setClicked(Object.keys(questionsData)[clicked_id-1])
+    backPage();
   }
 
   /** Handles user pressing the 'Skip' button */
   const handleSkip = (e) => {
-    setClicked(Object.keys(questionsData)[clicked_id+1])
+    advancePage();
+  }
+
+  /** Handles user pressing the 'Next' button */
+  const handleSubmit = (e, inputs) => {
+    advancePage();
+    console.log(inputs);
   }
 
   return (

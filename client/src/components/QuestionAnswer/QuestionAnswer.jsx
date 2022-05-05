@@ -100,15 +100,21 @@ const QuestionAnswer = (props) => {
       {/* Button positioning */}
       <Grid container direction='row' spacing={4} pt={2} justifyContent='flex-end'>
         <Grid item xs={6}>
-          <Button text='Back' handleClick={e => props.handleBack(e)} css='back-btn' />
+          <Button
+            text='BACK'
+            handleClick={e => props.handleBack(e)}
+            css='back-btn'
+          />
         </Grid>
         <Grid item xs={6}>
           <Box display='flex' justifyContent='flex-end'>
-            <Button text='Skip'
+            <Button
+              text='SKIP'
               handleClick={e => props.handleSkip(e)}
               css='white-median-btn'
             />
-            <Button text={props.progress === (props.length - 1) ? 'Finish' : 'Next'}
+            <Button
+              text={props.progress === (props.length - 1) ? 'FINISH' : 'NEXT'}
               handleClick={(e) => props.handleSubmit(e, inputs)}
               css='continue-btn'
             />
