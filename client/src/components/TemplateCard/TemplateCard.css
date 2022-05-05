@@ -18,12 +18,11 @@
     0 4px 8px #C6DCCB,
     0 8px 16px #C6DCCB;
 }
-.card-text-container{
-    width: 90%;
+.card-text-container, .card-image-text-container{
+    width: 95%;
     height: 48%;
     margin-left: 5%;
     margin-top: 2%;
-    margin-right: -20%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,12 +39,21 @@
     display: flex;
     flex-direction: row;
 }
+
+.card-title-container{
+    max-width: 70%;
+}
 .card-title{
     margin:0;
     font-family: 'Nunito', sans-serif;
     color: #64926E;
     font-size: 36px;
     font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+    min-width: 0;
 }
 .download-img{
     width: 30%;
@@ -59,4 +67,35 @@
     font-size: 18px;
     line-height: 25px;
     color: #000000;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    min-width: 0;
+    max-width: 90%;
+}
+
+.card-image-text-container{
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: space-between;
+}
+
+/* The card text container when it is a letter */
+.card-text-container-letter{
+    width: 65%;
+    height: 100%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.card-letter-preview{
+    width: 28%;
+    border-style: solid;
+    border-width: 0.06rem;
+    border-color: #59705F;
+    margin-right: 2%;
 }
