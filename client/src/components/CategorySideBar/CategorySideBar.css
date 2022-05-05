@@ -9,10 +9,9 @@
 .sidebar-container {
   margin: 2%;
   width: 90%;
-  border: solid;
-  border-color: white;
   border-radius: 0.9375rem;
   border-width: 0.063rem;
   padding: 5%;
   margin-bottom: 10%;
+  box-shadow: 0px 5px 15px rgba(69, 130, 108, 0.25);
 }

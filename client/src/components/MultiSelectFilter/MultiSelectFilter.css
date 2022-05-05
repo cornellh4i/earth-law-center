@@ -1,16 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
 .box{
-    width: 90%;
+    width: 80%;
     height: 23.25rem;
     display: 'flex';
     margin-left: 2%;
     border-radius: 5%;
     background-color: white;
-    box-shadow:  0 1px 2px #C6DCCB,
-    0 2px 4px #C6DCCB,
-    0 4px 8px #C6DCCB,
-    0 8px 16px #C6DCCB;
+    box-shadow: 0px 5px 15px rgba(69, 130, 108, 0.25);
+    padding: 10%;
 }
 
 .text{
