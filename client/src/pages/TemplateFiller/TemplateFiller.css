@@ -1,3 +1,18 @@
-body{
+body {
     font-family: 'Roboto', sans-serif;
+}
+
+.side-btn {
+    font-size: 14px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.side-btn:hover {
+    font-weight: bold;
+}
+
+.side-btn-active {
+    font-weight: bold;
 }

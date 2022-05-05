@@ -4,6 +4,7 @@ import './TemplateFiller.css';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { borderLeft } from '@mui/system';
 
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
@@ -55,23 +56,32 @@ const TemplateFiller = () => {
   /** Styling and functionality for sidebar navigation buttons */
   const fields = Object.keys(questionsData)
   const fieldItem = fields.map(field =>
-    <div className='side-btn' onClick={() => handleNavigationClick(field)}>{field}</div>
+    <div
+      className={questionsData[clicked].id === questionsData[field].id ? 'side-btn side-btn-active' : 'side-btn'}
+      onClick={() => handleNavigationClick(field)}>{field}
+    </div>
   )
-  
+
   /** Move user to the previous page */
   const backPage = () => {
-    let newClickedId = Math.max(clickedId-1, 0);
+    let newClickedId = Math.max(clickedId - 1, 0);
     changeProgress(newClickedId)
     setClicked(Object.keys(questionsData)[newClickedId]);
   }
-  
+
+  /** Update the progress bar to the correct percentage value */
   const changeProgress = (newClickedId) => {
-    setProgress(Math.floor((newClickedId+1) / length * 100))
+    setProgress(Math.floor((newClickedId + 1) / length * 100))
   }
-  
+
+  /** Change selected item in navbar to match correct selected page */
+  const changeSelectedPage = (newClicked) => {
+
+  }
+
   /** Advances user to the next page */
   const advancePage = () => {
-    let newClickedId = Math.min(clickedId+1, length-1)
+    let newClickedId = Math.min(clickedId + 1, length - 1)
     changeProgress(newClickedId)
     setClicked(Object.keys(questionsData)[newClickedId])
   }
