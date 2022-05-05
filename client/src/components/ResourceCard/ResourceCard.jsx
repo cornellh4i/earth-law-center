@@ -92,4 +92,10 @@ const ResourceCard = (props) => {
   );
 };
 
+
+ResourceCard.defaultProps = {
+  description: 'Lorem ipsum dolor sit amet, in sed percipitur eloquentia Lorem ipsum dolor sit amet, in sed',
+  link_to_resource: '../../properties/elc-home-mar2022.jpeg'
+};
+
 export default ResourceCard;
