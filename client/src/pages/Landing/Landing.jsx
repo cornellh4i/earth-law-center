@@ -11,9 +11,21 @@ import { Link } from 'react-router-dom'
 const Landing = () => {
   return (
     <div>
-      <Header title="Lorem Ipsum" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." hasSearch={true} searchBarPlaceholder="Search Lorem Ipsum"/>
+      <Header title="EarthLegislator" description="Earth Legislator is a web portal with ecocentric 
+                                                  (or “Earth-centered”) legal models that legislators, 
+                                                  activists, and others can easily customize and 
+                                                  download—much like the popular websites “Rocket Lawyer”
+                                                  or “LegalZoom” but for the planet. It also features 
+                                                  customizable letter templates, toolkits, and other 
+                                                  resources, making it easier for anyone to help ecocentric 
+                                                  legal movements flourish across the globe. These legal 
+                                                  movements aim to address shortcomings of the current legal 
+                                                  system, which legalizes the destruction of nature, so that 
+                                                  we achieve a future in which humans and Nature flourish 
+                                                  together." 
+                                                  hasSearch={true} searchBarPlaceholder="Search Lorem Ipsum"/>
       <div className="content">
-        {/*We have two Landing boxes for now*/}
+        {/* We have two Landing boxes for now */}
         <Grid container spacing={4} pt={5}>
           <Grid item xs={12} md={5.5}>
             <Link to='/laws' style = {{textDecoration: 'none'}}><LandingCard

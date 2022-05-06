@@ -1,4 +1,4 @@
-import 
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
 /* To remove white spaces around the header */
 body {
@@ -17,7 +17,7 @@ body {
 .content {
   margin-left: 5rem;
   margin-right: 5rem;
-  font-family: ;
+  
 }
 
 .search-bar-container{

@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import './Header.css'
 import SearchBar from '../SearchBar/SearchBar.jsx'
 import Button from '../Button/Button.jsx'
+import NavBar from '../NavBar/NavBar';
 
 /**
  * Component for a general header to be used all over the webiste
@@ -25,8 +26,11 @@ const Header = (props) => {
   if(props.hasSearch){
     return (
       <div className="banner">
+        {/* Assuming that we will only ever have a NavBar when there is a header, 
+            we keep the NavBar in this component */}
+        <NavBar/>
         <div className="content">
-          <Typography pt={5} pb={1} variant='h2' component='div' sx={{ fontWeight: 'bold' }}>
+          <Typography pt={5} pb={1} variant='h2' component='div' sx={{ fontWeight: 'bolder', fontFamily: 'Nunito', color: '#64926E'}}>
             {props.title}
           </Typography>
           <Typography variant='body2' color='text.secondary' sx={{ fontSize: 18, marginTop: 6 }} >
@@ -46,6 +50,7 @@ const Header = (props) => {
   }
   return (
     <div className="banner">
+      <NavBar/>
       <div className="content">
         <Typography pt={5} pb={1} variant='h2' component='div' sx={{ fontWeight: 'bold' }}>
           {props.title}
