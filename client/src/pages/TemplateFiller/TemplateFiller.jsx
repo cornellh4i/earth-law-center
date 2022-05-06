@@ -40,12 +40,12 @@ const TemplateFiller = () => {
   /** The current page clicked by the user, defaults to the first entry in questionsData */
   const [clicked, setClicked] = useState(Object.keys(questionsData)[0])
 
-  /** Value to render in the progress bar for the navigation sidebar */
-  const [progress, setProgress] = useState(0)
-
   /** Temporary variables */
   let length = Object.keys(questionsData).length;
   let clickedId = questionsData[clicked].id
+
+  /** Value to render in the progress bar for the navigation sidebar */
+  const [progress, setProgress] = useState(Math.floor(1 / length * 100))
 
   /** Handles user clicking a navigation button in the sidebar */
   const handleNavigationClick = (field) => {
