@@ -30,7 +30,7 @@ function App() {
   return (
     <Router>
       {/* navigation bar that shows up on all pages except template filler*/}
-      //{window.location.pathname === '/template-filler' ? null : <NavBar/>}
+      {/* {window.location.pathname === '/template-filler' ? null : <NavBar/>} */}
       <Routes>
         {/* All pages below */}
         <Route path='/' element={<Landing/>} />

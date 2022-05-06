@@ -6,7 +6,7 @@ import './About.css';
 const About = () => {
   return (
     <div>
-      <h1>About</h1>
+      <h1>About Page Coming Soon!</h1>
     </div>
   );
 };
