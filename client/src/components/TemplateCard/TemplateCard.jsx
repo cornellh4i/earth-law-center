@@ -13,6 +13,7 @@ import downloadbtn from './assets/download-btn.png';
 const TemplateCard = (props) => {
   var card_content = 
     <div className='card-text-container'>
+      <Button css='card-type-btn' onClick={props.edit} text={props.type}  ></Button>
         <h1 className='card-title'>{props.title}</h1>
         <p className='card-summary'>{props.summary}</p>
     </div>
