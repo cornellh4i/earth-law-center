@@ -212,3 +212,16 @@
 .search-btn:active {
   background: #64926E;
 }
+
+/* See more Button found on Landing Card */
+.see-more-btn{
+  width: 30%;
+  padding: 1.2rem;
+  background: #64926E;
+  color: white;
+  border-radius: 0.9375rem;
+  border: none;
+  margin-top: 5%;
+  font-family: 'Nunito';
+  font-size: 14px;
+}
