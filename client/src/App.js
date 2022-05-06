@@ -4,7 +4,6 @@ import './App.css';
 import Landing from './pages/Landing/Landing';
 import LawsDisplay from './pages/LawsDisplay/LawsDisplay'; 
 import LettersDisplay from './pages/LettersDisplay/LettersDisplay'; 
-import NavBar from './components/NavBar/NavBar';
 import About from './pages/About/About.jsx';
 import ResourceDisplay from './pages/ResourceDisplay/ResourceDisplay'; 
 import TemplateFiller from './pages/TemplateFiller/TemplateFiller'; 
@@ -28,7 +27,6 @@ function App() {
   return (
     <Router>
       {/* navigation bar that shows up on all pages */}
-      <NavBar/>
       <Routes>
         {/* All pages below */}
         <Route path='/' element={<Landing/>} />

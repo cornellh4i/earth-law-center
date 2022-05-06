@@ -6,14 +6,15 @@ import LandingCard from '../../components/LandingCard/LandingCard';
 import Header from '../../components/Header/Header'; 
 import './Landing.css';
 import { Link } from 'react-router-dom'
+import HeaderDescription from '../../data/LandingText.js';
 
 /** Component for Landing Page */
 const Landing = () => {
   return (
     <div>
-      <Header title="Lorem Ipsum" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." hasSearch={true} searchBarPlaceholder="Search Lorem Ipsum"/>
+      <Header title="EarthLegislator" description={HeaderDescription} hasSearch={false}/>
       <div className="content">
-        {/*We have two Landing boxes for now*/}
+        {/* We have two Landing boxes for now */}
         <Grid container spacing={4} pt={5}>
           <Grid item xs={12} md={5.5}>
             <Link to='/laws' style = {{textDecoration: 'none'}}><LandingCard
