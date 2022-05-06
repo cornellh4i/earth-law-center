@@ -1,43 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ResourceDisplay.css';
-import ResourceCard from '../../components/ResourceCard/ResourceCard';
-import Typography from '@mui/material/Typography';
+import ResourceData from '../../data/ResourceData';
+import ResourceList from '../../components/ResourceList/ResourceList'
 import Grid from '@mui/material/Grid';
+import Header from "../../components/Header/Header"
+import ResourceSideBar from "../../components/ResourceSideBar/ResourceSideBar"
 
 /** Component for Resource Display Page */
 const ResourceDisplay = () => {
+  const [category, setCategory] = useState("ALL RESOURCES");
+
   return (
-    <div>
-
-      <Typography pt={2} pb={2} align='left' variant='h5' component='div' sx={{ fontWeight: 'bold' }}>Resources</Typography>
-
-      <Grid container spacing={3}>
-        <Grid item md={6} xs={12}>
-          <ResourceCard title="Doc Title1" resource_type="Doc" link_to_resource="../../properties/elc-home-mar2022.jpeg" description="Lorem ipsum dolor sit amet, in sed percipitur eloquentia Lorem ipsum dolor sit amet, in sed" url='http://yahoo.com'></ResourceCard>
+    <>
+      <Header title="Lorem Ipsum" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." hasSearch={true} searchBarPlaceholder="Search Lorem Ipsum" />
+      <Grid container columns={16}>
+        <Grid item xs={4}>
+          <ResourceSideBar category={category} setCategory={setCategory} />
         </Grid>
-        <Grid item md={6} xs={12}>
-          <ResourceCard title="Doc Title2" resource_type="Doc" link_to_resource="../../properties/elc-home-mar2022.jpeg" description="Lorem ipsum dolor sit amet, in sed percipitur eloquentia Lorem ipsum dolor sit amet, in sed" url='http://google.com'></ResourceCard>
+        <Grid item xs={8}>
+          <ResourceList resource={ResourceData} category={category} />
         </Grid>
       </Grid>
-
-      <Grid container spacing={3}>
-        <Grid item md={6} xs={12}>
-          <ResourceCard title="Video Title1" resource_type="Video" link_to_resource="../../properties/elc-home-mar2022.jpeg" description="Lorem ipsum dolor sit amet, in sed percipitur eloquentia Lorem ipsum dolor sit amet, in sed" ></ResourceCard>
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <ResourceCard title="Video Title2" resource_type="Video" link_to_resource="../../properties/elc-home-mar2022.jpeg" description="Lorem ipsum dolor sit amet, in sed percipitur eloquentia Lorem ipsum dolor sit amet, in sed"></ResourceCard>
-        </Grid>
-      </Grid>
-
-      <Grid container spacing={3}>
-        <Grid item md={6} xs={12}>
-          <ResourceCard title="Website Title1" resource_type="Website" link_to_resource="../../properties/elc-home-mar2022.jpeg" description="Lorem ipsum dolor sit amet, in sed percipitur eloquentia Lorem ipsum dolor sit amet, in sed"></ResourceCard>
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <ResourceCard title="Website Title2" resource_type="Website" link_to_resource="../../properties/elc-home-mar2022.jpeg" description="Lorem ipsum dolor sit amet, in sed percipitur eloquentia Lorem ipsum dolor sit amet, in sed"></ResourceCard>
-        </Grid>
-      </Grid>
-    </div>
+    </>
   );
 };
 export default ResourceDisplay;

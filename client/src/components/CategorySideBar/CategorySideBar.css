@@ -1,14 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
 .sidebar-ul {
   list-style-type: none;
-  margin-left: -8%;
-  margin-top: -1%;
+  margin: 2%;
+  margin-left: -10%;
+  
 }
 .sidebar-container {
-  margin: 5%;
-  width: 16%;
-  height: 100%;
+  margin: 2%;
+  width: 90%;
   border: solid;
+  border-color: white;
   border-radius: 0.9375rem;
   border-width: 0.063rem;
-  background-color: #EAEAEA;
+  padding: 5%;
+  margin-bottom: 10%;
 }
