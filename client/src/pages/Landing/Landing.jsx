@@ -17,27 +17,23 @@ const Landing = () => {
         {/* We have two Landing boxes for now */}
         <Grid container spacing={4} pt={5}>
           <Grid item xs={12} md={5.5}>
-            {/* <Link to='/laws' style = {{textDecoration: 'none'}}> */}
               <LandingCard
                 title={"Law Template"}
                 text={Text.LawsDescription}>
-                link = {'laws'}
+                link = {'/laws'}
               </LandingCard>
-            {/* </Link> */}
           </Grid>
           <Grid item xs={12} md={1}></Grid>
           <Grid item xs={12} md={5.5}>
-          <Link to='/letters' style = {{textDecoration: 'none'}}>
             <LandingCard
               title={"Letter Template"}
               text={Text.LettersDescription}>
             </LandingCard>
-          </Link>
           </Grid>
         </Grid>
 
-        {/*Three resource boxes I believe. We can probably useState to fix them later*/}
-        <Typography pt={10} pb={2} align='center' variant='h5' component='div' sx={{ fontWeight: 'bolder',fontFamily: 'Nunito' }}>Resources</Typography>
+        {/* Three resource boxes I believe. We can probably useState to fix them later */}
+        <Typography pt={10} pb={2} align='center' variant='h5' component='div' sx={{ fontWeight: '900', fontSize: '36', fontFamily: 'Nunito', color: '#64926E' }}>Resources</Typography>
 
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
