@@ -1,11 +1,13 @@
 .card {
     box-shadow: none !important;
     border-radius: 20px !important;
+    background-color: #EEF2EF !important;
 }
 
 .card-content {
-    background-color: #d7d7d7 !important;
-    height: 400px !important;
+    background-color: #EEF2EF !important;
+    height: 23rem !important;
     display: flex;
     flex-wrap: wrap;
+    margin: 1.5rem
 }
