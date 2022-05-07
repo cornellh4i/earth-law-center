@@ -26,7 +26,7 @@ export default function MultiSelectFilter() {
 
   const { local, regional, national, international, ordinance, resolution } = state;
   return (
-<Box className='box' component="span" sx={{ p: 2}}>
+<Box className='box' component="span">
 <h1 className='text'>FILTER BY JURISDICTION</h1>
 
 <FormGroup>
