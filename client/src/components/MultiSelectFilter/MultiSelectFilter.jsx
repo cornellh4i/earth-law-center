@@ -15,7 +15,6 @@ export default function MultiSelectFilter(props) {
     international: false,
     ordinance: false,
     resolution: false,
-
   });
 
 

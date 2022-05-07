@@ -2,14 +2,20 @@ import React, {useState} from 'react';
 import '../LawsDisplay/LawsLettersDisplay.css';
 import '../../components/CategorySideBar/CategorySideBar'; 
 import Header from '../../components/Header/Header';
-import CategorySideBar from '../../components/CategorySideBar/CategorySideBar';
 import TemplateCard from '../../components/TemplateCard/TemplateCard'; 
 import MultiSelectFilter from '../../components/MultiSelectFilter/MultiSelectFilter'
 import testPic from './testpic.png'
 
 /** Component for Letters Page */
 const LettersDisplay = () => {
-const [checked, setChecked] = useState("");
+const [checked, setChecked] = useState({
+  local: false,
+  regional: false,
+  national: false,
+  international: false,
+  ordinance: false,
+  resolution: false,
+});
 
   return (
     <div>
@@ -22,13 +28,13 @@ const [checked, setChecked] = useState("");
           <h1 className="card-heading-title">Letter Templates</h1>
           <p className="card-description">Description of category: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,</p>
           <div className="card-box">
-            <TemplateCard letter={true} preview={testPic} className="law-card" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-            <TemplateCard letter={true} preview={testPic} className="law-card" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-            <TemplateCard letter={true} preview={testPic} className="law-card" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-            <TemplateCard letter={true} preview={testPic} className="law-card" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-            <TemplateCard letter={true} preview={testPic} className="law-card" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-            <TemplateCard letter={true} preview={testPic} className="law-card" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-            <TemplateCard letter={true} preview={testPic} className="law-card" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            <TemplateCard letter={true} preview={testPic} className="law-card" currentFilter={checked} law="ordinance" jurisdiction="local" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            <TemplateCard letter={true} preview={testPic} className="law-card" currentFilter={checked} law="ordinance" jurisdiction="regional" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            <TemplateCard letter={true} preview={testPic} className="law-card" currentFilter={checked} law="ordinance" jurisdiction="national" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            <TemplateCard letter={true} preview={testPic} className="law-card" currentFilter={checked} law="ordinance" jurisdiction="international" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            <TemplateCard letter={true} preview={testPic} className="law-card" currentFilter={checked} law="ordinance" jurisdiction="local" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            <TemplateCard letter={true} preview={testPic} className="law-card" currentFilter={checked} law="resolution" jurisdiction="local" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            <TemplateCard letter={true} preview={testPic} className="law-card" currentFilter={checked} law="resolution" jurisdiction="national" title="Ecocentric Land" summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
           </div>
         </div>
       </div>
