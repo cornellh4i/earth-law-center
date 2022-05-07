@@ -97,3 +97,11 @@
     border-color: #59705F;
     margin-right: 0;
 }
+
+.tag-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    margin-left: -3%;
+}

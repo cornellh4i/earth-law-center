@@ -13,12 +13,12 @@ import downloadbtn from './assets/download-btn.png';
 
 const TemplateCard = (props) => {
   const filters = {
-    local: props.jurisdiction == "local",
-    regional: props.jurisdiction == "regional",
-    national: props.jurisdiction == "national",
-    international: props.jurisdiction == "international",
-    ordinance: props.law == "ordinance",
-    resolution: props.law == "resolution",
+    local: props.jurisdiction === "local",
+    regional: props.jurisdiction === "regional",
+    national: props.jurisdiction === "national",
+    international: props.jurisdiction === "international",
+    ordinance: props.law === "ordinance",
+    resolution: props.law === "resolution",
   };
 
   var matchlaw = false;
@@ -40,8 +40,6 @@ const TemplateCard = (props) => {
 
     console.log(props.currentFilter);
   if(!(matchlaw && matchordinance)){
-    console.log(matchlaw + "" + matchordinance);
-    
     return null;
   }
 
@@ -68,7 +66,12 @@ const TemplateCard = (props) => {
   }
   return (
     <div className='card-container'>
-      {props.letter ? <></> : <Button css='card-type-btn' text={props.type}></Button>}
+      {props.letter ? <></> : 
+        <div className='tag-container'>
+          <Button css='card-type-btn' text={props.law}></Button>
+          <Button css='card-type-btn' text={props.jurisdiction}></Button>
+        </div>
+        }
       {card_content}
       <div className='card-btn-container'>
         <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
