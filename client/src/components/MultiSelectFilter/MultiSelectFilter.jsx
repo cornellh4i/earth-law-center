@@ -4,8 +4,9 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
+import { process_params } from 'express/lib/router';
 
-export default function MultiSelectFilter() {
+export default function MultiSelectFilter(props) {
 
   const [state, setState] = React.useState({
     local: false,
@@ -17,11 +18,16 @@ export default function MultiSelectFilter() {
 
   });
 
+
   const handleChange = (event) => {
     setState({
       ...state,
       [event.target.name]: event.target.checked,
     });
+    props.setCheckedParent({
+      ...state,
+      [event.target.name]: event.target.checked,
+    });;
   };
 
   const { local, regional, national, international, ordinance, resolution } = state;

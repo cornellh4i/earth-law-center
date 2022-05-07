@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import '../LawsDisplay/LawsLettersDisplay.css';
 import '../../components/CategorySideBar/CategorySideBar'; 
 import Header from '../../components/Header/Header';
@@ -9,14 +9,14 @@ import testPic from './testpic.png'
 
 /** Component for Letters Page */
 const LettersDisplay = () => {
-  const select_filter = useRef();
+const [checked, setChecked] = useState("");
 
   return (
     <div>
       <Header title="Build Earth Letters" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." hasSearch={true} searchBarPlaceholder="Search Law Templates"></Header>
       <div className="body-box">
         <div className="side-box">
-          <MultiSelectFilter ref={select_filter}/>
+        <MultiSelectFilter setCheckedParent={setChecked} />
         </div>
         <div className="content-box">
           <h1 className="card-heading-title">Letter Templates</h1>

@@ -11,6 +11,39 @@ import downloadbtn from './assets/download-btn.png';
 */
 
 const TemplateCard = (props) => {
+  const filters = {
+    local: props.jurisdiction == "local",
+    regional: props.jurisdiction == "regional",
+    national: props.jurisdiction == "national",
+    international: props.jurisdiction == "international",
+    ordinance: props.law == "ordinance",
+    resolution: props.law == "resolution",
+  };
+
+  var matchlaw = false;
+  var matchordinance = false;
+
+  if(props.currentFilter.ordinance === false && 
+    props.currentFilter.resolution === false) {matchlaw = true;}
+  else if((props.currentFilter.ordinance === filters.ordinance && filters.ordinance === true) || 
+    (props.currentFilter.resolution === filters.resolution && filters.resolution === true)) {matchlaw = true;}
+
+  if(props.currentFilter.local === false && 
+    props.currentFilter.regional === false && 
+    props.currentFilter.national === false && 
+    props.currentFilter.international === false){matchordinance = true;}
+  else if((props.currentFilter.local === filters.local && filters.local === true) || 
+    (props.currentFilter.regional === filters.regional && filters.regional === true) || 
+    (props.currentFilter.national === filters.national && filters.national === true) || 
+    (props.currentFilter.international === filters.international && filters.international === true)){matchordinance = true;}
+
+    console.log(props.currentFilter);
+  if(!(matchlaw && matchordinance)){
+    console.log(matchlaw + "" + matchordinance);
+    
+    return null;
+  }
+
   var card_content = 
     <div className='card-text-container'>
         <h1 className='card-title'>{props.title}</h1>
