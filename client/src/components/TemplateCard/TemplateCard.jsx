@@ -34,6 +34,7 @@ const TemplateCard = (props) => {
   }
   return (
     <div className='card-container'>
+      {props.letter ? <></> : <Button css='card-type-btn' text={props.type}></Button>}
       {card_content}
       <div className='card-btn-container'>
         <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>

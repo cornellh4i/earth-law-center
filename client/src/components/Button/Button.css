@@ -96,13 +96,16 @@
 }
 
 .card-type-btn {
-  width: 65px;
-  height: 40px;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 1%;
+  padding-bottom: 1%;
   background: #C6DCCB;
   border-radius: 15px;
   border: none;
   color: #64926E;
   margin-left: 80%;
+  margin-top: 1%;
   font-family: 'Nunito';
   font-style: normal;
   font-weight: 700;
