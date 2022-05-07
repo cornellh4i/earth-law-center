@@ -4,7 +4,9 @@
 }
 
 .resource1{
-    background-image: url('../../properties/resource1.png');
+    background-image: url('../../properties/resource1.png') !important;
+    min-height: 31.25rem;
+    width: 100%;
 }
 
 .resource2{
