@@ -4,8 +4,9 @@ import Button from '../Button/Button';
 import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 
-
 /** A Navigation Bar for the Website */
+
+
 const NavBar = () => {
   return (
     <div className="navbar-container">

@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box';
 import React from 'react';
 import './TemplateCard.css';
 import Button from '../Button/Button.jsx';
