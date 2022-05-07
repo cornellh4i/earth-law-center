@@ -1,7 +1,7 @@
 import React, {useState, useImperativeHandle, forwardRef} from 'react';
 import './CategorySideBar.css';
 
-/** Component for CategorySideBar Page 
+/** Component for CategorySideBar to be found on the resources and laws/letters pages
  * @param {categories} are the categories to be displayed in the sidebar
 */
 const CategorySideBar = forwardRef((props, _ref) => {
