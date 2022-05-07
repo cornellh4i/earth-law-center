@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
 .resource-box {
   font-family: 'Nunito';
   display: 'flex';
@@ -5,11 +7,12 @@
   align-items: 'center';
 }
 
-.resource-title{
+.resource-page-title{
   font-family: 'Nunito';
   font-weight: bold;
   color:'#64926E';
   font-size: 1.875em;
   margin-top: 5.5%;
   margin-bottom: 2%;
+  color: #64926E;
 }

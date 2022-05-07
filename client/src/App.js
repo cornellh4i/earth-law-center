@@ -36,7 +36,7 @@ function App() {
         <Route path='/' element={<Landing/>} />
         <Route path='/laws' element={<LawsDisplay/>} />
         <Route path='/letters' element={<LettersDisplay/>} />
-        <Route path='/about' element={<About/>} />
+        {/* <Route path='/about' element={<About/>} /> */}
         <Route path='/resources' element={<ResourceDisplay/>} />
         <Route path='/template-filler' element={<TemplateFiller/>} />
       </Routes>     

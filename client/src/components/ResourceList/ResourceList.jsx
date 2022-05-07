@@ -12,7 +12,7 @@ function ResourceList({ resource, category }) {
     return <p>No resources yet</p>
   }
   return <div className="resource-box">
-    <div className="resource-title">{category}</div>
+    <div className="resource-page-title">{category}</div>
     <Masonry columns={2} spacing={4}>
       {category === "ALL RESOURCES" &&
         resource.map((item) => (

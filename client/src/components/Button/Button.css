@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
 .navbar-btn {
-  font-weight: bold;
+  font-weight: bolder;
   font-size: 16px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -10,14 +10,16 @@
   background: none;
   text-align: center;
   cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  color: #64926E;
 }
 
 .navbar-btn:hover {
-  color: gray;
+  color: black;
 }
 
 .navbar-btn:active {
-  color: black;
+  color: #64926E;
 }
 
 .sidebar-btn,
@@ -41,14 +43,6 @@
   border: none;
   background: none;
   cursor: pointer;
-}
-
-.navbar-btn:hover {
-  color: gray;
-}
-
-.navbar-btn:active {
-  color: black;
 }
 
 /* Grey large button with white text */
