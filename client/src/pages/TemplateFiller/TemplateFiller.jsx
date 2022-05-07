@@ -1,10 +1,9 @@
 import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import './TemplateFiller.css';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { borderLeft } from '@mui/system';
 
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
@@ -47,6 +46,11 @@ const TemplateFiller = () => {
   /** Value to render in the progress bar for the navigation sidebar */
   const [progress, setProgress] = useState(Math.floor(1 / length * 100))
 
+  /** Update the progress bar to the correct percentage value */
+  const changeProgress = (newClickedId) => {
+    setProgress(Math.floor((newClickedId + 1) / length * 100))
+  }
+
   /** Handles user clicking a navigation button in the sidebar */
   const handleNavigationClick = (field) => {
     setClicked(field);
@@ -67,11 +71,6 @@ const TemplateFiller = () => {
     let newClickedId = Math.max(clickedId - 1, 0);
     changeProgress(newClickedId)
     setClicked(Object.keys(questionsData)[newClickedId]);
-  }
-
-  /** Update the progress bar to the correct percentage value */
-  const changeProgress = (newClickedId) => {
-    setProgress(Math.floor((newClickedId + 1) / length * 100))
   }
 
   /** Advances user to the next page */
@@ -99,7 +98,6 @@ const TemplateFiller = () => {
 
   return (
     <div>
-      {/* Entries to field prop is temporary for testing */}
       <Box sx={{ display: 'flex' }}>
         <FieldSideBar
           title='EarthLegislator'
@@ -108,12 +106,12 @@ const TemplateFiller = () => {
         />
         <Grid pt={5} container spacing={4}>
           <Grid item xs={1} />
-          <Grid item xs={10} >
+          <Grid item xs={10}>
             <QuestionAnswer
               field={clicked}
+              fieldId={questionsData[clicked].id}
               title={'Right of Nature Ordonnance Template'}
               questions={questionsData[clicked].questions}
-              progress={questionsData[clicked].id}
               length={length}
               handleBack={handleBack}
               handleSkip={handleSkip}
@@ -123,7 +121,7 @@ const TemplateFiller = () => {
           <Grid item xs={1} />
         </Grid>
       </Box >
-    </div >
+    </div>
   );
 };
 
