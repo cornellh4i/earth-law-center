@@ -9,15 +9,16 @@ import './ResourceCard.css';
 /** Component for a landing card used by template law/letter cards
  *  @param {title} is the title on the card
  *  @param {text} is the text in the card
- *  @param {link_to_resource} is the link_to_resource in the card
+ *  @param {doc_img} is the image of a document card
  *  @param {description} is the description in the card
  *  @param {url} is the url of the button
+ *  @param {youtube} is the youtube sequence number
 */
 const ResourceCard = (props) => {
-  const { title, resource_type, link_to_resource, description, url } = props;
+  const { title, resource_type, doc_img, description, url, youtube } = props;
   return (
     <div className='resource-card'>
-      <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold' }}>
+      <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold', fontFamily:'Nunito', color: '#64926E' }}>
         {title}
       </Typography>
 
@@ -27,17 +28,17 @@ const ResourceCard = (props) => {
         {resource_type === 'Doc' &&
           <>
             <Grid item xs={5}>
-              <CardMedia component='img' alt='image' height='15%' image={link_to_resource} />
+              {/* <img className='resource-doc-preview' src={doc_img}/> */}
             </Grid>
 
             <Grid item xs={7}>
-              <Typography variant='body2' className='resource-text' >
+              <div className='resource-text' >
                 {description}
-              </Typography>
+              </div>
               <div className='resource-button'>
                 <Button
                   text='VIEW'
-                  css='grey-median-btn'
+                  css='green-median-btn'
                   handleClick={() => {
                     window.open(url, "_blank");
                   }} />
@@ -46,21 +47,25 @@ const ResourceCard = (props) => {
           </>
         }
 
-        {/* Video card with landscape image and text */}
+        {/* Video card with youtube iframe and text */}
         {resource_type === 'Video' &&
           <>
             <Grid item xs={6}>
-              <CardMedia component='img' alt='first' height='20%' image={link_to_resource} />
+              <iframe id="player" type="text/html"
+                width="100%" 
+                height="85rem"
+                src={"http://www.youtube.com/embed/"+youtube+"?enablejsapi=1&origin=http://example.com"}
+                frameborder="0"></iframe>
             </Grid>
             <Grid item xs={6}>
-              <Typography variant='body2' className='resource-text' >
+              <div className='resource-text' >
                 {description}
-              </Typography>
+              </div>
             </Grid>
             <div className='resource-button'>
               <Button
-                text='VIEW'
-                css='grey-median-btn'
+                text='WATCH'
+                css='green-median-btn'
                 handleClick={() => {
                   window.open(url, "_blank");
                 }} />
@@ -72,15 +77,15 @@ const ResourceCard = (props) => {
         {resource_type === 'Website' &&
           <>
             <Grid item xs={12}>
-              <Typography variant='body2' className='resource-text' >
+              <div className='resource-text' >
                 {description}
-              </Typography>
+              </div>
             </Grid>
 
             <div className='resource-button'>
               <Button
                 text='VIEW'
-                css='grey-median-btn'
+                css='green-median-btn'
                 handleClick={() => {
                   window.open(url, "_blank");
                 }} />
@@ -95,7 +100,7 @@ const ResourceCard = (props) => {
 
 ResourceCard.defaultProps = {
   description: 'Lorem ipsum dolor sit amet, in sed percipitur eloquentia Lorem ipsum dolor sit amet, in sed',
-  link_to_resource: '../../properties/elc-home-mar2022.jpeg'
+  doc_img: '../../properties/elc-home-mar2022.jpeg'
 };
 
 export default ResourceCard;
