@@ -1,44 +1,100 @@
 import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
-import React, { useState, forwardRef } from 'react';
+import { useState, useRef } from 'react';
 import './TemplateFiller.css';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-
+import { borderLeft } from '@mui/system';
 
 /** Component for Template Filler Page */
-const TemplateFiller = forwardRef((props, _ref) => {
-  // Value to render in the progress bar for the navigation sidebar
-  const [progress, setProgress] = useState(30)
+const TemplateFiller = () => {
+  /** Temporary hardcoded data to pass as props to the Q&A component */
+  const questionsData = {
+    'Name of Local Ecosystem': {
+      id: 0,
+      questions: [
+        ['text input', 'What is the name of the local ecosystem?']
+      ]
+    },
+    'City & State': {
+      id: 1,
+      questions: [
+        ['states dropdown select', 'What state does this ordonnance apply to?'],
+        ['text input', 'What city does this ordonnance apply to?']
+      ]
+    },
+    'Number of Members in Guardianship Body': {
+      id: 2,
+      questions: [
+        ['text input', 'How many members are in the Guardianship Body?']
+      ]
+    },
+    'Enactment': {
+      id: 3,
+      questions: [
+        ['text input', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.']
+      ]
+    }
+  }
 
+  /** The current page clicked by the user, defaults to the first entry in questionsData */
+  const [clicked, setClicked] = useState(Object.keys(questionsData)[0])
 
-  const allField = [
-    'Overview',
-    'Name of Local Ecosystem(s)',
-    'Municipality',
-    'City & State',
-    'Activites Your Community Engages in',
-    'Specific Indegenous Peoples',
-    'Types of Impact',
-    'Types of Infrastructure Impacts',
-    'Number of Members in Guardianship Body',
-    'City\'s Environmental Advisory Board or Other Appropriate Body',
-    'Recommended Categories of Guardians',
-    'Guardian Terms & Vacancies',
-    'Annual City Report & Hearing',
-    'Enactment'
-  ]
+  /** Temporary variables */
+  let length = Object.keys(questionsData).length;
+  let clickedId = questionsData[clicked].id
 
-  const [clicked, setClicked] = useState(allField[0])
+  /** Value to render in the progress bar for the navigation sidebar */
+  const [progress, setProgress] = useState(Math.floor(1 / length * 100))
 
-  const fieldItem = allField.map((field) =>
-    <div>
-      <div className='side-btn' onClick={() => handleClick(field)}>{field}</div>
+  /** Handles user clicking a navigation button in the sidebar */
+  const handleNavigationClick = (field) => {
+    setClicked(field);
+    changeProgress(questionsData[field].id)
+  }
+
+  /** Styling and functionality for sidebar navigation buttons */
+  const fields = Object.keys(questionsData)
+  const fieldItem = fields.map(field =>
+    <div
+      className={questionsData[clicked].id === questionsData[field].id ? 'side-btn side-btn-active' : 'side-btn'}
+      onClick={() => handleNavigationClick(field)}>{field}
     </div>
   )
 
-  const handleClick = (field) => {
-    setClicked(field);
+  /** Move user to the previous page */
+  const backPage = () => {
+    let newClickedId = Math.max(clickedId - 1, 0);
+    changeProgress(newClickedId)
+    setClicked(Object.keys(questionsData)[newClickedId]);
+  }
+
+  /** Update the progress bar to the correct percentage value */
+  const changeProgress = (newClickedId) => {
+    setProgress(Math.floor((newClickedId + 1) / length * 100))
+  }
+
+  /** Advances user to the next page */
+  const advancePage = () => {
+    let newClickedId = Math.min(clickedId + 1, length - 1)
+    changeProgress(newClickedId)
+    setClicked(Object.keys(questionsData)[newClickedId])
+  }
+
+  /** Handles user pressing the 'Back' button */
+  const handleBack = (e) => {
+    backPage();
+  }
+
+  /** Handles user pressing the 'Skip' button */
+  const handleSkip = (e) => {
+    advancePage();
+  }
+
+  /** Handles user pressing the 'Next' button */
+  const handleSubmit = (e, inputs) => {
+    advancePage();
+    console.log(inputs);
   }
 
   return (
@@ -47,26 +103,28 @@ const TemplateFiller = forwardRef((props, _ref) => {
       <Box sx={{ display: 'flex' }}>
         <FieldSideBar
           title='EarthLegislator'
-          progress={progress}
-          clicked={clicked}
           fieldItem={fieldItem}
+          progress={progress}
         />
-        <Grid pt={2} container spacing={4}>
+        <Grid pt={5} container spacing={4}>
           <Grid item xs={1} />
           <Grid item xs={10} >
             <QuestionAnswer
               field={clicked}
               title={'Right of Nature Ordonnance Template'}
-              questions={[
-                ['states dropdown select', 'What state does this ordonnance apply to?'],
-                ['text input', 'What city does this ordonnance apply to?'],
-              ]}
+              questions={questionsData[clicked].questions}
+              progress={questionsData[clicked].id}
+              length={length}
+              handleBack={handleBack}
+              handleSkip={handleSkip}
+              handleSubmit={handleSubmit}
             />
           </Grid>
           <Grid item xs={1} />
         </Grid>
-      </Box>
-    </div>
+      </Box >
+    </div >
   );
-});
+};
+
 export default TemplateFiller;
