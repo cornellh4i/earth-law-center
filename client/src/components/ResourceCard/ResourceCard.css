@@ -29,3 +29,12 @@
   font-family: 'Nunito';
   color: #000
 }
+
+.resource-doc-preview{
+  width: 70%;
+  height:100%;
+  border-style: solid;
+  border-width: 0.06rem;
+  border-color: #59705F;
+  margin-right: 0;
+}

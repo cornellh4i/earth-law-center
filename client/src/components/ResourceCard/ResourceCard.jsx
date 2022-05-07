@@ -9,13 +9,13 @@ import './ResourceCard.css';
 /** Component for a landing card used by template law/letter cards
  *  @param {title} is the title on the card
  *  @param {text} is the text in the card
- *  @param {link_to_resource} is the link_to_resource in the card
+ *  @param {doc_img} is the image of a document card
  *  @param {description} is the description in the card
  *  @param {url} is the url of the button
  *  @param {youtube} is the youtube sequence number
 */
 const ResourceCard = (props) => {
-  const { title, resource_type, link_to_resource, description, url, youtube } = props;
+  const { title, resource_type, doc_img, description, url, youtube } = props;
   return (
     <div className='resource-card'>
       <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold', fontFamily:'Nunito', color: '#64926E' }}>
@@ -28,7 +28,7 @@ const ResourceCard = (props) => {
         {resource_type === 'Doc' &&
           <>
             <Grid item xs={5}>
-              {/* <CardMedia component='img' alt='image' height='15%' image="doc1.jpg" /> */}
+              {/* <img className='resource-doc-preview' src={doc_img}/> */}
             </Grid>
 
             <Grid item xs={7}>
@@ -100,7 +100,7 @@ const ResourceCard = (props) => {
 
 ResourceCard.defaultProps = {
   description: 'Lorem ipsum dolor sit amet, in sed percipitur eloquentia Lorem ipsum dolor sit amet, in sed',
-  link_to_resource: '../../properties/elc-home-mar2022.jpeg'
+  doc_img: '../../properties/elc-home-mar2022.jpeg'
 };
 
 export default ResourceCard;
