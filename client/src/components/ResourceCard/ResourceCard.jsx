@@ -28,7 +28,7 @@ const ResourceCard = (props) => {
         {resource_type === 'Doc' &&
           <>
             <Grid item xs={5}>
-              <CardMedia component='img' alt='image' height='15%' image={link_to_resource} />
+              {/* <CardMedia component='img' alt='image' height='15%' image="doc1.jpg" /> */}
             </Grid>
 
             <Grid item xs={7}>
