@@ -1,38 +1,36 @@
 .body {
     margin: 0;
+
 }
 
-.progress-bar {
-    border-radius: 0.5rem !important;
-    height: 0.6rem !important;
-    color: #585858;
-}
 
 /* Sidebar Drawer styling */
 .sidebar {
     width: 20rem;
+    color: #EEF2EF;
+    font-family: 'Nunito', sans-serif;
 }
 
 .sidebar .MuiDrawer-paper {
-    width: 20rem;
-    background-color: lightgray;
+    width: 22.5rem;
+    background-color: #EEF2EF;
     border: 0;
 }
 
 /* Sidebar content styling */
 .sidebar-content {
-    padding-top: 5rem;
+    padding-top: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
 }
 
-.side-btn {
-    font-size: 14px;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    cursor: pointer;
+.bar-div{
+    color: #817E7E;
+    margin-left: 1rem;
 }
 
-.side-btn:hover {
-    font-weight: bold;
+.return .MuiTypography-inherit{
+    color: #000000;
+    margin-left: 1rem;
+    margin-top: 1rem;
 }

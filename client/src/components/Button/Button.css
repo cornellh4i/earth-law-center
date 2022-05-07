@@ -62,6 +62,7 @@
   border-style: none;
   border-radius: 0.6rem;
   cursor: pointer;
+
 }
 
 /* Grey median button with white text */
@@ -75,6 +76,7 @@
   border-style: none;
   border-radius: 0.6rem;
   cursor: pointer;
+
 }
 
 /* Edit button for TemplateCard */
@@ -124,8 +126,8 @@
 /* White median with black text, black border, and left pointing arrow */
 .back-btn {
   margin: 2%;
-  min-width: 5rem;
-  height:2rem;
+  min-width: 6rem;
+  height:2.5rem;
   color: #000;
   font-weight: bold;
   font-size: 1rem;
@@ -135,6 +137,7 @@
   border-style: solid;
   border-radius: 0.7rem;
   cursor: pointer;
+  font-family: 'Nunito', sans-serif;
 }
 
 .back-btn::before {
@@ -150,8 +153,8 @@
 /* Grey median button with white text and right pointing arrow */
 .continue-btn {
   margin: 2%;
-  min-width: 5rem;
-  height:2rem;
+  min-width: 6rem;
+  height:2.5rem;
   color: #fff;
   font-weight: bold;
   font-size: 1rem;
@@ -160,6 +163,7 @@
   border-style: none;
   border-radius: 0.7rem;
   cursor: pointer;
+  font-family: 'Nunito', sans-serif;
 }
 
 .continue-btn::after {
@@ -175,13 +179,15 @@
 /* White median button with grey text */
 .white-median-btn {
   margin: 2%;
-  min-width: 5rem;
-  height:2rem;
+  min-width: 6rem;
+  height:2.5rem;
   color: #484848;
   font-weight: bold;
   font-size: 1rem;
   background-color: #fff;
   border-style: none;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
 }
 
 /* Hovering buttons in TemplateCard */
@@ -192,21 +198,23 @@
 }
 
 .search-btn {
-  width: 20%;
+  width: 25%;
   min-width: 100px;
   height: 100%;
   padding: 1.2rem;
-  background: #484848;
+  background: #64926E;
   color: white;
   border-radius: 0.9375rem;
   border: none;
   margin-left: 4%;
+  font-family: 'Nunito';
+  font-size: 12px;
 }
 
 .search-btn:hover {
-  background: #626262;
+  background: #97b89e;
 }
 
 .search-btn:active {
-  background: #484848;
+  background: #64926E;
 }

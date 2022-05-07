@@ -15,13 +15,17 @@ import Grid from '@mui/material/Grid';
  * @param {questions} is a list of lists; each nested list is a single question
  * of the following format: ['<input type>', '<question content']. Valid input
  * types currently include 'text input', 'states dropdown select'
+ * @param {progress} is the id of the current selected page; used to measure total progress
+ * @param {length} is the total number of pages that must be completed
+ * @param {handleBack}
+ * @param {handleSkip}
+ * @param {handleSubmit}
 */
 
 const QuestionAnswer = (props) => {
   /** The user's answers to the field questions. Each answer consists of a list of
    * the following format: ['<question asked>', '<user response>'] */
   const [inputs, setInputs] = useState({});
-  // const {clickedField, setClickedField} = useSharedFormState();
 
   /** List of all US states and territories; used for the states dropdown select */
   const us_states = [
@@ -41,26 +45,10 @@ const QuestionAnswer = (props) => {
     setInputs(values => ({ ...values, [name]: value }))
   }
 
-  /** Handles user pressing the 'Next' button */
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(inputs);
-  }
-
-  /** Handles user pressing the 'Back' button */
-  const handleBack = (e) => {
-    // Code here
-  }
-
-  /** Handles user pressing the 'Skip' button */
-  const handleSkip = (e) => {
-    // Code here
-  }
-
   /** A component consisting of all questions from props.questions.
    * Note: question[0] = <input type> and question[1] = <question content> */
-  const questionItems = props.questions.map(question =>
-    <div>
+  const questionItems = props.questions.map((question) =>
+    <div className='question-items'>
       {/* Question component */}
       <Typography pt={3} pb={1} variant='body2'>{question[1]}</Typography>
 
@@ -75,6 +63,7 @@ const QuestionAnswer = (props) => {
             size='small'
             fullWidth
             onChange={handleChange}
+            InputLabelProps={{style:{fontFamily: 'Nunito'}}}
           />
         </Box>
       }
@@ -92,6 +81,8 @@ const QuestionAnswer = (props) => {
               label='Select State'
               size='small'
               variant='outlined'
+              InputLabelProps={{style:{fontFamily: 'Nunito'}}}
+
             >
               {us_states.map(state =>
                 <MenuItem value={state}>{state}</MenuItem>
@@ -104,23 +95,35 @@ const QuestionAnswer = (props) => {
   )
 
   return (
-    // The div wrapping the entire component. It's className is <question-component>
     <div className='question-component'>
-      <Typography pt={1} pb={1} variant='h6'>{props.title}</Typography>
-      <Typography pt={1} pb={1} variant='h4' sx={{ fontWeight: 'bold' }}>{props.field}</Typography>
+      <Typography pt={1} pb={1} variant='h6' sx={{fontFamily: 'Nunito'}}>{props.title}</Typography>
+      <Typography pt={1} pb={1} variant='h4'
+      sx={{ fontWeight: 'bold', fontFamily: 'Nunito', color: '#64926E', fontSize:36 }}>
+        {props.field}
+      </Typography>
       {questionItems}
 
       {/* Button positioning */}
       <Grid container direction='row' spacing={4} pt={2} justifyContent='flex-end'>
         <Grid item xs={6}>
-          {/* TODO: Button CSS needs to be fixed in the future */}
-          <Button text='Back' handleClick={handleBack} css='back-btn' />
+          <Button
+            text='BACK'
+            handleClick={e => props.handleBack(e)}
+            css='back-btn'
+          />
         </Grid>
         <Grid item xs={6}>
           <Box display='flex' justifyContent='flex-end'>
-            {/* TODO: Button CSS needs to be fixed in the future */}
-            <Button text='Skip' handleClick={handleSkip} css='white-median-btn' />
-            <Button text='Next' handleClick={handleSubmit} css='continue-btn' />
+            <Button
+              text='SKIP'
+              handleClick={e => props.handleSkip(e)}
+              css='white-median-btn'
+            />
+            <Button
+              text={props.progress === (props.length - 1) ? 'FINISH' : 'NEXT'}
+              handleClick={(e) => props.handleSubmit(e, inputs)}
+              css='continue-btn'
+            />
           </Box>
         </Grid>
       </Grid>
