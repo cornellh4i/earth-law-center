@@ -3,17 +3,17 @@
     border-radius: 20px !important;
 }
 
-.resource1{
+.resource1 {
     background-image: url('../../properties/resource1.png') !important;
     min-height: 31.25rem;
     width: 100%;
 }
 
-.resource2{
+.resource2 {
     background-image: url('../../properties/resource2.png');
 }
 
-.resource3{
+.resource3 {
     background-image: url('../../properties/resource3.png');
 }
 
@@ -34,4 +34,21 @@
     color: black;
     font: Nunito;
     padding-left: 16px;
+}
+
+.thumbnail1 {
+    background-image: url('../../properties/resource1.png');
+    margin: 10px;
+    min-height: 35rem;
+    width: 400rem;
+    background-position: 60% 80%;
+
+}
+
+.thumbnail2 {
+    background-image: url('../../properties/resource2.png');
+}
+
+.thumbnail3 {
+    background-image: url('../../properties/resource3.png');
 }
