@@ -6,4 +6,18 @@
 .box-content {
     background-color: #d7d7d7 !important;
     height: 400px !important;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.resource-title {
+    color: #64926E;
+    padding-left: 16px;
+    padding-top: 100px;
+}
+
+.resource-description {
+    color: black;
+    font: Nunito;
+    padding-left: 16px;
 }
