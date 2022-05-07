@@ -9,9 +9,13 @@ import downloadbtn from './assets/download-btn.png';
  * @param {summary} is the summary of the card 
  * @param {edit} is the function that allows you to edit the template
  * @param {download} is the function that allows you to download a template 
+ * @param {law} is the type of law for the filter
+ * @param {jurisdiction} is the type of jurisdiction for the filter
+ * @param {currentFilter} is the current state of the MultiSelectFilter component
 */
 
 const TemplateCard = (props) => {
+  // an object containing the filter flags that this TemplateCard should trigger
   const filters = {
     local: props.jurisdiction === "local",
     regional: props.jurisdiction === "regional",
@@ -21,25 +25,32 @@ const TemplateCard = (props) => {
     resolution: props.law === "resolution",
   };
 
+  // variables representing if the law/jurisdiction of this TemplateCard matches the current filter state
   var matchlaw = false;
-  var matchordinance = false;
+  var matchjurisdiction = false;
 
+  // sets matchordinance to true if 
+  // 1. the law section of the filter is untouched or 
+  // 2. the filter checkbox corresponding to the law prop of this TemplateCard is checked
   if(props.currentFilter.ordinance === false && 
     props.currentFilter.resolution === false) {matchlaw = true;}
   else if((props.currentFilter.ordinance === filters.ordinance && filters.ordinance === true) || 
     (props.currentFilter.resolution === filters.resolution && filters.resolution === true)) {matchlaw = true;}
 
+  // sets matchordinance to true if 
+  // 1. the jurisdiction section of the filter is untouched or 
+  // 2. the filter checkbox corresponding to the jurisdiction prop of this TemplateCard is checked
   if(props.currentFilter.local === false && 
     props.currentFilter.regional === false && 
     props.currentFilter.national === false && 
-    props.currentFilter.international === false){matchordinance = true;}
+    props.currentFilter.international === false){matchjurisdiction = true;}
   else if((props.currentFilter.local === filters.local && filters.local === true) || 
     (props.currentFilter.regional === filters.regional && filters.regional === true) || 
     (props.currentFilter.national === filters.national && filters.national === true) || 
-    (props.currentFilter.international === filters.international && filters.international === true)){matchordinance = true;}
+    (props.currentFilter.international === filters.international && filters.international === true)){matchjurisdiction = true;}
 
-    console.log(props.currentFilter);
-  if(!(matchlaw && matchordinance)){
+  // if the card does not match the current filter state, don't render
+  if(!(matchlaw && matchjurisdiction)){
     return null;
   }
 
@@ -66,6 +77,7 @@ const TemplateCard = (props) => {
   }
   return (
     <div className='card-container'>
+      {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
       {props.letter ? <></> : 
         <div className='tag-container'>
           <Button css='card-type-btn' text={props.law}></Button>
