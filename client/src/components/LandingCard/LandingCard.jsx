@@ -28,9 +28,9 @@ const LandingCard = (props) => {
               {props.text}
             </Typography>
             {props.text == "Law Template" ? 
-            <Link to={'/laws'}><Button css="see-more-btn" text = "SEE MORE" /></Link> 
+            <Link to={'/laws'}><Button css="seemore-btn" text = "SEE MORE" /></Link> 
             :
-            <Link to={'/letters'}><Button css="see-more-btn" text = "SEE MORE" /></Link> 
+            <Link to={'/letters'}><Button css="seemore-btn" text = "SEE MORE" /></Link> 
             }
           </Box>
         </CardContent>

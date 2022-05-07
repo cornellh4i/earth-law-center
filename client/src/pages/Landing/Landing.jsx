@@ -7,6 +7,7 @@ import Header from '../../components/Header/Header';
 import './Landing.css';
 import { Link } from 'react-router-dom'
 import text from '../../data/LandingText.js';
+import Button from '../../components/Button/Button';
 
 /** Component for Landing Page */
 const Landing = () => {
@@ -30,23 +31,24 @@ const Landing = () => {
             </LandingCard></Link>
           </Grid>
         </Grid>
-
+        
         {/*Three resource boxes I believe. We can probably useState to fix them later*/}
-        <Typography pt={10} pb={2} align='center' variant='h5' component='div' sx={{ fontWeight: 'bold' }}>Resources</Typography>
-
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <ResourceBox boxNum = "1" title = "Video Title" description="Lorem">
-
-            </ResourceBox>
+        <Typography pt={10} pb={2} align='center' variant='h5' component='div' sx={{ fontWeight: 500, color: "#64926E" }}>Resources</Typography>
+        <Grid container >
+          <Grid item sm={12} md={3.6} pt={1}>
+            <ResourceBox title={"Video Title Teplate"} text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}></ResourceBox>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <ResourceBox boxNum ="2" title = "Video Title" description="Lorem"></ResourceBox>
+          <Grid item sm={12} md={0.6}></Grid>
+          <Grid item sm={12} md={3.6} pt={1}>
+            <ResourceBox title={"Video Title Teplate"} text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}></ResourceBox>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <ResourceBox boxNum ="3" title = "Video Title" description="Lorem"></ResourceBox>
+          <Grid item sm={12} md={0.6}></Grid>
+          <Grid item sm={12} md={3.6} pt={1}>
+            <ResourceBox title={"Video Title Teplate"} text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}></ResourceBox>
           </Grid>
         </Grid>
+
+        <Button text="SEE MORE" css="seemore-bottom-btn" />
       </div>
     </div>
   );
