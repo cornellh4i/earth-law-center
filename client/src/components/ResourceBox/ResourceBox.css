@@ -18,10 +18,11 @@
 }
 
 .box-content {
-    background-color: #d7d7d7 !important;
+    /* background-color: #d7d7d7 !important; */
     height: 400px !important;
     display: flex;
     flex-wrap: wrap;
+    background-repeat: no-repeat;
 }
 
 .resource-title {
@@ -36,19 +37,34 @@
     padding-left: 16px;
 }
 
+/* div boxes only */
 .thumbnail1 {
     background-image: url('../../properties/resource1.png');
-    margin: 10px;
-    min-height: 35rem;
-    width: 400rem;
-    background-position: 60% 80%;
-
+    padding: 7rem 3rem;
+    border-radius: 1rem;
 }
 
 .thumbnail2 {
     background-image: url('../../properties/resource2.png');
+    padding: 7rem 3rem;
+    border-radius: 1rem;
 }
 
 .thumbnail3 {
     background-image: url('../../properties/resource3.png');
+    padding: 7rem 3rem;
+    border-radius: 1rem;
+}
+
+.box-title{
+    color: #64926E;
+    font-weight: bold;
+    font-family: Nunito;
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+}
+
+.box-description{
+    color: #3E3E3E;
+    font-family: Nunito;
 }
