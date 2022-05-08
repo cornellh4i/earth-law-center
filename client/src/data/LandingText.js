@@ -4,5 +4,11 @@ const LawsDescription = "Customize and download model laws, resolutions, and oth
 
 const LettersDescription = "Customize and download letter templates encouraging governments, businesses, schools, and other actors to support Earth-centered legal movements."
 
+// Below are the objects of the three resources in the resource boxes. 
+const Resource1 = {title: "Why Earth Laws?", description: "Why should you consider advancing Earth-based laws", link:'https://www.youtube.com/watch?v='}
 
-export default {HeaderDescription, LawsDescription, LettersDescription}
+const Resource2 = {title: "Earth Law Center", description: "A nonprofit advancing a new generation of Earth-centered laws worldwide.", link:'https://www.earthlawcenter.org/'}
+
+const Resource3 = {title: "Rights of Nature", description: "A toolkit on US-based local Rights of Nature movements.", link:'https://en.wikipedia.org/wiki/Rights_of_nature'}
+
+export default {HeaderDescription, LawsDescription, LettersDescription, Resource1, Resource2, Resource3}

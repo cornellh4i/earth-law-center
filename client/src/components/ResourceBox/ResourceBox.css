@@ -42,18 +42,21 @@
     background-image: url('../../properties/resource1.png');
     padding: 7rem 3rem;
     border-radius: 1rem;
+    height:12rem;
 }
 
 .thumbnail2 {
     background-image: url('../../properties/resource2.png');
     padding: 7rem 3rem;
     border-radius: 1rem;
+    height:12rem;
 }
 
 .thumbnail3 {
     background-image: url('../../properties/resource3.png');
     padding: 7rem 3rem;
     border-radius: 1rem;
+    height:12rem;
 }
 
 .box-title{

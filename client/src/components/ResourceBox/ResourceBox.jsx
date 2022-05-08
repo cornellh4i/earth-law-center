@@ -15,6 +15,7 @@ const ResourceBox = (props) => {
       <div className={props.image}>
         <div className='box-title'>{props.title}</div>
         <div className='box-description'>{props.text}</div>
+        <Button css="seemore-btn" text="VIEW" handleClick={() => {window.open(props.link, "_blank");}}/>
       </div>
   );
 };

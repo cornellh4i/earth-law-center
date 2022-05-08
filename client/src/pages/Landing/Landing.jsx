@@ -8,6 +8,7 @@ import './Landing.css';
 import { Link } from 'react-router-dom'
 import text from '../../data/LandingText.js';
 import Button from '../../components/Button/Button';
+import ResourceData from "../../data/ResourceData"; 
 
 /** Component for Landing Page */
 const Landing = () => {
@@ -36,19 +37,19 @@ const Landing = () => {
         <Typography pt={10} pb={2} align='center' variant='h5' component='div' sx={{ fontWeight: 500, color: "#64926E" }}>Resources</Typography>
         <Grid container >
           <Grid item sm={12} md={3.6} pt={1}>
-            <ResourceBox title={"Video Title Teplate"} text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."} image="thumbnail1"></ResourceBox>
+            <ResourceBox title={text.Resource1.title} text={text.Resource1.description} image="thumbnail1" link={text.Resource1.link}></ResourceBox>
           </Grid>
           <Grid item sm={12} md={0.6}></Grid>
           <Grid item sm={12} md={3.6} pt={1}>
-            <ResourceBox title={"Video Title Teplate"} text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."} image="thumbnail2"></ResourceBox>
+            <ResourceBox title={text.Resource2.title} text={text.Resource2.description} image="thumbnail2" link={text.Resource2.link}></ResourceBox>
           </Grid>
           <Grid item sm={12} md={0.6}></Grid>
           <Grid item sm={12} md={3.6} pt={1}>
-            <ResourceBox title={"Video Title Teplate"} text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."} image="thumbnail3"></ResourceBox>
+            <ResourceBox title={text.Resource3.title} text={text.Resource3.description} image="thumbnail3" link={text.Resource3.link}></ResourceBox>
           </Grid>
         </Grid>
 
-        <Button text="SEE MORE" css="seemore-bottom-btn" />
+        <Link to="/resources"><Button text="SEE MORE" css="seemore-bottom-btn" /></Link>
       </div>
     </div>
   );
