@@ -12,21 +12,11 @@ import Button from '../Button/Button';
 /** Component for a Resource card */
 const ResourceBox = (props) => {
   return (
-    <Card className='card'>
-      <CardActionArea>
-        <CardContent className='box-content'>
-          <Box component={Stack} direction="column" >
-            <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 500, fontSize: 30, }} className="resource-title">
-              {props.title}
-            </Typography>
-            <Typography variant='body2' color='text.secondary' sx={{ fontSize: 15, fontWeight: 400 }} className="resource-description">
-              {props.text}
-            </Typography>
-            <Link to="/resources"><Button text="WATCH" css="watch-btn-landing-pg" /></Link>
-          </Box>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+      <div className={props.image}>
+        <div className='box-title'>{props.title}</div>
+        <div className='box-description'>{props.text}</div>
+        <Button css="seemore-btn" text="VIEW" handleClick={() => {window.open(props.link, "_blank");}}/>
+      </div>
   );
 };
 

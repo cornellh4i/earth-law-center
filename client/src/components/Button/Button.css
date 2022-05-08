@@ -205,7 +205,7 @@
 
 .search-btn {
   width: 25%;
-  min-width: 100px;
+  min-width: 6.25rem;
   height: 100%;
   padding: 1.2rem;
   background: #64926E;
@@ -228,30 +228,38 @@
 .seemore-btn {
   background: #64926E;
   color: white;
-  font: Nunito;
-  border-radius: 15px;
-  height: 50px;
-  width: 130px;
-  margin-top: 16px;
+  font-family: 'Nunito';
+  font-weight:bold;
+  border-radius:0.938rem;
+  height: 3.125rem;
+  width: 8.125rem;
+  margin-top: 1rem;
+  border: none;
 }
 
 .seemore-bottom-btn {
   background: #64926E;
   color: white;
-  font: Nunito;
-  border-radius: 15px;
-  height: 50px;
-  width: 130px;
+  font-family: 'Nunito';
+  font-weight:bold;
+  border-radius: 0.938rem;
+  height: 3.125rem;
+  width: 8.125rem;
   margin-top: 16px;
   margin-left: 43%;
+  box-shadow: none;
+  border: none;
 }
+
 .watch-btn-landing-pg {
   background: #64926E;
   color: white;
-  font: Nunito;
-  border-radius: 15px;
-  height: 50px;
-  width: 130px;
-  margin-top: 16px;
-  margin-left: 16px;
+  font-family: 'Nunito';
+  font-weight:bold;
+  border-radius: 0.938rem;
+  height: 3.125rem;
+  width: 8.125rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  border: none;
 }
