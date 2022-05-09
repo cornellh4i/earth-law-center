@@ -19,7 +19,7 @@ const [checked, setChecked] = useState({
 
   return (
     <div>
-      <Header title="Build Earth Letters" description="Customize and download model laws, resolutions, and other legal instruments that support a paradigm shift to better protect the planet. " hasSearch={true} searchBarPlaceholder="Search Law Templates"></Header>
+      <Header title="Build Earth Letters" description="Customize and download model laws, resolutions, and other legal instruments that support a paradigm shift to better protect the planet. " hasSearch={true} searchBarPlaceholder="Search Letter Templates"></Header>
       <div className="body-box">
         <div className="side-box">
         <MultiSelectFilter setCheckedParent={setChecked} />
