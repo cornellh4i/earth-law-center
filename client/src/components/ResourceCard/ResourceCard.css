@@ -35,3 +35,12 @@
   border-color: #59705F;
   margin-right: 0;
 }
+
+.resource-vid-preview{
+  width: 100%;
+  height:90%;
+  border-style: solid;
+  border-width: 0.06rem;
+  border-color: #59705F;
+  border: none 
+}

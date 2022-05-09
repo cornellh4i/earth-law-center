@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import './ResourceCard.css';
-import marine from '../../properties/marine.jpg'
 
 /** Component for a landing card used by template law/letter cards
  *  @param {title} is the title on the card
@@ -16,7 +15,7 @@ import marine from '../../properties/marine.jpg'
  *  @param {youtube} is the youtube sequence number
 */
 const ResourceCard = (props) => {
-  const { title, resource_type, doc_img, description, url, youtube, doc_pdf } = props;
+  const { title, resource_type, doc_img, description, url, youtube, vid_img, doc_pdf } = props;
   return (
     <div className='resource-card'>
       <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold', fontFamily:'Nunito', color: '#64926E' }}>
@@ -52,12 +51,14 @@ const ResourceCard = (props) => {
         {resource_type === 'Video' &&
           <>
             <Grid item xs={6}>
-              <iframe id="player" type="text/html"
+              {/* <iframe id="player" type="text/html"
                 width="100%" 
                 height="85rem"
                 src={"http://www.youtube.com/embed/"+youtube+"?enablejsapi=1&origin=http://example.com"}
                 // src={"http://www.youtube.com/embed/"+youtube}
-                frameborder="0"></iframe>
+                frameborder="0"></iframe> */}
+            <img className='resource-vid-preview' src = {vid_img}/>
+
             </Grid>
             <Grid item xs={6}>
               <div className='resource-text' >
