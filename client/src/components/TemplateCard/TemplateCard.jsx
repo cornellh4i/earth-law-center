@@ -3,6 +3,7 @@ import React from 'react';
 import './TemplateCard.css';
 import Button from '../Button/Button.jsx';
 import downloadbtn from './assets/download-btn.png';
+import { Link } from 'react-router-dom'
 
 /** Component for TemplateCard Page 
  * @param {title} is the title of the card
@@ -86,7 +87,9 @@ const TemplateCard = (props) => {
         }
       {card_content}
       <div className='card-btn-container'>
-        <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
+        {/* <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button> */}
+        {/* The below button is just for the showcase! */}
+        <Link to='/template-filler'> <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button> </Link>
         <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
       </div>
     </div>
