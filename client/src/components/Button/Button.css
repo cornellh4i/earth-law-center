@@ -206,7 +206,7 @@
 .search-btn {
   width: 25%;
   min-width: 6.25rem;
-  height: 100%;
+  height: 3.5rem;
   padding: 1.2rem;
   background: #64926E;
   color: white;
@@ -214,7 +214,8 @@
   border: none;
   margin-left: 4%;
   font-family: 'Nunito';
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: bolder;
 }
 
 .search-btn:hover {

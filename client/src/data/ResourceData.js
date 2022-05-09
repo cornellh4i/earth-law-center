@@ -1,10 +1,23 @@
+// Importing PDFs
+import marine from '../data/resource-documents/marine-protected.pdf';
+import comm_toolkit from '../data/resource-documents/comm_toolkit.pdf';
+import coral_toolkit from '../data/resource-documents/coral_toolkit.pdf';
+import biodiversity from '../data/resource-documents/post2020-biodiversity.pdf';
+
+// Importing PDF images
+import marine_img from '../properties/marine.jpg';
+import coral_img from '../properties/coral_toolkit.jpg';
+import biodiversity_img from '../properties/post2020_biodiversity.jpg';
+import comm_toolkit_img from '../properties/comm_toolkit.jpg';
+
 const ResourceData = [
   {
     id: 1,
     resource_type: 'Doc',
     title: 'Marine Protected Areas',
     description: 'A toolkit on holistic and rights-based approach to ocean governance.',
-    doc_img: '../properties/doc1.jpg',
+    doc_img: marine_img,
+    doc_pdf: marine
   },
   {
     id: 2,
@@ -26,7 +39,8 @@ const ResourceData = [
     resource_type: 'Doc',
     title: 'Coral Reef Toolkit',
     description: ' A toolkit on how to establish legal rights for coral reefs.',
-    url: '',
+    doc_pdf: coral_toolkit,
+    doc_img: coral_img
   },
   {
     id: 5,
@@ -107,7 +121,8 @@ const ResourceData = [
     resource_type: 'Doc',
     title: 'Community Toolkit',
     description: 'A toolkit on US-based local Rights of Nature movements',
-    url: '',
+    doc_pdf: comm_toolkit,
+    doc_img: comm_toolkit_img
   },
   {
     id: 16,
@@ -129,7 +144,8 @@ const ResourceData = [
     resource_type: 'Doc',
     title: 'Post-2020 Biodiversity',
     description: ' A toolkit on how to establish legal rights for coral reefs.',
-    url: '',
+    doc_pdf: biodiversity,
+    doc_img: biodiversity_img
   },
   {
     id: 19,

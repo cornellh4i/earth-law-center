@@ -16,7 +16,7 @@ function ResourceList({ resource, category }) {
     <Masonry columns={2} spacing={4}>
       {category === "ALL RESOURCES" &&
         resource.map((item) => (
-          <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} url={item.url} youtube={item.youtube} />
+          <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} url={item.url} youtube={item.youtube} doc_img = {item.doc_img} doc_pdf = {item.doc_pdf}/>
         ))}
       {category === "VIDEOS" &&
         resource.map((item) => (
@@ -24,7 +24,7 @@ function ResourceList({ resource, category }) {
         ))}
       {category === "DOCUMENTS" &&
         resource.map((item) => (
-          item.resource_type === "Doc" && <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} url={item.url} />
+          item.resource_type === "Doc" && <ResourceCard title={item.title} resource_type={item.resource_type} description={item.description} doc_img = {item.doc_img} doc_pdf = {item.doc_pdf} />
         ))}
       {category === "WEBSITES" &&
         resource.map((item) => (

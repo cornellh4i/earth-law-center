@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import './ResourceCard.css';
+import marine from '../../properties/marine.jpg'
 
 /** Component for a landing card used by template law/letter cards
  *  @param {title} is the title on the card
@@ -15,7 +16,7 @@ import './ResourceCard.css';
  *  @param {youtube} is the youtube sequence number
 */
 const ResourceCard = (props) => {
-  const { title, resource_type, doc_img, description, url, youtube } = props;
+  const { title, resource_type, doc_img, description, url, youtube, doc_pdf } = props;
   return (
     <div className='resource-card'>
       <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold', fontFamily:'Nunito', color: '#64926E' }}>
@@ -28,7 +29,7 @@ const ResourceCard = (props) => {
         {resource_type === 'Doc' &&
           <>
             <Grid item xs={5}>
-              {/* <img className='resource-doc-preview' src={doc_img}/> */}
+              <img className='resource-doc-preview' src = {props.doc_img}/>
             </Grid>
 
             <Grid item xs={7}>
@@ -40,7 +41,7 @@ const ResourceCard = (props) => {
                   text='VIEW'
                   css='green-median-btn'
                   handleClick={() => {
-                    window.open(url, "_blank");
+                    window.open(doc_pdf, "_blank");
                   }} />
               </div>
             </Grid>

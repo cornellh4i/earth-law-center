@@ -12,7 +12,7 @@ const ResourceDisplay = () => {
 
   return (
     <>
-      <Header title="Earth Law Resources" description="Video, document, and website resources for creating earth laws." hasSearch={true} searchBarPlaceholder="Search resources" />
+      <Header title="Earth Law Resources" description="Video, document, and website resources for creating earth laws." hasSearch={true} searchBarPlaceholder="Search Resources" />
       <Grid container columns={14}>
         <Grid item xs={4}>
           <ResourceSideBar category={category} setCategory={setCategory} />
