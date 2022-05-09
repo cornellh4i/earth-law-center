@@ -32,7 +32,7 @@ const ResourceData = [
     title: 'Earth Law in Canada',
     description: 'Earth-centered legal movements and Indigenous sovereignty in Canada.',
     youtube: 'l6CTFeO6yog',
-    url: 'https://www.youtube.com/watch?',
+    url: 'https://www.youtube.com/watch?v=l6CTFeO6yog',
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ const ResourceData = [
     title: 'Ecocide',
     description: 'End Ecocide on Earth talks about criminalizing “ecocide” in 2 minutes.',
     youtube: 'Ww_bVq9Sh_4',
-    url: 'https://www.youtube.com/watch?',
+    url: 'https://www.youtube.com/watch?v=Ww_bVq9Sh_4',
   },
   {
     id: 6,
@@ -63,7 +63,7 @@ const ResourceData = [
     title: 'Indigenous Guardianship',
     description: 'Learn about the Maoris guardianship of the Whanganui River.',
     youtube: 'YQZxRSzxhLI',
-    url: 'https://www.youtube.com/watch?',
+    url: 'https://www.youtube.com/watch?v=YQZxRSzxhLI',
   },
   {
     id: 8,
@@ -85,7 +85,7 @@ const ResourceData = [
     title: 'Animal Personhood',
     description: 'Animals should have rights just like humans.',
     youtube: 'ZiS8j8hulq8',
-    url: 'https://www.youtube.com/watch?',
+    url: 'https://www.youtube.com/watch?v=ZiS8j8hulq8',
   },
   {
     id: 11,
@@ -107,7 +107,7 @@ const ResourceData = [
     title: 'Why Earth Laws?',
     description: 'Why should you consider advancing Earth-based laws?',
     youtube: 'lubNvaTigAU',
-    url: 'https://www.youtube.com/watch?',
+    url: 'https://www.youtube.com/watch?v=lubNvaTigAU',
   },
   {
     id: 14,
@@ -137,7 +137,7 @@ const ResourceData = [
     title: 'Rights of Rivers',
     description:'A video on the Universal Declaration of the Rights of Rivers.',
     youtube: 'I2p7EfOKaFA',
-    url: 'https://www.youtube.com/watch?',
+    url: 'https://www.youtube.com/watch?v=I2p7EfOKaFA',
   },
   {
     id: 18,
