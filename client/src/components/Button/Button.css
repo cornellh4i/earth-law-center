@@ -88,7 +88,7 @@
 
 /* Edit button for TemplateCard */
 .card-edit-btn {
-  width: 343px;
+  width: 18.5rem;
   height: 57px;
   padding: 16px;
   background:
@@ -199,7 +199,7 @@
 /* Hovering buttons in TemplateCard */
 .card-download-btn:hover,
 .card-edit-btn:hover {
-  opacity: 70;
+  opacity: 70%;
   cursor: pointer;
 }
 
