@@ -55,8 +55,8 @@ const ResourceCard = (props) => {
               <iframe id="player" type="text/html"
                 width="100%" 
                 height="85rem"
-                // src={"http://www.youtube.com/embed/"+youtube+"?enablejsapi=1&origin=http://example.com"}
-                src={"http://www.youtube.com/embed/"+youtube}
+                src={"http://www.youtube.com/embed/"+youtube+"?enablejsapi=1&origin=http://example.com"}
+                // src={"http://www.youtube.com/embed/"+youtube}
                 frameborder="0"></iframe>
             </Grid>
             <Grid item xs={6}>
