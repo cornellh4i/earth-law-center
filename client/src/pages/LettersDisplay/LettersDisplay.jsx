@@ -26,7 +26,7 @@ const [checked, setChecked] = useState({
         </div>
         <div className="content-box">
           <h1 className="card-heading-title">Letter Templates</h1>
-          <p className="card-description">Description of category: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,</p>
+          <p className="card-description">Let us help you send a lawmaker or other decision-maker an informed letter about an Earth law movement you care about–the Rights of Nature, human environmental rights, rights of future generations, and others. Our letters are regularly updated with the most relevant information to ensure they are relevant and powerful. Just fill in a bit of information and download your letter now! These work for any level of government.</p>
           <div className="card-box">
           <TemplateCard letter={true} preview={testPic} className="law-card" currentFilter={checked} law="ordinance" jurisdiction="local" title="Nature Rights" summary="A letter encouraging lawmakers to recognize that ecosystems have inherent rights, just as humans do."/>
             <TemplateCard letter={true} preview={testPic} className="law-card" currentFilter={checked} law="ordinance" jurisdiction="regional" title="Ecocide" summary="A letter encouraging lawmakers to criminalize the severe and widespread or long-term damage to the environment."/>

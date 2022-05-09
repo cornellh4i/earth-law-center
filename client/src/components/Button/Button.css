@@ -199,7 +199,7 @@
 /* Hovering buttons in TemplateCard */
 .card-download-btn:hover,
 .card-edit-btn:hover {
-  opacity: 70%;
+  opacity: 70;
   cursor: pointer;
 }
 
