@@ -4,27 +4,23 @@ import Button from '../Button/Button';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 
 /** Component for a Q&A component on the Template Form Filler page
- * @param {field} is the field name selected in the navigation sidebar
- * @param {title} is the title of the template law/letter
- * @param {questions} is a list of lists; each nested list is a single question
- * of the following format: ['<input type>', '<question content']. Valid input
- * types currently include 'text input', 'states dropdown select'
- * @param {progress} is the id of the current selected page; used to measure total progress
- * @param {length} is the total number of pages that must be completed
- * @param {handleBack}
- * @param {handleSkip}
- * @param {handleSubmit}
+ * @param {field} is the title of the currently selected page
+ * @param {fieldId} is the id of the current selected page
+ * @param {title} is the template title
+ * @param {questions} is a list of questions; a question is a list of ['<valid input type>', '<question content']
+ * @param {length} is the total number of pages
+ * @param {handleBack} is a function that handles pressing the 'Back' button
+ * @param {handleSkip} is a function that handles pressing the 'Skip' button
+ * @param {handleSubmit} is a function that handles pressing the 'Next' button
 */
 
 const QuestionAnswer = (props) => {
-  /** The user's answers to the field questions. Each answer consists of a list of
-   * the following format: ['<question asked>', '<user response>'] */
+  /** The user's answers; each answer is a list of ['<question asked>', '<user response>'] */
   const [inputs, setInputs] = useState({});
 
   /** List of all US states and territories; used for the states dropdown select */
@@ -45,8 +41,7 @@ const QuestionAnswer = (props) => {
     setInputs(values => ({ ...values, [name]: value }))
   }
 
-  /** A component consisting of all questions from props.questions.
-   * Note: question[0] = <input type> and question[1] = <question content> */
+  /** A component of all questions; question[0] = <input type> and question[1] = <question content> */
   const questionItems = props.questions.map((question) =>
     <div className='question-items'>
       {/* Question component */}
@@ -63,7 +58,7 @@ const QuestionAnswer = (props) => {
             size='small'
             fullWidth
             onChange={handleChange}
-            InputLabelProps={{style:{fontFamily: 'Nunito'}}}
+            InputLabelProps={{ style: { fontFamily: 'Nunito' } }}
           />
         </Box>
       }
@@ -81,7 +76,7 @@ const QuestionAnswer = (props) => {
               label='Select State'
               size='small'
               variant='outlined'
-              InputLabelProps={{style:{fontFamily: 'Nunito'}}}
+              InputLabelProps={{ style: { fontFamily: 'Nunito' } }}
 
             >
               {us_states.map(state =>
@@ -96,9 +91,9 @@ const QuestionAnswer = (props) => {
 
   return (
     <div className='question-component'>
-      <Typography pt={1} pb={1} variant='h6' sx={{fontFamily: 'Nunito'}}>{props.title}</Typography>
+      <Typography pt={1} pb={1} variant='h6' sx={{ fontFamily: 'Nunito' }}>{props.title}</Typography>
       <Typography pt={1} pb={1} variant='h4'
-      sx={{ fontWeight: 'bold', fontFamily: 'Nunito', color: '#64926E', fontSize:36 }}>
+        sx={{ fontWeight: 'bold', fontFamily: 'Nunito', color: '#64926E', fontSize: 36 }}>
         {props.field}
       </Typography>
       {questionItems}
@@ -120,7 +115,7 @@ const QuestionAnswer = (props) => {
               css='white-median-btn'
             />
             <Button
-              text={props.progress === (props.length - 1) ? 'FINISH' : 'NEXT'}
+              text={props.fieldId === (props.length - 1) ? 'FINISH' : 'NEXT'}
               handleClick={(e) => props.handleSubmit(e, inputs)}
               css='continue-btn'
             />
