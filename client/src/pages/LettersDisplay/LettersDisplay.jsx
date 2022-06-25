@@ -5,7 +5,7 @@ import Header from '../../components/Header/Header';
 import MultiSelectFilter from '../../components/MultiSelectFilter/MultiSelectFilter'
 import LetterData from '../../data/LetterData'
 import TemplateList from '../../components/TemplateList/TemplateList.jsx'
-import testPic from './testpic.png'
+
 
 /** Component for Letters Page */
 const LettersDisplay = () => {

@@ -1,11 +1,14 @@
 .template-box{
   columns:2;
+  margin-bottom: 10%;
 }
+
 .body-box{
   display: flex;
   flex-direction: row;
   width: 90%;
 }
+
 .side-box{
   display: flex;
   padding-left:2%;

@@ -78,20 +78,22 @@ const TemplateCard = (props) => {
   ;
   }
   return (
-    <div className='card-container'>
-      {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
-      {props.letter ? <></> : 
-        <div className='tag-container'>
-          <Button css='card-type-btn' text={props.law}></Button>
-          <Button css='card-type-btn' text={props.jurisdiction}></Button>
+    <div className='card-ensure-shadow'>
+      <div className='card-container'>
+        {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
+        {props.letter ? <></> : 
+          <div className='tag-container'>
+            <Button css='card-type-btn' text={props.law}></Button>
+            <Button css='card-type-btn' text={props.jurisdiction}></Button>
+          </div>
+          }
+        {card_content}
+        <div className='card-btn-container'>
+          {/* <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button> */}
+          {/* The below button is just for the showcase! */}
+          <Link to='/template-filler'> <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button> </Link>
+          <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
         </div>
-        }
-      {card_content}
-      <div className='card-btn-container'>
-        {/* <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button> */}
-        {/* The below button is just for the showcase! */}
-        <Link to='/template-filler'> <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button> </Link>
-        <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
       </div>
     </div>
     

@@ -1,19 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
 .card-container{
-    break-inside: avoid;
-    height: 18rem;
+    height: 20rem;
     border-radius: 1rem;
     padding-left: 1%;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    backface-visibility:hidden;
     min-width: 300px;
-    margin-bottom:8%;
-    margin-right:4%;
-    box-shadow: 0px 5px 15px rgba(69, 130, 108, 0.25);
+    box-shadow: 0rem 0.5rem 1rem rgba(69, 130, 108, 0.25);
 }
+
+.card-ensure-shadow{
+    padding-bottom: 2rem;
+    padding-right: 2rem;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+}
+
 .card-text-container, .card-image-text-container{
+    padding-left:5%;
     width: 95%;
     height: 48%;
     display: flex;
