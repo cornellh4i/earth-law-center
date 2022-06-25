@@ -1,0 +1,23 @@
+.helpBoxTitle {
+  font: 'Nunito';
+  font-weight: 700;
+  font-size: 18px;
+  text-align: left;
+  margin-bottom: 36px;
+}
+
+.helpBoxDescription {
+  font-weight: 400;
+  font-size: 18px;
+  text-align: left;
+}
+
+.helpBox {
+  margin-left: 250px;
+  background-color: #eef2ef;
+  border-radius: 15px;
+  padding: 36px;
+  flex-wrap: wrap;
+  width: '30%';
+  max-width: 422px;
+}
