@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 /** Component for TemplateCard Page 
  * @param {title} is the title of the card
  * @param {summary} is the summary of the card 
+ * @param {letter} is if the card is letter and not law
  * @param {edit} is the function that allows you to edit the template
  * @param {download} is the function that allows you to download a template 
  * @param {law} is the type of law for the filter
