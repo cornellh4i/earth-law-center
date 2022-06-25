@@ -1,3 +1,7 @@
+.template-box{
+  columns:2;
+}
+
 .card-box{
   display: flex;
   flex-direction: row;
