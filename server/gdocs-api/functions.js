@@ -6,7 +6,6 @@
 const { google } = require('googleapis');
 const fs = require('fs').promises;
 const path = require("path");
-const express = require("express");
 
 /**
  * THIS IS A SAMPLE FUNCTION
@@ -40,50 +39,24 @@ function printDocInfo(auth) {
  * @returns the path to the downloaded doc
  */
 async function docDownload(auth, docID) {
-  const drive = google.drive({ version: 'v3', auth });
-  const result = await drive.files.export({
+  // Get file from google drive
+  const drive = google.drive({ version: 'v3', auth })
+  const response = await drive.files.export({
     fileId: docID,
     mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   }, {
     responseType: "arraybuffer"
-  });
+  })
 
-  console.log(result)
+  // Store file on server
+  var fileName = `${docID}.docx`
+  var fileLocation = './docs'
+  var filePath = path.join(fileLocation, fileName)
+  await fs.writeFile(filePath, Buffer.from(response.data), function (err) {
+    if (err) throw err;
+  })
 
-  return result.data;
-
-  // // Get file data from Google Drive API
-  // const result = await drive.files.export({
-  //   fileId: docID,
-  //   mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  // }, {
-  //   responseType: "arraybuffer"
-  // });
-
-  // // Store file on server
-  // var fileName = `${docID}.docx`
-  // var fileLocation = './docs'
-  // fs.writeFile(`${fileLocation}/${fileName}`, Buffer.from(result.data), function (err) {
-  //   if (err) throw err;
-  // });
-  // console.log('Word document created');
-
-  // var fileName = `${docID}.docx`
-  // var fileLocation = './docs'
-
-  // await drive.files.export({
-  //   fileId: docID,
-  //   mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  // }, {
-  //   responseType: "arraybuffer"
-  // }).then(function (response) {
-  //   fs.writeFile(`${fileLocation}/${fileName}`, Buffer.from(response.data), function (err) {
-  //     if (err) throw err;
-  //   });
-  //   console.log('Word document created');
-  // })
-
-  // return path.join('./docs', fileName);
+  return filePath
 }
 
 /**
