@@ -32,7 +32,9 @@ module.exports = () => {
           await fs.writeFile(filePath, Buffer.from(response), function (err) {
             if (err) throw err;
           })
-          res.download(filePath)
+          res.download(filePath, fileName, function() {
+            fs.unlink(filePath);
+          })
         })
     }
     catch (err) {
