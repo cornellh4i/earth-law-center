@@ -27,16 +27,19 @@ module.exports = () => {
       var filePath = path.join(fileLocation, fileName)
 
       authsamp.authenticate(scopes).then((client) => {
-        // Update file name
+        // Update file title
         functions.getAllText(client, req.params.docID).then(response => {
           fileName = `${response.title}.docx`
         })
 
         // Download doc
         functions.docDownload(client, req.params.docID).then(async function (response) {
+          // Write binary data to a file stored on the server
           await fs.writeFile(filePath, Buffer.from(response), function (err) {
             if (err) throw err;
           })
+
+          // Download to user's desktop and delete server file
           res.download(filePath, fileName, function () {
             fs.unlink(filePath);
           })
