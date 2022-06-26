@@ -38,14 +38,14 @@ function printDocInfo(auth) {
  */
 async function docDownload(auth, docID) {
   const drive = google.drive({ version: 'v3', auth });
-  const result = await drive.files.export({
+  const res = await drive.files.export({
     fileId: docID,
     mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   }, {
     responseType: "arraybuffer"
   });
 
-  return result.data;
+  return res.data;
 }
 
 /**
