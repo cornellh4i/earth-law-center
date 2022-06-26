@@ -1,6 +1,8 @@
 module.exports = () => {
   const express = require("express");
   const router = express.Router();
+  const path = require("path");
+  const fs = require('fs').promises;
 
   // Imported functions
   const functions = require('../gdocs-api/functions.js');
@@ -20,9 +22,18 @@ module.exports = () => {
   // Endpoint for docDownload
   router.get('/docDownload/:docID', async (req, res) => {
     try {
+      var fileName = `${req.params.docID}.docx`
+      var fileLocation = './docs'
+      var filePath = path.join(fileLocation, fileName)
+
       authsamp.authenticate(scopes)
         .then((client) => functions.docDownload(client, req.params.docID))
-        .then((response) => res.download(response))
+        .then(async function (response) {
+          await fs.writeFile(filePath, Buffer.from(response), function (err) {
+            if (err) throw err;
+          })
+          res.download(filePath)
+        })
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
