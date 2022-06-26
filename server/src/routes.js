@@ -22,17 +22,16 @@ module.exports = () => {
   // Endpoint for docDownload
   router.get('/docDownload/:docID', async (req, res) => {
     try {
-      var fileName = `${req.params.docID}.docx` // placeholder title
+      var fileName
       var fileLocation = './docs'
-      var filePath = path.join(fileLocation, fileName)
+      var filePath = path.join(fileLocation, `${req.params.docID}.docx`) // path on server
 
       authsamp.authenticate(scopes).then((client) => {
-        // Update file title
         functions.getAllText(client, req.params.docID).then(response => {
-          fileName = `${response.title}.docx`
+          // Update title and encode to remove problematic characters
+          fileName = encodeURIComponent(`${response.title}.docx`)
         })
 
-        // Download doc
         functions.docDownload(client, req.params.docID).then(async function (response) {
           // Write binary data to a file stored on the server
           await fs.writeFile(filePath, Buffer.from(response), function (err) {
