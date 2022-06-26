@@ -22,20 +22,26 @@ module.exports = () => {
   // Endpoint for docDownload
   router.get('/docDownload/:docID', async (req, res) => {
     try {
-      var fileName = `${req.params.docID}.docx`
+      var fileName = `${req.params.docID}.docx` // placeholder title
       var fileLocation = './docs'
       var filePath = path.join(fileLocation, fileName)
 
-      authsamp.authenticate(scopes)
-        .then((client) => functions.docDownload(client, req.params.docID))
-        .then(async function (response) {
+      authsamp.authenticate(scopes).then((client) => {
+        // Update file name
+        functions.getAllText(client, req.params.docID).then(response => {
+          fileName = `${response.title}.docx`
+        })
+
+        // Download doc
+        functions.docDownload(client, req.params.docID).then(async function (response) {
           await fs.writeFile(filePath, Buffer.from(response), function (err) {
             if (err) throw err;
           })
-          res.download(filePath, fileName, function() {
+          res.download(filePath, fileName, function () {
             fs.unlink(filePath);
           })
         })
+      })
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
@@ -76,7 +82,7 @@ module.exports = () => {
   // Endpoint for getAllText (currently does not work (returns an object))
   router.get('/getAllText/:docID', async (req, res) => {
     try {
-      authsamp.authenticate(scopes).then((client) => functions.getAllText(client, req.params.docID).then((response) => res.json({ msg: `text: ${response}`})))
+      authsamp.authenticate(scopes).then((client) => functions.getAllText(client, req.params.docID).then((response) => res.json({ msg: `text: ${JSON.stringify(response)}`})))
     }
     catch(err){
       res.json({error:err.message || err.toString()})
