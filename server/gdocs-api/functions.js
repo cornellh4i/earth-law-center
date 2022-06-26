@@ -4,6 +4,9 @@
 
 // Add Imports Below
 const { google } = require('googleapis');
+const fs = require('fs').promises;
+const path = require("path");
+const express = require("express");
 
 /**
  * THIS IS A SAMPLE FUNCTION
@@ -29,6 +32,59 @@ function printDocInfo(auth) {
     return someText
   });
 }  
+
+/**
+ * Downloads a google doc given a doc id
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {docID} is the document id of the google doc we want to download
+ * @returns the path to the downloaded doc
+ */
+async function docDownload(auth, docID) {
+  const drive = google.drive({ version: 'v3', auth });
+  const result = await drive.files.export({
+    fileId: docID,
+    mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  }, {
+    responseType: "arraybuffer"
+  });
+
+  console.log(result)
+
+  return result.data;
+
+  // // Get file data from Google Drive API
+  // const result = await drive.files.export({
+  //   fileId: docID,
+  //   mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  // }, {
+  //   responseType: "arraybuffer"
+  // });
+
+  // // Store file on server
+  // var fileName = `${docID}.docx`
+  // var fileLocation = './docs'
+  // fs.writeFile(`${fileLocation}/${fileName}`, Buffer.from(result.data), function (err) {
+  //   if (err) throw err;
+  // });
+  // console.log('Word document created');
+
+  // var fileName = `${docID}.docx`
+  // var fileLocation = './docs'
+
+  // await drive.files.export({
+  //   fileId: docID,
+  //   mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  // }, {
+  //   responseType: "arraybuffer"
+  // }).then(function (response) {
+  //   fs.writeFile(`${fileLocation}/${fileName}`, Buffer.from(response.data), function (err) {
+  //     if (err) throw err;
+  //   });
+  //   console.log('Word document created');
+  // })
+
+  // return path.join('./docs', fileName);
+}
 
 /**
  * Creates a copy of a google doc
@@ -281,4 +337,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy};
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload };
