@@ -264,3 +264,15 @@
   margin-left: 1rem;
   border: none;
 }
+
+.exit-preview-btn {
+  background: #64926E;
+  color: white;
+  font-family: 'Nunito';
+  font-weight:bold;
+  border-radius: 0.938rem;
+  height: 2.875rem;
+  width: 100%;
+  box-shadow: none;
+  border: none;
+}
