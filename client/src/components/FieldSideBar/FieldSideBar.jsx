@@ -18,6 +18,7 @@ const FieldSideBar = (props) => {
   const handleDownload = (e) => {
     console.log("test");
   }
+
   return (
     <Drawer
       className='sidebar'
