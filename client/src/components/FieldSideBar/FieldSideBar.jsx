@@ -45,7 +45,7 @@ const FieldSideBar = (props) => {
         <div className='bar-div'>
           {props.fieldItem}
         </div>
-        <Box pt={2} ml={2} className='test'>
+        <Box pt={2} ml={2}>
           <Button
             text='DOWNLOAD'
             handleClick={() => handleDownload()}
