@@ -273,9 +273,9 @@
   border: 0.125rem solid #000000;
   border-radius: 0.938rem;
   height: 3.125rem;
-  width: 80%;
+  width: 90%;
   margin-top: 1rem;
-  margin-left: 2rem;
+  margin-left: 1rem;
 }
 
 .template-preview-btn:hover {
