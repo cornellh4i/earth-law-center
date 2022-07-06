@@ -6,6 +6,7 @@ import LinearProgressWithLabel from './ProgressBar';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Link from '@mui/material/Link';
+import Button from '../Button/Button';
 
 /** Component for a Field Side Bar
  * @param {title} is the title to display in the sidebar
@@ -52,9 +53,11 @@ const FieldSideBar = (props) => {
             css='card-edit-btn'
           />
         </Box>
+        <Button css='template-preview-btn' text={'PREVIEW'}/>
         <Box pt={2} className='return'>
           <Link href='/laws' color='text.secondary'>Return to Templates</Link>
         </Box>
+       
       </div>
     </Drawer>
   );

@@ -264,3 +264,20 @@
   margin-left: 1rem;
   border: none;
 }
+
+.template-preview-btn {
+  background: white;
+  color: black;
+  font-family: 'Nunito';
+  font-weight:bold;
+  border: 0.125rem solid #000000;
+  border-radius: 0.938rem;
+  height: 3.125rem;
+  width: 90%;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.template-preview-btn:hover {
+  opacity: 0.7;
+}
