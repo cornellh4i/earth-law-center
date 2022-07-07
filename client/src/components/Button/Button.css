@@ -98,7 +98,7 @@
   margin-right: 5%;
   font-family: 'Nunito';
   font-style: normal;
-  font-weight: 700;
+  font-weight: bolder;
   font-size: 18px;
   line-height: 25px;
   color: #F1F1F3;
@@ -268,8 +268,9 @@
 .template-preview-btn {
   background: white;
   color: black;
+  font-size: 18px;
   font-family: 'Nunito';
-  font-weight:bold;
+  font-weight: bolder;
   border: 0.125rem solid #000000;
   border-radius: 0.938rem;
   height: 3.125rem;
