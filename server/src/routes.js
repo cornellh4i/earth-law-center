@@ -91,13 +91,13 @@ module.exports = () => {
 
 	// Endpoint to get corresponding questions for google sheets
 
-	router.get('/getQuestions/:sheetID', async (req, res) => {
+	router.get('/getQuestions/:sheetID/:field', async (req, res) => {
 		try {
 			authsamp
 				.authenticate(scopes)
 				.then((client) =>
 					functions
-						.getQuestions(client, req.params.sheetID)
+						.getQuestions(client, req.params.sheetID, req.params.field)
 						.then((response) => res.json({ msg: `text: ${response}` }))
 				);
 		} catch (err) {

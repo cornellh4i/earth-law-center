@@ -184,7 +184,7 @@ async function getAllText(auth, docID) {
  * @param {field} is the text that a corresponding question will be returned.
  * @returns the question(s) that corresponds to the field that was sent.
  */
-async function getQuestions(auth, sheetID) {
+async function getQuestions(auth, sheetID, field) {
 	const sheets = google.sheets({ version: 'v4', auth });
 
 	let questions = {};
@@ -200,7 +200,7 @@ async function getQuestions(auth, sheetID) {
 		const rows = result.values;
 		if (rows.length) {
 			for (column in rows) {
-				if (column[0] == Field) {
+				if (column[0] == field) {
 					// Watch out for out of index error
 					const questionArray = column.slice(1);
 					questionArray.map((question) => {
