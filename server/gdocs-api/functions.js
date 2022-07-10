@@ -182,43 +182,36 @@ async function getAllText(auth, docID) {
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param {sheetID} is the document id of the google sheets we want to read data from.
  * @param {field} is the text that a corresponding question will be returned.
- * @returns the question that corresponds to the field that was sent.
+ * @returns the question(s) that corresponds to the field that was sent.
  */
 async function getQuestions(auth, sheetID) {
 	const sheets = google.sheets({ version: 'v4', auth });
-	let result;
+
 	let questions = {};
 
-	const request = {
-		spreadsheetId: sheetID,
-		majorDimension: 'ROWS',
-		range: 'Fields&Questions!A:Z',
-	};
-
 	try {
-		result = await sheets.spreadsheets.values.get(request);
-		return result;
-		// This is probably not optimal but it works //
-		// const rows = result.values;
-		// if (rows.length) {
-		// 	for (column in rows) {
-		// 		if (column[0] == Field) {
-		// 			// Array of remaining data
-		// 			const questionArray = column.slice(1);
-		// 			questionArray.map((question) => {
-		// 				questions.push(question);
-		// 			});
-		// 		}
-		// 	}
-		// 	return questions;
-		// } else {
-		// 	return 'No data Found';
-		// }
+		result = await sheets.spreadsheets.values.get({
+			spreadsheetId: sheetID,
+			majorDimension: 'ROWS',
+			range: 'Fields&Questions!A:Z',
+		});
 
-		// Flatten to string to display
-		// const output = range.values.reduce(
-		//   (str, row) => `${str}${row[0]}, ${row[4]}\n`,
-		//   'Name, Major:\n');
+		// This is probably not optimal but it works
+		const rows = result.values;
+		if (rows.length) {
+			for (column in rows) {
+				if (column[0] == Field) {
+					// Watch out for out of index error
+					const questionArray = column.slice(1);
+					questionArray.map((question) => {
+						questions.push(question);
+					});
+				}
+			}
+			return questions;
+		} else {
+			return 'No data Found';
+		}
 	} catch (err) {
 		console.error(err);
 	}
