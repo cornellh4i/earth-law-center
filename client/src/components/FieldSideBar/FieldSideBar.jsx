@@ -11,14 +11,10 @@ import Link from '@mui/material/Link';
  * @param {title} is the title to display in the sidebar
  * @param {fieldItem} is the component to display in the sidebar
  * @param {progress} is an int where 0 < progress < 100, representing user progress
+ * @param {handleDownload} is a function that handles the Download button functionality
 */
 
 const FieldSideBar = (props) => {
-  /** Downloads a google doc */
-  const handleDownload = (e) => {
-    console.log("test");
-  }
-
   return (
     <Drawer
       className='sidebar'
@@ -48,7 +44,7 @@ const FieldSideBar = (props) => {
         <Box pt={2} ml={2}>
           <Button
             text='DOWNLOAD'
-            handleClick={() => handleDownload()}
+            handleClick={() => props.handleDownload()}
             css='card-edit-btn'
           />
         </Box>
@@ -56,7 +52,6 @@ const FieldSideBar = (props) => {
         <Box pt={2} className='return'>
           <Link href='/laws' color='text.secondary'>Return to Templates</Link>
         </Box>
-       
       </div>
     </Drawer>
   );
