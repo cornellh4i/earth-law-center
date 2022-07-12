@@ -2,7 +2,6 @@ import React, {useState, useRef} from 'react';
 import Typography from '@mui/material/Typography';
 import './Header.css'
 import SearchBar from '../SearchBar/SearchBar.jsx'
-import Button from '../Button/Button.jsx'
 import NavBar from '../NavBar/NavBar';
 
 /**
@@ -37,12 +36,7 @@ const Header = (props) => {
             {props.description}
           </Typography>
           <div className="search-bar-container">
-            <SearchBar placeholder={props.searchBarPlaceholder} ref={search_bar}/>
-            <Button css="search-btn" text="SEARCH" handleClick={ 
-              (e) => {
-                setSearch(getSearchTerm());
-              }
-            }/>
+            <SearchBar placeholder={props.searchBarPlaceholder} ref={search_bar} handleSearch={props.handleSearch}/>
           </div>
         </div>
       </div>
