@@ -72,16 +72,14 @@ const TemplateCard = (props) => {
   ;
   if (props.letter){
     card_content = 
-    <div className='card-image-text-container'>
-      <div className='card-text-container-letter'>
-        <div className='card-title-container'>
+    <div className='card-text-container'>
+        <p className='card-category'>{props.category}</p>
+        <div className='title-container'>
           <h1 className='card-title'>{props.title}</h1>
         </div>
-        <div className='card-summary-container'>
+        <div className='summary-container'>
           <p className='card-summary'>{props.summary}</p>
         </div>
-      </div>
-      <img className='card-letter-preview' src={props.preview}/>
     </div>
   ;
   }
