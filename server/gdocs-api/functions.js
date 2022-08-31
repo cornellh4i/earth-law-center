@@ -31,6 +31,24 @@ function printDocInfo(auth) {
 }  
 
 /**
+ * Downloads a google doc given a doc id
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {docID} is the document id of the google doc we want to download
+ * @returns the doc data as a binary array buffer
+ */
+async function docDownload(auth, docID) {
+  const drive = google.drive({ version: 'v3', auth });
+  const res = await drive.files.export({
+    fileId: docID,
+    mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  }, {
+    responseType: "arraybuffer"
+  });
+
+  return res.data;
+}
+
+/**
  * Creates a copy of a google doc
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param {docID} is the document id of the google doc we want to copy
@@ -281,4 +299,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy};
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload };
