@@ -1,6 +1,7 @@
-.template-box{
-  columns:2;
-  margin-bottom: 10%;
+@media (min-width: 1200px) {
+  .template-box{
+    columns:2;
+  }
 }
 
 .body-box{

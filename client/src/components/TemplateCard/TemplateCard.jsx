@@ -85,12 +85,14 @@ const TemplateCard = (props) => {
   ;
   }
   return (
-    <div className={props.letter ? 'card-letter-container' : 'card-container'}>
-      {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
-      {card_content}
-      <div className='card-btn-container'>
-        <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
-        <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
+    <div className='card-ensure-shadow'>
+      <div className={props.letter ? 'card-letter-container' : 'card-container'}>
+        {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
+        {card_content}
+        <div className='card-btn-container'>
+          <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
+          <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
+        </div>
       </div>
     </div>
     

@@ -44,7 +44,7 @@ const LetterData = [
     letter: false,
     law: 'resolution',
     jurisdiction: 'local',
-    title: 'EPreamble on the Rights of Nature',
+    title: 'Preamble on the Rights of Nature',
     summary: 'A generic preamble on the Rights of Nature to include in any legal instrument, with fully updated information.'
   }
 ]
