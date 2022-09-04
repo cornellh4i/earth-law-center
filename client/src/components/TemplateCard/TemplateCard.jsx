@@ -58,42 +58,39 @@ const TemplateCard = (props) => {
 
   var card_content = 
     <div className='card-text-container'>
-        <h1 className='card-title'>{props.title}</h1>
-        <p className='card-summary'>{props.summary}</p>
+        <p className='card-category'>{props.category}</p>
+        <div className='title-container'>
+          <h1 className='card-title'>{props.title}</h1>
+        </div>
+        <div className='tag-container'>
+          <Button css='card-type-btn' text={props.law}></Button>
+          <Button css='card-type-btn' text={props.jurisdiction}></Button>
+        </div>
+        <div className='summary-container'>
+          <p className='card-summary'>{props.summary}</p>
+        </div>
     </div>
   ;
   if (props.letter){
     card_content = 
-    <div className='card-image-text-container'>
-      <div className='card-text-container-letter'>
-        <div className='card-title-container'>
+    <div className='card-text-container'>
+        <p className='card-category'>{props.category}</p>
+        <div className='title-container'>
           <h1 className='card-title'>{props.title}</h1>
         </div>
-        <div className='card-summary-container'>
+        <div className='summary-container'>
           <p className='card-summary'>{props.summary}</p>
         </div>
-      </div>
-      <img className='card-letter-preview' src={props.preview}/>
     </div>
   ;
   }
   return (
-    <div className='card-ensure-shadow'>
-      <div className='card-container'>
-        {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
-        {props.letter ? <></> : 
-          <div className='tag-container'>
-            <Button css='card-type-btn' text={props.law}></Button>
-            <Button css='card-type-btn' text={props.jurisdiction}></Button>
-          </div>
-          }
-        {card_content}
-        <div className='card-btn-container'>
-          {/* <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button> */}
-          {/* The below button is just for the showcase! */}
-          <Link to='/template-filler'> <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button> </Link>
-          <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
-        </div>
+    <div className={props.letter ? 'card-letter-container' : 'card-container'}>
+      {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
+      {card_content}
+      <div className='card-btn-container'>
+        <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
+        <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
       </div>
     </div>
     

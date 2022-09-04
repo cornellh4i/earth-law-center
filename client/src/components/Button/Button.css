@@ -88,17 +88,16 @@
 
 /* Edit button for TemplateCard */
 .card-edit-btn {
-  width: 18.5rem;
+  width: 72%;
   height: 57px;
   padding: 16px;
   background:
     #64926E;
   border-radius: 15px;
   border: none;
-  margin-right: 5%;
   font-family: 'Nunito';
   font-style: normal;
-  font-weight: 700;
+  font-weight: bolder;
   font-size: 18px;
   line-height: 25px;
   color: #F1F1F3;
@@ -110,14 +109,14 @@
   padding-top: 1%;
   padding-bottom: 1%;
   background: #C6DCCB;
-  border-radius: 15px;
+  border-radius: 10px;
   border: none;
-  color: #64926E;
+  color: black;
   margin-top: 1%;
-  margin-left: 2%;
+  margin-right: 2%;
   font-family: 'Nunito';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 18px;
   line-height: 25px;
 }
@@ -126,7 +125,7 @@
 .card-download-btn {
   border: none;
   background-color: transparent;
-  margin-left: -6%;
+  margin-bottom: 1%;
 }
 
 .card-download-btn img {
@@ -263,4 +262,22 @@
   margin-top: 1rem;
   margin-left: 1rem;
   border: none;
+}
+
+.template-preview-btn {
+  background: white;
+  color: black;
+  font-size: 18px;
+  font-family: 'Nunito';
+  font-weight: bolder;
+  border: 0.125rem solid #000000;
+  border-radius: 0.938rem;
+  height: 3.125rem;
+  width: 90%;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.template-preview-btn:hover {
+  opacity: 0.7;
 }
