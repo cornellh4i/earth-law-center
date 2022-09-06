@@ -7,3 +7,9 @@
   padding-left:7%;
   width: 90%;
 }
+
+.letter-body-box{
+  display: flex;
+  flex-direction: row;
+  width: 93%;
+}

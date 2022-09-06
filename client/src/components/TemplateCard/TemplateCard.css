@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
 .card-container, .card-letter-container{
-    height: 23rem;
+    height: 20rem;
     border-radius: 1.2rem;
     padding-left: 1%;
     flex-direction: column;
@@ -48,16 +48,16 @@
 }
 
 .title-container{
-    max-width: 70%;
+    max-width: 90%;
 }
 
 .card-title{
     margin:0;
     font-family: 'Nunito', sans-serif;
     color: #64926E;
-    font-size: 36px;
+    font-size: 32px;
     font-weight: bold;
-    white-space: nowrap;
+    white-space: wrap;
     text-overflow: ellipsis;
     overflow: hidden;
     max-width: 100%;
