@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 /** Component for TemplateCard Page 
  * @param {title} is the title of the card
  * @param {summary} is the summary of the card 
+ * @param {letter} is if the card is letter and not law
  * @param {edit} is the function that allows you to edit the template
  * @param {download} is the function that allows you to download a template 
  * @param {law} is the type of law for the filter
@@ -84,12 +85,14 @@ const TemplateCard = (props) => {
   ;
   }
   return (
-    <div className={props.letter ? 'card-letter-container' : 'card-container'}>
-      {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
-      {card_content}
-      <div className='card-btn-container'>
-        <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
-        <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
+    <div className='card-ensure-shadow'>
+      <div className={props.letter ? 'card-letter-container' : 'card-container'}>
+        {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
+        {card_content}
+        <div className='card-btn-container'>
+          <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
+          <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
+        </div>
       </div>
     </div>
     
