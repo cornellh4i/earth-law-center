@@ -18,10 +18,21 @@ const [checked, setChecked] = useState({
   ordinance: false,
   resolution: false,
 });
+const [data, setData] = useState(LetterData)
+const searchData=(input)=>{
+  setData(LetterData.filter((item)=>{
+    if (input===''){
+      return true
+    }
+    else {
+      return item.title.toLowerCase().includes(input) || item.summary.toLowerCase().includes(input)
+    }
+  }))
+}
 
   return (
     <div>
-      <Header title="Build Earth Letters" description="Customize and download model laws, resolutions, and other legal instruments that support a paradigm shift to better protect the planet. " hasSearch={true} searchBarPlaceholder="Search Letter Templates"></Header>
+      <Header title="Build Earth Letters" description="Customize and download model laws, resolutions, and other legal instruments that support a paradigm shift to better protect the planet. " hasSearch={true} searchBarPlaceholder="Search Letter Templates" handleSearch={searchData}></Header>
       <div className="letters-body-box">
         {/* <div className="side-box">
         <MultiSelectFilter setCheckedParent={setChecked} />
@@ -30,7 +41,7 @@ const [checked, setChecked] = useState({
           <h1 className="card-heading-title">Letter Templates</h1>
           <p className="card-description">Let us help you send a lawmaker or other decision-maker an informed letter about an Earth law movement you care about–the Rights of Nature, human environmental rights, rights of future generations, and others. Our letters are regularly updated with the most relevant information to ensure they are relevant and powerful. Just fill in a bit of information and download your letter now! These work for any level of government.</p>
           <div className="letter-template-box">
-            <TemplateList data={LetterData} checked={checked} />
+            <TemplateList data={data} checked={checked} />
           </div>
         </div>
       </div>
