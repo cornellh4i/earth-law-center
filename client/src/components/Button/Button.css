@@ -101,6 +101,7 @@
   font-size: 18px;
   line-height: 25px;
   color: #F1F1F3;
+  cursor: pointer;
 }
 
 .card-type-btn {
@@ -126,6 +127,7 @@
   border: none;
   background-color: transparent;
   margin-bottom: 1%;
+  cursor: pointer;
 }
 
 .card-download-btn img {
@@ -275,6 +277,11 @@
   width: 100%;
   box-shadow: none;
   border: none;
+  cursor: pointer;
+}
+
+.exit-preview-btn:hover {
+  opacity: 0.7;
 }
 
 .template-preview-btn {
@@ -289,8 +296,9 @@
   width: 90%;
   margin-top: 1rem;
   margin-left: 1rem;
+  cursor: pointer;
 }
 
 .template-preview-btn:hover {
-  opacity: 0.7;
+  opacity: 0.6;
 }
