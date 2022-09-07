@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
+.helpBoxTitle {
+  font: 'Nunito';
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-align: left;
+  margin-bottom: 2.25rem;
+}
+
+.helpBoxDescription {
+  font-weight: 400;
+  font-size: 1.15rem;
+  text-align: left;
+}
+
+.helpBox {
+  margin-left: 15.5rem;
+  background-color: #eef2ef;
+  border-radius: 1rem;
+  padding: 2.25rem;
+  flex-wrap: wrap;
+  width: '30%';
+  max-width: 26rem;
+}

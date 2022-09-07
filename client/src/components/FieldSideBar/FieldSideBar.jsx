@@ -1,5 +1,6 @@
 import React from 'react'
 import './FieldSideBar.css';
+import Button from '../Button/Button';
 import Typography from '@mui/material/Typography';
 import LinearProgressWithLabel from './ProgressBar';
 import Box from '@mui/material/Box';
@@ -13,6 +14,11 @@ import Link from '@mui/material/Link';
 */
 
 const FieldSideBar = (props) => {
+  /** Downloads a google doc */
+  const handleDownload = (e) => {
+    console.log("test");
+  }
+
   return (
     <Drawer
       className='sidebar'
@@ -39,9 +45,18 @@ const FieldSideBar = (props) => {
         <div className='bar-div'>
           {props.fieldItem}
         </div>
+        <Box pt={2} ml={2}>
+          <Button
+            text='DOWNLOAD'
+            handleClick={() => handleDownload()}
+            css='card-edit-btn'
+          />
+        </Box>
+        <Button css='template-preview-btn' text={'PREVIEW'}/>
         <Box pt={2} className='return'>
           <Link href='/laws' color='text.secondary'>Return to Templates</Link>
         </Box>
+       
       </div>
     </Drawer>
   );
