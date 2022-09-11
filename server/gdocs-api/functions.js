@@ -30,6 +30,47 @@ function printDocInfo(auth) {
   });
 }  
 
+
+/**
+ * Takes in a field name and the a google sheets if and gets back a question related to that field.
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {sheetID} is the document id of the google sheets we want to read data from.
+ * @param {field} is the text that a corresponding question will be returned.
+ * @returns the question(s) that corresponds to the field that was sent.
+ */
+async function getQuestions(auth, sheetID, field) {
+  const sheets = google.sheets({ version: 'v4', auth });
+
+  let questions = {};
+
+  try {
+    result = await sheets.spreadsheets.values.get({
+      spreadsheetId: sheetID,
+      majorDimension: 'ROWS',
+      range: 'Fields&Questions!A:Z',
+    });
+
+    // This is probably not optimal but it works
+    const rows = result.values;
+    if (rows.length) {
+      for (column in rows) {
+        if (column[0] == field) {
+          // Watch out for out of index error
+          const questionArray = column.slice(1);
+          questionArray.map((question) => {
+            questions.push(question);
+          });
+        }
+      }
+      return questions;
+    } else {
+      return 'No data Found';
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 /**
  * Downloads a google doc given a doc id
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.

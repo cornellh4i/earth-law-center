@@ -19,6 +19,21 @@ module.exports = () => {
   });
   /*********************************************************/
 
+  // Endpoint for getting questions from Google Sheets
+  router.get('/getQuestions/:sheetID/:field', async (req, res) => {
+    try {
+      authsamp
+        .authenticate(scopes)
+        .then((client) =>
+          functions
+            .getQuestions(client, req.params.sheetID, req.params.field)
+            .then((response) => res.json({ msg: `text: ${response}` }))
+        );
+    } catch (err) {
+      res.json({ error: err.message || err.toString() });
+    }
+  });
+
   // Endpoint for docDownload
   router.get('/docDownload/:docID', async (req, res) => {
     try {
