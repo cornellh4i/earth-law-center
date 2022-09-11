@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './LawsLettersDisplay.css';
-import '../../components/CategorySideBar/CategorySideBar'; 
+import '../../components/CategorySideBar/CategorySideBar';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import CategorySideBar from '../../components/CategorySideBar/CategorySideBar';
-import TemplateCard from '../../components/TemplateCard/TemplateCard'; 
+import TemplateCard from '../../components/TemplateCard/TemplateCard';
 import MultiSelectFilter from '../../components/MultiSelectFilter/MultiSelectFilter'
 import LawData from '../../data/LawData'
 import TemplateList from '../../components/TemplateList/TemplateList.jsx'
@@ -25,8 +26,8 @@ const LawsDisplay = () => {
       <Header title="Build Earth Laws" description="Customize and download model laws, resolutions, and other legal instruments that support a paradigm shift to better protect the planet. " hasSearch={true} searchBarPlaceholder="Search Law Templates"></Header>
       <div className="body-box">
         <div className="side-box">
-          <CategorySideBar setCategoryParent={setCategory} categories = {["ALL CATEGORIES", "RIGHTS OF NATURE", "RIGHTS OF FUTURE GENERATIONS", "HUMAN ENVIRONMENTAL RIGHTS", 
-  "ECOCIDE", "LEGAL GUARDIANSHIP", "ECOCENTRIC CORPORATE GOVERNANCE", "ECOCENTRIC LAND MODELS"]}/>
+          <CategorySideBar setCategoryParent={setCategory} categories={["ALL CATEGORIES", "RIGHTS OF NATURE", "RIGHTS OF FUTURE GENERATIONS", "HUMAN ENVIRONMENTAL RIGHTS",
+            "ECOCIDE", "LEGAL GUARDIANSHIP", "ECOCENTRIC CORPORATE GOVERNANCE", "ECOCENTRIC LAND MODELS"]} />
           <MultiSelectFilter setCheckedParent={setChecked} />
         </div>
         <div className="content-box">
@@ -37,6 +38,7 @@ const LawsDisplay = () => {
           </div>
         </div>
       </div>
+      <Footer text="Powered by Earth Law Center" />
     </div>
   );
 };

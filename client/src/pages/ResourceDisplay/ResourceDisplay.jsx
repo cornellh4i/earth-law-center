@@ -4,6 +4,7 @@ import ResourceData from '../../data/ResourceData';
 import ResourceList from '../../components/ResourceList/ResourceList'
 import Grid from '@mui/material/Grid';
 import Header from "../../components/Header/Header"
+import Footer from "../../components/Footer/Footer"
 import ResourceSideBar from "../../components/ResourceSideBar/ResourceSideBar"
 
 /** Component for Resource Display Page */
@@ -21,6 +22,7 @@ const ResourceDisplay = () => {
           <ResourceList resource={ResourceData} category={category} />
         </Grid>
       </Grid>
+      <Footer text="Powered by Earth Law Center" />
     </>
   );
 };
