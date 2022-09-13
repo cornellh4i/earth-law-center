@@ -7,6 +7,7 @@ module.exports = () => {
   // Imported functions
   const functions = require('../gdocs-api/functions.js');
   const authsamp = require('../gdocs-api/web-index.js')
+
   const scopes = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets.readonly'];
 
   /**** Below are Example Routes from the starter code *****/
