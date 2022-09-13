@@ -28,7 +28,7 @@ function printDocInfo(auth) {
     console.log(`The text of the document is: ${someText}`);
     return someText
   });
-}  
+}
 
 
 /**
@@ -41,31 +41,35 @@ function printDocInfo(auth) {
 async function getQuestions(auth, sheetID, field) {
   const sheets = google.sheets({ version: 'v4', auth });
 
-  let questions = {};
-
   try {
-    result = await sheets.spreadsheets.values.get({
+    const response = await sheets.spreadsheets.values.get({
       spreadsheetId: sheetID,
       majorDimension: 'ROWS',
-      range: 'Fields&Questions!A:Z',
+      range: 'test!A:Z',
     });
 
-    // This is probably not optimal but it works
-    const rows = result.values;
-    if (rows.length) {
-      for (column in rows) {
-        if (column[0] == field) {
-          // Watch out for out of index error
-          const questionArray = column.slice(1);
-          questionArray.map((question) => {
-            questions.push(question);
-          });
-        }
-      }
-      return questions;
-    } else {
-      return 'No data Found';
+    const grid = response.data.values
+    //input_field is reserved for future testing purposes
+    var question = {
+      "field": "",
+      // "input_field":"",
+      "question": "",
+      "input_type": "",
+      "description": "",
     }
+    for (let i = 0; i < grid.length; i++) {
+      row = grid[i]
+      if (row[0] === field) {
+        question.field = row[0]
+        // question.input_field=field
+        try { question.question = row[1] } catch (err) { console.log("missing question") }
+        try { question.input_type = row[2] } catch (err) { console.log("missing input type") }
+        try { question.description = row[3] } catch (err) { console.log("missing description") }
+        break
+      }
+    }
+    return question
+
   } catch (err) {
     console.error(err);
   }
@@ -95,7 +99,7 @@ async function docDownload(auth, docID) {
  * @param {docID} is the document id of the google doc we want to copy
  * @returns the docID of the copied document
  */
- async function docCopy(auth, docID){ 
+async function docCopy(auth, docID) {
   const drive = google.drive({ version: 'v3', auth });
   //Copy file and store id in docCopyId
   var copyTitle = "ELC COPY";
@@ -105,10 +109,10 @@ async function docDownload(auth, docID) {
     resource: {
       name: copyTitle,
     }
-  }).then(function(response) {
+  }).then(function (response) {
     docCopyId = response.data.id
   },
-  function(err) { console.error("Execute error", err); });
+    function (err) { console.error("Execute error", err); });
   return docCopyId
 }
 
@@ -121,15 +125,15 @@ async function docDownload(auth, docID) {
  * @param {location} is the location in the document we want to insert the data at
  * @returns the docID of the copied document with the new changes 
  */
- async function insertText(auth, docID, text, location) {
+async function insertText(auth, docID, text, location) {
   //Authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
   var docCopyId;
   var updateObject
-    // Below is the function that generates a new docID (it does not currently work because of a circular dependency)
+  // Below is the function that generates a new docID (it does not currently work because of a circular dependency)
   await docCopy(auth, docID).then(
     (docCopy) => {
-      docCopyId = docCopy; 
+      docCopyId = docCopy;
       // JSON request body for batchupdate with docCopyId 
       updateObject = {
         documentId: docCopyId,
@@ -143,10 +147,10 @@ async function docDownload(auth, docID) {
         },
         "writeControl": {}
       }
-    }); 
-    // Send the JSON object in a batchUpdate request
-    await docs.documents.batchUpdate(updateObject)
-    return docCopyId 
+    });
+  // Send the JSON object in a batchUpdate request
+  await docs.documents.batchUpdate(updateObject)
+  return docCopyId
 }
 
 /**
@@ -157,7 +161,7 @@ async function docDownload(auth, docID) {
  * @param {containsText} is the text in the document matching the substring that will be replaced by replaceText.
  * @returns the docID of the copied document with the new changes 
  */
- async function replaceAllTexts(auth, docID, replaceText, containsText) {
+async function replaceAllTexts(auth, docID, replaceText, containsText) {
   //Authorize docs and drive
   const docs = google.docs({ version: 'v1', auth });
   var docCopyId;
@@ -165,7 +169,7 @@ async function docDownload(auth, docID) {
   // Below is the function that generates a new docID
   await docCopy(auth, docID).then(
     (docCopy) => {
-      docCopyId = docCopy; 
+      docCopyId = docCopy;
       // JSON request body for batchupdate with docCopyId 
       updateObject = {
         "documentId": docCopyId,
@@ -182,10 +186,10 @@ async function docDownload(auth, docID) {
           }],
         }
       }
-    }); 
-    // Send the JSON object in a batchUpdate request
-    await docs.documents.batchUpdate(updateObject)
-    return docCopyId 
+    });
+  // Send the JSON object in a batchUpdate request
+  await docs.documents.batchUpdate(updateObject)
+  return docCopyId
 }
 
 // BELOW ARE THE GETALLTEXT FUNCTION AND HELPER FUNCTIONS (currently don't work with routes)
@@ -196,7 +200,7 @@ async function docDownload(auth, docID) {
  * @param {docID} is the document id of the google doc we want get data from 
  * @returns all the data from a google doc in the form of a json object 
  */
- async function getAllText(auth, docID) {
+async function getAllText(auth, docID) {
   const docs = google.docs({ version: 'v1', auth });
   var allText;
   // We are using a GET request here
@@ -209,15 +213,15 @@ async function docDownload(auth, docID) {
   // if (err) return console.log('The API returned an error: ' + err);
   // Adds title of doc to JSON 
   allText = {
-    "title" : res.data.title
+    "title": res.data.title
   }
   // Creates an attribute for each text run in the doc
   allText["textRun0"] = await readStructuralElements(res.data.body.content[0]);
   for (i = 1; i < res.data.body.content.length; i++) {
-    allText["textRun" + i] = await readStructuralElements(res.data.body.content[i], allText["textRun" + (i-1)]);
+    allText["textRun" + i] = await readStructuralElements(res.data.body.content[i], allText["textRun" + (i - 1)]);
   }
   // });
-  
+
   return allText;
 }
 
@@ -232,18 +236,18 @@ async function docDownload(auth, docID) {
 async function readStructuralElements(element, prevTextRun) {
   // code sourced and modified from Google Docs API documentation
   var textRun = {
-    "text" : "",
+    "text": "",
     // Stores data on font style
-    "style" : {
-      "bold" : false,
-      "italic" : false,
-      "underline" : false,
+    "style": {
+      "bold": false,
+      "italic": false,
+      "underline": false,
     },
     // Stores data on list style
-    "listStyle" : {
-      "isList" : false,
-      "nestingLevel" : 0,
-      "numberInList" : 0
+    "listStyle": {
+      "isList": false,
+      "nestingLevel": 0,
+      "numberInList": 0
     }
   }
   if (element.paragraph != null) {
@@ -269,7 +273,7 @@ async function readStructuralElements(element, prevTextRun) {
   } else if (element.tableOfContents != null) {
     // The text in the TOC is also in a Structural Element.
     textRun.text += readStructuralElements(element.getTableOfContents().getContent());
-  }  
+  }
   return textRun;
 }
 
@@ -297,9 +301,9 @@ async function readParagraphElement(element) {
 function readParagraphElementStyle(element) {
   // Helper for parsing paragraph font style
   var style = {
-    "bold" : false,
-    "italic" : false,
-    "underline" : false,
+    "bold": false,
+    "italic": false,
+    "underline": false,
   }
   // Fixes issue of style attributes being undefined
   // One issue to address: code does not work for varying styles
@@ -319,20 +323,20 @@ function readParagraphElementStyle(element) {
 function readParagraphElementListStyle(bullet, prevListStyle) {
   // Helper for parsing paragraph list style
   var listStyle = {
-    "isList" : false,
-    "nestingLevel" : 0,
-    "numberInList" : 0
+    "isList": false,
+    "nestingLevel": 0,
+    "numberInList": 0
   }
   listStyle.isList = bullet != null;
   listStyle.numberInList = + (bullet != null);
   // increments the nesting level within the listStyle JSON 
   // to match the bullet's nesting level
-  if (bullet != null && bullet.nestingLevel != null){
+  if (bullet != null && bullet.nestingLevel != null) {
     listStyle.nestingLevel = bullet.nestingLevel;
   }
   // Google Docs API does not differentiate between ordered and unordered
   // lists, so we created our own numbering system below
-  if (prevListStyle.isList){
+  if (prevListStyle.isList) {
     listStyle.numberInList = prevListStyle.numberInList + 1;
     // Testing: console.log(prevListStyle)
   }
@@ -340,4 +344,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload };
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, getQuestions };
