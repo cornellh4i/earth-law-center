@@ -1,21 +1,14 @@
-import { useState } from 'react';
 import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
-import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
+import { useState } from 'react';
 import './TemplateFiller.css';
-
-import { useLocation } from 'react-router-dom'
+import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import HelpBox from '../../components/HelpBox/HelpBox';
-
-/** Component for the Template Filler Page
- * Params are passed through react-router-dom states rather than props
- * @param {docID} is the docID of the selected doc
-*/
-
+/** Component for Template Filler Page */
 const TemplateFiller = () => {
-  /** Retrieve state from react-router-dom  */
-  const state = useLocation().state
+  /** Temporary hardcoded doc ID -- REPLACE WITH PROPS */
+  const docID = '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
 
   /** Temporary hardcoded data to pass as props to the Q&A component */
   const questionsData = {
@@ -115,7 +108,7 @@ const TemplateFiller = () => {
 
   /** Downloads a google doc when user presses the Download button */
   const handleDownload = (e) => {
-    window.location.assign(`http://localhost:8081/api/docDownload/${state.docID}`);
+    window.location.assign(`http://localhost:8081/api/docDownload/${docID}`);
   }
 
   return (
