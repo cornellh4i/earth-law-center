@@ -9,7 +9,9 @@ import './ResourceList.css';
 */
 function ResourceList({ resource, category }) {
   if (!resource || resource.length === 0) {
-    return <p>No resources yet</p>
+    return <div className="resource-box">
+      <div className="resource-page-title">{category}</div>
+    </div>
   }
   return <div className="resource-box">
     <div className="resource-page-title">{category}</div>
