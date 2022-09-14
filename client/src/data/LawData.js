@@ -5,7 +5,8 @@ const LetterData = [
     law: 'ordinance',
     jurisdiction: 'local',
     title: 'Ecosystem Rights',
-    summary: 'A resolution or ordinance on the rights of a particular ecosystem-e.g., a forest-with a possible guardianship body to speak for it.'
+    summary: 'A resolution or ordinance on the rights of a particular ecosystem-e.g., a forest-with a possible guardianship body to speak for it.',
+    category: 'Rights of Nature'
   },
   {
     id: 2,
@@ -13,7 +14,8 @@ const LetterData = [
     law: 'ordinance',
     jurisdiction: 'regional',
     title: 'Local Ocean Rights',
-    summary: 'A resolution or ordinance on the rights of marine ecosystems, including the right to \'health\'.'
+    summary: 'A resolution or ordinance on the rights of marine ecosystems, including the right to \'health\'.',
+    category: 'Rights of Future Generations'
   },
   {
     id: 3,
@@ -21,7 +23,8 @@ const LetterData = [
     law: 'ordinance',
     jurisdiction: 'national',
     title: 'Local Rights of Rivers',
-    summary: 'A resolution or ordinance on the rights of rivers and watersheds with a guardianship body to speak for the river.'
+    summary: 'A resolution or ordinance on the rights of rivers and watersheds with a guardianship body to speak for the river.',
+    category: 'Human Environmental Rights'
   },
   {
     id: 4,
@@ -29,7 +32,8 @@ const LetterData = [
     law: 'ordinance',
     jurisdiction: 'international',
     title: 'State Constitutional Amendment',
-    summary: 'A Rights of Nature state constitutional amendment that can unlock the ability of local rights of nature efforts.'
+    summary: 'A Rights of Nature state constitutional amendment that can unlock the ability of local rights of nature efforts.',
+    category: 'Ecocide'
   },
   {
     id: 5,
@@ -37,7 +41,8 @@ const LetterData = [
     law: 'ordinance',
     jurisdiction: 'local',
     title: 'National Constitutional Amendment',
-    summary: 'A constitutional amendment establishing the Rights of Nature and other ecocentric legal principles.'
+    summary: 'A constitutional amendment establishing the Rights of Nature and other ecocentric legal principles.',
+    category: 'Legal Guardianship'
   },
   {
     id: 6,
@@ -45,7 +50,8 @@ const LetterData = [
     law: 'resolution',
     jurisdiction: 'local',
     title: 'Preamble on the Rights of Nature',
-    summary: 'A generic preamble on the Rights of Nature to include in any legal instrument, with fully updated information.'
+    summary: 'A generic preamble on the Rights of Nature to include in any legal instrument, with fully updated information.',
+    category: 'Ecocentric Land Models'
   }
 ]
 
