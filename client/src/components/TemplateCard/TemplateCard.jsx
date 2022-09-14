@@ -76,6 +76,12 @@ const TemplateCard = (props) => {
     </div>
   ;
   }
+
+  /** Downloads a google doc when user presses the Download button */
+  const handleDownload = (e) => {
+    window.location.assign(`http://localhost:8081/api/docDownload/${props.docID}`);
+  }
+
   return (
     <div className='card-container'>
       {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
@@ -89,13 +95,10 @@ const TemplateCard = (props) => {
       <div className='card-btn-container'>
         {/* <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button> */}
         {/* The below button is just for the showcase! */}
-        <Link
-          to='/template-filler'
-          state={{ docID: props.docID }}
-        >
+        <Link to='/template-filler' state={{ docID: props.docID, download: () => handleDownload() }}>
           <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
         </Link>
-        <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
+        <button className='card-download-btn' onClick={handleDownload}><img className='download-img' src={downloadbtn} alt='download'/></button>
       </div>
     </div>
     
