@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 /** Component for TemplateCard Page 
  * @param {title} is the title of the card
  * @param {summary} is the summary of the card 
- * @param {edit} is the function that allows you to edit the template
+ * @param {docID} is the docID of the doc to be edited
  * @param {download} is the function that allows you to download a template 
  * @param {law} is the type of law for the filter
  * @param {jurisdiction} is the type of jurisdiction for the filter
@@ -91,7 +91,7 @@ const TemplateCard = (props) => {
         {/* The below button is just for the showcase! */}
         <Link
           to='/template-filler'
-          state={{ docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os' }}
+          state={{ docID: props.docID }}
         >
           <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
         </Link>
