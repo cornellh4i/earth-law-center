@@ -33,48 +33,48 @@ const TemplateCard = (props) => {
   // sets matchordinance to true if 
   // 1. the law section of the filter is untouched or 
   // 2. the filter checkbox corresponding to the law prop of this TemplateCard is checked
-  if(props.currentFilter.ordinance === false && 
-    props.currentFilter.resolution === false) {matchlaw = true;}
-  else if((props.currentFilter.ordinance === filters.ordinance && filters.ordinance === true) || 
-    (props.currentFilter.resolution === filters.resolution && filters.resolution === true)) {matchlaw = true;}
+  if (props.currentFilter.ordinance === false &&
+    props.currentFilter.resolution === false) { matchlaw = true; }
+  else if ((props.currentFilter.ordinance === filters.ordinance && filters.ordinance === true) ||
+    (props.currentFilter.resolution === filters.resolution && filters.resolution === true)) { matchlaw = true; }
 
   // sets matchordinance to true if 
   // 1. the jurisdiction section of the filter is untouched or 
   // 2. the filter checkbox corresponding to the jurisdiction prop of this TemplateCard is checked
-  if(props.currentFilter.local === false && 
-    props.currentFilter.regional === false && 
-    props.currentFilter.national === false && 
-    props.currentFilter.international === false){matchjurisdiction = true;}
-  else if((props.currentFilter.local === filters.local && filters.local === true) || 
-    (props.currentFilter.regional === filters.regional && filters.regional === true) || 
-    (props.currentFilter.national === filters.national && filters.national === true) || 
-    (props.currentFilter.international === filters.international && filters.international === true)){matchjurisdiction = true;}
+  if (props.currentFilter.local === false &&
+    props.currentFilter.regional === false &&
+    props.currentFilter.national === false &&
+    props.currentFilter.international === false) { matchjurisdiction = true; }
+  else if ((props.currentFilter.local === filters.local && filters.local === true) ||
+    (props.currentFilter.regional === filters.regional && filters.regional === true) ||
+    (props.currentFilter.national === filters.national && filters.national === true) ||
+    (props.currentFilter.international === filters.international && filters.international === true)) { matchjurisdiction = true; }
 
   // if the card does not match the current filter state, don't render
-  if(!(matchlaw && matchjurisdiction)){
+  if (!(matchlaw && matchjurisdiction)) {
     return null;
   }
 
-  var card_content = 
+  var card_content =
     <div className='card-text-container'>
-        <h1 className='card-title'>{props.title}</h1>
-        <p className='card-summary'>{props.summary}</p>
+      <h1 className='card-title'>{props.title}</h1>
+      <p className='card-summary'>{props.summary}</p>
     </div>
-  ;
-  if (props.letter){
-    card_content = 
-    <div className='card-image-text-container'>
-      <div className='card-text-container-letter'>
-        <div className='card-title-container'>
-          <h1 className='card-title'>{props.title}</h1>
+    ;
+  if (props.letter) {
+    card_content =
+      <div className='card-image-text-container'>
+        <div className='card-text-container-letter'>
+          <div className='card-title-container'>
+            <h1 className='card-title'>{props.title}</h1>
+          </div>
+          <div className='card-summary-container'>
+            <p className='card-summary'>{props.summary}</p>
+          </div>
         </div>
-        <div className='card-summary-container'>
-          <p className='card-summary'>{props.summary}</p>
-        </div>
+        <img className='card-letter-preview' src={props.preview} />
       </div>
-      <img className='card-letter-preview' src={props.preview}/>
-    </div>
-  ;
+      ;
   }
 
   /** Downloads a google doc when user presses the Download button */
@@ -85,12 +85,12 @@ const TemplateCard = (props) => {
   return (
     <div className='card-container'>
       {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
-      {props.letter ? <></> : 
+      {props.letter ? <></> :
         <div className='tag-container'>
           <Button css='card-type-btn' text={props.law}></Button>
           <Button css='card-type-btn' text={props.jurisdiction}></Button>
         </div>
-        }
+      }
       {card_content}
       <div className='card-btn-container'>
         {/* <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button> */}
@@ -98,10 +98,9 @@ const TemplateCard = (props) => {
         <Link to='/template-filler' state={{ docID: props.docID, download: () => handleDownload() }}>
           <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
         </Link>
-        <button className='card-download-btn' onClick={handleDownload}><img className='download-img' src={downloadbtn} alt='download'/></button>
+        <button className='card-download-btn' onClick={handleDownload}><img className='download-img' src={downloadbtn} alt='download' /></button>
       </div>
     </div>
-    
   );
 };
 export default TemplateCard;
