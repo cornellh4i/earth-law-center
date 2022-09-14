@@ -89,7 +89,12 @@ const TemplateCard = (props) => {
       <div className='card-btn-container'>
         {/* <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button> */}
         {/* The below button is just for the showcase! */}
-        <Link to='/template-filler'> <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button> </Link>
+        <Link
+          to='/template-filler'
+          state={{ docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os' }}
+        >
+          <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
+        </Link>
         <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download'/></button>
       </div>
     </div>
