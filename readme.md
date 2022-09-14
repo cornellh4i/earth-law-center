@@ -1,4 +1,4 @@
-# ELC x H4I: Tempate Law Form Filler
+# ELC x H4I: Template Law Form Filler
 
 ## Introduction
 The Template Law Form Filler is a webiste created by the Cornell Hack4Impact team made to simplify the process of creating eco-centric laws by legislators. 
