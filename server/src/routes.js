@@ -10,7 +10,7 @@ module.exports = () => {
   const scopes = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive'];
 
   /**** Below are Example Routes from the starter code *****/
-  router.get('/hello', async (res) => {
+  router.get('/hello', async (_, res) => {
     res.json({ msg: "Hello, world!" });
   });
 
