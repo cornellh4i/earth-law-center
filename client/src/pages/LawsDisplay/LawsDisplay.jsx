@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './LawsLettersDisplay.css';
-import '../../components/CategorySideBar/CategorySideBar'; 
+import '../../components/CategorySideBar/CategorySideBar';
 import Header from '../../components/Header/Header';
 import CategorySideBar from '../../components/CategorySideBar/CategorySideBar';
-import TemplateCard from '../../components/TemplateCard/TemplateCard'; 
+import TemplateCard from '../../components/TemplateCard/TemplateCard';
 import MultiSelectFilter from '../../components/MultiSelectFilter/MultiSelectFilter'
 import LawData from '../../data/LawData'
 import TemplateList from '../../components/TemplateList/TemplateList.jsx'
@@ -20,9 +20,9 @@ const LawsDisplay = () => {
     resolution: false,
   });
   const [data, setData] = useState(LawData)
-  const searchData=(input)=>{
-    setData(LawData.filter((item)=>{
-      if (input===''){
+  const searchData = (input) => {
+    setData(LawData.filter((item) => {
+      if (input === '') {
         return true
       }
       else {
@@ -36,8 +36,8 @@ const LawsDisplay = () => {
       <Header title="Build Earth Laws" description="Customize and download model laws, resolutions, and other legal instruments that support a paradigm shift to better protect the planet. " hasSearch={true} searchBarPlaceholder="Search Law Templates" handleSearch={searchData}></Header>
       <div className="body-box">
         <div className="side-box">
-          <CategorySideBar setCategoryParent={setCategory} categories = {["ALL CATEGORIES", "RIGHTS OF NATURE", "RIGHTS OF FUTURE GENERATIONS", "HUMAN ENVIRONMENTAL RIGHTS", 
-  "ECOCIDE", "LEGAL GUARDIANSHIP", "ECOCENTRIC CORPORATE GOVERNANCE", "ECOCENTRIC LAND MODELS"]}/>
+          <CategorySideBar setCategoryParent={setCategory} categories={["ALL CATEGORIES", "RIGHTS OF NATURE", "RIGHTS OF FUTURE GENERATIONS", "HUMAN ENVIRONMENTAL RIGHTS",
+            "ECOCIDE", "LEGAL GUARDIANSHIP", "ECOCENTRIC CORPORATE GOVERNANCE", "ECOCENTRIC LAND MODELS"]} />
           <MultiSelectFilter setCheckedParent={setChecked} />
         </div>
         <div className="content-box">

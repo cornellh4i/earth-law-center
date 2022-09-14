@@ -1,4 +1,4 @@
-const LetterData = [
+const LawData = [
   {
     id: 1,
     letter: false,
@@ -49,4 +49,4 @@ const LetterData = [
   }
 ]
 
-export default LetterData
+export default LawData
