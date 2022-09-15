@@ -1,9 +1,9 @@
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import React from 'react';
 import './TemplateCard.css';
 import Button from '../Button/Button.jsx';
 import downloadbtn from './assets/download-btn.png';
-import { Link } from 'react-router-dom'
+import { Navigate } from "react-router-dom";
 
 /** Component for TemplateCard Page 
  * @param {title} is the title of the card
@@ -14,9 +14,12 @@ import { Link } from 'react-router-dom'
  * @param {law} is the type of law for the filter
  * @param {jurisdiction} is the type of jurisdiction for the filter
  * @param {currentFilter} is the current state of the MultiSelectFilter component
+ * @param {docID} is the docID of the current google doc
 */
 
 const TemplateCard = (props) => {
+  const [navigate, setNavigate] = useState(false)
+
   // an object containing the filter flags that this TemplateCard should trigger
   const filters = {
     local: props.jurisdiction === "local",
@@ -84,18 +87,36 @@ const TemplateCard = (props) => {
       </div>
       ;
   }
+
+  /** Downloads a Google doc when user presses the download button */
+  const download = (e) => {
+    // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
+    window.location.assign(`http://localhost:8081/api/docDownload/${props.docID}`);
+  }
+
+  /** Sends user to the Template Filler page for the provided docID */
+  const edit = (e) => {
+    setNavigate(true)
+  }
+
   return (
     <div className='card-ensure-shadow'>
       <div className={props.letter ? 'card-letter-container' : 'card-container'}>
         {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
         {card_content}
         <div className='card-btn-container'>
-          <Button css='card-edit-btn' onClick={props.edit} text="EDIT"></Button>
-          <button className='card-download-btn' onClick={props.download}><img className='download-img' src={downloadbtn} alt='download' /></button>
+          <Button css='card-edit-btn' handleClick={edit} text="EDIT"></Button>
+          <button className='card-download-btn' onClick={download}><img className='download-img' src={downloadbtn} alt='download' /></button>
+          {navigate && <Navigate
+            to="/template-filler"
+            state={{ docID: props.docID }}
+            replace={true}
+          />}
         </div>
       </div>
     </div>
 
   );
 };
+
 export default TemplateCard;

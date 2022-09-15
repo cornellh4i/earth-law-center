@@ -13,16 +13,18 @@ function dataList({ data, checked }) {
   return <div>{
     data.map((item) => (
       <TemplateCard
+        key={item.id}
         className='template-card'
         title={item.title}
         summary={item.summary}
         letter={item.letter}
-        edit={item.edit}
-        download={item.download}
+        // edit={item.edit}
+        // download={item.download}
         preview={item.preview}
         law={item.law}
         jurisdiction={item.jurisdiction}
         currentFilter={checked}
+        docID={item.docID}
       />
     ))}
   </div>

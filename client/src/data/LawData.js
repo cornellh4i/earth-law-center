@@ -5,7 +5,8 @@ const LawData = [
     law: 'ordinance',
     jurisdiction: 'local',
     title: 'Ecosystem Rights',
-    summary: 'A resolution or ordinance on the rights of a particular ecosystem-e.g., a forest-with a possible guardianship body to speak for it.'
+    summary: 'A resolution or ordinance on the rights of a particular ecosystem-e.g., a forest-with a possible guardianship body to speak for it.',
+    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
   },
   {
     id: 2,
@@ -13,40 +14,45 @@ const LawData = [
     law: 'ordinance',
     jurisdiction: 'regional',
     title: 'Local Ocean Rights',
-    summary: 'A resolution or ordinance on the rights of marine ecosystems, including the right to \'health\'.'
-  },
+    summary: 'A resolution or ordinance on the rights of marine ecosystems, including the right to \'health\'.',
+    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
+   },
   {
     id: 3,
     letter: false,
     law: 'ordinance',
     jurisdiction: 'national',
     title: 'Local Rights of Rivers',
-    summary: 'A resolution or ordinance on the rights of rivers and watersheds with a guardianship body to speak for the river.'
-  },
+    summary: 'A resolution or ordinance on the rights of rivers and watersheds with a guardianship body to speak for the river.',
+    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
+   },
   {
     id: 4,
     letter: false,
     law: 'ordinance',
     jurisdiction: 'international',
     title: 'State Constitutional Amendment',
-    summary: 'A Rights of Nature state constitutional amendment that can unlock the ability of local rights of nature efforts.'
-  },
+    summary: 'A Rights of Nature state constitutional amendment that can unlock the ability of local rights of nature efforts.',
+    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
+   },
   {
     id: 5,
     letter: false,
     law: 'ordinance',
     jurisdiction: 'local',
     title: 'National Constitutional Amendment',
-    summary: 'A constitutional amendment establishing the Rights of Nature and other ecocentric legal principles.'
-  },
+    summary: 'A constitutional amendment establishing the Rights of Nature and other ecocentric legal principles.',
+    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
+   },
   {
     id: 6,
     letter: false,
     law: 'resolution',
     jurisdiction: 'local',
     title: 'Preamble on the Rights of Nature',
-    summary: 'A generic preamble on the Rights of Nature to include in any legal instrument, with fully updated information.'
-  }
+    summary: 'A generic preamble on the Rights of Nature to include in any legal instrument, with fully updated information.',
+    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
+   }
 ]
 
 export default LawData

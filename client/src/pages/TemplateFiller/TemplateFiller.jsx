@@ -1,14 +1,19 @@
 import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
-import { useState } from 'react';
-import './TemplateFiller.css';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
+import './TemplateFiller.css';
+
+import { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import HelpBox from '../../components/HelpBox/HelpBox';
+import { useLocation } from "react-router-dom";
+
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
-  /** Temporary hardcoded doc ID -- REPLACE WITH PROPS */
-  const docID = '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
+  /** Data from the state passed by TemplateCard; contains the following data:
+   * @param docID is the docID of the google doc
+  */
+  const data = useLocation().state
 
   /** Temporary hardcoded data to pass as props to the Q&A component */
   const questionsData = {
@@ -108,7 +113,8 @@ const TemplateFiller = () => {
 
   /** Downloads a google doc when user presses the Download button */
   const handleDownload = (e) => {
-    window.location.assign(`http://localhost:8081/api/docDownload/${docID}`);
+    // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
+    window.location.assign(`http://localhost:8081/api/docDownload/${data.docID}`);
   }
 
   return (

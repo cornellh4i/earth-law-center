@@ -19,6 +19,7 @@ const LawsDisplay = () => {
     ordinance: false,
     resolution: false,
   });
+
   const [data, setData] = useState(LawData)
   const searchData = (input) => {
     setData(LawData.filter((item) => {
