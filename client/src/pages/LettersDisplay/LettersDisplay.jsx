@@ -1,34 +1,35 @@
 import React, { useState } from 'react';
 import '../LawsDisplay/LawsLettersDisplay.css';
 import '../../components/CategorySideBar/CategorySideBar';
-import './LettersDisplay.css'; 
+import './LettersDisplay.css';
 import Header from '../../components/Header/Header';
 import MultiSelectFilter from '../../components/MultiSelectFilter/MultiSelectFilter'
 import LetterData from '../../data/LetterData'
 import TemplateList from '../../components/TemplateList/TemplateList.jsx'
+import Grid from '@mui/material/Grid';
 
 
 /** Component for Letters Page */
 const LettersDisplay = () => {
-const [checked, setChecked] = useState({
-  local: false,
-  regional: false,
-  national: false,
-  international: false,
-  ordinance: false,
-  resolution: false,
-});
-const [data, setData] = useState(LetterData)
-const searchData=(input)=>{
-  setData(LetterData.filter((item)=>{
-    if (input===''){
-      return true
-    }
-    else {
-      return item.title.toLowerCase().includes(input) || item.summary.toLowerCase().includes(input)
-    }
-  }))
-}
+  const [checked, setChecked] = useState({
+    local: false,
+    regional: false,
+    national: false,
+    international: false,
+    ordinance: false,
+    resolution: false,
+  });
+  const [data, setData] = useState(LetterData)
+  const searchData = (input) => {
+    setData(LetterData.filter((item) => {
+      if (input === '') {
+        return true
+      }
+      else {
+        return item.title.toLowerCase().includes(input) || item.summary.toLowerCase().includes(input)
+      }
+    }))
+  }
 
   return (
     <div>
@@ -41,7 +42,9 @@ const searchData=(input)=>{
           <h1 className="card-heading-title">Letter Templates</h1>
           <p className="card-description">Let us help you send a lawmaker or other decision-maker an informed letter about an Earth law movement you care about–the Rights of Nature, human environmental rights, rights of future generations, and others. Our letters are regularly updated with the most relevant information to ensure they are relevant and powerful. Just fill in a bit of information and download your letter now! These work for any level of government.</p>
           <div className="letter-template-box">
-            <TemplateList data={data} checked={checked} />
+            <Grid container columns={14}>
+              <TemplateList data={data} checked={checked} />
+            </Grid>
           </div>
         </div>
       </div>
