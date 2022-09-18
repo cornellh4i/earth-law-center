@@ -32,13 +32,13 @@ function printDocInfo(auth) {
 
 
 /**
- * Takes in a field name and the a google sheets if and gets back a question related to that field.
+ * Takes in a field name and returns the question corresponding to that field.
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param {sheetID} is the document id of the google sheets we want to read data from.
  * @param {field} is the text that a corresponding question will be returned.
  * @returns the question(s) that corresponds to the field that was sent.
  */
-async function getQuestions(auth, sheetID, field) {
+async function getQuestion(auth, sheetID, field) {
   const sheets = google.sheets({ version: 'v4', auth });
 
   try {
@@ -344,4 +344,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, getQuestions };
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, getQuestion };
