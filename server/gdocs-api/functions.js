@@ -209,8 +209,6 @@ async function getAllText(auth, docID) {
     documentId: docID,
   });
   // console.log("get all text res", res)
-  // , (err, res) => {
-  // if (err) return console.log('The API returned an error: ' + err);
   // Adds title of doc to JSON 
   allText = {
     "title": res.data.title
