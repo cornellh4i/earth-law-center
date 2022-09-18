@@ -5,9 +5,16 @@ import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import HelpBox from '../../components/HelpBox/HelpBox';
+import { useNavigate } from 'react-router-dom';
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
   /** Temporary hardcoded data to pass as props to the Q&A component */
+  const overviewData = {
+    'Overview': {
+      id: 0,
+      questions: [['', 'A letter encouraging lawmakers to recognize that ecosystems have inherent rights, just as humans do']],
+    }
+  }
   const questionsData = {
     'Name of Local Ecosystem': {
       id: 0,
@@ -39,13 +46,14 @@ const TemplateFiller = () => {
 
   /** The current page clicked by the user, defaults to the first entry in questionsData */
   const [clicked, setClicked] = useState(Object.keys(questionsData)[0]);
+  const [authenticated, setAuthenticated] = useState(false);
 
   /** Temporary variables */
   let length = Object.keys(questionsData).length;
   let clickedId = questionsData[clicked].id;
 
   /** Value to render in the progress bar for the navigation sidebar */
-  const [progress, setProgress] = useState(Math.floor((1 / length) * 100));
+  const [progress, setProgress] = useState(Math.floor((0 / length) * 100));
 
   /** Update the progress bar to the correct percentage value */
   const changeProgress = (newClickedId) => {
@@ -75,6 +83,9 @@ const TemplateFiller = () => {
 
   /** Move user to the previous page */
   const backPage = () => {
+    if (!authenticated){
+
+    }
     let newClickedId = Math.max(clickedId - 1, 0);
     changeProgress(newClickedId);
     setClicked(Object.keys(questionsData)[newClickedId]);
@@ -92,6 +103,13 @@ const TemplateFiller = () => {
     backPage();
   };
 
+  /** Handles user pressing the 'Back' button before authenticating */
+  let navigate = useNavigate(); 
+  const handleBackUnauth = () =>{ 
+    let path = '/'; 
+    navigate(path);
+  }
+
   /** Handles user pressing the 'Skip' button */
   const handleSkip = (e) => {
     advancePage();
@@ -103,26 +121,34 @@ const TemplateFiller = () => {
     console.log(inputs);
   };
 
+  /** Handles user pressing the 'Sign In with Google' button */
+  const handleAuthentication = (e, inputs) => {
+    clickedId = -1;
+    setAuthenticated(true);
+    advancePage();
+  };
+
   return (
     <div>
       <Box sx={{ display: 'flex' }}>
         <FieldSideBar
           title='EarthLegislator'
-          fieldItem={fieldItem}
+          fieldItem={authenticated ? fieldItem : null}
           progress={progress}
         />
         <Grid pt={5} container spacing={4}>
           <Grid item xs={1} />
           <Grid item xs={10}>
             <QuestionAnswer
-              field={clicked}
-              fieldId={questionsData[clicked].id}
+              field={authenticated ? clicked : Object.keys(overviewData)[0]}
+              fieldId={authenticated ? questionsData[clicked].id : overviewData['Overview'].id}
               title={'Right of Nature Ordonnance Template'}
-              questions={questionsData[clicked].questions}
+              questions={authenticated ? questionsData[clicked].questions : overviewData['Overview'].questions}
               length={length}
-              handleBack={handleBack}
+              handleBack={authenticated ? handleBack : handleBackUnauth}
               handleSkip={handleSkip}
-              handleSubmit={handleSubmit}
+              handleSubmit={authenticated ? handleSubmit : handleAuthentication}
+              authenticated={authenticated}
             />
           </Grid>
           <Grid item xs={1} />
