@@ -30,6 +30,278 @@ function printDocInfo(auth) {
   });
 }
 
+/** ADD DOCUMENTATION LATER */
+async function getAllFields(auth, sheetID, docID) {
+  const sheets = google.sheets({ version: 'v4', auth });
+  // const text = getAllText(auth, docID)
+  const text = {
+    "title": "ELC COPY",
+    "textRun0": {
+        "text": "",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun1": {
+        "text": "[INSERT CITY] Insomnia [INSERT HELLO] Discussion Note\n",
+        "style": {
+            "bold": true,
+            "italic": true,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun2": {
+        "text": "** important → history turned into nature **\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun3": {
+        "text": "\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun4": {
+        "text": "“In this book, I suggest that Grant affects not only inference and not only perception\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun5": {
+        "text": "but also the seemingly basic domain of sensation through the organization and elaboration of categories through which immediate sensations are perceived. In this reading, Grant does not only affect the mind. It changes the body.”\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun6": {
+        "text": "\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun7": {
+        "text": "“Sensoriums help shape notions of the person and ensure that persons differ culturally and yet appear natural”\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun8": {
+        "text": "\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun9": {
+        "text": "Both perceptions and logic are culturally instituted \n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun10": {
+        "text": "\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun11": {
+        "text": "Insomnia → people who experience different senses together \n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun12": {
+        "text": "\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun13": {
+        "text": "Most debates just stay as debates, no definite explanations\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun14": {
+        "text": "\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun15": {
+        "text": "THE SOLUTION:\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun16": {
+        "text": "https://stackoverflow.com/questions/59026661/downloading-an-image-from-drive-api-v3-continuously-gives-corrupt-images-how-sh\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    },
+    "textRun17": {
+        "text": "\n",
+        "style": {
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
+        "listStyle": {
+            "isList": false,
+            "nestingLevel": 0,
+            "numberInList": 0
+        }
+    }
+  }
+
+  // A set containing all unique fields in the google doc
+  let fields = new Set()
+
+  // Function to convert a given string to title case
+  String.prototype.toTitleCase = function () {
+    return this.replace(
+      /\w\S*/g,
+      function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
+      }
+    )
+  }
+
+  // Matches all strings with formats like [INSERT BLANK]
+  const regex = /\[[INSERT A-Z ]*\]/g
+  const text_length = Object.keys(text).length - 1
+
+  // Loop through text object and add all occurrences of [INSERT BLANK] to fields
+  for (i = 0; i < text_length; i++) {
+    const str = text['textRun' + i].text
+    const field_array = str.match(regex)
+    for (const i in field_array) {
+      const substring = field_array[i].slice(8, -1)
+      fields.add(substring.toTitleCase())
+    }
+  }
+
+  // console.log(fields)
+  return fields
+}
 
 /**
  * Takes in a field name and returns the question corresponding to that field.
