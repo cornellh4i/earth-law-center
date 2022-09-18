@@ -3,6 +3,7 @@ import '../LawsDisplay/LawsLettersDisplay.css';
 import '../../components/CategorySideBar/CategorySideBar';
 import './LettersDisplay.css';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import MultiSelectFilter from '../../components/MultiSelectFilter/MultiSelectFilter'
 import LetterData from '../../data/LetterData'
 import TemplateList from '../../components/TemplateList/TemplateList.jsx'
@@ -45,6 +46,7 @@ const LettersDisplay = () => {
           </div>
         </div>
       </div>
+      <Footer text="Powered by Earth Law Center" />
     </div>
   );
 };

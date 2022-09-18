@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './LawsLettersDisplay.css';
 import '../../components/CategorySideBar/CategorySideBar';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import CategorySideBar from '../../components/CategorySideBar/CategorySideBar';
 import TemplateCard from '../../components/TemplateCard/TemplateCard';
 import MultiSelectFilter from '../../components/MultiSelectFilter/MultiSelectFilter'
@@ -49,6 +50,7 @@ const LawsDisplay = () => {
           </div>
         </div>
       </div>
+      <Footer text="Powered by Earth Law Center" />
     </div>
   );
 };

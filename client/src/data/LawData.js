@@ -6,7 +6,8 @@ const LawData = [
     jurisdiction: 'local',
     title: 'Ecosystem Rights',
     summary: 'A resolution or ordinance on the rights of a particular ecosystem-e.g., a forest-with a possible guardianship body to speak for it.',
-    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
+    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os',
+    category: 'Rights of Nature'
   },
   {
     id: 2,
@@ -15,8 +16,9 @@ const LawData = [
     jurisdiction: 'regional',
     title: 'Local Ocean Rights',
     summary: 'A resolution or ordinance on the rights of marine ecosystems, including the right to \'health\'.',
-    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
-   },
+    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os',
+    category: 'Rights of Future Generations'
+  },
   {
     id: 3,
     letter: false,
@@ -24,8 +26,9 @@ const LawData = [
     jurisdiction: 'national',
     title: 'Local Rights of Rivers',
     summary: 'A resolution or ordinance on the rights of rivers and watersheds with a guardianship body to speak for the river.',
-    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
-   },
+    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os',
+    category: 'Human Environmental Rights'
+  },
   {
     id: 4,
     letter: false,
@@ -33,8 +36,9 @@ const LawData = [
     jurisdiction: 'international',
     title: 'State Constitutional Amendment',
     summary: 'A Rights of Nature state constitutional amendment that can unlock the ability of local rights of nature efforts.',
-    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
-   },
+    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os',
+    category: 'Ecocide'
+  },
   {
     id: 5,
     letter: false,
@@ -42,8 +46,9 @@ const LawData = [
     jurisdiction: 'local',
     title: 'National Constitutional Amendment',
     summary: 'A constitutional amendment establishing the Rights of Nature and other ecocentric legal principles.',
-    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
-   },
+    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os',
+    category: 'Legal Guardianship'
+  },
   {
     id: 6,
     letter: false,
@@ -51,8 +56,9 @@ const LawData = [
     jurisdiction: 'local',
     title: 'Preamble on the Rights of Nature',
     summary: 'A generic preamble on the Rights of Nature to include in any legal instrument, with fully updated information.',
-    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os'
-   }
+    docID: '1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoRFmKw3Os',
+    category: 'Ecocentric Land Models'
+  }
 ]
 
 export default LawData

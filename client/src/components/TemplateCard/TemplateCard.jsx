@@ -34,6 +34,8 @@ const TemplateCard = (props) => {
   var matchlaw = false;
   var matchjurisdiction = false;
 
+  var filtered = props.currentFilter.ordinance || props.currentFilter.resolution || props.currentFilter.local || props.currentFilter.regional || props.currentFilter.national || props.currentFilter.international;
+
   // sets matchordinance to true if 
   // 1. the law section of the filter is untouched or 
   // 2. the filter checkbox corresponding to the law prop of this TemplateCard is checked
@@ -61,17 +63,17 @@ const TemplateCard = (props) => {
 
   var card_content =
     <div className='card-text-container'>
-      <p className='card-category'>{props.category}</p>
-      <div className='title-container'>
-        <h1 className='card-title'>{props.title}</h1>
-      </div>
-      <div className='tag-container'>
-        <Button css='card-type-btn' text={props.law}></Button>
-        <Button css='card-type-btn' text={props.jurisdiction}></Button>
-      </div>
-      <div className='summary-container'>
-        <p className='card-summary'>{props.summary}</p>
-      </div>
+        <p className='card-category'>{props.category}</p>
+        <div className='title-container'>
+          <h1 className='card-title'>{props.title}</h1>
+        </div>
+        <div className='tag-container'>
+          <Button css={filtered ? 'hidden' : 'card-type-btn'} text={props.law}></Button>
+          <Button css={filtered ? 'hidden' : 'card-type-btn'} text={props.jurisdiction}></Button>
+        </div>
+        <div className='summary-container'>
+          <p className='card-summary'>{props.summary}</p>
+        </div>
     </div>
     ;
   if (props.letter) {

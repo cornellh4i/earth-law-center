@@ -4,11 +4,12 @@ import Typography from '@mui/material/Typography';
 import ResourceBox from '../../components/ResourceBox/ResourceBox';
 import LandingCard from '../../components/LandingCard/LandingCard';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import './Landing.css';
 import { Link } from 'react-router-dom'
 import text from '../../data/LandingText.js';
 import Button from '../../components/Button/Button';
-import ResourceData from "../../data/ResourceData"; 
+import ResourceData from "../../data/ResourceData";
 
 /** Component for Landing Page */
 const Landing = () => {
@@ -51,6 +52,7 @@ const Landing = () => {
 
         <Link to="/resources"><Button text="SEE MORE" css="seemore-bottom-btn" /></Link>
       </div>
+      <Footer text="Powered by Earth Law Center" />
     </div>
   );
 };
