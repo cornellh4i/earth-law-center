@@ -22,28 +22,26 @@ module.exports = () => {
   // Endpoint for docDownload
   router.get('/docDownload/:docID', async (req, res) => {
     try {
-      var fileName
-      var fileLocation = './docs'
-      var filePath = path.join(fileLocation, `${req.params.docID}.docx`) // path on server
+      (async function () {
+        let fileLocation = './docs'
+        let filePath = path.join(fileLocation, `${req.params.docID}.docx`) // path on server
+        let client = await authsamp.authenticate(scopes)
 
-      authsamp.authenticate(scopes).then((client) => {
-        functions.getAllText(client, req.params.docID).then(response => {
-          // Update title and encode to remove problematic characters
-          fileName = encodeURIComponent(`${response.title}.docx`)
+        // Update title and encode to remove problematic characters
+        let response = await functions.getAllText(client, req.params.docID)
+        let fileName = await encodeURIComponent(`${response.title}.docx`)
+
+        // Write binary data to a file stored on the server
+        response = await functions.docDownload(client, req.params.docID)
+        await fs.writeFile(filePath, Buffer.from(response), function (err) {
+          if (err) throw err;
         })
 
-        functions.docDownload(client, req.params.docID).then(async function (response) {
-          // Write binary data to a file stored on the server
-          await fs.writeFile(filePath, Buffer.from(response), function (err) {
-            if (err) throw err;
-          })
-
-          // Download to user's desktop and delete server file
-          res.download(filePath, fileName, function () {
-            fs.unlink(filePath);
-          })
+        // Download to user's desktop and delete server file
+        res.download(filePath, fileName, function () {
+          fs.unlink(filePath);
         })
-      })
+      })()
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
