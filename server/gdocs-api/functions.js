@@ -203,22 +203,22 @@ async function replaceAllTexts(auth, docID, replaceText, containsText) {
 async function getAllText(auth, docID) {
   const docs = google.docs({ version: 'v1', auth });
   var allText;
+
   // We are using a GET request here
   const res = await docs.documents.get({
-    // This document ID is found in the url after the /d
-    documentId: docID,
+    documentId: docID, // docID is found in the url after /d
   });
-  // console.log("get all text res", res)
+
   // Adds title of doc to JSON 
   allText = {
     "title": res.data.title
   }
+
   // Creates an attribute for each text run in the doc
   allText["textRun0"] = await readStructuralElements(res.data.body.content[0]);
   for (i = 1; i < res.data.body.content.length; i++) {
     allText["textRun" + i] = await readStructuralElements(res.data.body.content[i], allText["textRun" + (i - 1)]);
   }
-  // });
 
   return allText;
 }
@@ -253,9 +253,9 @@ async function readStructuralElements(element, prevTextRun) {
     paragraphElements = element.paragraph.elements;
     for (j = 0; j < paragraphElements.length; j++) {
       // Parses text, style, and list style of paragraph element
-      textRun.text += readParagraphElement(paragraphElements[j]);
-      textRun.style = readParagraphElementStyle(paragraphElements[j]);
-      textRun.listStyle = readParagraphElementListStyle(element.paragraph.bullet, prevTextRun.listStyle);
+      textRun.text += await readParagraphElement(paragraphElements[j]);
+      textRun.style = await readParagraphElementStyle(paragraphElements[j]);
+      textRun.listStyle = await readParagraphElementListStyle(element.paragraph.bullet, prevTextRun.listStyle);
     }
   } else if (element.table != null) {
     // The text in table cells are in nested Structural Elements and tables may be
@@ -265,12 +265,12 @@ async function readStructuralElements(element, prevTextRun) {
     for (j = 0; j < rows.length(); j++) {
       cells = rows[j].getTableCells();
       for (k = 0; k < cells.length(); k++) {
-        textRun.text += readStructuralElements(cells[k].getContent());
+        textRun.text += await readStructuralElements(cells[k].getContent());
       }
     }
   } else if (element.tableOfContents != null) {
     // The text in the TOC is also in a Structural Element.
-    textRun.text += readStructuralElements(element.getTableOfContents().getContent());
+    textRun.text += await readStructuralElements(element.getTableOfContents().getContent());
   }
   return textRun;
 }
