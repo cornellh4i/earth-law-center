@@ -1,13 +1,20 @@
 import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
-import { useState } from 'react';
-import './TemplateFiller.css';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
+import './TemplateFiller.css';
+
+import { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import HelpBox from '../../components/HelpBox/HelpBox';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
+  /** Data from the state passed by TemplateCard; contains the following data:
+   * @param docID is the docID of the google doc
+  */
+  const data = useLocation().state
+
   /** Temporary hardcoded data to pass as props to the Q&A component */
   const overviewData = {
     'Overview': {
@@ -128,6 +135,13 @@ const TemplateFiller = () => {
     advancePage();
   };
 
+  /** Downloads a google doc when user presses the Download button */
+  const handleDownload = (e) => {
+    // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
+    window.location.assign(`http://localhost:8081/api/docDownload/${data.docID}`);
+  }
+
+
   return (
     <div>
       <Box sx={{ display: 'flex' }}>
@@ -135,6 +149,7 @@ const TemplateFiller = () => {
           title='EarthLegislator'
           fieldItem={authenticated ? fieldItem : null}
           progress={progress}
+          handleDownload={handleDownload}
         />
         <Grid pt={5} container spacing={4}>
           <Grid item xs={1} />

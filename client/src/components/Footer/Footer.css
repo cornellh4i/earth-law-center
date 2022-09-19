@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
+.footBanner {
+  display: flex;
+  align-items: center;
+  min-height: 8rem;
+  width: 100%;
+  background: #eef2ef;
+}
+
+.footContent {
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
