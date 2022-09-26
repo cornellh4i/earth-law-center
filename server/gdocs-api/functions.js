@@ -31,251 +31,14 @@ function printDocInfo(auth) {
 }
 
 /** ADD DOCUMENTATION LATER */
-async function getAllFields(auth, sheetID, docID) {
-  const sheets = google.sheets({ version: 'v4', auth });
-  // const text = getAllText(auth, docID)
-  const text = {
-    "title": "ELC COPY",
-    "textRun0": {
-        "text": "",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun1": {
-        "text": "[INSERT CITY] Insomnia [INSERT HELLO] Discussion Note\n",
-        "style": {
-            "bold": true,
-            "italic": true,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun2": {
-        "text": "** important → history turned into nature **\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun3": {
-        "text": "\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun4": {
-        "text": "“In this book, I suggest that Grant affects not only inference and not only perception\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun5": {
-        "text": "but also the seemingly basic domain of sensation through the organization and elaboration of categories through which immediate sensations are perceived. In this reading, Grant does not only affect the mind. It changes the body.”\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun6": {
-        "text": "\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun7": {
-        "text": "“Sensoriums help shape notions of the person and ensure that persons differ culturally and yet appear natural”\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun8": {
-        "text": "\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun9": {
-        "text": "Both perceptions and logic are culturally instituted \n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun10": {
-        "text": "\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun11": {
-        "text": "Insomnia → people who experience different senses together \n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun12": {
-        "text": "\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun13": {
-        "text": "Most debates just stay as debates, no definite explanations\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun14": {
-        "text": "\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun15": {
-        "text": "THE SOLUTION:\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun16": {
-        "text": "https://stackoverflow.com/questions/59026661/downloading-an-image-from-drive-api-v3-continuously-gives-corrupt-images-how-sh\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    },
-    "textRun17": {
-        "text": "\n",
-        "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
-        },
-        "listStyle": {
-            "isList": false,
-            "nestingLevel": 0,
-            "numberInList": 0
-        }
-    }
-  }
+async function getAllFields(auth, docID) {
+  const text = await getAllText(auth, docID)
 
   // A set containing all unique fields in the google doc
   let fields = new Set()
 
   // Function to convert a given string to title case
+  // NOT USED CURRENTLY BUT WE NEED IT EVENTUALLY, STORING HERE FOR NOW
   String.prototype.toTitleCase = function () {
     return this.replace(
       /\w\S*/g,
@@ -295,11 +58,11 @@ async function getAllFields(auth, sheetID, docID) {
     const field_array = str.match(regex)
     for (const i in field_array) {
       const substring = field_array[i].slice(8, -1)
-      fields.add(substring.toTitleCase())
+      fields.add(substring.toLowerCase())
     }
   }
 
-  // console.log(fields)
+  console.log(fields)
   return fields
 }
 
@@ -307,11 +70,14 @@ async function getAllFields(auth, sheetID, docID) {
  * Takes in a field name and returns the question corresponding to that field.
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param {sheetID} is the document id of the google sheets we want to read data from.
- * @param {field} is the text that a corresponding question will be returned.
+ * @param {docID} is the document id of the google doc we want to retrieve info from.
  * @returns the question(s) that corresponds to the field that was sent.
  */
-async function getQuestion(auth, sheetID, field) {
+async function getQuestions(auth, sheetID, docID) {
   const sheets = google.sheets({ version: 'v4', auth });
+
+  // Set of strings where each string is a field in the template doc
+  let fields = await getAllFields(auth, docID)
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -320,28 +86,32 @@ async function getQuestion(auth, sheetID, field) {
       range: 'test!A:Z',
     });
 
+    // All non-empty values in the google sheets
     const grid = response.data.values
-    //input_field is reserved for future testing purposes
-    var question = {
-      "field": "",
-      // "input_field":"",
-      "question": "",
-      "input_type": "",
-      "description": "",
-    }
+
+    // Array of question objects
+    let data = []
+
     for (let i = 0; i < grid.length; i++) {
       row = grid[i]
-      if (row[0] === field) {
+      if (fields.has(row[0].toLowerCase())) {
+        // Question object, contains all relevant columns in the google sheets
+        let question = {
+          "field": "",
+          "question": "",
+          "input_type": "",
+          "description": "",
+        }
+
         question.field = row[0]
-        // question.input_field=field
         try { question.question = row[1] } catch (err) { console.log("missing question") }
         try { question.input_type = row[2] } catch (err) { console.log("missing input type") }
         try { question.description = row[3] } catch (err) { console.log("missing description") }
-        break
+        data.push(question)
       }
     }
-    return question
 
+    return data
   } catch (err) {
     console.error(err);
   }
@@ -614,4 +384,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, getQuestion };
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, getQuestions };
