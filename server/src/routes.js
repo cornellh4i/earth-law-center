@@ -25,7 +25,7 @@ module.exports = () => {
       (async function () {
         let fileLocation = './docs'
         let filePath = path.join(fileLocation, `${req.params.docID}.docx`) // path on server
-        let client = await authsamp.authenticate(scopes)
+        let client = await functions.readAuthFile()
 
         // Update title and encode to remove problematic characters
         let response = await functions.getAllText(client, req.params.docID)
@@ -61,7 +61,7 @@ module.exports = () => {
   // Endpoint for insertText
   router.get('/insertText/:docID/:text/:location', async (req, res) => {
     try {
-      authsamp.authenticate(scopes).then((client) => functions.insertText(client, req.params.docID, req.params.text, { index: req.params.location }).then((response) => res.json({ msg: `docid: ${response}` })))
+      functions.readAuthFile(scopes).then((client) => functions.insertText(client, req.params.docID, req.params.text, { index: req.params.location }).then((response) => res.json({ msg: `docid: ${response}` })))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
@@ -71,14 +71,14 @@ module.exports = () => {
   // Endpoint for replaceAllText() -- TODO
   router.get('/replaceAllText/:docID/:replaceText/:containsText', async (req, res) => {
     try {
-      authsamp.authenticate(scopes).then((client) => functions.replaceAllTexts(client, req.params.docID, req.params.replaceText, req.params.containsText).then((response) => res.json({ msg: `docid: ${response}` })))
+      functions.readAuthFile(scopes).then((client) => functions.replaceAllTexts(client, req.params.docID, req.params.replaceText, req.params.containsText).then((response) => res.json({ msg: `docid: ${response}` })))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
     }
   });
 
-  // Endpoint for replaceAllText() -- TODO
+  // Endpoint for authenticateText() -- TODO
   router.get('/authenticateTest', async (req, res) => {
     try {
       authsamp.authenticate(scopes).then((client) => functions.authenticateTest(client).then((response) => res.json({ msg: `token: ${response}` })))
@@ -92,7 +92,7 @@ module.exports = () => {
   // Endpoint for getAllText (currently does not work (returns an object))
   router.get('/getAllText/:docID', async (req, res) => {
     try {
-      authsamp.authenticate(scopes).then((client) => functions.getAllText(client, req.params.docID).then((response) => res.json({ msg: `text: ${JSON.stringify(response)}` })))
+      functions.readAuthFile(scopes).then((client) => functions.getAllText(client, req.params.docID).then((response) => res.json({ msg: `text: ${JSON.stringify(response)}` })))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
