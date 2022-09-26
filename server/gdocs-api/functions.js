@@ -30,7 +30,12 @@ function printDocInfo(auth) {
   });
 }
 
-/** ADD DOCUMENTATION LATER */
+/**
+ * Takes in a docID and returns all the fields in the form of [INSERT XXX].
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {docID} is the document id of the google doc we want to retrieve info from.
+ * @returns the fields(s) that are retrieved from the google doc.
+ */
 async function getAllFields(auth, docID) {
   const text = await getAllText(auth, docID)
 
@@ -94,6 +99,7 @@ async function getQuestions(auth, sheetID, docID) {
 
     for (let i = 0; i < grid.length; i++) {
       row = grid[i]
+      // Check if the current sheet field is in the doc fields set
       if (fields.has(row[0].toLowerCase())) {
         // Question object, contains all relevant columns in the google sheets
         let question = {
