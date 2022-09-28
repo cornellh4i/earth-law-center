@@ -16,7 +16,7 @@ const TemplateFiller = () => {
   const data = useLocation().state
 
   /** Temporary hardcoded data to pass as props to the Q&A component */
-  const questionsData = [
+  const rawData = [
     {
       "field": "City",
       "question": "What city does this law apply to?",
@@ -64,6 +64,7 @@ const TemplateFiller = () => {
       "input_type": "short answer"
     }
   ]
+  const questionsData=JSON.parse(rawData)
 
   /** Temporary hardcoded data to pass as props to the Q&A component */
   // const questionsData = {
@@ -96,11 +97,10 @@ const TemplateFiller = () => {
   // };
 
   /** The current page clicked by the user, defaults to the first entry in questionsData */
-  const [clicked, setClicked] = useState(Object.keys(questionsData)[0]);
+  const [clickedId, setClickedId] = useState(0);
 
   /** Temporary variables */
-  let length = Object.keys(questionsData).length;
-  let clickedId = questionsData[clicked].id;
+  let length = questionsData.length;
 
   /** Value to render in the progress bar for the navigation sidebar */
   const [progress, setProgress] = useState(Math.floor((1 / length) * 100));
@@ -111,21 +111,22 @@ const TemplateFiller = () => {
   };
 
   /** Handles user clicking a navigation button in the sidebar */
-  const handleNavigationClick = (field) => {
-    setClicked(field);
-    changeProgress(questionsData[field].id);
+  const handleNavigationClick = (id) => {
+    setClickedId(id);
+    changeProgress(id);
   };
 
   /** Styling and functionality for sidebar navigation buttons */
-  const fields = Object.keys(questionsData);
-  const fieldItem = fields.map((field) => (
+  // const fields = Object.keys(questionsData);
+  const fieldItem = questionsData.map((question,index) => (
     <div
       className={
-        questionsData[clicked].id === questionsData[field].id
+        // questionsData[clicked].id === questionsData[field].id
+        index===clickedId
           ? 'side-btn side-btn-active'
           : 'side-btn'
       }
-      onClick={() => handleNavigationClick(field)}
+      onClick={() => handleNavigationClick(index)}
     >
       {field}
     </div>
@@ -135,14 +136,14 @@ const TemplateFiller = () => {
   const backPage = () => {
     let newClickedId = Math.max(clickedId - 1, 0);
     changeProgress(newClickedId);
-    setClicked(Object.keys(questionsData)[newClickedId]);
+    setClickedId(newClickedId);
   };
 
   /** Advances user to the next page */
   const advancePage = () => {
     let newClickedId = Math.min(clickedId + 1, length - 1);
     changeProgress(newClickedId);
-    setClicked(Object.keys(questionsData)[newClickedId]);
+    setClickedId(newClickedId);
   };
 
   /** Handles user pressing the 'Back' button */
