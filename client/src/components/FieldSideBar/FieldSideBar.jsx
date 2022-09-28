@@ -46,10 +46,11 @@ const FieldSideBar = (props) => {
           <Button
             text='DOWNLOAD'
             handleClick={() => props.handleDownload()}
-            css='card-edit-btn'
+            css={props.fieldItem == null ? 'hidden' : 'card-edit-btn'}
+
           />
         </Box>
-        <RouteLink to='/preview'><Button css='template-preview-btn' text={'PREVIEW'}/></RouteLink>
+        <RouteLink to='/preview'><Button css={props.fieldItem == null ? 'hidden' : 'template-preview-btn'} text={'PREVIEW'}/></RouteLink>
         <Box pt={2} className='return'>
           <Link href='/laws' color='text.secondary'>Return to Templates</Link>
         </Box>

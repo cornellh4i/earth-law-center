@@ -306,3 +306,28 @@
 .hidden{
   display: none;
 }
+
+.google-authentication-btn{
+  height: 3rem;
+  width: 20rem;
+  background:
+    #64926E;
+  border-radius: 15px;
+  border: none;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 16px;
+  line-height: 25px;
+  color: #F1F1F3;
+  cursor: pointer;
+}
+.google-authentication-btn::after {
+  padding: 0.17rem;
+  margin: 2% 0%;
+  content: " ";
+  border-bottom: 0.12rem solid #fff;
+  border-left: 0.12rem solid #fff;
+  transform: translateX(100%) rotate(225deg);
+  display: inline-block;
+}
