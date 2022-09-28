@@ -26,7 +26,6 @@ module.exports = () => {
       authsamp.authenticate(scopes).then((client) => {
         functions.getQuestions(client, req.params.sheetID, req.params.docID)
           .then(async function (response) {
-            // await res.json({ msg: `text: ${response}` })
             res.json(response)
           })
       })
@@ -100,7 +99,6 @@ module.exports = () => {
   // Endpoint for getAllText (currently does not work (returns an object))
   router.get('/getAllText/:docID', async (req, res) => {
     try {
-      // authsamp.authenticate(scopes).then((client) => functions.getAllText(client, req.params.docID).then((response) => res.json({ msg: `text: ${JSON.stringify(response)}` })))
       authsamp.authenticate(scopes).then((client) => functions.getAllText(client, req.params.docID).then(async function (response) { res.json(response) }))
     }
     catch (err) {

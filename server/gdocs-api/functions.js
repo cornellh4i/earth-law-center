@@ -67,7 +67,6 @@ async function getAllFields(auth, docID) {
     }
   }
 
-  console.log(fields)
   return fields
 }
 
@@ -110,9 +109,9 @@ async function getQuestions(auth, sheetID, docID) {
         }
 
         question.field = row[0]
-        try { question.question = row[1] } catch (err) { console.log("missing question") }
-        try { question.input_type = row[2] } catch (err) { console.log("missing input type") }
-        try { question.description = row[3] } catch (err) { console.log("missing description") }
+        try { question.question = row[1] } catch (err) { console.err("missing question") }
+        try { question.input_type = row[2] } catch (err) { console.err("missing input type") }
+        try { question.description = row[3] } catch (err) { console.err("missing description") }
         data.push(question)
       }
     }
