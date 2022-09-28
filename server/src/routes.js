@@ -68,7 +68,7 @@ module.exports = () => {
     }
   });
 
-  // Endpoint for replaceAllText() -- TODO
+  // Endpoint for replaceAllText
   router.get('/replaceAllText/:docID/:replaceText/:containsText', async (req, res) => {
     try {
       functions.readAuthFile(scopes).then((client) => functions.replaceAllTexts(client, req.params.docID, req.params.replaceText, req.params.containsText).then((response) => res.json({ msg: `docid: ${response}` })))
@@ -78,10 +78,10 @@ module.exports = () => {
     }
   });
 
-  // Endpoint for authenticateText() -- TODO
-  router.get('/authenticateTest', async (req, res) => {
+  // Endpoint for preAuthenticate
+  router.get('/preAuthenticate', async (req, res) => {
     try {
-      authsamp.authenticate(scopes).then((client) => functions.authenticateTest(client).then((response) => res.json({ msg: `token: ${response}` })))
+      authsamp.authenticate(scopes).then((client) => functions.preAuthenticate(client).then((response) => res.json({ msg: `token: ${response}` })))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })

@@ -183,16 +183,11 @@ async function getAllText(auth, docID) {
 }
 
 /**
- * TESTING
- * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * Authenticate user and write user token
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client
  * @returns the doc data as a binary array buffer
  */
-async function authenticateTest(auth) {
-  // const drive = google.drive({ version: 'v3', auth });
-  // const qs = new url.URL(req.url, 'http://localhost:8081')
-  //   .searchParams;
-  // const code = qs.get('code');
-  // oAuth2Client.getCredentials(oauth2Client.credentials);
+async function preAuthenticate(auth) {
   fs.writeFile(TOKEN_PATH, JSON.stringify(auth), (err) => {
     if (err) console.error(err);
     console.log('Token stored to', TOKEN_PATH);
@@ -201,6 +196,9 @@ async function authenticateTest(auth) {
   return auth;
 }
 
+/**
+ * Read the user token
+ */
 async function readAuthFile() {
   fs.readFile(TOKEN_PATH, (err, token) => {
     if (err) return 'error';
@@ -327,4 +325,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, authenticateTest, readAuthFile };
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, preAuthenticate, readAuthFile };
