@@ -415,4 +415,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, getQuetsions, preAuthenticate, readAuthFile };
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, getQuestions, preAuthenticate, readAuthFile };
