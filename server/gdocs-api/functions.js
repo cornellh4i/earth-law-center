@@ -33,6 +33,98 @@ function printDocInfo(auth) {
 }
 
 /**
+ * Takes in a docID and returns all the fields in the form of [INSERT XXX].
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {docID} is the document id of the google doc we want to retrieve info from.
+ * @returns the fields(s) that are retrieved from the google doc.
+ */
+async function getAllFields(auth, docID) {
+  const text = await getAllText(auth, docID)
+
+  // A set containing all unique fields in the google doc
+  let fields = new Set()
+
+  // Function to convert a given string to title case
+  // NOT USED CURRENTLY BUT WE NEED IT EVENTUALLY, STORING HERE FOR NOW
+  String.prototype.toTitleCase = function () {
+    return this.replace(
+      /\w\S*/g,
+      function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
+      }
+    )
+  }
+
+  // Matches all strings with formats like [INSERT BLANK]
+  const regex = /\[[INSERT A-Z ]*\]/g
+  const text_length = Object.keys(text).length - 1
+
+  // Loop through text object and add all occurrences of [INSERT BLANK] to fields
+  for (i = 0; i < text_length; i++) {
+    const str = text['textRun' + i].text
+    const field_array = str.match(regex)
+    for (const i in field_array) {
+      const substring = field_array[i].slice(8, -1)
+      fields.add(substring.toLowerCase())
+    }
+  }
+
+  return fields
+}
+
+/**
+ * Takes in a field name and returns the question corresponding to that field.
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {sheetID} is the document id of the google sheets we want to read data from.
+ * @param {docID} is the document id of the google doc we want to retrieve info from.
+ * @returns the question(s) that corresponds to the field that was sent.
+ */
+async function getQuestions(auth, sheetID, docID) {
+  const sheets = google.sheets({ version: 'v4', auth });
+
+  // Set of strings where each string is a field in the template doc
+  let fields = await getAllFields(auth, docID)
+
+  try {
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: sheetID,
+      majorDimension: 'ROWS',
+      range: 'test!A:Z',
+    });
+
+    // All non-empty values in the google sheets
+    const grid = response.data.values
+
+    // Array of question objects
+    let data = []
+
+    for (let i = 0; i < grid.length; i++) {
+      row = grid[i]
+      // Check if the current sheet field is in the doc fields set
+      if (fields.has(row[0].toLowerCase())) {
+        // Question object, contains all relevant columns in the google sheets
+        let question = {
+          "field": "",
+          "question": "",
+          "input_type": "",
+          "description": "",
+        }
+
+        question.field = row[0]
+        try { question.question = row[1] } catch (err) { console.err("missing question") }
+        try { question.input_type = row[2] } catch (err) { console.err("missing input type") }
+        try { question.description = row[3] } catch (err) { console.err("missing description") }
+        data.push(question)
+      }
+    }
+
+    return data
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+/**
  * Downloads a google doc given a doc id
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param {docID} is the document id of the google doc we want to download
@@ -160,24 +252,22 @@ async function replaceAllTexts(auth, docID, replaceText, containsText) {
 async function getAllText(auth, docID) {
   const docs = google.docs({ version: 'v1', auth });
   var allText;
+
   // We are using a GET request here
   const res = await docs.documents.get({
-    // This document ID is found in the url after the /d
-    documentId: docID,
+    documentId: docID, // docID is found in the url after /d
   });
-  // console.log("get all text res", res)
-  // , (err, res) => {
-  // if (err) return console.log('The API returned an error: ' + err);
+
   // Adds title of doc to JSON 
   allText = {
     "title": res.data.title
   }
+
   // Creates an attribute for each text run in the doc
   allText["textRun0"] = await readStructuralElements(res.data.body.content[0]);
   for (i = 1; i < res.data.body.content.length; i++) {
     allText["textRun" + i] = await readStructuralElements(res.data.body.content[i], allText["textRun" + (i - 1)]);
   }
-  // });
 
   return allText;
 }
@@ -236,9 +326,9 @@ async function readStructuralElements(element, prevTextRun) {
     paragraphElements = element.paragraph.elements;
     for (j = 0; j < paragraphElements.length; j++) {
       // Parses text, style, and list style of paragraph element
-      textRun.text += readParagraphElement(paragraphElements[j]);
-      textRun.style = readParagraphElementStyle(paragraphElements[j]);
-      textRun.listStyle = readParagraphElementListStyle(element.paragraph.bullet, prevTextRun.listStyle);
+      textRun.text += await readParagraphElement(paragraphElements[j]);
+      textRun.style = await readParagraphElementStyle(paragraphElements[j]);
+      textRun.listStyle = await readParagraphElementListStyle(element.paragraph.bullet, prevTextRun.listStyle);
     }
   } else if (element.table != null) {
     // The text in table cells are in nested Structural Elements and tables may be
@@ -248,12 +338,12 @@ async function readStructuralElements(element, prevTextRun) {
     for (j = 0; j < rows.length(); j++) {
       cells = rows[j].getTableCells();
       for (k = 0; k < cells.length(); k++) {
-        textRun.text += readStructuralElements(cells[k].getContent());
+        textRun.text += await readStructuralElements(cells[k].getContent());
       }
     }
   } else if (element.tableOfContents != null) {
     // The text in the TOC is also in a Structural Element.
-    textRun.text += readStructuralElements(element.getTableOfContents().getContent());
+    textRun.text += await readStructuralElements(element.getTableOfContents().getContent());
   }
   return textRun;
 }
@@ -325,4 +415,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, preAuthenticate, readAuthFile };
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, getQuestions, preAuthenticate, readAuthFile };

@@ -6,8 +6,9 @@ module.exports = () => {
 
   // Imported functions
   const functions = require('../gdocs-api/functions.js');
-  const authsamp = require('../gdocs-api/web_index.js')
-  const scopes = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive'];
+  const authsamp = require('../gdocs-api/web-index.js')
+
+  const scopes = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets.readonly'];
 
   /**** Below are Example Routes from the starter code *****/
   router.get('/hello', async (_, res) => {
@@ -18,6 +19,20 @@ module.exports = () => {
     res.json({ msg: `Hello, ${req.params.name}` });
   });
   /*********************************************************/
+
+  // Endpoint for getting questions from Google Sheets
+  router.get('/getQuestions/:sheetID/:docID', async (req, res) => {
+    try {
+      authsamp.authenticate(scopes).then((client) => {
+        functions.getQuestions(client, req.params.sheetID, req.params.docID)
+          .then(async function (response) {
+            res.json(response)
+          })
+      })
+    } catch (err) {
+      res.json({ error: err.message || err.toString() })
+    }
+  })
 
   // Endpoint for docDownload
   router.get('/docDownload/:docID', async (req, res) => {

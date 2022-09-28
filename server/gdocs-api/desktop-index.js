@@ -8,7 +8,7 @@ const { run } = require('googleapis/build/src/apis/run');
 dotenv.config();
 console.log("ENV", process.env.CLIENT_ID)
 
-const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive'];
+const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/sheets'];
 
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first time. 
