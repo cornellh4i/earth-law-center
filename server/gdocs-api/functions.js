@@ -4,6 +4,8 @@
 
 // Add Imports Below
 const { google } = require('googleapis');
+const TOKEN_PATH = 'token.json';
+const fs = require('fs');
 
 /**
  * THIS IS A SAMPLE FUNCTION
@@ -271,6 +273,30 @@ async function getAllText(auth, docID) {
 }
 
 /**
+ * Authenticate user and write user token
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client
+ * @returns the doc data as a binary array buffer
+ */
+async function preAuthenticate(auth) {
+  fs.writeFile(TOKEN_PATH, JSON.stringify(auth), (err) => {
+    if (err) console.error(err);
+    console.log('Token stored to', TOKEN_PATH);
+  });
+  console.info('Tokens acquired.');
+  return auth;
+}
+
+/**
+ * Read the user token
+ */
+async function readAuthFile() {
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return 'error';
+    return JSON.parse(token)
+  });
+}
+
+/**
  * Helper function to initialize textRun JSON, determines what type of structural element is being parsed, and stores
  * respective data (list style, text, and font style for paragraph elements; rows and columns of a table;
  * total content of a table of contents) into the respective textRun's JSON.
@@ -389,4 +415,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, getQuestions };
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, getQuetsions, preAuthenticate, readAuthFile };
