@@ -302,3 +302,7 @@
 .template-preview-btn:hover {
   opacity: 0.6;
 }
+
+.hidden{
+  display: none;
+}

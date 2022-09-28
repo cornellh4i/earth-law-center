@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import '../LawsDisplay/LawsLettersDisplay.css';
 import '../../components/CategorySideBar/CategorySideBar';
-import './LettersDisplay.css'; 
+import './LettersDisplay.css';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import MultiSelectFilter from '../../components/MultiSelectFilter/MultiSelectFilter'
 import LetterData from '../../data/LetterData'
 import TemplateList from '../../components/TemplateList/TemplateList.jsx'
@@ -10,25 +11,25 @@ import TemplateList from '../../components/TemplateList/TemplateList.jsx'
 
 /** Component for Letters Page */
 const LettersDisplay = () => {
-const [checked, setChecked] = useState({
-  local: false,
-  regional: false,
-  national: false,
-  international: false,
-  ordinance: false,
-  resolution: false,
-});
-const [data, setData] = useState(LetterData)
-const searchData=(input)=>{
-  setData(LetterData.filter((item)=>{
-    if (input===''){
-      return true
-    }
-    else {
-      return item.title.toLowerCase().includes(input) || item.summary.toLowerCase().includes(input)
-    }
-  }))
-}
+  const [checked, setChecked] = useState({
+    local: false,
+    regional: false,
+    national: false,
+    international: false,
+    ordinance: false,
+    resolution: false,
+  });
+  const [data, setData] = useState(LetterData)
+  const searchData = (input) => {
+    setData(LetterData.filter((item) => {
+      if (input === '') {
+        return true
+      }
+      else {
+        return item.title.toLowerCase().includes(input) || item.summary.toLowerCase().includes(input)
+      }
+    }))
+  }
 
   return (
     <div>
@@ -45,6 +46,7 @@ const searchData=(input)=>{
           </div>
         </div>
       </div>
+      <Footer text="Powered by Earth Law Center" />
     </div>
   );
 };

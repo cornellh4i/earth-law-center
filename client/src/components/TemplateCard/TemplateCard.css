@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
 .card-container, .card-letter-container{
-    height: 20rem;
+    height: 24rem;
     border-radius: 1.2rem;
     padding-left: 1%;
     flex-direction: column;
@@ -24,7 +24,7 @@
     padding-left:5%;
     width: 95%;
     height: 48%;
-    margin-left: 5%;
+    margin-left: 2%;
     margin-top: 0;
     display: flex;
     flex-direction: column;
