@@ -16,34 +16,84 @@ const TemplateFiller = () => {
   const data = useLocation().state
 
   /** Temporary hardcoded data to pass as props to the Q&A component */
-  const questionsData = {
-    'Name of Local Ecosystem': {
-      id: 0,
-      questions: [['text input', 'What is the name of the local ecosystem?']],
+  const questionsData = [
+    {
+      "field": "City",
+      "question": "What city does this law apply to?",
+      "input_type": "short answer",
+      "description": "asdsadsa"
     },
-    'City & State': {
-      id: 1,
-      questions: [
-        ['states dropdown select', 'What state does this ordonnance apply to?'],
-        ['text input', 'What city does this ordonnance apply to?'],
-      ],
+    {
+      "field": "State",
+      "question": "What state does this law apply to?",
+      "input_type": "states dropdown"
     },
-    'Number of Members in Guardianship Body': {
-      id: 2,
-      questions: [
-        ['text input', 'How many members are in the Guardianship Body?'],
-      ],
+    {
+      "field": "Municipality",
+      "question": "What municipality does this law apply to?",
+      "input_type": "short answer"
     },
-    Enactment: {
-      id: 3,
-      questions: [
-        [
-          'text input',
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        ],
-      ],
+    {
+      "field": "Activities Your Community Engages In",
+      "question": "What are some activities that nature enables your community to participate in?",
+      "input_type": "short answer"
     },
-  };
+    {
+      "field": "Specific Indigenous Peoples",
+      "question": "What is the name of the indigenous peoples who lived before your city was founded?",
+      "input_type": "short answer"
+    },
+    {
+      "field": "Specific Types of Impacts",
+      "question": "What are some matters, actions, or decisions that may result in harm for the local ecosystem?",
+      "input_type": "short answer"
+    },
+    {
+      "field": "Specific Types of Infrastructure Impacts",
+      "question": "What are some specific infrastructure developments that would harm your local ecosystem?",
+      "input_type": "short answer"
+    },
+    {
+      "field": "Number of Members",
+      "question": "How many members should the Guardianship Body consist of?",
+      "input_type": "short answer"
+    },
+    {
+      "field": "Number of Guardians",
+      "question": "What is the number of guardians?",
+      "input_type": "short answer"
+    }
+  ]
+
+  /** Temporary hardcoded data to pass as props to the Q&A component */
+  // const questionsData = {
+  //   'Name of Local Ecosystem': {
+  //     id: 0,
+  //     questions: [['text input', 'What is the name of the local ecosystem?']],
+  //   },
+  //   'City & State': {
+  //     id: 1,
+  //     questions: [
+  //       ['states dropdown select', 'What state does this ordonnance apply to?'],
+  //       ['text input', 'What city does this ordonnance apply to?'],
+  //     ],
+  //   },
+  //   'Number of Members in Guardianship Body': {
+  //     id: 2,
+  //     questions: [
+  //       ['text input', 'How many members are in the Guardianship Body?'],
+  //     ],
+  //   },
+  //   Enactment: {
+  //     id: 3,
+  //     questions: [
+  //       [
+  //         'text input',
+  //         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  //       ],
+  //     ],
+  //   },
+  // };
 
   /** The current page clicked by the user, defaults to the first entry in questionsData */
   const [clicked, setClicked] = useState(Object.keys(questionsData)[0]);
