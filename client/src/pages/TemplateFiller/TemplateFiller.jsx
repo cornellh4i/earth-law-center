@@ -120,6 +120,7 @@ const TemplateFiller = () => {
   // const fields = Object.keys(questionsData);
   const fieldItem = questionsData.map((question, index) => (
     <div
+      key={index}
       className={
         // questionsData[clicked].id === questionsData[field].id
         index===clickedId
@@ -146,19 +147,9 @@ const TemplateFiller = () => {
     setClickedId(newClickedId);
   };
 
-  /** Handles user pressing the 'Back' button */
-  const handleBack = (e) => {
-    backPage();
-  };
-
-  /** Handles user pressing the 'Skip' button */
-  const handleSkip = (e) => {
-    advancePage();
-  };
-
   /** Handles user pressing the 'Next' button */
-  const handleSubmit = (e, inputs) => {
-    advancePage();
+  const handleSubmit = (inputs) => {
+    // HANDLE INPUTS LATER
     console.log(inputs);
   };
 
@@ -178,26 +169,31 @@ const TemplateFiller = () => {
           progress={progress}
           handleDownload={handleDownload}
         />
-        {/* <Grid pt={5} container spacing={4}>
+        <Grid pt={5} container spacing={4}>
           <Grid item xs={1} />
           <Grid item xs={10}>
             <QuestionAnswer
               field={questionsData[clickedId].field}
               fieldId={clickedId}
               title={'Right of Nature Ordonnance Template'}
-              questions={questionsData[clickedId].question}
+              question={questionsData[clickedId].question}
+              inputType={questionsData[clickedId].input_type}
               length={length}
-              handleBack={handleBack}
-              handleSkip={handleSkip}
+              handleBack={backPage}
+              handleSkip={advancePage}
+              handleNext={advancePage}
               handleSubmit={handleSubmit}
             />
           </Grid>
           <Grid item xs={1} />
-          <HelpBox
-            title='Earth Law Center'
-            description='Earth Law Center is one example of an organization that drafts Rights of Nature and other Earth-centered laws across the United States and world.'
-          />
-        </Grid> */}
+          
+          {questionsData[clickedId].description &&
+            <HelpBox
+              title='TIP'
+              description={questionsData[clickedId].description}
+            />
+          }
+        </Grid>
       </Box>
     </div>
   );

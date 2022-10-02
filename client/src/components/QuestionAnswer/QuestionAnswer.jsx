@@ -12,18 +12,20 @@ import Grid from '@mui/material/Grid';
  * @param {field} is the title of the currently selected page
  * @param {fieldId} is the id of the current selected page
  * @param {title} is the template title
- * @param {questions} is a list of questions; a question is a list of ['<valid input type>', '<question content']
+ * @param {question} is the question string
+ * @param {inputType} is the inputType of the question
  * @param {length} is the total number of pages
  * @param {handleBack} is a function that handles pressing the 'Back' button
  * @param {handleSkip} is a function that handles pressing the 'Skip' button
- * @param {handleSubmit} is a function that handles pressing the 'Next' button
+ * @param {handleNext} is a function that handles pressing the 'Next' button
+ * @param {handleSubmit} is a function that handles pressing the 'Finish' button
 */
 
 const QuestionAnswer = (props) => {
-  /** The user's answers; each answer is a list of ['<question asked>', '<user response>'] */
+  // Stores user answers; a dict where key: value = fieldId: user_input
   const [inputs, setInputs] = useState({});
 
-  /** List of all US states and territories; used for the states dropdown select */
+  // List of all US states and territories; used for the states dropdown select
   const us_states = [
     'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Canal Zone', 'Colorado', 'Connecticut',
     'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana',
@@ -34,60 +36,12 @@ const QuestionAnswer = (props) => {
     'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
   ]
 
-  /** Handles user field changes and updates the inputs variable */
+  // Handles user field changes and updates the input variable
   const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setInputs(values => ({ ...values, [name]: value }))
+    const id = props.fieldId
+    const value = e.target.value
+    setInputs(values => ({ ...values, [id]: value }))
   }
-
-  /** A component of all questions; question[0] = <input type> and question[1] = <question content> */
-  const questionItems = props.questions.map((question) =>
-    <div className='question-items'>
-      {/* Question component */}
-      <Typography pt={3} pb={1} variant='body2'>{question[1]}</Typography>
-
-      {/* Text input answer component */}
-      {question[0] === 'text input' &&
-        <Box>
-          <TextField
-            className='text-input'
-            name={question[1]}
-            value={inputs[question[1]] || ''}
-            label='Type answer here'
-            size='small'
-            fullWidth
-            onChange={handleChange}
-            InputLabelProps={{ style: { fontFamily: 'Nunito' } }}
-          />
-        </Box>
-      }
-
-      {/* States dropdown select answer component */}
-      {question[0] === 'states dropdown select' &&
-        <Box>
-          <FormControl>
-            <TextField
-              select
-              className='select-input'
-              name={question[1]}
-              value={inputs[question[1]] || ''}
-              onChange={handleChange}
-              label='Select State'
-              size='small'
-              variant='outlined'
-              InputLabelProps={{ style: { fontFamily: 'Nunito' } }}
-
-            >
-              {us_states.map(state =>
-                <MenuItem value={state}>{state}</MenuItem>
-              )}
-            </TextField>
-          </FormControl>
-        </Box>
-      }
-    </div>
-  )
 
   return (
     <div className='question-component'>
@@ -96,7 +50,51 @@ const QuestionAnswer = (props) => {
         sx={{ fontWeight: 'bold', fontFamily: 'Nunito', color: '#64926E', fontSize: 36 }}>
         {props.field}
       </Typography>
-      {questionItems}
+
+      {/* Question component */}
+      <div className='question-items'>
+        <Typography pt={3} pb={1} variant='body2'>{props.question}</Typography>
+
+        {/* Text input answer component */}
+        {props.inputType === 'short answer' &&
+          <Box>
+            <TextField
+              className='text-input'
+              name={props.question}
+              value={inputs[props.fieldId] || ''}
+              label='Type answer here'
+              size='small'
+              fullWidth
+              onChange={handleChange}
+              InputLabelProps={{ style: { fontFamily: 'Nunito' } }}
+            />
+          </Box>
+        }
+
+        {/* States dropdown select answer component */}
+        {props.inputType === 'states dropdown' &&
+          <Box>
+            <FormControl>
+              <TextField
+                select
+                className='select-input'
+                name={props.question}
+                value={inputs[props.fieldId] || ''}
+                onChange={handleChange}
+                label='Select State'
+                size='small'
+                variant='outlined'
+                InputLabelProps={{ style: { fontFamily: 'Nunito' } }}
+
+              >
+                {us_states.map(state =>
+                  <MenuItem key={state} value={state}>{state}</MenuItem>
+                )}
+              </TextField>
+            </FormControl>
+          </Box>
+        }
+      </div>
 
       {/* Button positioning */}
       <Grid container direction='row' spacing={4} pt={2} justifyContent='flex-end'>
@@ -115,8 +113,16 @@ const QuestionAnswer = (props) => {
               css='white-median-btn'
             />
             <Button
-              text={props.fieldId === (props.length - 1) ? 'FINISH' : 'NEXT'}
-              handleClick={(e) => props.handleSubmit(e, inputs)}
+              text={
+                props.fieldId === (props.length - 1)
+                  ? 'FINISH'
+                  : 'NEXT'
+              }
+              handleClick={
+                props.fieldId === (props.length - 1)
+                  ? e => props.handleSubmit(inputs)
+                  : e => props.handleNext()
+              }
               css='continue-btn'
             />
           </Box>
