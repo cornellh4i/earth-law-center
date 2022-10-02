@@ -90,7 +90,7 @@ const TemplateFiller = () => {
 
   /** Move user to the previous page */
   const backPage = () => {
-    if (!authenticated){
+    if (!authenticated) {
 
     }
     let newClickedId = Math.max(clickedId - 1, 0);
@@ -111,9 +111,9 @@ const TemplateFiller = () => {
   };
 
   /** Handles user pressing the 'Back' button before authenticating */
-  let navigate = useNavigate(); 
-  const handleBackUnauth = () =>{ 
-    let path = '/'; 
+  let navigate = useNavigate();
+  const handleBackUnauth = () => {
+    let path = '/';
     navigate(path);
   }
 
@@ -129,11 +129,19 @@ const TemplateFiller = () => {
   };
 
   /** Handles user pressing the 'Sign In with Google' button */
-  const handleAuthentication = (e, inputs) => {
-    clickedId = -1;
-    setAuthenticated(true);
-    advancePage();
+  async function handleAuthentication(e, inputs) {
+    // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
+    const response = await fetch(`http://localhost:8081/api/preAuthenticate`);
+
+    const success = await response.json() != null;
+    handleAuthenticationSuccess(e, inputs, success);
   };
+
+  const handleAuthenticationSuccess = (e, inputs, success) => {
+    clickedId = -1;
+    setAuthenticated(success);
+    advancePage();
+  }
 
   /** Downloads a google doc when user presses the Download button */
   const handleDownload = (e) => {
