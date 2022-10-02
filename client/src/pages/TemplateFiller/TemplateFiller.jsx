@@ -2,7 +2,7 @@ import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import './TemplateFiller.css';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import HelpBox from '../../components/HelpBox/HelpBox';
@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
   /** Data from the state passed by TemplateCard; contains the following data:
-   * @param docID is the docID of the google doc
+   * @param docID is the ID of the google doc
   */
   const data = useLocation().state
 
@@ -64,7 +64,16 @@ const TemplateFiller = () => {
       "input_type": "short answer"
     }
   ]
-  const questionsData = rawData
+  // New temporary constants for sheetID
+  let sheetID = '1cAcOx0xhzm8HLhKWsVYX_fTRiNS2UmcINtIc-9Wxd0k'
+  let questionsData = rawData;
+  useEffect(() => {
+    (async function () {
+      const response = await fetch(`http://localhost:8081/api/getQuestions/${sheetID}/${data.docID}`);
+      console.log('RESPONSE')
+      console.log(response.json())
+    })()
+  }, []);
 
   /** Temporary hardcoded data to pass as props to the Q&A component */
   // const questionsData = {
@@ -123,7 +132,7 @@ const TemplateFiller = () => {
       key={index}
       className={
         // questionsData[clicked].id === questionsData[field].id
-        index===clickedId
+        index === clickedId
           ? 'side-btn side-btn-active'
           : 'side-btn'
       }
@@ -186,7 +195,7 @@ const TemplateFiller = () => {
             />
           </Grid>
           <Grid item xs={1} />
-          
+
           {questionsData[clickedId].description &&
             <HelpBox
               title='TIP'
