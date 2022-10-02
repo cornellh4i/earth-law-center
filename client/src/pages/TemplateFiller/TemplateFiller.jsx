@@ -64,7 +64,7 @@ const TemplateFiller = () => {
       "input_type": "short answer"
     }
   ]
-  const questionsData=JSON.parse(rawData)
+  const questionsData = rawData
 
   /** Temporary hardcoded data to pass as props to the Q&A component */
   // const questionsData = {
@@ -118,7 +118,7 @@ const TemplateFiller = () => {
 
   /** Styling and functionality for sidebar navigation buttons */
   // const fields = Object.keys(questionsData);
-  const fieldItem = questionsData.map((question,index) => (
+  const fieldItem = questionsData.map((question, index) => (
     <div
       className={
         // questionsData[clicked].id === questionsData[field].id
@@ -128,7 +128,7 @@ const TemplateFiller = () => {
       }
       onClick={() => handleNavigationClick(index)}
     >
-      {field}
+      {question.field}
     </div>
   ));
 
@@ -171,20 +171,21 @@ const TemplateFiller = () => {
   return (
     <div>
       <Box sx={{ display: 'flex' }}>
+        <div>hello</div>
         <FieldSideBar
           title='EarthLegislator'
           fieldItem={fieldItem}
           progress={progress}
           handleDownload={handleDownload}
         />
-        <Grid pt={5} container spacing={4}>
+        {/* <Grid pt={5} container spacing={4}>
           <Grid item xs={1} />
           <Grid item xs={10}>
             <QuestionAnswer
-              field={clicked}
-              fieldId={questionsData[clicked].id}
+              field={questionsData[clickedId].field}
+              fieldId={clickedId}
               title={'Right of Nature Ordonnance Template'}
-              questions={questionsData[clicked].questions}
+              questions={questionsData[clickedId].question}
               length={length}
               handleBack={handleBack}
               handleSkip={handleSkip}
@@ -196,7 +197,7 @@ const TemplateFiller = () => {
             title='Earth Law Center'
             description='Earth Law Center is one example of an organization that drafts Rights of Nature and other Earth-centered laws across the United States and world.'
           />
-        </Grid>
+        </Grid> */}
       </Box>
     </div>
   );
