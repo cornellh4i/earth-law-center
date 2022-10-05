@@ -4,7 +4,7 @@
 
 // Add Imports Below
 const { google } = require('googleapis');
-const TOKEN_PATH = 'token.json';
+const TOKEN_PATH = '../../client/token.json';
 const fs = require('fs');
 
 /**

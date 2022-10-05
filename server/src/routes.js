@@ -89,6 +89,17 @@ module.exports = () => {
   });
 
 
+  // Endpoint for authSuccess
+  router.get('/authSuccess', async (req, res) => {
+    try {
+      close();
+    }
+    catch (err) {
+      res.json({ error: err.message || err.toString() })
+    }
+  });
+
+
   // Endpoint for getAllText (currently does not work (returns an object))
   router.get('/getAllText/:docID', async (req, res) => {
     try {
