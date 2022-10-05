@@ -56,7 +56,7 @@ async function getAllFields(auth, docID) {
   }
 
   // Matches all strings with formats like [INSERT BLANK]
-  const regex = /\[[INSERT A-Z ]*\]/g
+  const regex = /\[INSERT.*\]/g
   const text_length = Object.keys(text).length - 1
 
   // Loop through text object and add all occurrences of [INSERT BLANK] to fields
