@@ -94,15 +94,15 @@ async function getQuestions(auth, sheetID, docID) {
 
     // All values (possibly including empty rows) in the google sheets
     const grid = response.data.values
-    console.log(grid)
 
     // Array of question objects
     let data = []
 
     for (let i = 0; i < grid.length; i++) {
       row = grid[i]
-      // Check if first column of the row is non-empty and matches the field in the doc
-      if (row[0].length > 0 && fields.has(row[0].toLowerCase())) {
+
+      // Check if row is a non-empty array and that the first column matches the doc field
+      if (row.length > 0 && fields.has(row[0].toLowerCase())) {
         // Question object, contains all relevant columns in the google sheets
         let question = {
           "field": "",
