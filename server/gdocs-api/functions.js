@@ -60,7 +60,7 @@ async function getAllFields(auth, docID) {
   let fields = new Set()
 
   // Matches all strings with formats like [INSERT BLANK]
-  const regex = /\[INSERT[ A-Z()%\/\.0-9\-_`"'$&\*?!#@]*\]/g
+  const regex = /\[insert[ a-z()%\/\.0-9\-_`"'$&\*?!#@]*\]/g
   const text_length = Object.keys(text).length - 1
 
   // Loop through text object and add all occurrences of [INSERT BLANK] to fields
@@ -109,11 +109,12 @@ async function getQuestions(auth, sheetID, docID) {
     for (let i = 0; i < grid.length; i++) {
       row = grid[i]
 
+      // Define column only if row has a non-zero length
       // Encode text to ensure UTF-8 chars and uppercase chars are removed
-      let column = row[0].toLowerCase().toASCII()
+      let column = (row.length > 0) ? row[0].toLowerCase().toASCII() : null
 
       // Check if row is a non-empty array and that the first column matches the doc field
-      if (row.length > 0 && fields.has(column)) {
+      if (fields.has(column)) {
         // Question object, contains all relevant columns in the google sheets
         let question = {
           "field": "",
