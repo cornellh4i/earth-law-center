@@ -33,6 +33,21 @@ function printDocInfo(auth) {
 }
 
 /**
+ * String method which takes in a UTF-8 string and returns its ASCII equivalent.
+ */
+String.prototype.toASCII = function () {
+  // Dict of all UTF-8 to ASCII substitutions
+  const substitutions = {
+    '\u{2018}': '\'', // LEFT SINGLE QUOTATION MARK  -> APOSTROPHE
+    '\u{2019}': '\'', // RIGHT SINGLE QUOTATION MARK -> APOSTROPHE
+    '\u{201C}': '"',  // LEFT DOUBLE QUOTATION MARK  -> QUOTATION MARK
+    '\u{201D}': '"',  // RIGHT DOUBLE QUOTATION MARK -> QUOTATION MARK
+  }
+
+  return this.replace(/[\u2018\u2019\u201C\u201D]/g, char => substitutions[char])
+}
+
+/**
  * Takes in a docID and returns all the fields in the form of [INSERT XXX].
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param {docID} is the document id of the google doc we want to retrieve info from.
@@ -44,28 +59,21 @@ async function getAllFields(auth, docID) {
   // A set containing all unique fields in the google doc
   let fields = new Set()
 
-  // Function to convert a given string to title case
-  // NOT USED CURRENTLY BUT WE NEED IT EVENTUALLY, STORING HERE FOR NOW
-  String.prototype.toTitleCase = function () {
-    return this.replace(
-      /\w\S*/g,
-      function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
-      }
-    )
-  }
-
   // Matches all strings with formats like [INSERT BLANK]
-  const regex = /\[INSERT[ A-Z()%\/\.0-9\-_`"'’$&\*?!#@]*\]/g
+  const regex = /\[INSERT[ A-Z()%\/\.0-9\-_`"'$&\*?!#@]*\]/g
   const text_length = Object.keys(text).length - 1
 
   // Loop through text object and add all occurrences of [INSERT BLANK] to fields
   for (i = 0; i < text_length; i++) {
-    const str = text['textRun' + i].text
+    // Encode text to ensure UTF-8 chars and uppercase chars are removed
+    const str = text['textRun' + i].text.toLowerCase().toASCII()
+
+    // Array of all [INSERT XXX] strings from the google doc
     const field_array = str.match(regex)
+
     for (const i in field_array) {
       const substring = field_array[i].slice(8, -1)
-      fields.add(substring.toLowerCase())
+      fields.add(substring)
     }
   }
 
@@ -101,8 +109,11 @@ async function getQuestions(auth, sheetID, docID) {
     for (let i = 0; i < grid.length; i++) {
       row = grid[i]
 
+      // Encode text to ensure UTF-8 chars and uppercase chars are removed
+      let column = row[0].toLowerCase().toASCII()
+
       // Check if row is a non-empty array and that the first column matches the doc field
-      if (row.length > 0 && fields.has(row[0].toLowerCase())) {
+      if (row.length > 0 && fields.has(column)) {
         // Question object, contains all relevant columns in the google sheets
         let question = {
           "field": "",
