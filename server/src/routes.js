@@ -89,7 +89,7 @@ module.exports = () => {
   });
 
 
-  // Endpoint for authSuccess
+  // Endpoint for authSuccess (currently just a blank page)
   router.get('/authSuccess', async (req, res) => {
     try {
       close();

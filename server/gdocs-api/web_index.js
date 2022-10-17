@@ -54,12 +54,14 @@ async function authenticate(scopes) {
     // grab the url that will be used for authorization
     const authorizeUrl = oauth2Client.generateAuthUrl({
       access_type: 'offline',
-      scope: scopes.join(' '),
+      scope: scopes.join(' ')
+      // ux_mode: "redirect"
     });
     const server = http
       .createServer(async (req, res) => {
         try {
           if (req.url.indexOf('/oauth2callback') > -1) {
+            console.log('TEST 1!!!')
             const qs = new url.URL(req.url, 'http://localhost:8080')
               .searchParams;
             res.end('Authentication successful! Please return to the console.');
@@ -74,7 +76,9 @@ async function authenticate(scopes) {
       })
       .listen(8080, () => {
         // open the browser to the authorize url to start the workflow
+        console.log('log2')
         opn(authorizeUrl, { wait: false }).then(cp => cp.unref());
+        console.log('log3')
       });
     destroyer(server);
   });
