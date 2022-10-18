@@ -94,6 +94,9 @@ const TemplateCard = (props) => {
   const download = (e) => {
     // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
     window.location.assign(`http://localhost:8081/api/docDownload/${props.docID}`);
+    // fetch(`http://localhost:8081/api/docDownload/${props.docID}`, {
+    //   method: 'GET'
+    // }).then((res) => console.log(res));
   }
 
   /** Sends user to the Template Filler page for the provided docID */
