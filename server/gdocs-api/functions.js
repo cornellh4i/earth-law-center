@@ -241,6 +241,48 @@ async function replaceAllTexts(auth, docID, replaceText, containsText) {
   return docCopyId
 }
 
+/**
+ * Replaces all instances of containsText with replaceText in document specified by docID
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {docID} is the document id of the google doc we want to insert data in
+ * @param {replaceTextDict} is a dictionary with key value pairs. 
+ *    the keys the text in the document matching the substring that will be replaced by replaceText.
+ *    the values represent the text that will replace the matched text.
+ * @returns the docID of the copied document with the new changes 
+ */
+async function batchReplaceAllTexts(auth, docID, replaceTextDict) {
+  //Authorize docs and drive
+  const docs = google.docs({ version: 'v1', auth });
+  var docCopyId;
+  var updateObject;
+  // Below is the function that generates a new docID
+  await docCopy(auth, docID).then(
+    (docCopy) => {
+      docCopyId = docCopy;
+      // JSON request body for batchupdate with docCopyId 
+      for (const [key, value] of Object.entries(replaceTextDict)) {
+        updateObject = {
+          "documentId": docCopyId,
+          "resource": {
+            "requests": [{
+              "replaceAllText":
+              {
+                "replaceText": value,
+                "containsText": {
+                  "text": key,
+                  "matchCase": false
+                }
+              }
+            }],
+          }
+        }
+      }
+    });
+  // Send the JSON object in a batchUpdate request
+  await docs.documents.batchUpdate(updateObject)
+  return docCopyId
+}
+
 // BELOW ARE THE GETALLTEXT FUNCTION AND HELPER FUNCTIONS (currently don't work with routes)
 
 /**
@@ -415,4 +457,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, getQuestions, preAuthenticate, readAuthFile };
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, batchReplaceAllTexts, docCopy, docDownload, getQuestions, preAuthenticate, readAuthFile };

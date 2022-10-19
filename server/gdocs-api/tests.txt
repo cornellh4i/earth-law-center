@@ -27,4 +27,5 @@ authorizeInsertText(functions.insertText, "1w3YFbfJ4y5Fz7ea0_5YTgxE9zoA3qvOnlKoR
 
 authorizeGetAllText(functions.getAllText, '1OZrCP-jvxxlZim6uInLzR0UjPxmJnLcl88oDToTHmmw');
 
+http://localhost:8081/api/batchReplaceAllTexts/1L7f3V09aXqZh9C1iR5bFN2BgfXVEZ9rIZHnL6bF0Hjc/that/this/not/yes
 // ************************************************************************************************************

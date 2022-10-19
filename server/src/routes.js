@@ -93,6 +93,24 @@ module.exports = () => {
     }
   });
 
+  // Endpoint for batchReplaceAllTexts
+  // Note - only works for URLs of the format '/batchReplaceAllTexts/:docID/word1/replacementWord1/word2/replacementWord2' and so on
+  // Causes errors when format is not met
+  router.get('/batchReplaceAllTexts/:docID/*', async (req, res) => {
+    var dict = {};
+    var arr = req.params[0].split('/')
+    for(i = 0; i < arr.length; i += 2){
+      dict[arr[i]] = arr[i + 1]
+    }
+    console.log(dict)
+    try {
+      functions.readAuthFile(scopes).then((client) => functions.batchReplaceAllTexts(client, req.params.docID, dict).then((response) => res.json({ msg: `docid: ${response}` })))
+    }
+    catch (err) {
+      res.json({ error: err.message || err.toString() })
+    }
+  });
+
   // Endpoint for preAuthenticate
   router.get('/preAuthenticate', async (req, res) => {
     try {
