@@ -52,7 +52,7 @@ async function authorizeDocID(callback, docID) {
     (fs.readFile(TOKEN_PATH, async (err, token) => {
       if (err) return getNewToken(oAuth2Client, callback);
       oAuth2Client.setCredentials(JSON.parse(token));
-      await callback(oAuth2Client, docID).then((res) => {console.log("INDEX RESULT", res); resolve(res)})
+      await callback(oAuth2Client, docID).then((res) => { console.log("INDEX RESULT", res); resolve(res) })
     }))
   });
 }
@@ -102,7 +102,7 @@ function authorizeInsertText(callback, docID, text, location) {
     try {
       let result = callback(oAuth2Client, docID, text, location);
       // console.log("NewIDInAUTH", result)
-      return result 
+      return result
     } catch (e) {
       console.log(`The API returned an error: ` + e)
     }
@@ -141,4 +141,4 @@ function getNewToken(oAuth2Client, callback) {
 }
 
 // Exporting authorize functions
-module.exports = { authorize, authorizeInsertText, authorizeReplaceAllTexts, authorizeDocID};
+module.exports = { authorize, authorizeInsertText, authorizeReplaceAllTexts, authorizeDocID };

@@ -88,22 +88,19 @@ module.exports = () => {
     }
   });
 
-
-  // Endpoint for authSuccess (currently just a blank page)
-  router.get('/authSuccess', async (req, res) => {
+  // Endpoint for getAllText (currently does not work (returns an object))
+  router.get('/getAllText/:docID', async (req, res) => {
     try {
-      close();
+      functions.readAuthFile(scopes).then((client) => functions.getAllText(client, req.params.docID).then((response) => res.json({ msg: `text: ${JSON.stringify(response)}` })))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
     }
   });
 
-
-  // Endpoint for getAllText (currently does not work (returns an object))
-  router.get('/getAllText/:docID', async (req, res) => {
+  router.get('/redirect-auth', (req, res) => {
     try {
-      functions.readAuthFile(scopes).then((client) => functions.getAllText(client, req.params.docID).then((response) => res.json({ msg: `text: ${JSON.stringify(response)}` })))
+      res.send("<script>window.close();</script > ")
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
