@@ -98,14 +98,5 @@ module.exports = () => {
     }
   });
 
-  router.get('/redirect-auth', (req, res) => {
-    try {
-      res.send("<script>window.close();</script > ")
-    }
-    catch (err) {
-      res.json({ error: err.message || err.toString() })
-    }
-  });
-
   return router;
 }

@@ -62,7 +62,7 @@ async function authenticate(scopes) {
           if (req.url.indexOf('/oauth2callback') > -1) {
             const qs = new url.URL(req.url, 'http://localhost:8080')
               .searchParams;
-            res.end('Authentication successful! Please return to the console.');
+            res.end('Authentication successful! Please return to the Earth Law Center page.');
             server.destroy();
             const { tokens } = await oauth2Client.getToken(qs.get('code'));
             oauth2Client.credentials = tokens; // eslint-disable-line require-atomic-updates
@@ -74,10 +74,8 @@ async function authenticate(scopes) {
       })
       .listen(8080, () => {
         // open the browser to the authorize url to start the workflow
-        opn(authorizeUrl, { wait: false }).then(cp => cp.unref());
+        opn(authorizeUrl);
       });
-    // problem: closing new tab, can only window.close() page that was opened with window.open()
-    // opn makes it open in new tab? -> want to make it redirect? is this possible? then will overview page progress?
     destroyer(server);
   });
 }
