@@ -259,12 +259,11 @@ async function batchReplaceAllTexts(auth, docID, replaceTextDict) {
   await docCopy(auth, docID).then(
     (docCopy) => {
       docCopyId = docCopy;
+      requests = [];
+      
       // JSON request body for batchupdate with docCopyId 
       for (const [key, value] of Object.entries(replaceTextDict)) {
-        updateObject = {
-          "documentId": docCopyId,
-          "resource": {
-            "requests": [{
+        requests.push({
               "replaceAllText":
               {
                 "replaceText": value,
@@ -273,11 +272,17 @@ async function batchReplaceAllTexts(auth, docID, replaceTextDict) {
                   "matchCase": false
                 }
               }
-            }],
-          }
+            })
         }
+      });
+    console.log(requests);
+    updateObject = {
+      "documentId": docCopyId,
+      "resource": {
+        "requests": requests,
       }
-    });
+    }
+    
   // Send the JSON object in a batchUpdate request
   await docs.documents.batchUpdate(updateObject)
   return docCopyId
