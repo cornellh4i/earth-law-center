@@ -9,7 +9,6 @@ import ResourceDisplay from './pages/ResourceDisplay/ResourceDisplay';
 import TemplateFiller from './pages/TemplateFiller/TemplateFiller';
 import { useLocation } from 'react-router-dom';
 import Preview from "./pages/Preview/Preview";
-import RedirectAuth from "./pages/RedirectAuth/RedirectAuth.jsx";
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -42,8 +41,6 @@ function App() {
         <Route path='/resources' element={<ResourceDisplay />} />
         <Route path='/template-filler' element={<TemplateFiller />} />
         <Route path='/preview' element={<Preview />} />
-        <Route path='/redirect-auth' element={<RedirectAuth />} />
-        {/* <Route path='/http://localhost:8080/oauth2callback?code=4%2F0ARtbsJrxNV4Jx1WMNpOzUxdktCzCOpeD-BHYmfTUXulTzO36mvu50zQ1TwmvXgLEYrZrnA&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdocuments+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive' element={<RedirectAuth />} /> */}
       </Routes>
     </Router>
 
