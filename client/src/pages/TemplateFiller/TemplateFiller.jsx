@@ -81,7 +81,30 @@ const TemplateFiller = () => {
   // Handles user pressing the 'Next' button
   const handleSubmit = (inputs) => {
     // HANDLE INPUTS LATER
+
+    // EXAMPLE OF INPUTS DATA STRUCTURE
+    // inputs = {
+    //   0: 'New York',
+    //   1: 'Montana',
+    //   2: 'Local River'
+    // }
+
+    let batchReplaceData = {}
+    Object.keys(inputs).map(fieldId => {
+      batchReplaceData[`[INSERT ${questionsData[fieldId].field.toUpperCase()}]`] = inputs[fieldId]
+    })
+
+    console.log(batchReplaceData)
+
+    // EXAMPLE OF FINAL DATA STRUCTURE FOR BATCH REPLACE
+    // batchReplaceData = {
+    //   '[INSERT STATE]': 'New York',
+    //   '[INSERT CITY]': 'Montana',
+    //   '[INSERT NAME OF LOCAL ECOSYSTEM(S)]': 'Local River'
+    // }
+
     console.log(inputs);
+    console.log(questionsData)
   };
 
   // Downloads a google doc when user presses the Download button
