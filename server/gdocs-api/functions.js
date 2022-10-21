@@ -62,7 +62,7 @@ async function getAllFields(auth, docID) {
 
   // A set containing the original unique fields in the google doc, including
   // special unicode characters
-  let original_fields = new Set()
+  let raw_fields = new Set()
   
   // Matches all strings with formats like [INSERT BLANK]
   const regex = /\[INSERT[ A-Z()%\/\.0-9\-_`"'$&\*?!#@\u2018\u2019\u201C\u201D]*\]/g
@@ -80,11 +80,11 @@ async function getAllFields(auth, docID) {
     for (const i in field_array) {
       const substring = field_array[i].slice(8, -1).toLowerCase().toASCII()
       fields.add(substring)
-      original_fields.add(field_array[i])
+      raw_fields.add(field_array[i])
     }
   }
 
-  return fields, original_fields
+  return fields, raw_fields
 }
 
 /**
@@ -98,7 +98,7 @@ async function getQuestions(auth, sheetID, docID) {
   const sheets = google.sheets({ version: 'v4', auth });
 
   // Set of strings where each string is a field in the template doc
-  let fields, original_fields = await getAllFields(auth, docID)
+  let fields, raw_fields = await getAllFields(auth, docID)
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -132,7 +132,7 @@ async function getQuestions(auth, sheetID, docID) {
         }
 
         question.field = row[0]
-        question.original_field = original_fields[i]
+        // question.original_field = raw_fields[i]
         try { question.question = row[1] } catch (err) { console.err("missing question") }
         try { question.input_type = row[2] } catch (err) { console.err("missing input type") }
         try { question.description = row[3] } catch (err) { console.err("missing description") }
