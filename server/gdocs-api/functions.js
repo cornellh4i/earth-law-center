@@ -56,28 +56,35 @@ String.prototype.toASCII = function () {
 async function getAllFields(auth, docID) {
   const text = await getAllText(auth, docID)
 
-  // A set containing all unique fields in the google doc
+  // A set containing all unique fields in the google doc without special
+  // unicode characters
   let fields = new Set()
 
+  // A set containing the original unique fields in the google doc, including
+  // special unicode characters
+  let original_fields = new Set()
+  
   // Matches all strings with formats like [INSERT BLANK]
-  const regex = /\[insert[ a-z()%\/\.0-9\-_`"'$&\*?!#@]*\]/g
+  const regex = /\[INSERT[ A-Z()%\/\.0-9\-_`"'$&\*?!#@\u2018\u2019\u201C\u201D]*\]/g
   const text_length = Object.keys(text).length - 1
 
   // Loop through text object and add all occurrences of [INSERT BLANK] to fields
   for (i = 0; i < text_length; i++) {
     // Encode text to ensure UTF-8 chars and uppercase chars are removed
-    const str = text['textRun' + i].text.toLowerCase().toASCII()
+    const str = text['textRun' + i].text
 
-    // Array of all [INSERT XXX] strings from the google doc
+    // Array of all [INSERT XXX] strings from the google doc including special
+    // unicode characters
     const field_array = str.match(regex)
 
     for (const i in field_array) {
-      const substring = field_array[i].slice(8, -1)
+      const substring = field_array[i].slice(8, -1).toLowerCase().toASCII()
       fields.add(substring)
+      original_fields.add(field_array[i])
     }
   }
 
-  return fields
+  return fields, original_fields
 }
 
 /**
@@ -91,7 +98,7 @@ async function getQuestions(auth, sheetID, docID) {
   const sheets = google.sheets({ version: 'v4', auth });
 
   // Set of strings where each string is a field in the template doc
-  let fields = await getAllFields(auth, docID)
+  let fields, original_fields = await getAllFields(auth, docID)
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -118,12 +125,14 @@ async function getQuestions(auth, sheetID, docID) {
         // Question object, contains all relevant columns in the google sheets
         let question = {
           "field": "",
+          "original_field": "",
           "question": "",
           "input_type": "",
           "description": "",
         }
 
         question.field = row[0]
+        question.original_field = original_fields[i]
         try { question.question = row[1] } catch (err) { console.err("missing question") }
         try { question.input_type = row[2] } catch (err) { console.err("missing input type") }
         try { question.description = row[3] } catch (err) { console.err("missing description") }
