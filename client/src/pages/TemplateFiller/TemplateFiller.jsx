@@ -80,8 +80,6 @@ const TemplateFiller = () => {
 
   // Handles user pressing the 'Next' button
   const handleSubmit = (inputs) => {
-    // HANDLE INPUTS LATER
-
     // EXAMPLE OF INPUTS DATA STRUCTURE
     // inputs = {
     //   0: 'New York',
@@ -91,9 +89,9 @@ const TemplateFiller = () => {
 
     let batchReplaceData = {}
     Object.keys(inputs).map(fieldId => {
-      batchReplaceData[`[INSERT ${questionsData[fieldId].field.toUpperCase()}]`] = inputs[fieldId]
+      batchReplaceData[questionsData[fieldId].original_field] = inputs[fieldId]
     })
-
+    console.log("this is the submission lol")
     console.log(batchReplaceData)
 
     // EXAMPLE OF FINAL DATA STRUCTURE FOR BATCH REPLACE
@@ -102,9 +100,6 @@ const TemplateFiller = () => {
     //   '[INSERT CITY]': 'Montana',
     //   '[INSERT NAME OF LOCAL ECOSYSTEM(S)]': 'Local River'
     // }
-
-    console.log(inputs);
-    console.log(questionsData)
   };
 
   // Downloads a google doc when user presses the Download button

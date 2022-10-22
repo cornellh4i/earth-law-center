@@ -56,14 +56,10 @@ String.prototype.toASCII = function () {
 async function getAllFields(auth, docID) {
   const text = await getAllText(auth, docID)
 
-  // A set containing all unique fields in the google doc without special
-  // unicode characters
-  let fields = new Set()
+  // A dictionary storing the ASCII character fields from the google sheet as keys
+  // and googld doc [INSERT XXX] fields with special unicode characters as values.
+  var fields = {};
 
-  // A set containing the original unique fields in the google doc, including
-  // special unicode characters
-  let raw_fields = new Set()
-  
   // Matches all strings with formats like [INSERT BLANK]
   const regex = /\[INSERT[ A-Z()%\/\.0-9\-_`"'$&\*?!#@\u2018\u2019\u201C\u201D]*\]/g
   const text_length = Object.keys(text).length - 1
@@ -79,12 +75,10 @@ async function getAllFields(auth, docID) {
 
     for (const i in field_array) {
       const substring = field_array[i].slice(8, -1).toLowerCase().toASCII()
-      fields.add(substring)
-      raw_fields.add(field_array[i])
+      fields[substring] = field_array[i]
     }
   }
-
-  return fields, raw_fields
+  return fields
 }
 
 /**
@@ -98,7 +92,7 @@ async function getQuestions(auth, sheetID, docID) {
   const sheets = google.sheets({ version: 'v4', auth });
 
   // Set of strings where each string is a field in the template doc
-  let fields, raw_fields = await getAllFields(auth, docID)
+  let fields = await getAllFields(auth, docID)
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -121,7 +115,7 @@ async function getQuestions(auth, sheetID, docID) {
       let column = (row.length > 0) ? row[0].toLowerCase().toASCII() : null
 
       // Check if row is a non-empty array and that the first column matches the doc field
-      if (fields.has(column)) {
+      if (column in fields) {
         // Question object, contains all relevant columns in the google sheets
         let question = {
           "field": "",
@@ -130,9 +124,8 @@ async function getQuestions(auth, sheetID, docID) {
           "input_type": "",
           "description": "",
         }
-
         question.field = row[0]
-        // question.original_field = raw_fields[i]
+        question.original_field = fields[column]
         try { question.question = row[1] } catch (err) { console.err("missing question") }
         try { question.input_type = row[2] } catch (err) { console.err("missing input type") }
         try { question.description = row[3] } catch (err) { console.err("missing description") }
