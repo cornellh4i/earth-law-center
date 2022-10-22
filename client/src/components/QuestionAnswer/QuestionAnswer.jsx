@@ -17,6 +17,7 @@ import Grid from '@mui/material/Grid';
  * @param {handleBack} is a function that handles pressing the 'Back' button
  * @param {handleSkip} is a function that handles pressing the 'Skip' button
  * @param {handleSubmit} is a function that handles pressing the 'Next' button
+ * @param {authenticated} is a boolean representing whether or not the user has authenticated
 */
 
 const QuestionAnswer = (props) => {
@@ -112,13 +113,20 @@ const QuestionAnswer = (props) => {
             <Button
               text='SKIP'
               handleClick={e => props.handleSkip(e)}
-              css='white-median-btn'
+              css={props.authenticated ? 'white-median-btn' : 'hidden'}
             />
-            <Button
-              text={props.fieldId === (props.length - 1) ? 'FINISH' : 'NEXT'}
-              handleClick={(e) => props.handleSubmit(e, inputs)}
-              css='continue-btn'
-            />
+            {props.authenticated 
+              ? <Button
+                text={props.fieldId === (props.length - 1) ? 'FINISH' : 'NEXT'}
+                handleClick={(e) => props.handleSubmit(e, inputs)}
+                css='continue-btn'
+              />  
+              : <Button
+                text='SIGN IN WITH GOOGLE'
+                handleClick={(e) => props.handleSubmit(e, inputs)}
+                css='google-authentication-btn'
+              />
+            }
           </Box>
         </Grid>
       </Grid>
