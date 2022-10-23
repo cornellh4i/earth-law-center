@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import HelpBox from '../../components/HelpBox/HelpBox';
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
@@ -16,11 +16,29 @@ const TemplateFiller = () => {
    */
   const data = useLocation().state
 
-  // List of question objects
-  const [questionsData, setQuestionsData] = useState([])
+  // Storing the initial overview page in the format of a questions object
+  const overviewData = {
+    "field": "Overview",
+    "original_field": "",
+    "question": "A letter encouraging lawmakers to recognize that ecosystems have inherent rights, just as humans do",
+    "input_type": "",
+    "description": "",
+  }
+  // const overviewData = {
+  //   'Overview': {
+  //     id: 0,
+  //     questions: [['', 'A letter encouraging lawmakers to recognize that ecosystems have inherent rights, just as humans do']],
+  //   }
+  // }
+
+  // Array of question objects. We initialize it with the overviewData
+  const [questionsData, setQuestionsData] = useState([overviewData])
 
   // Value to render in the progress bar for the navigation sidebar
   const [progress, setProgress] = useState(Math.floor((1 / questionsData.length) * 100));
+
+  // Whether the user is currently logged in
+  const [authenticated, setAuthenticated] = useState(false);
 
   // The current page clicked by the user, defaults to the first entry in questionsData
   const [clickedId, setClickedId] = useState(0);
@@ -33,7 +51,6 @@ const TemplateFiller = () => {
   // New temporary constants for sheetID
   let sheetID = '1cAcOx0xhzm8HLhKWsVYX_fTRiNS2UmcINtIc-9Wxd0k'
 
-  // Fetches data from template doc on page load
   useEffect(() => {
     (async function () {
       const response = await fetch(`http://localhost:8081/api/getQuestions/${sheetID}/${data.docID}`)
@@ -102,11 +119,36 @@ const TemplateFiller = () => {
     // }
   };
 
+  // Handles user pressing the 'Back' button before authenticating
+  let navigate = useNavigate();
+  const backPageUnauth = () => {
+    let path = '/';
+    navigate(path);
+  }
+
+  // Handles user pressing the 'Sign In with Google' button
+  async function handleAuthentication(e, inputs) {
+    // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
+    const response = await fetch(`http://localhost:8081/api/preAuthenticate`);
+
+    const success = await response.json() != null;
+    handleAuthenticationSuccess(e, inputs, success);
+  };
+
+  // Handles a successful authentication
+  const handleAuthenticationSuccess = (e, inputs, success) => {
+    // clickedId = -1;
+    setAuthenticated(success);
+    setQuestionsData([])
+    // advancePage();
+  }
+
   // Downloads a google doc when user presses the Download button
   const handleDownload = (e) => {
     // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
     window.location.assign(`http://localhost:8081/api/docDownload/${data.docID}`);
   }
+
 
   return (
     <div>
@@ -118,6 +160,17 @@ const TemplateFiller = () => {
             progress={progress}
             handleDownload={handleDownload}
           />
+            {/* <QuestionAnswer
+              field={authenticated ? clicked : Object.keys(overviewData)[0]}
+              fieldId={authenticated ? questionsData[clicked].id : overviewData['Overview'].id}
+              title={'Right of Nature Ordonnance Template'}
+              questions={authenticated ? questionsData[clicked].questions : overviewData['Overview'].questions}
+              length={length}
+              handleBack={authenticated ? handleBack : handleBackUnauth}
+              handleSkip={handleSkip}
+              handleSubmit={authenticated ? handleSubmit : handleAuthentication}
+              authenticated={authenticated}
+            /> */}
 
           <Grid pt={5} container spacing={4}>
             <Grid item xs={1} />
@@ -129,10 +182,12 @@ const TemplateFiller = () => {
                 question={questionsData[clickedId].question}
                 inputType={questionsData[clickedId].input_type}
                 length={questionsData.length}
-                handleBack={backPage}
+                handleBack={authenticated ? backPage : backPageUnauth}
                 handleSkip={advancePage}
                 handleNext={advancePage}
+                handleAuth={handleAuthentication}
                 handleSubmit={handleSubmit}
+                authenticated={authenticated}
               />
             </Grid>
             <Grid item xs={1} />

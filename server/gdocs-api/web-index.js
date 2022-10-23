@@ -20,14 +20,14 @@ const url = require('url');
 const opn = require('open');
 const destroyer = require('server-destroy');
 
-const {google} = require('googleapis');
+const { google } = require('googleapis');
 const people = google.people('v1');
-const functions= require('./functions.js');
+const functions = require('./functions.js');
 /**
  * To use OAuth2 authentication, we need access to a CLIENT_ID, CLIENT_SECRET, AND REDIRECT_URI.  To get these credentials for your application, visit https://console.cloud.google.com/apis/credentials.
  */
 const keyPath = path.join(__dirname, 'oauth2.keys.json');
-let keys = {redirect_uris: ['']};
+let keys = { redirect_uris: [''] };
 if (fs.existsSync(keyPath)) {
   keys = require(keyPath).web;
 }
@@ -44,7 +44,7 @@ const oauth2Client = new google.auth.OAuth2(
 /**
  * This is one of the many ways you can configure googleapis to use authentication credentials.  In this method, we're setting a global reference for all APIs.  Any other API you use here, like google.drive('v3'), will now use this auth client. You can also override the auth client at the service and method call levels.
  */
-google.options({auth: oauth2Client});
+google.options({ auth: oauth2Client });
 
 /**
  * Open an http server to accept the oauth callback. In this simple example, the only request to our webserver is to /callback?code=<code>
@@ -62,9 +62,9 @@ async function authenticate(scopes) {
           if (req.url.indexOf('/oauth2callback') > -1) {
             const qs = new url.URL(req.url, 'http://localhost:8080')
               .searchParams;
-            res.end('Authentication successful! Please return to the console.');
+            res.end('Authentication successful! Please return to the Earth Law Center page.');
             server.destroy();
-            const {tokens} = await oauth2Client.getToken(qs.get('code'));
+            const { tokens } = await oauth2Client.getToken(qs.get('code'));
             oauth2Client.credentials = tokens; // eslint-disable-line require-atomic-updates
             resolve(oauth2Client);
           }
@@ -74,12 +74,10 @@ async function authenticate(scopes) {
       })
       .listen(8080, () => {
         // open the browser to the authorize url to start the workflow
-        opn(authorizeUrl, {wait: false}).then(cp => cp.unref());
+        opn(authorizeUrl);
       });
     destroyer(server);
   });
 }
 
-module.exports = {authenticate};
-
-
+module.exports = { authenticate };

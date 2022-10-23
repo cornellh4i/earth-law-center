@@ -18,7 +18,9 @@ import Grid from '@mui/material/Grid';
  * @param {handleBack} is a function that handles pressing the 'Back' button
  * @param {handleSkip} is a function that handles pressing the 'Skip' button
  * @param {handleNext} is a function that handles pressing the 'Next' button
+ * @param {handleAuth} is a function that handles user authentication
  * @param {handleSubmit} is a function that handles pressing the 'Finish' button
+ * @param {authenticated} is a boolean representing whether or not the user has authenticated
 */
 
 const QuestionAnswer = (props) => {
@@ -110,21 +112,31 @@ const QuestionAnswer = (props) => {
             <Button
               text='SKIP'
               handleClick={e => props.handleSkip(e)}
-              css='white-median-btn'
+              css={props.authenticated ? 'white-median-btn' : 'hidden'}
             />
-            <Button
-              text={
-                props.fieldId === (props.length - 1)
-                  ? 'FINISH'
-                  : 'NEXT'
-              }
-              handleClick={
-                props.fieldId === (props.length - 1)
-                  ? e => props.handleSubmit(inputs)
-                  : e => props.handleNext()
-              }
-              css='continue-btn'
-            />
+            {props.authenticated
+              // Next/Finish button after user authenticates
+              ? <Button
+                text={
+                  props.fieldId === (props.length - 1)
+                    ? 'FINISH'
+                    : 'NEXT'
+                }
+                handleClick={
+                  props.fieldId === (props.length - 1)
+                    ? e => props.handleSubmit(inputs)
+                    : e => props.handleNext()
+                }
+                css='continue-btn'
+              />
+
+              // Google sign in button when the user is not authenticated
+              : <Button
+                text='SIGN IN WITH GOOGLE'
+                handleClick={(e) => props.handleAuth()}
+                css='google-authentication-btn'
+              />
+            }
           </Box>
         </Grid>
       </Grid>
