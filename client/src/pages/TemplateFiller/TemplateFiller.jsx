@@ -108,7 +108,16 @@ const TemplateFiller = () => {
   /** Handles user pressing the 'Next' button */
   const handleSubmit = (e, inputs) => {
     advancePage();
-    console.log(inputs);
+    //temp hardcoded
+    let batchReplaceData = {
+      '[INSERT CITY]': 'New York',
+      '[INSERT STATE]': 'Montana',
+      '[INSERT NAME OF LOCAL ECOSYSTEM(S)': 'Local River'
+    }
+    fetch('/testdata', {
+      method: 'post',
+      body: batchReplaceData
+     });
   };
 
   /** Downloads a google doc when user presses the Download button */
