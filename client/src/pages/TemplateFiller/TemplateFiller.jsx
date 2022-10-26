@@ -24,12 +24,6 @@ const TemplateFiller = () => {
     "input_type": "",
     "description": "",
   }
-  // const overviewData = {
-  //   'Overview': {
-  //     id: 0,
-  //     questions: [['', 'A letter encouraging lawmakers to recognize that ecosystems have inherent rights, just as humans do']],
-  //   }
-  // }
 
   // Array of question objects. We initialize it with the overviewData
   const [questionsData, setQuestionsData] = useState([overviewData])
@@ -108,7 +102,6 @@ const TemplateFiller = () => {
     Object.keys(inputs).map(fieldId => {
       batchReplaceData[questionsData[fieldId].original_field] = inputs[fieldId]
     })
-    console.log("this is the submission lol")
     console.log(batchReplaceData)
 
     // EXAMPLE OF FINAL DATA STRUCTURE FOR BATCH REPLACE
@@ -137,11 +130,10 @@ const TemplateFiller = () => {
 
   // Handles a successful authentication
   const handleAuthenticationSuccess = (e, inputs, success) => {
-    // clickedId = -1;
     setAuthenticated(success);
-    setQuestionsData([])
-    console.log(success)
-    // advancePage();
+    if (success) {
+      setQuestionsData([])
+    }
   }
 
   // Downloads a google doc when user presses the Download button
@@ -149,7 +141,6 @@ const TemplateFiller = () => {
     // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
     window.location.assign(`http://localhost:8081/api/docDownload/${data.docID}`);
   }
-
 
   return (
     <div>
@@ -161,17 +152,6 @@ const TemplateFiller = () => {
             progress={progress}
             handleDownload={handleDownload}
           />
-            {/* <QuestionAnswer
-              field={authenticated ? clicked : Object.keys(overviewData)[0]}
-              fieldId={authenticated ? questionsData[clicked].id : overviewData['Overview'].id}
-              title={'Right of Nature Ordonnance Template'}
-              questions={authenticated ? questionsData[clicked].questions : overviewData['Overview'].questions}
-              length={length}
-              handleBack={authenticated ? handleBack : handleBackUnauth}
-              handleSkip={handleSkip}
-              handleSubmit={authenticated ? handleSubmit : handleAuthentication}
-              authenticated={authenticated}
-            /> */}
 
           <Grid pt={5} container spacing={4}>
             <Grid item xs={1} />
