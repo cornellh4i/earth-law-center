@@ -97,15 +97,15 @@ module.exports = () => {
   // Endpoint for batchReplaceAllTexts
   // Note - only works for URLs of the format '/batchReplaceAllTexts/:docID/word1/replacementWord1/word2/replacementWord2' and so on
   // Causes errors when format is not met
-  router.get('/batchReplaceAllTexts/:docID/*', async (req, res) => {
+  router.post('/batchReplaceAllTexts', function (req, res) {
     var dict = {};
-    var arr = req.params[0].split('/')
-    for(i = 0; i < arr.length; i += 2){
-      dict[arr[i]] = arr[i + 1]
+    console.log(req.body.data)
+    for (const key in req.body.data) {
+      dict[key] = req.body.data[key]
     }
     console.log(dict)
     try {
-      functions.readAuthFile(scopes).then((client) => functions.batchReplaceAllTexts(client, req.params.docID, dict).then((response) => res.json({ msg: `docid: ${response}` })))
+      functions.readAuthFile(scopes).then((client) => functions.batchReplaceAllTexts(client, req.body.docID, dict).then((response) => res.json({ msg: `docid: ${response}` })))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
@@ -122,6 +122,12 @@ module.exports = () => {
     }
   });
 
+  // POST route to test send body
+  router.post('/testdata', function (req, res) {
+    console.log(req.body);
+    // res.send({ message: 'testing' });
+    res.send(req.body);
+  });
 
   // Endpoint for getAllText (currently does not work (returns an object))
   router.get('/getAllText/:docID', async (req, res) => {

@@ -110,14 +110,21 @@ const TemplateFiller = () => {
     advancePage();
     //temp hardcoded
     let batchReplaceData = {
-      '[INSERT CITY]': 'New York',
-      '[INSERT STATE]': 'Montana',
-      '[INSERT NAME OF LOCAL ECOSYSTEM(S)': 'Local River'
-    }
-    fetch('/testdata', {
+      "[INSERT CITY]": "New York",
+      "[INSERT STATE]": "Montana",
+      "[INSERT NAME OF LOCAL ECOSYSTEM(S)": "Local River"
+    };
+    // console log gives undefined -> may be a handleSubmit issue
+    console.log(batchReplaceData)
+    fetch('/api/testdata', {
       method: 'post',
       body: batchReplaceData
-     });
+      // need to include docID in data structure
+      // {
+      //   "data": batchReplaceData,
+      //   "docID": "1uUpBeX4dN5BXn62hp0jxoVQak2jBq2iRCf6goHxS8sw"
+      // }
+    });
   };
 
   /** Downloads a google doc when user presses the Download button */
