@@ -45,6 +45,7 @@ const TemplateFiller = () => {
   // New temporary constants for sheetID
   let sheetID = '1cAcOx0xhzm8HLhKWsVYX_fTRiNS2UmcINtIc-9Wxd0k'
 
+  // Refetch from API when the state authenticated changes (after user sign-in)
   useEffect(() => {
     (async function () {
       const response = await fetch(`http://localhost:8081/api/getQuestions/${sheetID}/${data.docID}`)
