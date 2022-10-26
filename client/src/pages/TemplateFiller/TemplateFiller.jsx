@@ -58,7 +58,7 @@ const TemplateFiller = () => {
       setQuestionsData(json)
       setProgress(Math.floor((1 / json.length) * 100));
     })()
-  }, []);
+  }, [authenticated]);
 
   // Handles user clicking a navigation button in the sidebar
   const handleNavigationClick = (id) => {
@@ -140,6 +140,7 @@ const TemplateFiller = () => {
     // clickedId = -1;
     setAuthenticated(success);
     setQuestionsData([])
+    console.log(success)
     // advancePage();
   }
 
