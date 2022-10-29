@@ -9,7 +9,7 @@ import HelpBox from '../../components/HelpBox/HelpBox';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 /** Component for Template Filler Page */
-const TemplateFiller = () => {
+const TemplateFiller = (props) => {
   /** Data from the state passed by TemplateCard; contains the following data:
    * @param docID is the docID of the google doc
   */
@@ -144,9 +144,9 @@ const TemplateFiller = () => {
   }
 
   /** Downloads a google doc when user presses the Download button */
-  const handleDownload = (e) => {
-    // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
-    window.location.assign(`http://localhost:8081/api/docDownload/${data.docID}`);
+  const handleDownload = async(e) => {
+    const url = `api/docDownload/${props.docID}`;
+    await fetch(url);
   }
 
 
@@ -157,7 +157,7 @@ const TemplateFiller = () => {
           title='EarthLegislator'
           fieldItem={authenticated ? fieldItem : null}
           progress={progress}
-          handleDownload={handleDownload}
+          handleDownload={() => handleDownload}
         />
         <Grid pt={5} container spacing={4}>
           <Grid item xs={1} />

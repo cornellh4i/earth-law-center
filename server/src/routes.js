@@ -56,6 +56,7 @@ module.exports = () => {
         res.download(filePath, fileName, function () {
           fs.unlink(filePath);
         })
+        // res.json({success: 'Success!'})
       })()
     }
     catch (err) {
