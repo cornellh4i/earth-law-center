@@ -44,7 +44,7 @@ function authorize(callback) {
 async function authorizeDocID(callback, docID) {
   const client_id = "454620567847-jsntbbqhlc4pvtda5cmfi18eqb4jff94.apps.googleusercontent.com";
   const client_secret = "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";
-  const redirect_uris = ["http://localhost:8080/api/docCopy"];
+  const redirect_uris = ["http://localhost:8081/api/docCopy"];
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
   // Check if we have previously stored a token.

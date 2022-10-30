@@ -95,7 +95,7 @@ module.exports = () => {
   });
 
   // Endpoint for preAuthenticate
-  router.get('/preAuthenticate', async (req, res) => {
+  router.get('/preAuthenticate', async (res) => {
     try {
       authsamp.authenticate(scopes).then((client) => functions.preAuthenticate(client).then((response) => res.json({ msg: `token: ${response}` })))
     }
