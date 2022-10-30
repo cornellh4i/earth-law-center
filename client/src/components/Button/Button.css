@@ -237,6 +237,7 @@
   width: 8.125rem;
   margin-top: 1rem;
   border: none;
+  cursor: pointer;
 }
 
 .seemore-bottom-btn {
