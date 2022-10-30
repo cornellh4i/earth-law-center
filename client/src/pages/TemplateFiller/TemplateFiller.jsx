@@ -1,6 +1,7 @@
 import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import './TemplateFiller.css';
+import CorsErrorPage from '../../components/CorsErrorPage/CorsErrorPage';
 
 import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
@@ -36,6 +37,9 @@ const TemplateFiller = () => {
 
   // The current page clicked by the user, defaults to the first entry in questionsData
   const [clickedId, setClickedId] = useState(0);
+
+  // Whether the user is currently logged in
+  // const [corsflag, setCorsflag] = useState(false);
 
   // Update the progress bar to the correct percentage value
   const changeProgress = (newClickedId) => {
@@ -124,17 +128,24 @@ const TemplateFiller = () => {
 
   // Handles user pressing the 'Sign In with Google' button
   async function handleAuthentication(e, inputs) {
+    // if (corsflag == false) {
+    //   setCorsflag(true);
     // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
     const response = await fetch(`http://localhost:8081/api/preAuthenticate`);
 
     const success = await response.json() != null;
     handleAuthenticationSuccess(e, inputs, success);
+    // } else {
+    //   // Show CORS ERROR
+    //   // setCorsflag(false) and reroute to correct page on button click
+    // }
   };
 
   // Handles a successful authentication
   const handleAuthenticationSuccess = (e, inputs, success) => {
     setAuthenticated(success);
     if (success) {
+      // setCorsflag(false);
       setQuestionsData([])
     }
   }
@@ -147,6 +158,7 @@ const TemplateFiller = () => {
 
   return (
     <div>
+      <CorsErrorPage className='error-page' />
       {questionsData.length > 0 &&
         <Box sx={{ display: 'flex' }}>
           <FieldSideBar

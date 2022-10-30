@@ -6,7 +6,7 @@ import LinearProgressWithLabel from './ProgressBar';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Link from '@mui/material/Link';
-import {Link as RouteLink} from 'react-router-dom';
+import { Link as RouteLink } from 'react-router-dom';
 
 /** Component for a Field Side Bar
  * @param {title} is the title to display in the sidebar
@@ -21,6 +21,7 @@ const FieldSideBar = (props) => {
       className='sidebar'
       variant='permanent'
       anchor='left'
+      style={{ zIndex: -1 }}
     >
       <div className='sidebar-content'>
         {/* Header title */}
@@ -50,7 +51,7 @@ const FieldSideBar = (props) => {
 
           />
         </Box>
-        <RouteLink to='/preview'><Button css={props.fieldItem == null ? 'hidden' : 'template-preview-btn'} text={'PREVIEW'}/></RouteLink>
+        <RouteLink to='/preview'><Button css={props.fieldItem == null ? 'hidden' : 'template-preview-btn'} text={'PREVIEW'} /></RouteLink>
         <Box pt={2} className='return'>
           <Link href='/laws' color='text.secondary'>Return to Templates</Link>
         </Box>

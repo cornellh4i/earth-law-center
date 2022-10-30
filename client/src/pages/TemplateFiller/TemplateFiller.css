@@ -18,3 +18,8 @@ body {
     font-weight: bold;
     color: #000000
 }
+
+.error-page {
+    position: absolute;
+    z-index: 4;
+}
