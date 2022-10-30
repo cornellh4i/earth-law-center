@@ -48,9 +48,7 @@ const TemplateFiller = () => {
   // Refetch from API when the state authenticated changes (after user sign-in)
   useEffect(() => {
     (async function () {
-      console.log("hello")
       if (authenticated) {
-        console.log("booo")
         const response = await fetch(`http://localhost:8081/api/getQuestions/${sheetID}/${data.docID}`)
         const json = await response.json()
         setQuestionsData(json)
