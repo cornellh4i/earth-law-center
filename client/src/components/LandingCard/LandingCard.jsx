@@ -10,8 +10,9 @@ import Button from '../Button/Button';
 import { Link } from 'react-router-dom'; 
 
 /** Component for a landing card used by template law/letter cards
- *  @param {title} is the title on the card
- *  @param {text} is the text in the card
+ * @param {title} is the title on the card
+ * @param {text} is the text in the card
+ * @param {link} is the link that the card points to, e.g. /laws or /letters
 */
 const LandingCard = (props) => {
   return (
@@ -27,11 +28,8 @@ const LandingCard = (props) => {
             <Typography variant='body2' color='text.secondary' sx={{ fontSize: 18, marginTop:'10', fontFamily: 'Nunito'}} >
               {props.text}
             </Typography>
-            {props.text == "Law Template" ? 
-            <Link to={'/laws'}><Button css="seemore-btn" text = "SEE MORE" /></Link> 
-            :
-            <Link to={'/letters'}><Button css="seemore-btn" text = "SEE MORE" /></Link> 
-            }
+            <Link to={props.link}><Button css="seemore-btn" text = "SEE MORE" /></Link> 
+
           </Box>
         </CardContent>
       </CardActionArea>
