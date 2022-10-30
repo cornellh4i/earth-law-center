@@ -29,7 +29,7 @@ const TemplateFiller = () => {
   const [questionsData, setQuestionsData] = useState([overviewData])
 
   // Value to render in the progress bar for the navigation sidebar
-  const [progress, setProgress] = useState(Math.floor((1 / questionsData.length) * 100));
+  const [progress, setProgress] = useState(0);
 
   // Whether the user is currently logged in
   const [authenticated, setAuthenticated] = useState(false);
