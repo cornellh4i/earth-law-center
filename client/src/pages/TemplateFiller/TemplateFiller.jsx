@@ -2,7 +2,7 @@ import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import './TemplateFiller.css';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import HelpBox from '../../components/HelpBox/HelpBox';
@@ -10,125 +10,119 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 /** Component for Template Filler Page */
 const TemplateFiller = () => {
-  /** Data from the state passed by TemplateCard; contains the following data:
-   * @param docID is the docID of the google doc
-  */
+  /**
+   * Data from the state passed by TemplateCard; contains the following data:
+   * @param docID is the ID of the google doc
+   */
   const data = useLocation().state
 
-  /** Temporary hardcoded data to pass as props to the Q&A component */
+  // Storing the initial overview page in the format of a questions object
   const overviewData = {
-    'Overview': {
-      id: 0,
-      questions: [['', 'A letter encouraging lawmakers to recognize that ecosystems have inherent rights, just as humans do']],
-    }
+    "field": "Overview",
+    "original_field": "",
+    "question": "A letter encouraging lawmakers to recognize that ecosystems have inherent rights, just as humans do",
+    "input_type": "",
+    "description": "",
   }
-  const questionsData = {
-    'Name of Local Ecosystem': {
-      id: 0,
-      questions: [['text input', 'What is the name of the local ecosystem?']],
-    },
-    'City & State': {
-      id: 1,
-      questions: [
-        ['states dropdown select', 'What state does this ordonnance apply to?'],
-        ['text input', 'What city does this ordonnance apply to?'],
-      ],
-    },
-    'Number of Members in Guardianship Body': {
-      id: 2,
-      questions: [
-        ['text input', 'How many members are in the Guardianship Body?'],
-      ],
-    },
-    Enactment: {
-      id: 3,
-      questions: [
-        [
-          'text input',
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        ],
-      ],
-    },
-  };
 
-  /** The current page clicked by the user, defaults to the first entry in questionsData */
-  const [clicked, setClicked] = useState(Object.keys(questionsData)[0]);
+  // Array of question objects. We initialize it with the overviewData
+  const [questionsData, setQuestionsData] = useState([overviewData])
+
+  // Value to render in the progress bar for the navigation sidebar
+  const [progress, setProgress] = useState(0);
+
+  // Whether the user is currently logged in
   const [authenticated, setAuthenticated] = useState(false);
 
-  /** Temporary variables */
-  let length = Object.keys(questionsData).length;
-  let clickedId = questionsData[clicked].id;
+  // The current page clicked by the user, defaults to the first entry in questionsData
+  const [clickedId, setClickedId] = useState(0);
 
-  /** Value to render in the progress bar for the navigation sidebar */
-  const [progress, setProgress] = useState(Math.floor((0 / length) * 100));
-
-  /** Update the progress bar to the correct percentage value */
+  // Update the progress bar to the correct percentage value
   const changeProgress = (newClickedId) => {
-    setProgress(Math.floor(((newClickedId + 1) / length) * 100));
+    setProgress(Math.floor(((newClickedId + 1) / questionsData.length) * 100));
   };
 
-  /** Handles user clicking a navigation button in the sidebar */
-  const handleNavigationClick = (field) => {
-    setClicked(field);
-    changeProgress(questionsData[field].id);
+  // New temporary constants for sheetID
+  let sheetID = '1cAcOx0xhzm8HLhKWsVYX_fTRiNS2UmcINtIc-9Wxd0k'
+
+  // Refetch from API when the state authenticated changes (after user sign-in)
+  useEffect(() => {
+    (async function () {
+      if (authenticated) {
+        const response = await fetch(`http://localhost:8081/api/getQuestions/${sheetID}/${data.docID}`)
+        const json = await response.json()
+        setQuestionsData(json)
+        setProgress(Math.floor((1 / json.length) * 100));
+      }
+    })()
+  }, [authenticated]);
+
+  // Handles user clicking a navigation button in the sidebar
+  const handleNavigationClick = (id) => {
+    setClickedId(id);
+    changeProgress(id);
   };
 
-  /** Styling and functionality for sidebar navigation buttons */
-  const fields = Object.keys(questionsData);
-  const fieldItem = fields.map((field) => (
+  // Styling and functionality for sidebar navigation buttons
+  const fieldItem = questionsData.map((question, index) => (
     <div
+      key={index}
       className={
-        questionsData[clicked].id === questionsData[field].id
+        index === clickedId
           ? 'side-btn side-btn-active'
           : 'side-btn'
       }
-      onClick={() => handleNavigationClick(field)}
+      onClick={() => handleNavigationClick(index)}
     >
-      {field}
+      {question.field}
     </div>
   ));
 
-  /** Move user to the previous page */
+  // Move user to the previous page
   const backPage = () => {
-    if (!authenticated) {
-
-    }
     let newClickedId = Math.max(clickedId - 1, 0);
     changeProgress(newClickedId);
-    setClicked(Object.keys(questionsData)[newClickedId]);
+    setClickedId(newClickedId);
   };
 
-  /** Advances user to the next page */
+  // Advances user to the next page
   const advancePage = () => {
-    let newClickedId = Math.min(clickedId + 1, length - 1);
+    let newClickedId = Math.min(clickedId + 1, questionsData.length - 1);
     changeProgress(newClickedId);
-    setClicked(Object.keys(questionsData)[newClickedId]);
+    setClickedId(newClickedId);
   };
 
-  /** Handles user pressing the 'Back' button */
-  const handleBack = (e) => {
-    backPage();
+  // Handles user pressing the 'Next' button
+  const handleSubmit = (inputs) => {
+    // EXAMPLE OF INPUTS DATA STRUCTURE
+    // inputs = {
+    //   0: 'New York',
+    //   1: 'Montana',
+    //   2: 'Local River'
+    // }
+
+    let batchReplaceData = {}
+    Object.keys(inputs).map(fieldId => {
+      batchReplaceData[questionsData[fieldId].original_field] = inputs[fieldId]
+    })
+    console.log(batchReplaceData)
+
+    // EXAMPLE OF FINAL DATA STRUCTURE FOR BATCH REPLACE
+    // batchReplaceData = {
+    //   '[INSERT STATE]': 'New York',
+    //   '[INSERT CITY]': 'Montana',
+    //   '[INSERT NAME OF LOCAL ECOSYSTEM(S)]': 'Local River'
+    // }
   };
 
-  /** Handles user pressing the 'Back' button before authenticating */
+  // Handles user pressing the 'Back' button before authenticating
   let navigate = useNavigate();
-  const handleBackUnauth = () => {
+  const backPageUnauth = () => {
     let path = '/';
     navigate(path);
   }
 
-  /** Handles user pressing the 'Skip' button */
-  const handleSkip = (e) => {
-    advancePage();
-  };
-
-  /** Handles user pressing the 'Next' button */
-  const handleSubmit = (e, inputs) => {
-    advancePage();
-    console.log(inputs);
-  };
-
-  /** Handles user pressing the 'Sign In with Google' button */
+  // Handles user pressing the 'Sign In with Google' button
   async function handleAuthentication(e, inputs) {
     // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
     const response = await fetch(`http://localhost:8081/api/preAuthenticate`);
@@ -137,50 +131,60 @@ const TemplateFiller = () => {
     handleAuthenticationSuccess(e, inputs, success);
   };
 
+  // Handles a successful authentication
   const handleAuthenticationSuccess = (e, inputs, success) => {
-    clickedId = -1;
     setAuthenticated(success);
-    advancePage();
+    if (success) {
+      setQuestionsData([])
+    }
   }
 
-  /** Downloads a google doc when user presses the Download button */
+  // Downloads a google doc when user presses the Download button
   const handleDownload = (e) => {
     // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
     window.location.assign(`http://localhost:8081/api/docDownload/${data.docID}`);
   }
 
-
   return (
     <div>
-      <Box sx={{ display: 'flex' }}>
-        <FieldSideBar
-          title='EarthLegislator'
-          fieldItem={authenticated ? fieldItem : null}
-          progress={progress}
-          handleDownload={handleDownload}
-        />
-        <Grid pt={5} container spacing={4}>
-          <Grid item xs={1} />
-          <Grid item xs={10}>
-            <QuestionAnswer
-              field={authenticated ? clicked : Object.keys(overviewData)[0]}
-              fieldId={authenticated ? questionsData[clicked].id : overviewData['Overview'].id}
-              title={'Right of Nature Ordonnance Template'}
-              questions={authenticated ? questionsData[clicked].questions : overviewData['Overview'].questions}
-              length={length}
-              handleBack={authenticated ? handleBack : handleBackUnauth}
-              handleSkip={handleSkip}
-              handleSubmit={authenticated ? handleSubmit : handleAuthentication}
-              authenticated={authenticated}
-            />
-          </Grid>
-          <Grid item xs={1} />
-          <HelpBox
-            title='Earth Law Center'
-            description='Earth Law Center is one example of an organization that drafts Rights of Nature and other Earth-centered laws across the United States and world.'
+      {questionsData.length > 0 &&
+        <Box sx={{ display: 'flex' }}>
+          <FieldSideBar
+            title='EarthLegislator'
+            fieldItem={fieldItem}
+            progress={progress}
+            handleDownload={handleDownload}
           />
-        </Grid>
-      </Box>
+
+          <Grid pt={5} container spacing={4}>
+            <Grid item xs={1} />
+            <Grid item xs={10}>
+              <QuestionAnswer
+                field={questionsData[clickedId].field}
+                fieldId={clickedId}
+                title={'Right of Nature Ordonnance Template'}
+                question={questionsData[clickedId].question}
+                inputType={questionsData[clickedId].input_type}
+                length={questionsData.length}
+                handleBack={authenticated ? backPage : backPageUnauth}
+                handleSkip={advancePage}
+                handleNext={advancePage}
+                handleAuth={handleAuthentication}
+                handleSubmit={handleSubmit}
+                authenticated={authenticated}
+              />
+            </Grid>
+            <Grid item xs={1} />
+
+            {questionsData[clickedId].description &&
+              <HelpBox
+                title='TIP'
+                description={questionsData[clickedId].description}
+              />
+            }
+          </Grid>
+        </Box>
+      }
     </div>
   );
 };
