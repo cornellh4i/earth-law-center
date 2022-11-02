@@ -101,11 +101,11 @@ const QuestionAnswer = (props) => {
       {/* Button positioning */}
       <Grid container direction='row' spacing={4} pt={2} justifyContent='flex-end'>
         <Grid item xs={6}>
-          <Button
-            text='BACK'
-            handleClick={e => props.handleBack(e)}
-            css='back-btn'
-          />
+            <Button
+              text='BACK'
+              handleClick={e => props.handleBack(e)}
+              css='back-btn'
+            />
         </Grid>
         <Grid item xs={6}>
           <Box display='flex' justifyContent='flex-end'>
