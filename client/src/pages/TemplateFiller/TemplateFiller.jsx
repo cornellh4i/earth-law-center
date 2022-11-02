@@ -105,7 +105,6 @@ const TemplateFiller = () => {
     Object.keys(inputs).map(fieldId => {
       batchReplaceData[questionsData[fieldId].original_field] = inputs[fieldId]
     })
-    console.log(batchReplaceData)
 
     // EXAMPLE OF FINAL DATA STRUCTURE FOR BATCH REPLACE
     // batchReplaceData = {
@@ -113,6 +112,13 @@ const TemplateFiller = () => {
     //   '[INSERT CITY]': 'Montana',
     //   '[INSERT NAME OF LOCAL ECOSYSTEM(S)]': 'Local River'
     // }
+
+    // need to include docID, currently hard coded docID for sample template in URL
+    fetch(`http://localhost:8081/api/batchReplaceAllTexts/13YIr9SZ2Vgkh3R56AGP4L3cUIXZEmVqygHJ3IOj_BeQ`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(batchReplaceData)
+    });
   };
 
   // Handles user pressing the 'Back' button before authenticating
