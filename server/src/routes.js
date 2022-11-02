@@ -23,7 +23,7 @@ module.exports = () => {
   // Endpoint for getting questions from Google Sheets
   router.get('/getQuestions/:sheetID/:docID', async (req, res) => {
     try {
-      authsamp.authenticate(scopes).then((client) => {
+      functions.readAuthFile(scopes).then((client) => {
         functions.getQuestions(client, req.params.sheetID, req.params.docID)
           .then(async function (response) {
             res.json(response)
