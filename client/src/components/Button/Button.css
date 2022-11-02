@@ -104,6 +104,22 @@
   cursor: pointer;
 }
 
+.template-download-btn {
+  background:
+    #64926E;
+  color: #F1F1F3;
+  font-size: 18px;
+  font-family: 'Nunito';
+  font-weight: bolder;
+  border: none;
+  border-radius: 0.938rem;
+  height: 3.125rem;
+  width: 90%;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
 .card-type-btn {
   padding-left: 3%;
   padding-right: 3%;
