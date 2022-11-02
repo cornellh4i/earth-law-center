@@ -215,7 +215,9 @@
 
 /* Hovering buttons in TemplateCard */
 .card-download-btn:hover,
-.card-edit-btn:hover {
+.card-edit-btn:hover,
+.template-download-btn:hover,
+.google-authentication-btn:hover {
   opacity: 0.7;
   cursor: pointer;
 }
