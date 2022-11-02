@@ -92,9 +92,6 @@ const TemplateCard = (props) => {
 
   /** Downloads a Google doc when user presses the download button */
   const download = (e) => {
-    // Currently still using endpoint here but we should not be using google here
-    // const url = `api/docDownload/${props.docID}`;
-    // await fetch(url);
     window.location.assign(`/api/docDownload/${props.docID}`);
   }
 
