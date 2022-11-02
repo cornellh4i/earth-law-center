@@ -153,7 +153,6 @@
 /* White median with black text, black border, and left pointing arrow */
 .back-btn {
   font-family: 'Nunito';
-  /* margin: 2%; */
   min-width: 6rem;
   height: 3rem;
   color: #000;
@@ -179,7 +178,6 @@
 
 /* Grey median button with white text and right pointing arrow */
 .continue-btn {
-  /* margin: 2%; */
   min-width: 6rem;
   height: 3rem;
   color: #fff;
@@ -206,7 +204,6 @@
 /* White median button with grey text */
 .white-median-btn {
   font-family: 'Nunito';
-  /* margin: 2%; */
   min-width: 6rem;
   height: 3rem;
   color: #484848;
@@ -330,7 +327,6 @@
 }
 
 .google-authentication-btn{
-  /* margin: 2%; */
   height: 3rem;
   width: 15rem;
   background:
