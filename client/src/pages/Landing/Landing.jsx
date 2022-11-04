@@ -20,17 +20,23 @@ const Landing = () => {
         {/* We have two Landing boxes for now */}
         <Grid container spacing={4} pt={5}>
           <Grid item xs={12} md={5.5}>
-            <Link to='/laws' style={{ textDecoration: 'none' }}><LandingCard
-              title={"Law Template"}
-              text={text.LawsDescription}>
-            </LandingCard></Link>
+            <Link to='/laws' style={{ textDecoration: 'none' }}>
+              <LandingCard
+                title={"Law Template"}
+                text={text.LawsDescription}
+                link={"/laws"}>
+              </LandingCard>
+            </Link>
           </Grid>
           <Grid item xs={12} md={1}></Grid>
           <Grid item xs={12} md={5.5}>
-            <Link to='/letters' style={{ textDecoration: 'none' }}><LandingCard
-              title={"Letter Template"}
-              text={text.LettersDescription}>
-            </LandingCard></Link>
+            <Link to='/letters' style={{ textDecoration: 'none' }}>
+              <LandingCard
+                title={"Letter Template"}
+                text={text.LettersDescription}
+                link={"/letters"}>
+              </LandingCard>
+            </Link>
           </Grid>
         </Grid>
 
