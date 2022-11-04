@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
 .helpBoxTitle {
-  font: 'Nunito';
+  font-family: 'Nunito';
   font-weight: 700;
   font-size: 1.15rem;
   text-align: left;
@@ -9,17 +9,20 @@
 }
 
 .helpBoxDescription {
+  font-family: 'Nunito';
   font-weight: 400;
-  font-size: 1.15rem;
+  font-size: 1rem;
   text-align: left;
 }
 
 .helpBox {
-  margin-left: 15.5rem;
+  /* background-color: #387948; */
   background-color: #eef2ef;
   border-radius: 1rem;
   padding: 2.25rem;
-  flex-wrap: wrap;
-  width: '30%';
-  max-width: 26rem;
+  /* flex-wrap: wrap; */
+  /* width: '50%'; */
+  /* padding-right:10rem; */
+  /* width: '100%'; */
+  /* max-width: 26rem; */
 }

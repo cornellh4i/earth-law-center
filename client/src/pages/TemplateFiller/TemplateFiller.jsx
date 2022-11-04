@@ -164,7 +164,7 @@ const TemplateFiller = () => {
 
           <Grid pt={5} container spacing={4}>
             <Grid item xs={1} />
-            <Grid item xs={10}>
+            <Grid item xs={6}>
               <QuestionAnswer
                 field={questionsData[clickedId].field}
                 fieldId={clickedId}
@@ -180,14 +180,17 @@ const TemplateFiller = () => {
                 authenticated={authenticated}
               />
             </Grid>
+            <Grid item xs={4}>
+              {questionsData[clickedId].description &&
+                <Box style={{ paddingTop: '4.5rem' }}>
+                  <HelpBox
+                    title={`More about ${questionsData[clickedId].field}`}
+                    description={questionsData[clickedId].description}
+                  />
+                </Box>
+              }
+            </Grid>
             <Grid item xs={1} />
-
-            {questionsData[clickedId].description &&
-              <HelpBox
-                title='TIP'
-                description={questionsData[clickedId].description}
-              />
-            }
           </Grid>
         </Box>
       }
