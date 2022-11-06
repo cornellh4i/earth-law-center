@@ -94,6 +94,20 @@ module.exports = () => {
     }
   });
 
+  // Endpoint for batchReplaceAllTexts
+  router.post('/batchReplaceAllTexts/:docID', function (req, res) {
+    var dict = {};
+    for (const key in req.body) {
+      dict[key] = req.body[key]
+    }
+    try {
+      functions.readAuthFile(scopes).then((client) => functions.batchReplaceAllTexts(client, req.params.docID, dict).then((response) => res.json({ msg: `docid: ${response}` })))
+    }
+    catch (err) {
+      res.json({ error: err.message || err.toString() })
+    }
+  });
+
   // Endpoint for preAuthenticate
   router.get('/preAuthenticate', async (req, res) => {
     try {
