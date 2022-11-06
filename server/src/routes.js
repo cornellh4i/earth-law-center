@@ -23,7 +23,7 @@ module.exports = () => {
   // Endpoint for getting questions from Google Sheets
   router.get('/getQuestions/:sheetID/:docID', async (req, res) => {
     try {
-      authsamp.authenticate(scopes).then((client) => {
+      functions.readAuthFile(scopes).then((client) => {
         functions.getQuestions(client, req.params.sheetID, req.params.docID)
           .then(async function (response) {
             res.json(response)
@@ -88,6 +88,20 @@ module.exports = () => {
   router.get('/replaceAllText/:docID/:replaceText/:containsText', async (req, res) => {
     try {
       functions.readAuthFile(scopes).then((client) => functions.replaceAllTexts(client, req.params.docID, req.params.replaceText, req.params.containsText).then((response) => res.json({ msg: `docid: ${response}` })))
+    }
+    catch (err) {
+      res.json({ error: err.message || err.toString() })
+    }
+  });
+
+  // Endpoint for batchReplaceAllTexts
+  router.post('/batchReplaceAllTexts/:docID', function (req, res) {
+    var dict = {};
+    for (const key in req.body) {
+      dict[key] = req.body[key]
+    }
+    try {
+      functions.readAuthFile(scopes).then((client) => functions.batchReplaceAllTexts(client, req.params.docID, dict).then((response) => res.json({ msg: `docid: ${response}` })))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })

@@ -33,6 +33,21 @@ function printDocInfo(auth) {
 }
 
 /**
+ * String method which takes in a UTF-8 string and returns its ASCII equivalent.
+ */
+String.prototype.toASCII = function () {
+  // Dict of all UTF-8 to ASCII substitutions
+  const substitutions = {
+    '\u{2018}': '\'', // LEFT SINGLE QUOTATION MARK  -> APOSTROPHE
+    '\u{2019}': '\'', // RIGHT SINGLE QUOTATION MARK -> APOSTROPHE
+    '\u{201C}': '"',  // LEFT DOUBLE QUOTATION MARK  -> QUOTATION MARK
+    '\u{201D}': '"',  // RIGHT DOUBLE QUOTATION MARK -> QUOTATION MARK
+  }
+
+  return this.replace(/[\u2018\u2019\u201C\u201D]/g, char => substitutions[char])
+}
+
+/**
  * Takes in a docID and returns all the fields in the form of [INSERT XXX].
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
  * @param {docID} is the document id of the google doc we want to retrieve info from.
@@ -41,34 +56,28 @@ function printDocInfo(auth) {
 async function getAllFields(auth, docID) {
   const text = await getAllText(auth, docID)
 
-  // A set containing all unique fields in the google doc
-  let fields = new Set()
-
-  // Function to convert a given string to title case
-  // NOT USED CURRENTLY BUT WE NEED IT EVENTUALLY, STORING HERE FOR NOW
-  String.prototype.toTitleCase = function () {
-    return this.replace(
-      /\w\S*/g,
-      function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
-      }
-    )
-  }
+  // A dictionary storing the ASCII character fields from the google sheet as keys
+  // and googld doc [INSERT XXX] fields with special unicode characters as values.
+  var fields = {};
 
   // Matches all strings with formats like [INSERT BLANK]
-  const regex = /\[[INSERT A-Z ]*\]/g
+  const regex = /\[INSERT[ A-Z()%\/\.0-9\-_`"'$&\*?!#@\u2018\u2019\u201C\u201D]*\]/g
   const text_length = Object.keys(text).length - 1
 
   // Loop through text object and add all occurrences of [INSERT BLANK] to fields
   for (i = 0; i < text_length; i++) {
+    // Encode text to ensure UTF-8 chars and uppercase chars are removed
     const str = text['textRun' + i].text
+
+    // Array of all [INSERT XXX] strings from the google doc including special
+    // unicode characters
     const field_array = str.match(regex)
+
     for (const i in field_array) {
-      const substring = field_array[i].slice(8, -1)
-      fields.add(substring.toLowerCase())
+      const substring = field_array[i].slice(8, -1).toLowerCase().toASCII()
+      fields[substring] = field_array[i]
     }
   }
-
   return fields
 }
 
@@ -92,7 +101,7 @@ async function getQuestions(auth, sheetID, docID) {
       range: 'test!A:Z',
     });
 
-    // All non-empty values in the google sheets
+    // All values (possibly including empty rows) in the google sheets
     const grid = response.data.values
 
     // Array of question objects
@@ -100,17 +109,23 @@ async function getQuestions(auth, sheetID, docID) {
 
     for (let i = 0; i < grid.length; i++) {
       row = grid[i]
-      // Check if the current sheet field is in the doc fields set
-      if (fields.has(row[0].toLowerCase())) {
+
+      // Define column only if row has a non-zero length
+      // Encode text to ensure UTF-8 chars and uppercase chars are removed
+      let column = (row.length > 0) ? row[0].toLowerCase().toASCII() : null
+
+      // Check if row is a non-empty array and that the first column matches the doc field
+      if (column in fields) {
         // Question object, contains all relevant columns in the google sheets
         let question = {
           "field": "",
+          "original_field": "",
           "question": "",
           "input_type": "",
           "description": "",
         }
-
         question.field = row[0]
+        question.original_field = fields[column]
         try { question.question = row[1] } catch (err) { console.err("missing question") }
         try { question.input_type = row[2] } catch (err) { console.err("missing input type") }
         try { question.description = row[3] } catch (err) { console.err("missing description") }
@@ -236,6 +251,52 @@ async function replaceAllTexts(auth, docID, replaceText, containsText) {
         }
       }
     });
+  // Send the JSON object in a batchUpdate request
+  await docs.documents.batchUpdate(updateObject)
+  return docCopyId
+}
+
+/**
+ * Replaces all instances of containsText with replaceText in document specified by docID
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * @param {docID} is the document id of the google doc we want to insert data in
+ * @param {replaceTextDict} is a dictionary with key value pairs. 
+ *    the keys the text in the document matching the substring that will be replaced by replaceText.
+ *    the values represent the text that will replace the matched text.
+ * @returns the docID of the copied document with the new changes 
+ */
+async function batchReplaceAllTexts(auth, docID, replaceTextDict) {
+  //Authorize docs and drive
+  const docs = google.docs({ version: 'v1', auth });
+  var docCopyId;
+  var updateObject;
+  // Below is the function that generates a new docID
+  await docCopy(auth, docID).then(
+    (docCopy) => {
+      docCopyId = docCopy;
+      requests = [];
+
+      // JSON request body for batchupdate with docCopyId 
+      for (const [key, value] of Object.entries(replaceTextDict)) {
+        requests.push({
+          "replaceAllText":
+          {
+            "replaceText": value,
+            "containsText": {
+              "text": key,
+              "matchCase": false
+            }
+          }
+        })
+      }
+    });
+  updateObject = {
+    "documentId": docCopyId,
+    "resource": {
+      "requests": requests,
+    }
+  }
+
   // Send the JSON object in a batchUpdate request
   await docs.documents.batchUpdate(updateObject)
   return docCopyId
@@ -415,4 +476,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, docCopy, docDownload, getQuestions, preAuthenticate, readAuthFile };
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, batchReplaceAllTexts, docCopy, docDownload, getQuestions, preAuthenticate, readAuthFile };

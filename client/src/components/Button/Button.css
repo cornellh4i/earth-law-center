@@ -104,6 +104,22 @@
   cursor: pointer;
 }
 
+.template-download-btn {
+  background:
+    #64926E;
+  color: #F1F1F3;
+  font-size: 18px;
+  font-family: 'Nunito';
+  font-weight: bolder;
+  border: none;
+  border-radius: 0.938rem;
+  height: 3.125rem;
+  width: 90%;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
 .card-type-btn {
   padding-left: 3%;
   padding-right: 3%;
@@ -136,9 +152,9 @@
 
 /* White median with black text, black border, and left pointing arrow */
 .back-btn {
-  margin: 2%;
-  min-width: 5rem;
-  height: 2rem;
+  font-family: 'Nunito';
+  min-width: 6rem;
+  height: 3rem;
   color: #000;
   font-weight: bold;
   font-size: 1rem;
@@ -162,13 +178,13 @@
 
 /* Grey median button with white text and right pointing arrow */
 .continue-btn {
-  margin: 2%;
-  min-width: 5rem;
-  height: 2rem;
+  min-width: 6rem;
+  height: 3rem;
   color: #fff;
   font-weight: bold;
   font-size: 1rem;
-  background-color: #484848;
+  font-family: 'Nunito';
+  background:#64926E;
   border-width: 0.05rem;
   border-style: none;
   border-radius: 0.7rem;
@@ -187,9 +203,9 @@
 
 /* White median button with grey text */
 .white-median-btn {
-  margin: 2%;
-  min-width: 5rem;
-  height: 2rem;
+  font-family: 'Nunito';
+  min-width: 6rem;
+  height: 3rem;
   color: #484848;
   font-weight: bold;
   font-size: 1rem;
@@ -199,7 +215,9 @@
 
 /* Hovering buttons in TemplateCard */
 .card-download-btn:hover,
-.card-edit-btn:hover {
+.card-edit-btn:hover,
+.template-download-btn:hover,
+.google-authentication-btn:hover {
   opacity: 0.7;
   cursor: pointer;
 }
@@ -237,6 +255,7 @@
   width: 8.125rem;
   margin-top: 1rem;
   border: none;
+  cursor: pointer;
 }
 
 .seemore-bottom-btn {
@@ -309,7 +328,7 @@
 
 .google-authentication-btn{
   height: 3rem;
-  width: 20rem;
+  width: 15rem;
   background:
     #64926E;
   border-radius: 15px;

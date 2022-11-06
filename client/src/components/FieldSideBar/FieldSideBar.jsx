@@ -38,19 +38,17 @@ const FieldSideBar = (props) => {
           <LinearProgressWithLabel className='progress-bar' value={props.progress} color='inherit' />
         </Box>
 
-        {/* Field items */}
         <div className='bar-div'>
           {props.fieldItem}
         </div>
-        <Box pt={2} ml={2}>
+        <Box pt={2}>
+          <RouteLink to='/preview'><Button css={props.fieldItem == null ? 'hidden' : 'template-preview-btn'} text={'PREVIEW'} /></RouteLink>
           <Button
             text='DOWNLOAD'
             handleClick={() => props.handleDownload()}
-            css={props.fieldItem == null ? 'hidden' : 'card-edit-btn'}
-
+            css={props.fieldItem == null ? 'hidden' : 'template-download-btn'}
           />
         </Box>
-        <RouteLink to='/preview'><Button css={props.fieldItem == null ? 'hidden' : 'template-preview-btn'} text={'PREVIEW'}/></RouteLink>
         <Box pt={2} className='return'>
           <Link href='/laws' color='text.secondary'>Return to Templates</Link>
         </Box>
