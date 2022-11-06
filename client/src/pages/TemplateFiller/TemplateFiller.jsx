@@ -114,7 +114,7 @@ const TemplateFiller = () => {
     // }
 
     // need to include docID, currently hard coded docID for sample template in URL
-    fetch(`/api/batchReplaceAllTexts/13YIr9SZ2Vgkh3R56AGP4L3cUIXZEmVqygHJ3IOj_BeQ`, {
+    fetch(`/api/batchReplaceAllTexts/${data.docID}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(batchReplaceData)
