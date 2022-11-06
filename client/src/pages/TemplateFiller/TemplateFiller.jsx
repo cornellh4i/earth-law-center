@@ -49,7 +49,7 @@ const TemplateFiller = () => {
   useEffect(() => {
     (async function () {
       if (authenticated) {
-        const response = await fetch(`http://localhost:8081/api/getQuestions/${sheetID}/${data.docID}`)
+        const response = await fetch(`/api/getQuestions/${sheetID}/${data.docID}`)
         const json = await response.json()
         setQuestionsData(json)
         setProgress(Math.floor((1 / json.length) * 100));
@@ -124,9 +124,7 @@ const TemplateFiller = () => {
 
   // Handles user pressing the 'Sign In with Google' button
   async function handleAuthentication(e, inputs) {
-    // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
-    const response = await fetch(`http://localhost:8081/api/preAuthenticate`);
-
+    const response = await fetch(`/api/preAuthenticate`);
     const success = await response.json() != null;
     handleAuthenticationSuccess(e, inputs, success);
   };
@@ -141,8 +139,7 @@ const TemplateFiller = () => {
 
   // Downloads a google doc when user presses the Download button
   const handleDownload = (e) => {
-    // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
-    window.location.assign(`http://localhost:8081/api/docDownload/${data.docID}`);
+    window.location.assign(`/api/docDownload/${data.docID}`);
   }
 
   return (
