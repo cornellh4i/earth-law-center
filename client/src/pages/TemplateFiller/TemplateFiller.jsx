@@ -119,6 +119,8 @@ const TemplateFiller = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(batchReplaceData)
     });
+    let path = '/template-filler-end';
+    navigate(path, {docID: data.docID});
   };
 
   // Handles user pressing the 'Back' button before authenticating

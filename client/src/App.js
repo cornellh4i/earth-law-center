@@ -7,6 +7,7 @@ import LettersDisplay from './pages/LettersDisplay/LettersDisplay';
 import About from './pages/About/About.jsx';
 import ResourceDisplay from './pages/ResourceDisplay/ResourceDisplay';
 import TemplateFiller from './pages/TemplateFiller/TemplateFiller';
+import TemplateFillerEnd from './pages/TemplateFillerEnd/TemplateFillerEnd';
 import { useLocation } from 'react-router-dom';
 import Preview from "./pages/Preview/Preview";
 
@@ -40,6 +41,7 @@ function App() {
         {/* <Route path='/about' element={<About/>} /> */}
         <Route path='/resources' element={<ResourceDisplay />} />
         <Route path='/template-filler' element={<TemplateFiller />} />
+        <Route path='/template-filler-end' element={<TemplateFillerEnd />} />
         <Route path='/preview' element={<Preview />} />
       </Routes>
     </Router>
