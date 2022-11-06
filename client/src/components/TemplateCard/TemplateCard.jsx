@@ -63,17 +63,17 @@ const TemplateCard = (props) => {
 
   var card_content =
     <div className='card-text-container'>
-        <p className='card-category'>{props.category}</p>
-        <div className='title-container'>
-          <h1 className='card-title'>{props.title}</h1>
-        </div>
-        <div className='tag-container'>
-          <Button css={filtered ? 'hidden' : 'card-type-btn'} text={props.law}></Button>
-          <Button css={filtered ? 'hidden' : 'card-type-btn'} text={props.jurisdiction}></Button>
-        </div>
-        <div className='summary-container'>
-          <p className='card-summary'>{props.summary}</p>
-        </div>
+      <p className='card-category'>{props.category}</p>
+      <div className='title-container'>
+        <h1 className='card-title'>{props.title}</h1>
+      </div>
+      <div className='tag-container'>
+        <Button css={filtered ? 'hidden' : 'card-type-btn'} text={props.law}></Button>
+        <Button css={filtered ? 'hidden' : 'card-type-btn'} text={props.jurisdiction}></Button>
+      </div>
+      <div className='summary-container'>
+        <p className='card-summary'>{props.summary}</p>
+      </div>
     </div>
     ;
   if (props.letter) {
@@ -95,7 +95,8 @@ const TemplateCard = (props) => {
     // Currently still using endpoint here but we should not be using google here
     // const url = `api/docDownload/${props.docID}`;
     // await fetch(url);
-    window.location.assign(`http://localhost:8081/api/docDownload/${props.docID}`);
+    // window.location.assign(`http://localhost:8081/api/docDownload/${props.docID}`);
+    window.open(props.pdf, "_blank");
   }
 
   /** Sends user to the Template Filler page for the provided docID */
