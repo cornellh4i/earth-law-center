@@ -49,7 +49,7 @@ const TemplateFiller = () => {
   useEffect(() => {
     (async function () {
       if (authenticated) {
-        const response = await fetch(`http://localhost:8081/api/getQuestions/${sheetID}/${data.docID}`)
+        const response = await fetch(`/api/getQuestions/${sheetID}/${data.docID}`)
         const json = await response.json()
         setQuestionsData(json)
         setProgress(Math.floor((1 / json.length) * 100));
@@ -105,7 +105,6 @@ const TemplateFiller = () => {
     Object.keys(inputs).map(fieldId => {
       batchReplaceData[questionsData[fieldId].original_field] = inputs[fieldId]
     })
-    console.log(batchReplaceData)
 
     // EXAMPLE OF FINAL DATA STRUCTURE FOR BATCH REPLACE
     // batchReplaceData = {
@@ -113,6 +112,13 @@ const TemplateFiller = () => {
     //   '[INSERT CITY]': 'Montana',
     //   '[INSERT NAME OF LOCAL ECOSYSTEM(S)]': 'Local River'
     // }
+
+    // need to include docID, currently hard coded docID for sample template in URL
+    fetch(`/api/batchReplaceAllTexts/13YIr9SZ2Vgkh3R56AGP4L3cUIXZEmVqygHJ3IOj_BeQ`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(batchReplaceData)
+    });
   };
 
   // Handles user pressing the 'Back' button before authenticating
@@ -124,9 +130,7 @@ const TemplateFiller = () => {
 
   // Handles user pressing the 'Sign In with Google' button
   async function handleAuthentication(e, inputs) {
-    // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
-    const response = await fetch(`http://localhost:8081/api/preAuthenticate`);
-
+    const response = await fetch(`/api/preAuthenticate`);
     const success = await response.json() != null;
     handleAuthenticationSuccess(e, inputs, success);
   };
@@ -141,8 +145,7 @@ const TemplateFiller = () => {
 
   // Downloads a google doc when user presses the Download button
   const handleDownload = (e) => {
-    // API ENDPOINT IS CURRENTLY HARDCODED, PLEASE FIX LATER
-    window.location.assign(`http://localhost:8081/api/docDownload/${data.docID}`);
+    window.location.assign(`/api/docDownload/${data.docID}`);
   }
 
   return (
