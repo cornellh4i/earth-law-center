@@ -1,6 +1,9 @@
 {
   "name": "mern-app",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "gdocs": "cd server && cd gdocs-api && concurrently \"node functions.js\" \"node index.js\"",
     "start-backend": "cd server && npm start",
