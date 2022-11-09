@@ -122,11 +122,13 @@ const TemplateFiller = () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(batchReplaceData)
-    }).then((response) => response.json())
+    })
+    
+    response.then((response) => response.json())
     .then((responseJSON) => {
-      newID = responseJSON.docID;
-      console.log(newID);
-      navigate(path, {state: {docID: newID}});
+      // newID = responseJSON.docID;
+      // console.log(newID);
+      navigate(path, {state: {docID: responseJSON.docID}});
     });
   };
 

@@ -3,16 +3,20 @@ import './TemplateFillerEnd.css';
 import DocViewer, { DocViewerRenderers } from "react-doc-viewer";
 import Button from '../../components/Button/Button';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 /** Component for Preview Page */
 
 const TemplateEnd = (props) => {
 
-    console.log(props)
+    const {state} = useLocation();
+    const {docID} = state;
 
+    console.log('state' , state);
+    console.log('docID' , docID);
 
     const docs = [
-        { uri:  "https://docs.google.com/document/d/" + props.docID + "/export?format=pdf"}
+        { uri:  "https://docs.google.com/document/d/" + docID + "/export?format=pdf"}
       ];
 
 
