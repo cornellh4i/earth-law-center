@@ -298,8 +298,9 @@ async function batchReplaceAllTexts(auth, docID, replaceTextDict) {
   }
 
   // Send the JSON object in a batchUpdate request
-  await docs.documents.batchUpdate(updateObject)
-  return docCopyId
+  await docs.documents.batchUpdate(updateObject);
+  console.log(docCopyId);
+  return docCopyId;
 }
 
 // BELOW ARE THE GETALLTEXT FUNCTION AND HELPER FUNCTIONS (currently don't work with routes)

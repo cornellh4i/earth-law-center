@@ -7,9 +7,14 @@ import { Link } from 'react-router-dom';
 /** Component for Preview Page */
 
 const TemplateEnd = (props) => {
+
+    console.log(props)
+
+
     const docs = [
-        { uri: props.docID != null ? "https://docs.google.com/document/d/" + props.docID + "/export?format=pdf" : "https://docs.google.com/document/d/1MOptsvcrhcrYNaKVybRCh5drQOWupfeJ/export?format=pdf"}
+        { uri:  "https://docs.google.com/document/d/" + props.docID + "/export?format=pdf"}
       ];
+
 
   return (
     <div>

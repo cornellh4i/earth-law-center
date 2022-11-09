@@ -101,7 +101,7 @@ module.exports = () => {
       dict[key] = req.body[key]
     }
     try {
-      functions.readAuthFile(scopes).then((client) => functions.batchReplaceAllTexts(client, req.params.docID, dict).then((response) => res.json({ msg: `docid: ${response}` })))
+      functions.readAuthFile(scopes).then((client) => functions.batchReplaceAllTexts(client, req.params.docID, dict).then((response) => res.json({docID: response})))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })

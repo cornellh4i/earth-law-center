@@ -16,6 +16,8 @@ const TemplateFiller = () => {
    */
   const data = useLocation().state
 
+  let navigate = useNavigate();
+
   // Storing the initial overview page in the format of a questions object
   const overviewData = {
     "field": "Overview",
@@ -92,7 +94,8 @@ const TemplateFiller = () => {
     setClickedId(newClickedId);
   };
 
-  // Handles user pressing the 'Next' button
+  // Handles user pressing the 'Finish' button
+  // Error if user clicks the button without inputing any information
   const handleSubmit = (inputs) => {
     // EXAMPLE OF INPUTS DATA STRUCTURE
     // inputs = {
@@ -112,19 +115,23 @@ const TemplateFiller = () => {
     //   '[INSERT CITY]': 'Montana',
     //   '[INSERT NAME OF LOCAL ECOSYSTEM(S)]': 'Local River'
     // }
-
-    // need to include docID, currently hard coded docID for sample template in URL
-    fetch(`/api/batchReplaceAllTexts/${data.docID}`, {
+    
+    let path = '/template-filler-end';
+    let newID = '';
+    const response = fetch(`/api/batchReplaceAllTexts/${data.docID}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(batchReplaceData)
+    }).then((response) => response.json())
+    .then((responseJSON) => {
+      newID = responseJSON.docID;
+      console.log(newID);
+      navigate(path, {state: {docID: newID}});
     });
-    let path = '/template-filler-end';
-    navigate(path, {docID: data.docID});
   };
 
   // Handles user pressing the 'Back' button before authenticating
-  let navigate = useNavigate();
+  
   const backPageUnauth = () => {
     let path = '/';
     navigate(path);
