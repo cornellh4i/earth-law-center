@@ -3,10 +3,12 @@ module.exports = () => {
   const router = express.Router();
   const path = require("path");
   const fs = require('fs').promises;
-
+  const https = require('https')
   // Imported functions
   const functions = require('../gdocs-api/functions.js');
   const authsamp = require('../gdocs-api/web-index.js')
+  const { google } = require('googleapis');
+  const keys = require('../auth.json'); 
 
   const scopes = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets.readonly'];
 
@@ -23,7 +25,7 @@ module.exports = () => {
   // Endpoint for getting questions from Google Sheets
   router.get('/getQuestions/:sheetID/:docID', async (req, res) => {
     try {
-      functions.readAuthFile(scopes).then((client) => {
+      functions.readAuthFile().then(async (client) => {
         functions.getQuestions(client, req.params.sheetID, req.params.docID)
           .then(async function (response) {
             res.json(response)

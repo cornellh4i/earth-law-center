@@ -6,6 +6,9 @@
 const { google } = require('googleapis');
 const TOKEN_PATH = '../client/token.json';
 const fs = require('fs');
+const {GoogleAuth} = require('google-auth-library');
+const key = require('../auth.json'); 
+const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets.readonly'];
 
 /**
  * THIS IS A SAMPLE FUNCTION
@@ -89,8 +92,9 @@ async function getAllFields(auth, docID) {
  * @returns the question(s) that corresponds to the field that was sent.
  */
 async function getQuestions(auth, sheetID, docID) {
-  const sheets = google.sheets({ version: 'v4', auth });
 
+  const sheets = google.sheets({ version: 'v4', auth });
+  console.log("SHEETS", sheets); 
   // Set of strings where each string is a field in the template doc
   let fields = await getAllFields(auth, docID)
 
@@ -339,6 +343,14 @@ async function getAllText(auth, docID) {
  * @returns the doc data as a binary array buffer
  */
 async function preAuthenticate(auth) {
+  // jwt.authorize((err, response)=> {
+  //   try {
+  //     const {token} = response; 
+  //     return token;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }); 
   fs.writeFile(TOKEN_PATH, JSON.stringify(auth), (err) => {
     if (err) console.error(err);
     console.log('Token stored to', TOKEN_PATH);
@@ -351,10 +363,37 @@ async function preAuthenticate(auth) {
  * Read the user token
  */
 async function readAuthFile() {
-  fs.readFile(TOKEN_PATH, (err, token) => {
-    if (err) return 'error';
-    return JSON.parse(token)
+  return new Promise(function (resolve, reject) {
+
+    const jwtClient = new google.auth.JWT(
+      key.client_email,
+      null,
+      key.private_key,
+      SCOPES,
+      null
+    );
+
+    jwtClient.authorize(function (err, tokens) {
+      console.log("OUTSIDE ERR")
+      if (err) {
+        console.log("INSIDE ERR")
+        reject(err);
+        return;
+      }
+
+      const client = new google.auth.OAuth2(
+        key.client_id,
+        key.client_secret,
+      );
+      client.credentials = tokens; // eslint-disable-line require-atomic-updates
+      resolve(client);
+    });
   });
+  // fs.readFile(TOKEN_PATH, (err, token) => {
+  //   if (err) return 'error';
+  //   return JSON.parse(token)
+  // });
+  // return token; 
 }
 
 /**
