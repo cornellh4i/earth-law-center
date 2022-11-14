@@ -4,7 +4,6 @@
 
 // Add Imports Below
 const { google } = require('googleapis');
-// const key = require('../auth.json'); 
 const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets.readonly'];
 
 // Only import env variables if not in production mode
