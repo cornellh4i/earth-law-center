@@ -338,20 +338,6 @@ async function getAllText(auth, docID) {
 }
 
 /**
- * Authenticate user and write user token
- * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client
- * @returns the doc data as a binary array buffer
- */
-async function preAuthenticate(auth) {
-  fs.writeFile(TOKEN_PATH, JSON.stringify(auth), (err) => {
-    if (err) console.error(err);
-    console.log('Token stored to', TOKEN_PATH);
-  });
-  console.info('Tokens acquired.');
-  return auth;
-}
-
-/**
  * Read the user token
  */
 async function readAuthFile() {
@@ -505,4 +491,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, batchReplaceAllTexts, docCopy, docDownload, getQuestions, preAuthenticate, readAuthFile };
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, batchReplaceAllTexts, docCopy, docDownload, getQuestions, readAuthFile };
