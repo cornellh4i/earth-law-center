@@ -94,7 +94,6 @@ async function getAllFields(auth, docID) {
 async function getQuestions(auth, sheetID, docID) {
 
   const sheets = google.sheets({ version: 'v4', auth });
-  console.log("SHEETS", sheets); 
   // Set of strings where each string is a field in the template doc
   let fields = await getAllFields(auth, docID)
 
@@ -338,9 +337,10 @@ async function getAllText(auth, docID) {
 }
 
 /**
- * Read the user token
+ * Authenticates the user using our service account. 
+ * @returns an OAuth2 client with the credentials of the service account
  */
-async function readAuthFile() {
+async function preAuthenticate() {
   return new Promise(function (resolve, reject) {
 
     const jwtClient = new google.auth.JWT(
@@ -361,15 +361,10 @@ async function readAuthFile() {
         key.client_id,
         key.client_secret,
       );
-      client.credentials = tokens; // eslint-disable-line require-atomic-updates
+      client.credentials = tokens; 
       resolve(client);
     });
   });
-  // fs.readFile(TOKEN_PATH, (err, token) => {
-  //   if (err) return 'error';
-  //   return JSON.parse(token)
-  // });
-  // return token; 
 }
 
 /**
@@ -491,4 +486,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, batchReplaceAllTexts, docCopy, docDownload, getQuestions, readAuthFile };
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, batchReplaceAllTexts, docCopy, docDownload, getQuestions, preAuthenticate };

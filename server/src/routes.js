@@ -25,7 +25,7 @@ module.exports = () => {
   // Endpoint for getting questions from Google Sheets
   router.get('/getQuestions/:sheetID/:docID', async (req, res) => {
     try {
-      functions.readAuthFile().then(async (client) => {
+      functions.preAuthenticate().then(async (client) => {
         functions.getQuestions(client, req.params.sheetID, req.params.docID)
           .then(async function (response) {
             res.json(response)
@@ -42,7 +42,7 @@ module.exports = () => {
       (async function () {
         let fileLocation = './docs'
         let filePath = path.join(fileLocation, `${req.params.docID}.docx`) // path on server
-        let client = await functions.readAuthFile()
+        let client = await functions.preAuthenticate()
 
         // Update title and encode to remove problematic characters
         let response = await functions.getAllText(client, req.params.docID)
@@ -69,7 +69,7 @@ module.exports = () => {
   // Endpoint for docCopy 
   router.get('/docCopy/:docID', async (req, res) => {
     try {
-      functions.readAuthFile().then((client) => functions.docCopy(client, req.params.docID).then((response) => res.json({ msg: `docid: ${response}` })))
+      functions.preAuthenticate().then((client) => functions.docCopy(client, req.params.docID).then((response) => res.json({ msg: `docid: ${response}` })))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
@@ -79,7 +79,7 @@ module.exports = () => {
   // Endpoint for insertText
   router.get('/insertText/:docID/:text/:location', async (req, res) => {
     try {
-      functions.readAuthFile(scopes).then((client) => functions.insertText(client, req.params.docID, req.params.text, { index: req.params.location }).then((response) => res.json({ msg: `docid: ${response}` })))
+      functions.preAuthenticate(scopes).then((client) => functions.insertText(client, req.params.docID, req.params.text, { index: req.params.location }).then((response) => res.json({ msg: `docid: ${response}` })))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
@@ -89,7 +89,7 @@ module.exports = () => {
   // Endpoint for replaceAllText
   router.get('/replaceAllText/:docID/:replaceText/:containsText', async (req, res) => {
     try {
-      functions.readAuthFile(scopes).then((client) => functions.replaceAllTexts(client, req.params.docID, req.params.replaceText, req.params.containsText).then((response) => res.json({ msg: `docid: ${response}` })))
+      functions.preAuthenticate(scopes).then((client) => functions.replaceAllTexts(client, req.params.docID, req.params.replaceText, req.params.containsText).then((response) => res.json({ msg: `docid: ${response}` })))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
@@ -103,7 +103,7 @@ module.exports = () => {
       dict[key] = req.body[key]
     }
     try {
-      functions.readAuthFile(scopes).then((client) => functions.batchReplaceAllTexts(client, req.params.docID, dict).then((response) => res.json({ msg: `docid: ${response}` })))
+      functions.preAuthenticate(scopes).then((client) => functions.batchReplaceAllTexts(client, req.params.docID, dict).then((response) => res.json({ msg: `docid: ${response}` })))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
@@ -113,7 +113,7 @@ module.exports = () => {
   // Endpoint for preAuthenticate
   router.get('/preAuthenticate', async (req, res) => {
     try {
-      functions.readAuthFile().then((response) => res.json({ msg: `token: ${response}` }))
+      functions.preAuthenticate().then((response) => res.json({ msg: `token: ${response}` }))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
@@ -123,7 +123,7 @@ module.exports = () => {
   // Endpoint for getAllText (currently does not work (returns an object))
   router.get('/getAllText/:docID', async (req, res) => {
     try {
-      functions.readAuthFile(scopes).then((client) => functions.getAllText(client, req.params.docID).then((response) => res.json({ msg: `text: ${JSON.stringify(response)}` })))
+      functions.preAuthenticate(scopes).then((client) => functions.getAllText(client, req.params.docID).then((response) => res.json({ msg: `text: ${JSON.stringify(response)}` })))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
