@@ -4,8 +4,13 @@
 
 // Add Imports Below
 const { google } = require('googleapis');
-const key = require('../auth.json'); 
+// const key = require('../auth.json'); 
 const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets.readonly'];
+
+// Only import env variables if not in production mode
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 /**
  * THIS IS A SAMPLE FUNCTION
@@ -339,11 +344,10 @@ async function getAllText(auth, docID) {
  */
 async function preAuthenticate() {
   return new Promise(function (resolve, reject) {
-
     const jwtClient = new google.auth.JWT(
-      key.client_email,
+      process.env.CLIENT_EMAIL,
       null,
-      key.private_key,
+      process.env.PRIVATE_KEY, 
       SCOPES,
       null
     );
@@ -355,8 +359,8 @@ async function preAuthenticate() {
       }
 
       const client = new google.auth.OAuth2(
-        key.client_id,
-        key.client_secret,
+        process.env.CLIENT_ID,
+        process.env.CLIENT_SECRET
       );
       client.credentials = tokens; 
       resolve(client);
