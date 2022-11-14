@@ -4,9 +4,6 @@
 
 // Add Imports Below
 const { google } = require('googleapis');
-const TOKEN_PATH = '../client/token.json';
-const fs = require('fs');
-const {GoogleAuth} = require('google-auth-library');
 const key = require('../auth.json'); 
 const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets.readonly'];
 

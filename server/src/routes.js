@@ -3,12 +3,8 @@ module.exports = () => {
   const router = express.Router();
   const path = require("path");
   const fs = require('fs').promises;
-  const https = require('https')
   // Imported functions
   const functions = require('../gdocs-api/functions.js');
-  const authsamp = require('../gdocs-api/web-index.js')
-  const { google } = require('googleapis');
-  const keys = require('../auth.json'); 
 
   const scopes = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets.readonly'];
 
@@ -58,7 +54,6 @@ module.exports = () => {
         res.download(filePath, fileName, function () {
           fs.unlink(filePath);
         })
-        // res.json({success: 'Success!'})
       })()
     }
     catch (err) {
