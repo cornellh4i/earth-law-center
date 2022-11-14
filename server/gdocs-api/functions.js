@@ -343,14 +343,6 @@ async function getAllText(auth, docID) {
  * @returns the doc data as a binary array buffer
  */
 async function preAuthenticate(auth) {
-  // jwt.authorize((err, response)=> {
-  //   try {
-  //     const {token} = response; 
-  //     return token;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }); 
   fs.writeFile(TOKEN_PATH, JSON.stringify(auth), (err) => {
     if (err) console.error(err);
     console.log('Token stored to', TOKEN_PATH);
@@ -374,9 +366,7 @@ async function readAuthFile() {
     );
 
     jwtClient.authorize(function (err, tokens) {
-      console.log("OUTSIDE ERR")
       if (err) {
-        console.log("INSIDE ERR")
         reject(err);
         return;
       }

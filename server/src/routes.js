@@ -113,7 +113,7 @@ module.exports = () => {
   // Endpoint for preAuthenticate
   router.get('/preAuthenticate', async (req, res) => {
     try {
-      authsamp.authenticate(scopes).then((client) => functions.preAuthenticate(client).then((response) => res.json({ msg: `token: ${response}` })))
+      functions.readAuthFile().then((res) => res.json({ msg: `token: ${response}` }))
     }
     catch (err) {
       res.json({ error: err.message || err.toString() })
