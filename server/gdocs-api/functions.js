@@ -342,9 +342,9 @@ async function getAllText(auth, docID) {
  * @returns an OAuth2 client with the credentials of the service account
  */
 async function preAuthenticate() {
-  process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
-  
+
   return new Promise(function (resolve, reject) {
+    process.env.PRIVATE_KEY.replace(/\\n/gm, '\n');
     const jwtClient = new google.auth.JWT(
       process.env.CLIENT_EMAIL,
       null,
