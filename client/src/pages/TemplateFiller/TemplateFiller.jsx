@@ -16,6 +16,8 @@ const TemplateFiller = () => {
    */
   const data = useLocation().state
 
+  let navigate = useNavigate();
+
   // Storing the initial overview page in the format of a questions object
   const overviewData = {
     "field": "Overview",
@@ -24,6 +26,10 @@ const TemplateFiller = () => {
     "input_type": "",
     "description": "",
   }
+
+  let startInputs = ((data.questionsInputs) ? data.questionsInputs : {})
+
+  const [questionsInputs, setQuestionsInputs] = useState(startInputs)
 
   // Array of question objects. We initialize it with the overviewData
   const [questionsData, setQuestionsData] = useState([overviewData])
@@ -92,7 +98,8 @@ const TemplateFiller = () => {
     setClickedId(newClickedId);
   };
 
-  // Handles user pressing the 'Next' button
+  // Handles user pressing the 'Finish' button
+  // Error if user clicks the button without inputing any information
   const handleSubmit = (inputs) => {
     // EXAMPLE OF INPUTS DATA STRUCTURE
     // inputs = {
@@ -112,17 +119,22 @@ const TemplateFiller = () => {
     //   '[INSERT CITY]': 'Montana',
     //   '[INSERT NAME OF LOCAL ECOSYSTEM(S)]': 'Local River'
     // }
-
-    // need to include docID, currently hard coded docID for sample template in URL
-    fetch(`/api/batchReplaceAllTexts/${data.docID}`, {
+    
+    let path = '/final-download';
+    const response = fetch(`/api/batchReplaceAllTexts/${data.docID}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(batchReplaceData)
+    })
+    
+    response.then((response) => response.json())
+    .then((responseJSON) => {
+      navigate(path, {state: {docID: responseJSON.docID, inputs: questionsInputs, oldID: data.docID}});
     });
   };
 
   // Handles user pressing the 'Back' button before authenticating
-  let navigate = useNavigate();
+  
   const backPageUnauth = () => {
     let path = '/';
     navigate(path);
@@ -165,7 +177,7 @@ const TemplateFiller = () => {
               <QuestionAnswer
                 field={questionsData[clickedId].field}
                 fieldId={clickedId}
-                title={'Right of Nature Ordonnance Template'}
+                title={'Right of Nature Ordinnance Template'}
                 question={questionsData[clickedId].question}
                 inputType={questionsData[clickedId].input_type}
                 length={questionsData.length}
@@ -175,6 +187,8 @@ const TemplateFiller = () => {
                 handleAuth={handleAuthentication}
                 handleSubmit={handleSubmit}
                 authenticated={authenticated}
+                inputs={questionsInputs}
+                setInputs={setQuestionsInputs}
               />
             </Grid>
             <Grid item xs={4}>

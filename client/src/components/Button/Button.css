@@ -352,3 +352,29 @@
   transform: translateX(100%) rotate(225deg);
   display: inline-block;
 }
+
+.final-download-btn {
+  min-width: 6rem;
+  height: 3rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: 'Nunito';
+  background:#64926E;
+  border-width: 0.05rem;
+  border-style: none;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  padding-bottom: 0;
+}
+
+.final-download-btn::after {
+  padding: 0.17rem;
+  padding-bottom: -1rem;
+  margin: -5% 0% -10% 5%;
+  content: "↓";
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 0.15rem;
+  display: inline-block;
+}
