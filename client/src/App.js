@@ -9,6 +9,7 @@ import ResourceDisplay from './pages/ResourceDisplay/ResourceDisplay';
 import TemplateFiller from './pages/TemplateFiller/TemplateFiller';
 import { useLocation } from 'react-router-dom';
 import Preview from "./pages/Preview/Preview";
+import Error from "./pages/Error/Error";
 const API_URL = process.env.REACT_APP_API;
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path='/resources' element={<ResourceDisplay />} />
         <Route path='/template-filler' element={<TemplateFiller />} />
         <Route path='/preview' element={<Preview />} />
+        <Route path='/error' element={<Error />} />
       </Routes>
     </Router>
 
