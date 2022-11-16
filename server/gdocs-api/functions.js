@@ -181,6 +181,13 @@ async function docCopy(auth, docID) {
     docCopyId = response.data.id
   },
     function (err) { console.error("Execute error", err); });
+  await drive.permissions.create({
+    fileId: docCopyId,
+    resource: {
+      role: 'reader',
+      type: 'anyone',
+    }
+  })
   return docCopyId
 }
 
@@ -483,7 +490,6 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
   // lists, so we created our own numbering system below
   if (prevListStyle.isList) {
     listStyle.numberInList = prevListStyle.numberInList + 1;
-    // Testing: console.log(prevListStyle)
   }
   return listStyle;
 }
