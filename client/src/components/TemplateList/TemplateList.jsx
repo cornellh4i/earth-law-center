@@ -25,6 +25,7 @@ function dataList({ data, checked }) {
         jurisdiction={item.jurisdiction}
         currentFilter={checked}
         docID={item.docID}
+        pdf={item.pdf}
       />
     ))}
   </div>
