@@ -4,8 +4,12 @@
 
 // Add Imports Below
 const { google } = require('googleapis');
-const TOKEN_PATH = '../client/token.json';
-const fs = require('fs');
+const SCOPES = ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets.readonly'];
+
+// Only import env variables if not in production mode
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 /**
  * THIS IS A SAMPLE FUNCTION
@@ -89,8 +93,8 @@ async function getAllFields(auth, docID) {
  * @returns the question(s) that corresponds to the field that was sent.
  */
 async function getQuestions(auth, sheetID, docID) {
-  const sheets = google.sheets({ version: 'v4', auth });
 
+  const sheets = google.sheets({ version: 'v4', auth });
   // Set of strings where each string is a field in the template doc
   let fields = await getAllFields(auth, docID)
 
@@ -334,26 +338,32 @@ async function getAllText(auth, docID) {
 }
 
 /**
- * Authenticate user and write user token
- * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client
- * @returns the doc data as a binary array buffer
+ * Authenticates the user using our service account. 
+ * @returns an OAuth2 client with the credentials of the service account
  */
-async function preAuthenticate(auth) {
-  fs.writeFile(TOKEN_PATH, JSON.stringify(auth), (err) => {
-    if (err) console.error(err);
-    console.log('Token stored to', TOKEN_PATH);
-  });
-  console.info('Tokens acquired.');
-  return auth;
-}
+async function preAuthenticate() {
+  return new Promise(function (resolve, reject) {
+    const jwtClient = new google.auth.JWT(
+      process.env.CLIENT_EMAIL,
+      null,
+      process.env.PRIVATE_KEY, 
+      SCOPES,
+      null
+    );
 
-/**
- * Read the user token
- */
-async function readAuthFile() {
-  fs.readFile(TOKEN_PATH, (err, token) => {
-    if (err) return 'error';
-    return JSON.parse(token)
+    jwtClient.authorize(function (err, tokens) {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      const client = new google.auth.OAuth2(
+        process.env.CLIENT_ID,
+        process.env.CLIENT_SECRET
+      );
+      client.credentials = tokens; 
+      resolve(client);
+    });
   });
 }
 
@@ -476,4 +486,4 @@ function readParagraphElementListStyle(bullet, prevListStyle) {
 }
 
 // Exporting functions
-module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, batchReplaceAllTexts, docCopy, docDownload, getQuestions, preAuthenticate, readAuthFile };
+module.exports = { printDocInfo, insertText, getAllText, replaceAllTexts, batchReplaceAllTexts, docCopy, docDownload, getQuestions, preAuthenticate };
