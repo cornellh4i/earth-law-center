@@ -344,11 +344,11 @@ async function getAllText(auth, docID) {
 async function preAuthenticate() {
 
   return new Promise(function (resolve, reject) {
-    process.env.PRIVATE_KEY.replace(/\\n/g, '\n');
+    
     const jwtClient = new google.auth.JWT(
       process.env.CLIENT_EMAIL,
       null,
-      process.env.PRIVATE_KEY, 
+      process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
       SCOPES,
       null
     );
