@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "export NODE_OPTIONS=--openssl-legacy-provider && node src/index.js"
+    "start": "node src/index.js"
   },
   "license": "ISC",
   "dependencies": {
