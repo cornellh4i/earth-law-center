@@ -278,40 +278,44 @@ async function replaceAllTexts(auth, docID, replaceText, containsText) {
  */
 async function batchReplaceAllTexts(auth, docID, replaceTextDict) {
   //Authorize docs and drive
-  const docs = google.docs({ version: 'v1', auth });
-  var docCopyId;
-  var updateObject;
-  // Below is the function that generates a new docID
-  await docCopy(auth, docID).then(
-    (docCopy) => {
-      docCopyId = docCopy;
-      requests = [];
-
-      // JSON request body for batchupdate with docCopyId 
-      for (const [key, value] of Object.entries(replaceTextDict)) {
-        requests.push({
-          "replaceAllText":
-          {
-            "replaceText": value,
-            "containsText": {
-              "text": key,
-              "matchCase": false
+  if (Object.keys(replaceTextDict).length === 0){
+    return docID; 
+  } else {
+    const docs = google.docs({ version: 'v1', auth });
+    var docCopyId;
+    var updateObject;
+    // Below is the function that generates a new docID
+    await docCopy(auth, docID).then(
+      (docCopy) => {
+        docCopyId = docCopy;
+        requests = [];
+  
+        // JSON request body for batchupdate with docCopyId 
+        for (const [key, value] of Object.entries(replaceTextDict)) {
+          requests.push({
+            "replaceAllText":
+            {
+              "replaceText": value,
+              "containsText": {
+                "text": key,
+                "matchCase": false
+              }
             }
-          }
-        })
+          })
+        }
+      });
+    updateObject = {
+      "documentId": docCopyId,
+      "resource": {
+        "requests": requests,
       }
-    });
-  updateObject = {
-    "documentId": docCopyId,
-    "resource": {
-      "requests": requests,
     }
+  
+    // Send the JSON object in a batchUpdate request
+    await docs.documents.batchUpdate(updateObject);
+    return docCopyId;
   }
-
-  // Send the JSON object in a batchUpdate request
-  await docs.documents.batchUpdate(updateObject);
-  console.log(docCopyId);
-  return docCopyId;
+  
 }
 
 // BELOW ARE THE GETALLTEXT FUNCTION AND HELPER FUNCTIONS (currently don't work with routes)
