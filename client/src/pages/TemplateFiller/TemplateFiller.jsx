@@ -32,7 +32,7 @@ const TemplateFiller = () => {
   const [questionsInputs, setQuestionsInputs] = useState(startInputs)
 
   console.log(questionsInputs)
-  
+
   // Array of question objects. We initialize it with the overviewData
   const [questionsData, setQuestionsData] = useState([overviewData])
 

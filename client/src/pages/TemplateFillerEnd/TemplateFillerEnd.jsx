@@ -1,14 +1,18 @@
 import React from 'react';
 import './TemplateFillerEnd.css';
+import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import DocViewer, { DocViewerRenderers } from "react-doc-viewer";
 import Button from '../../components/Button/Button';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 /** Component for Preview Page */
 
 const TemplateEnd = (props) => {
 
     const data = useLocation().state;
+    console.log(data);
     const docID = data.docID;
     const oldID = data.oldID;
     const inputs = data.inputs;
@@ -18,6 +22,12 @@ const TemplateEnd = (props) => {
     const docs = [
         { uri:  "https://docs.google.com/document/d/" + docID + "/export?format=pdf"}
       ];
+
+      const fieldItem = 
+        <div className={'side-btn side-btn-active'}>
+          Download
+        </div>
+        
 
     const returnToTemplateFiller = () => {
         let path = "/template-filler";
@@ -32,30 +42,40 @@ const TemplateEnd = (props) => {
 
     return (
         <div>
-            <div className='preview-header'>
-                <div className='spacer'/>
-                <h1 className='preview-header-text'>TEST TITLE</h1>
-                <Link className='exit-btn-link' to='/'><Button css='exit-preview-btn' text={'EXIT'}/></Link>
-            </div>
-            <div className="preview-doc-container">
-                <DocViewer className='preview-docview' pluginRenderers={DocViewerRenderers} documents={docs} config={{
-                    header: {
-                    disableHeader: true,
-                    disableFileName: true,
-                    retainURLParams: true
-                    }
-                }} />
-            </div>
-            <Button
-                text='BACK'
-                handleClick={returnToTemplateFiller}
-                css='back-btn'
-                />
-            <Button
-                text='BACK'
-                handleClick={handleDownload}
-                css='continue-btn'
-                />
+            <Box sx={{ display: 'flex' }}>
+                <FieldSideBar
+                title='EarthLegislator'
+                fieldItem={fieldItem}
+                progress={100}
+                handleDownload={handleDownload}
+            />
+                <Grid pt={2} container spacing={4}>
+                    <Grid item xs={1} />
+                    <Grid item xs={6}>
+                        <h1 className='header-text'>Download</h1>
+                        <DocViewer className='docview' pluginRenderers={DocViewerRenderers} documents={docs} config={{
+                                header: {
+                                disableHeader: true,
+                                disableFileName: true,
+                                retainURLParams: true
+                                }
+                            }} />
+                        <Box sx={{ display: 'flex' }}>
+                            <Button
+                                text='BACK'
+                                handleClick={returnToTemplateFiller}
+                                css='back-btn'
+                                />
+                            <div className='buttonSpacer'></div>
+                            <Button
+                                text='DOCX'
+                                handleClick={handleDownload}
+                                css='final-download-btn'
+                                />
+                        </Box>
+                    </Grid>
+                </Grid>
+            </Box>
         </div>
     );
 };
