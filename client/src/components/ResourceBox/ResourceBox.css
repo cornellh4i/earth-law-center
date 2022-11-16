@@ -26,27 +26,30 @@
     background-image: url('../../properties/resource1.png');
     padding: 7rem 3rem;
     border-radius: 1rem;
-    height:12rem;
-    background-repeat:no-repeat;
+    height: 12rem;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .thumbnail2 {
     background-image: url('../../properties/resource2.png');
     padding: 7rem 3rem;
     border-radius: 1rem;
-    height:12rem;
-    background-repeat:no-repeat;
+    height: 12rem;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .thumbnail3 {
     background-image: url('../../properties/resource3.png');
     padding: 7rem 3rem;
     border-radius: 1rem;
-    height:12rem;
-    background-repeat:no-repeat;
+    height: 12rem;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.box-title{
+.box-title {
     color: #64926E;
     font-weight: bold;
     font-family: Nunito;
@@ -54,7 +57,7 @@
     margin-bottom: 0.2rem;
 }
 
-.box-description{
+.box-description {
     color: #3E3E3E;
     font-family: Nunito;
 }
