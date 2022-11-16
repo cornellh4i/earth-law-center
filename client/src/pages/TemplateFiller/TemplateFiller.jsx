@@ -122,7 +122,7 @@ const TemplateFiller = () => {
     //   '[INSERT NAME OF LOCAL ECOSYSTEM(S)]': 'Local River'
     // }
     
-    let path = '/template-filler-end';
+    let path = '/final-download';
     let newID = '';
     const response = fetch(`/api/batchReplaceAllTexts/${data.docID}`, {
       method: 'POST',

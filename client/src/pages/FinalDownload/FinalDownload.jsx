@@ -1,5 +1,5 @@
 import React from 'react';
-import './TemplateFillerEnd.css';
+import './FinalDownload.css';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import DocViewer, { DocViewerRenderers } from "react-doc-viewer";
 import Button from '../../components/Button/Button';
@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 
 /** Component for Preview Page */
 
-const TemplateEnd = (props) => {
+const FinalDownload = (props) => {
 
     const data = useLocation().state;
     console.log(data);
@@ -60,7 +60,7 @@ const TemplateEnd = (props) => {
                                 retainURLParams: true
                                 }
                             }} />
-                        <Box sx={{ display: 'flex' }}>
+                        <Box sx={{ display: 'flex', marginTop: '2rem' }}>
                             <Button
                                 text='BACK'
                                 handleClick={returnToTemplateFiller}
@@ -79,4 +79,4 @@ const TemplateEnd = (props) => {
         </div>
     );
 };
-export default TemplateEnd;
+export default FinalDownload;
