@@ -10,7 +10,6 @@ import TemplateFiller from './pages/TemplateFiller/TemplateFiller';
 import TemplateFillerEnd from './pages/TemplateFillerEnd/TemplateFillerEnd';
 import { useLocation } from 'react-router-dom';
 import Preview from "./pages/Preview/Preview";
-
 const API_URL = process.env.REACT_APP_API;
 
 function App() {

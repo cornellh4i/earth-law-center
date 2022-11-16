@@ -1,6 +1,7 @@
 {
   "name": "mern-app",
   "version": "1.0.0",
+
   "scripts": {
     "gdocs": "cd server && cd gdocs-api && concurrently \"node functions.js\" \"node index.js\"",
     "start-backend": "cd server && npm start",
@@ -10,6 +11,9 @@
     "preinstall": "cd server && npm install",
     "install": "cd client && npm install",
     "build": "cd client && npm run build"
+  },
+  "engines": {
+    "node": "14.15.4"
   },
   "license": "ISC",
   "dependencies": {
