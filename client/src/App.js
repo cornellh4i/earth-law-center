@@ -9,7 +9,6 @@ import ResourceDisplay from './pages/ResourceDisplay/ResourceDisplay';
 import TemplateFiller from './pages/TemplateFiller/TemplateFiller';
 import { useLocation } from 'react-router-dom';
 import Preview from "./pages/Preview/Preview";
-
 const API_URL = process.env.REACT_APP_API;
 
 function App() {

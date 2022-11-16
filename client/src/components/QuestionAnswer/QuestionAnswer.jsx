@@ -132,9 +132,9 @@ const QuestionAnswer = (props) => {
 
               // Google sign in button when the user is not authenticated
               : <Button
-                text='SIGN IN WITH GOOGLE'
+                text='NEXT'
                 handleClick={(e) => props.handleAuth()}
-                css='google-authentication-btn'
+                css='continue-btn'
               />
             }
           </Box>
