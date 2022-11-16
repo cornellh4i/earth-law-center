@@ -25,7 +25,7 @@ import Grid from '@mui/material/Grid';
 
 const QuestionAnswer = (props) => {
   // Stores user answers; a dict where key: value = fieldId: user_input
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState(props.inputs);
 
   // List of all US states and territories; used for the states dropdown select
   const us_states = [
@@ -43,6 +43,7 @@ const QuestionAnswer = (props) => {
     const id = props.fieldId
     const value = e.target.value
     setInputs(values => ({ ...values, [id]: value }))
+    props.setInputs(values => ({ ...values, [id]: value }))
   }
 
   return (

@@ -27,6 +27,12 @@ const TemplateFiller = () => {
     "description": "",
   }
 
+  let startInputs = ((data.questionsInputs) ? data.questionsInputs : {})
+
+  const [questionsInputs, setQuestionsInputs] = useState(startInputs)
+
+  console.log(questionsInputs)
+  
   // Array of question objects. We initialize it with the overviewData
   const [questionsData, setQuestionsData] = useState([overviewData])
 
@@ -128,7 +134,7 @@ const TemplateFiller = () => {
     .then((responseJSON) => {
       // newID = responseJSON.docID;
       // console.log(newID);
-      navigate(path, {state: {docID: responseJSON.docID}});
+      navigate(path, {state: {docID: responseJSON.docID, inputs: questionsInputs, oldID: data.docID}});
     });
   };
 
@@ -186,6 +192,8 @@ const TemplateFiller = () => {
                 handleAuth={handleAuthentication}
                 handleSubmit={handleSubmit}
                 authenticated={authenticated}
+                inputs={questionsInputs}
+                setInputs={setQuestionsInputs}
               />
             </Grid>
             <Grid item xs={4}>

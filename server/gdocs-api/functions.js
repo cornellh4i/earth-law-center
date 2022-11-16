@@ -177,6 +177,13 @@ async function docCopy(auth, docID) {
     docCopyId = response.data.id
   },
     function (err) { console.error("Execute error", err); });
+  await drive.permissions.create({
+    fileId: docCopyId,
+    resource: {
+      role: 'reader',
+      type: 'anyone',
+    }
+  })
   return docCopyId
 }
 
