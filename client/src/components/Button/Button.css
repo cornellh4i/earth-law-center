@@ -29,7 +29,7 @@
   cursor: pointer;
   border: none;
   font-family: 'Nunito', sans-serif;
-  font-size: 18px;
+  font-size: clamp(10px, 12px + .8vw, 18px);
   line-height: 1.534rem;
   font-weight: 100;
   background-color: transparent;
@@ -40,6 +40,7 @@
 .sidebar-btn-highlighted {
   font-weight: 900;
   font-size: 18px;
+  font-size: clamp(10px, 12px + .8vw, 18px);
   border: none;
   background: none;
   cursor: pointer;
@@ -184,7 +185,7 @@
   font-weight: bold;
   font-size: 1rem;
   font-family: 'Nunito';
-  background:#64926E;
+  background: #64926E;
   border-width: 0.05rem;
   border-style: none;
   border-radius: 0.7rem;
@@ -249,8 +250,8 @@
   background: #64926E;
   color: white;
   font-family: 'Nunito';
-  font-weight:bold;
-  border-radius:0.938rem;
+  font-weight: bold;
+  border-radius: 0.938rem;
   height: 3.125rem;
   width: 8.125rem;
   margin-top: 1rem;
@@ -262,7 +263,7 @@
   background: #64926E;
   color: white;
   font-family: 'Nunito';
-  font-weight:bold;
+  font-weight: bold;
   border-radius: 0.938rem;
   height: 3.125rem;
   width: 8.125rem;
@@ -276,7 +277,7 @@
   background: #64926E;
   color: white;
   font-family: 'Nunito';
-  font-weight:bold;
+  font-weight: bold;
   border-radius: 0.938rem;
   height: 3.125rem;
   width: 8.125rem;
@@ -290,7 +291,7 @@
   background: #64926E;
   color: white;
   font-family: 'Nunito';
-  font-weight:bold;
+  font-weight: bold;
   border-radius: 0.938rem;
   height: 2.875rem;
   width: 100%;
@@ -322,11 +323,11 @@
   opacity: 0.6;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
-.google-authentication-btn{
+.google-authentication-btn {
   height: 3rem;
   width: 15rem;
   background:
@@ -341,6 +342,7 @@
   color: #F1F1F3;
   cursor: pointer;
 }
+
 .google-authentication-btn::after {
   padding: 0.17rem;
   margin: 2% 0%;

@@ -5,7 +5,7 @@
   background-color: #fff;
   border-radius: 0.5rem;
   box-shadow: 0px 5px 15px rgba(69, 130, 108, 0.25);
-  padding: 1.2rem
+  padding: 1.2rem;
 }
 
 .resource-button {
@@ -24,23 +24,25 @@
 .resource-text {
   font-size: 11;
   font-family: 'Nunito';
-  color: #000
+  color: #000;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
-.resource-doc-preview{
+.resource-doc-preview {
   width: 85%;
-  height:100%;
+  height: 100%;
   border-style: solid;
   border-width: 0.06rem;
   border-color: #59705F;
   margin-right: 0;
 }
 
-.resource-vid-preview{
+.resource-vid-preview {
   width: 100%;
-  height:90%;
+  height: 90%;
   border-style: solid;
   border-width: 0.06rem;
   border-color: #59705F;
-  border: none 
+  border: none
 }
