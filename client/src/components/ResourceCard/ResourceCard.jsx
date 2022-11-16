@@ -18,7 +18,7 @@ const ResourceCard = (props) => {
   const { title, resource_type, doc_img, description, url, youtube, vid_img, doc_pdf } = props;
   return (
     <div className='resource-card'>
-      <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold', fontFamily:'Nunito', color: '#64926E' }}>
+      <Typography gutterBottom variant='h5' component='div' sx={{ fontWeight: 'bold', fontFamily: 'Nunito', color: '#64926E', overflow: 'hidden', textOverflow: 'ellipsis' }}>
         {title}
       </Typography>
 
@@ -28,7 +28,7 @@ const ResourceCard = (props) => {
         {resource_type === 'Doc' &&
           <>
             <Grid item xs={5}>
-              <img className='resource-doc-preview' src = {props.doc_img}/>
+              <img className='resource-doc-preview' src={props.doc_img} />
             </Grid>
 
             <Grid item xs={7}>
@@ -57,7 +57,7 @@ const ResourceCard = (props) => {
                 src={"http://www.youtube.com/embed/"+youtube+"?enablejsapi=1&origin=http://example.com"}
                 // src={"http://www.youtube.com/embed/"+youtube}
                 frameborder="0"></iframe> */}
-            <img className='resource-vid-preview' src = {vid_img}/>
+              <img className='resource-vid-preview' src={vid_img} />
 
             </Grid>
             <Grid item xs={6}>
