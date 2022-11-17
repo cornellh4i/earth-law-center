@@ -6,6 +6,8 @@
   font-size: 1.15rem;
   text-align: left;
   margin-bottom: 2.25rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .helpBoxDescription {
@@ -13,6 +15,8 @@
   font-weight: 400;
   font-size: 1rem;
   text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .helpBox {

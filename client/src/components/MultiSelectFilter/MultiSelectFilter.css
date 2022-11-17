@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
-.box{
+.box {
     width: 80%;
-    height: 23.25rem;
+    /* height: 23.25rem; */
     display: 'flex';
     margin-left: 2%;
     border-radius: 5%;
@@ -11,7 +11,7 @@
     padding: 10%;
 }
 
-.text{
+.text {
     font-size: 18px;
     line-height: 1.534rem;
     font-weight: 700, bold;
@@ -19,7 +19,7 @@
     color: #000000;
 }
 
-.labels{
+.labels {
     font-size: 14px;
     line-height: 1.534rem;
     font-weight: 400, regular;
