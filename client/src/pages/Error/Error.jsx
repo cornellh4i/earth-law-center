@@ -9,7 +9,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 const Error = () => {
   document.body.setAttribute("style", "background: #EEF2EF;");
-  const msg=useLocation().state.error_msg
+  const data = useLocation().state
   return (
     <div>
       <div className="error-header">
@@ -17,7 +17,7 @@ const Error = () => {
         <div className="error-header-text">Oops!</div>
         <div className="error-body-text">
           {/* The law template you are looking for hasn't been published ... */}
-          {msg===null ? '404 not found':msg}
+          {data === null || data.error_msg === null ? '404 - The page you are looking for does not exist.' : data.error_msg}
         </div>
         <Link to="/">
           <Button css="back-green-btn" text={"Back to Home"} />
