@@ -11,6 +11,7 @@ import FinalDownload from './pages/FinalDownload/FinalDownload';
 import { useLocation } from 'react-router-dom';
 import Preview from "./pages/Preview/Preview";
 import Error from "./pages/Error/Error";
+import { Navigate } from 'react-router-dom';
 const API_URL = process.env.REACT_APP_API;
 
 function App() {
@@ -43,7 +44,8 @@ function App() {
         <Route path='/template-filler' element={<TemplateFiller />} />
         <Route path='/final-download' element={<FinalDownload />} />
         <Route path='/preview' element={<Preview />} />
-        <Route path='/error' element={<Error />} />
+        <Route path='/error' element={<Error />}/>
+        <Route path="*" element={<Error />}/>
       </Routes>
     </Router>
 
