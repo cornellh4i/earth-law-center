@@ -132,9 +132,7 @@ const TemplateCard = (props) => {
 
   return (
     <div className="card-ensure-shadow">
-      <div
-        className={props.letter ? "card-letter-container" : "card-container"}
-      >
+      <div className={props.letter ? "card-letter-container" : "card-container"}>
         {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
         {card_content}
         {props.docID == "" ? (

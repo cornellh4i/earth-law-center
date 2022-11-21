@@ -6,9 +6,7 @@ import frog from "../../properties/frog.png";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 /** Component for Error Page */
-
 const Error = () => {
-  // useEffect(() => { document.body.style.backgroundColor = '#EEF2EF' }, [])
   const data = useLocation().state
   return (
     <div className="error-page">
