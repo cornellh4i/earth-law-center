@@ -9,7 +9,6 @@ import { Navigate } from "react-router-dom";
  * @param {title} is the title of the card
  * @param {summary} is the summary of the card
  * @param {letter} is if the card is letter and not law
- * @param {edit} is the function that allows you to edit the template
  * @param {download} is the function that allows you to download a template
  * @param {law} is the type of law for the filter
  * @param {jurisdiction} is the type of jurisdiction for the filter
@@ -141,20 +140,11 @@ const TemplateCard = (props) => {
         {props.docID == "" ? (
           // Render the following if there is no doc ID
           <div className="card-btn-container">
-            <Button css="card-edit-btn" text="EDIT">
-              {navigate && (
-                <Navigate
-                  to="/error"
-                  state={{
-                    error_msg:
-                      "The law template you are looking for hasn't been published",
-                  }}
-                />
-              )}
-            </Button>
-            <button className="card-download-btn">
+            <Button css="card-edit-btn" handleClick={edit} text="EDIT"></Button>
+            <button className="card-download-btn" onClick={edit}>
               <img className="download-img" src={downloadbtn} alt="download" />
-              {navigate && (
+            </button>
+            {navigate && (
                 <Navigate
                   to="/error"
                   state={{
@@ -163,7 +153,6 @@ const TemplateCard = (props) => {
                   }}
                 />
               )}
-            </button>
           </div>
         ) : (
           // Render the following if a docID exists

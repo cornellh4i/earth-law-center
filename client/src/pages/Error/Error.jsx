@@ -8,15 +8,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 /** Component for Error Page */
 
 const Error = () => {
-  document.body.setAttribute("style", "background: #EEF2EF;");
+  // useEffect(() => { document.body.style.backgroundColor = '#EEF2EF' }, [])
   const data = useLocation().state
   return (
-    <div>
+    <div className="error-page">
       <div className="error-header">
         <img src={frog} alt="frog" />
         <div className="error-header-text">Oops!</div>
         <div className="error-body-text">
-          {/* The law template you are looking for hasn't been published ... */}
           {data === null || data.error_msg === null ? '404 - The page you are looking for does not exist.' : data.error_msg}
         </div>
         <Link to="/">
