@@ -110,7 +110,7 @@ const TemplateCard = (props) => {
           <button className='card-download-btn' onClick={download}><img className='download-img' src={downloadbtn} alt='download' /></button>
           {navigate && <Navigate
             to="/template-filler"
-            state={{ docID: props.docID }}
+            state={{ docID: props.docID, templateTitle: props.title }}
             replace={true}
           />}
         </div>
