@@ -218,7 +218,8 @@
 .card-download-btn:hover,
 .card-edit-btn:hover,
 .template-download-btn:hover,
-.google-authentication-btn:hover {
+.google-authentication-btn:hover,
+.back-green-btn:hover {
   opacity: 0.7;
   cursor: pointer;
 }
@@ -376,5 +377,30 @@
   font-weight: bold;
   text-decoration: underline;
   text-underline-offset: 0.15rem;
+  display: inline-block;
+}
+
+
+.back-green-btn {
+  font-family: 'Nunito';
+  min-width: 12rem;
+  height: 3rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background-color: #64926E;
+  /* border-width: 0.05rem; */
+  border-style: none;
+  border-radius: 0.7rem;
+  cursor: pointer;
+}
+
+.back-green-btn::before {
+  padding: 0.17rem;
+  margin: 1% 0%;
+  content: " ";
+  border-bottom: 0.12rem solid #fff;
+  border-left: 0.12rem solid #fff;
+  transform: translateX(-150%) rotate(45deg);
   display: inline-block;
 }
