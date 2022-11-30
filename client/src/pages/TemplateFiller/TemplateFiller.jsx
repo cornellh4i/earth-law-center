@@ -5,6 +5,7 @@ import './TemplateFiller.css';
 import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { Backdrop, CircularProgress } from '@mui/material';
 import HelpBox from '../../components/HelpBox/HelpBox';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -38,10 +39,13 @@ const TemplateFiller = () => {
   const [progress, setProgress] = useState(0);
 
   // Whether the user is currently logged in
-  const [authenticated, setAuthenticated] = useState(false);
+  var already_auth = data.auth === true ? true : false
+  const [authenticated, setAuthenticated] = useState(already_auth);
 
   // The current page clicked by the user, defaults to the first entry in questionsData
   const [clickedId, setClickedId] = useState(0);
+
+  const [loading, setLoading] = useState(false);
 
   // Update the progress bar to the correct percentage value
   const changeProgress = (newClickedId) => {
@@ -55,10 +59,12 @@ const TemplateFiller = () => {
   useEffect(() => {
     (async function () {
       if (authenticated) {
+        setLoading(true)
         const response = await fetch(`/api/getQuestions/${sheetID}/${data.docID}`)
         const json = await response.json()
         setQuestionsData(json)
         setProgress(Math.floor((1 / json.length) * 100));
+        setLoading(false)
       }
     })()
   }, [authenticated]);
@@ -107,7 +113,7 @@ const TemplateFiller = () => {
     //   1: 'Montana',
     //   2: 'Local River'
     // }
-
+    setLoading(true);
     let batchReplaceData = {}
     Object.keys(inputs).map(fieldId => {
       batchReplaceData[questionsData[fieldId].original_field] = inputs[fieldId]
@@ -162,6 +168,12 @@ const TemplateFiller = () => {
 
   return (
     <div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       {questionsData.length > 0 &&
         <Box sx={{ display: 'flex' }}>
           <FieldSideBar
