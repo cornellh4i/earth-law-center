@@ -1,0 +1,30 @@
+.error-page{
+    height: '100vh';
+    min-height: '100vh';
+    width: '100vw';
+    min-width: '100vw';
+    background-color: #EEF2EF;
+}
+
+.error-header {
+    padding: 8% 25%;
+}
+
+.error-header-text {
+    font-family: "Nunito";
+    font-size: 2.5rem;
+    font-weight: 600;
+    padding: 3rem 0rem 0rem;
+    color: #000;
+}
+
+.error-body-text {
+    font-family: "Nunito";
+    color: #3c3c3c;
+    font-size: 1.5rem;
+    padding: 0.8rem 0rem 2rem;
+}
+
+img {
+    width: 20%;
+}

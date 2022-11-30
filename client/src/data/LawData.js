@@ -1,5 +1,6 @@
 // Importing PDFs
 import doc_1 from '../data/law-documents/Model RoN Local Ordinance Template_Draft_RN.pdf';
+import doc_2 from '../data/law-documents/Template Resolution on the Rights of Future Generations.pdf';
 
 const LawData = [
   {
@@ -20,9 +21,9 @@ const LawData = [
     jurisdiction: 'regional',
     title: 'Local Ocean Rights',
     summary: 'A resolution or ordinance on the rights of marine ecosystems, including the right to \'health\'.',
-    docID: '13YIr9SZ2Vgkh3R56AGP4L3cUIXZEmVqygHJ3IOj_BeQ',
+    docID: '1n5TsEssCrD8lMeAMA1I7WVEqNFiecyhHzumLH4nwpxQ',
     category: 'Rights of Future Generations',
-    pdf: doc_1
+    pdf: doc_2
   },
   {
     id: 3,
@@ -31,9 +32,9 @@ const LawData = [
     jurisdiction: 'national',
     title: 'Local Rights of Rivers',
     summary: 'A resolution or ordinance on the rights of rivers and watersheds with a guardianship body to speak for the river.',
-    docID: '13YIr9SZ2Vgkh3R56AGP4L3cUIXZEmVqygHJ3IOj_BeQ',
+    docID: '',
     category: 'Human Environmental Rights',
-    pdf: doc_1
+    pdf: null
   },
   {
     id: 4,
@@ -42,9 +43,9 @@ const LawData = [
     jurisdiction: 'international',
     title: 'State Constitutional Amendment',
     summary: 'A Rights of Nature state constitutional amendment that can unlock the ability of local rights of nature efforts.',
-    docID: '13YIr9SZ2Vgkh3R56AGP4L3cUIXZEmVqygHJ3IOj_BeQ',
+    docID: '',
     category: 'Ecocide',
-    pdf: doc_1
+    pdf: null
   },
   {
     id: 5,
@@ -53,9 +54,9 @@ const LawData = [
     jurisdiction: 'local',
     title: 'National Constitutional Amendment',
     summary: 'A constitutional amendment establishing the Rights of Nature and other ecocentric legal principles.',
-    docID: '13YIr9SZ2Vgkh3R56AGP4L3cUIXZEmVqygHJ3IOj_BeQ',
+    docID: '',
     category: 'Legal Guardianship',
-    pdf: doc_1
+    pdf: null
   },
   {
     id: 6,
@@ -64,9 +65,9 @@ const LawData = [
     jurisdiction: 'local',
     title: 'Preamble on the Rights of Nature',
     summary: 'A generic preamble on the Rights of Nature to include in any legal instrument, with fully updated information.',
-    docID: '13YIr9SZ2Vgkh3R56AGP4L3cUIXZEmVqygHJ3IOj_BeQ',
+    docID: '',
     category: 'Ecocentric Land Models',
-    pdf: doc_1
+    pdf: null
   }
 ]
 

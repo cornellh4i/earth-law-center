@@ -27,8 +27,8 @@ const FinalDownload = () => {
 
     const returnToTemplateFiller = () => {
         let path = "/template-filler";
-        navigate(path, { state: { docID: oldID, questionsInputs: inputs } })
-    }
+        navigate(path, {state: {docID: oldID, questionsInputs: inputs, auth: true}})
+      }
 
     const handleDownload = (e) => {
         window.location.assign(`/api/docDownload/${docID}`);

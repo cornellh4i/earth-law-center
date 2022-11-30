@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Landing from './pages/Landing/Landing';
@@ -8,9 +7,9 @@ import About from './pages/About/About.jsx';
 import ResourceDisplay from './pages/ResourceDisplay/ResourceDisplay';
 import TemplateFiller from './pages/TemplateFiller/TemplateFiller';
 import FinalDownload from './pages/FinalDownload/FinalDownload';
-import { useLocation } from 'react-router-dom';
 import Preview from "./pages/Preview/Preview";
-const API_URL = process.env.REACT_APP_API;
+import Error from "./pages/Error/Error";
+import { Navigate } from 'react-router-dom';
 
 function App() {
 
@@ -27,7 +26,6 @@ function App() {
   // }, []);
 
 
-
   return (
     <Router>
       {/* navigation bar that shows up on all pages except template filler*/}
@@ -42,6 +40,8 @@ function App() {
         <Route path='/template-filler' element={<TemplateFiller />} />
         <Route path='/final-download' element={<FinalDownload />} />
         <Route path='/preview' element={<Preview />} />
+        <Route path='/error' element={<Error />}/>
+        <Route path="*" element={<Navigate to="/error" replace />} />
       </Routes>
     </Router>
 
