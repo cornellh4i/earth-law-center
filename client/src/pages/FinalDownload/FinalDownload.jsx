@@ -15,7 +15,7 @@ const FinalDownload = () => {
     const data = useLocation().state;
     const docID = data.docID;
     const oldID = data.oldID;
-    const title = data.title;
+    const title = data.templateTitle;
     const questions = data.questions;
     const inputs = data.inputs;
     let navigate = useNavigate();
@@ -50,6 +50,7 @@ const FinalDownload = () => {
                     fieldItem={fieldItem}
                     progress={100}
                     handleDownload={handleDownload}
+                    templateTitle={title}
                 />
                 <Grid pt={2} container spacing={4}>
                     <Grid item xs={1} />
