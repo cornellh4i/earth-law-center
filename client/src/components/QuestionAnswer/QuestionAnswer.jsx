@@ -105,7 +105,7 @@ const QuestionAnswer = (props) => {
           <Button
             text='BACK'
             handleClick={e => props.handleBack(e)}
-            css={props.authenticated ? 'back-btn' : 'hidden'}
+            css={props.authenticated ? 'back-btn' : 'disable-btn'}
           />
         </Grid>
         <Grid item xs={8}>
