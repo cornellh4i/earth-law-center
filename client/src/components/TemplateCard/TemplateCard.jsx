@@ -143,14 +143,14 @@ const TemplateCard = (props) => {
               <img className="download-img" src={downloadbtn} alt="download" />
             </button>
             {navigate && (
-                <Navigate
-                  to="/error"
-                  state={{
-                    error_msg:
-                      "The law template you are looking for hasn't been published",
-                  }}
-                />
-              )}
+              <Navigate
+                to="/error"
+                state={{
+                  error_msg: "The template you are looking for hasn't been published.",
+                  redirect_url: props.letter ? "/letters" : "/laws"
+                }}
+              />
+            )}
           </div>
         ) : (
           // Render the following if a docID exists
