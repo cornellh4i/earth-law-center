@@ -132,7 +132,7 @@ const TemplateFiller = () => {
 
     response.then((response) => response.json())
       .then((responseJSON) => {
-        navigate(path, { state: { docID: responseJSON.docID, templateTitle: templateTitle, questions: questionsData, inputs: questionsInputs, oldID: data.docID } });
+        navigate(path, { state: { docID: responseJSON.docID, templateTitle: templateTitle, inputs: questionsInputs, oldID: data.docID } });
       });
   };
 
@@ -172,6 +172,7 @@ const TemplateFiller = () => {
             progress={progress}
             handleDownload={handleDownload}
             templateTitle={templateTitle}
+            downloadPage={false}
           />
 
           <Grid pt={5} container spacing={4}>

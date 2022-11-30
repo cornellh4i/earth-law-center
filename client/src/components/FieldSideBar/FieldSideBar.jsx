@@ -49,12 +49,12 @@ const FieldSideBar = (props) => {
           <Button
             text='PREVIEW'
             handleClick={() => navigate(path, { state: { templateTitle: props.templateTitle } })}
-            css={props.fieldItem == null ? 'hidden' : 'template-preview-btn'}
+            css={props.fieldItem == null || props.downloadPage ? 'hidden' : 'template-preview-btn'}
           />
           <Button
             text='DOWNLOAD'
             handleClick={() => props.handleDownload()}
-            css={props.fieldItem == null ? 'hidden' : 'template-download-btn'}
+            css={props.fieldItem == null || props.downloadPage ? 'hidden' : 'template-download-btn'}
           />
         </Box>
         <Box pt={2} className='return'>

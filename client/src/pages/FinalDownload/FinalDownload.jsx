@@ -16,7 +16,6 @@ const FinalDownload = () => {
     const docID = data.docID;
     const oldID = data.oldID;
     const title = data.templateTitle;
-    const questions = data.questions;
     const inputs = data.inputs;
     let navigate = useNavigate();
 
@@ -24,13 +23,7 @@ const FinalDownload = () => {
         { uri: "https://docs.google.com/document/d/" + docID + "/export?format=pdf" }
     ];
 
-    const fieldItem = questions.map((question) => (
-        <div
-            className={'side-btn'}
-        >
-            {question.field}
-        </div>
-    ));
+    const fieldItem = <div></div>
 
     const returnToTemplateFiller = () => {
         let path = "/template-filler";
@@ -51,6 +44,7 @@ const FinalDownload = () => {
                     progress={100}
                     handleDownload={handleDownload}
                     templateTitle={title}
+                    downloadPage={true}
                 />
                 <Grid pt={2} container spacing={4}>
                     <Grid item xs={1} />
