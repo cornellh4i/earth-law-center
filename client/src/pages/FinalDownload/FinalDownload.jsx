@@ -29,7 +29,7 @@ const FinalDownload = (props) => {
 
     const returnToTemplateFiller = () => {
         let path = "/template-filler";
-        navigate(path, {state: {docID: oldID, questionsInputs: inputs}})
+        navigate(path, {state: {docID: oldID, questionsInputs: inputs, auth: true}})
       }
 
     const handleDownload = (e) => {
@@ -54,7 +54,8 @@ const FinalDownload = (props) => {
                                 header: {
                                 disableHeader: true,
                                 disableFileName: true,
-                                retainURLParams: true
+                                retainURLParams: true,
+                                overrideComponent: null
                                 }
                             }} />
                         <Box sx={{ display: 'flex', marginTop: '2rem' }}>
