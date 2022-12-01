@@ -46,7 +46,7 @@ const TemplateFiller = () => {
   const [clickedId, setClickedId] = useState(0);
 
   // Title of the template
-  const templateTitle = data.templateTitle + ' Template';
+  const templateTitle = data.auth === true ? data.title : data.templateTitle + ' Template';
   const [loading, setLoading] = useState(false);
 
   // Update the progress bar to the correct percentage value

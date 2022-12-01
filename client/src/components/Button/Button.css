@@ -185,8 +185,8 @@
   color: #000;
   font-weight: bold;
   font-size: 1rem;
-  background-color: #fff;
-  border-color: #000;
+  background-color: rgb(231, 227, 227);
+  border-color: rgb(231, 227, 227);
   border-width: 0.05rem;
   border-style: solid;
   border-radius: 0.7rem;
