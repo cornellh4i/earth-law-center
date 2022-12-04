@@ -23,14 +23,14 @@ const Preview = (props) => {
 
     const returnToTemplateFiller = () => {
         let path = "/template-filler";
-        navigate(path, { state: { docID: oldID, questionsInputs: inputs, auth: auth, templateTitle: data.templateTitle } })
+        navigate(path, { state: { docID: oldID, questionsInputs: inputs, auth: auth, templateTitle: title } })
     }
 
     return (
         <div>
             <div className='preview-header'>
                 <div className='spacer' />
-                <h1 className='preview-header-text'>{data.templateTitle}</h1>
+                <h1 className='preview-header-text'>{title}</h1>
                 <div className='exit-btn-link'><Button css='exit-preview-btn' text={'EXIT PREVIEW'} handleClick={returnToTemplateFiller} /></div >
             </div>
             <div className="preview-doc-container">

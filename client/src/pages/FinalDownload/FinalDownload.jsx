@@ -27,7 +27,7 @@ const FinalDownload = () => {
 
     const returnToTemplateFiller = () => {
         let path = "/template-filler";
-        navigate(path, { state: { docID: oldID, questionsInputs: inputs, auth: true, title: title } })
+        navigate(path, { state: { docID: oldID, questionsInputs: inputs, auth: true, templateTitle: title } })
     }
 
     const handleDownload = (e) => {

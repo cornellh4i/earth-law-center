@@ -46,8 +46,8 @@ const TemplateFiller = () => {
   const [clickedId, setClickedId] = useState(0);
 
   // Title of the template
-  const templateTitle = data.templateTitle.slice(-8) == 'Template' ? data.templateTitle : data.templateTitle + ' Template';
-  // const templateTitle = data.auth === true ? data.title : data.templateTitle + ' Template';
+  const templateTitle = data.templateTitle;
+
   const [loading, setLoading] = useState(false);
 
   // Update the progress bar to the correct percentage value
@@ -141,7 +141,7 @@ const TemplateFiller = () => {
 
     response.then((response) => response.json())
       .then((responseJSON) => {
-        navigate(path, { state: { docID: responseJSON.docID, templateTitle: templateTitle, inputs: questionsInputs, oldID: data.docID, templateTitle: preview, auth: auth } });
+        navigate(path, { state: { docID: responseJSON.docID, templateTitle: templateTitle, inputs: questionsInputs, oldID: data.docID, auth: auth } });
       });
   };
 
