@@ -80,8 +80,10 @@ const TemplateCard = (props) => {
     matchjurisdiction = true;
   }
 
+  var displayCategory = ((props.filterCategory.toLowerCase() == props.category.toLowerCase()) || (props.filterCategory.toLowerCase() == 'all categories'))
+
   // // if the card does not match the current filter state, don't render
-  if (!(matchlaw && matchjurisdiction) || (props.filterCategory != props.category) ){
+  if (!(matchlaw && matchjurisdiction) || !displayCategory ){
     return null; 
   }
 
