@@ -4,5 +4,6 @@ body {
 
 .navbar-container {
   margin: none;
-  padding: 12px;
+  padding-top: 2em;
+  padding-right: 1em;
 }

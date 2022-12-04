@@ -44,7 +44,7 @@ const Header = (props) => {
   }
   return (
     <div className="banner">
-      <NavBar/>
+      <NavBar />
       <div className="content">
         <Typography pt={5} pb={1} variant='h2' component='div' sx={{ fontWeight: 'bolder', fontFamily: 'Nunito', color: '#64926E'}}>
           {props.title}
