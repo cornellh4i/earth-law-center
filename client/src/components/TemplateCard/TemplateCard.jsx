@@ -161,7 +161,7 @@ const TemplateCard = (props) => {
               {navigate && (
                 <Navigate
                   to="/template-filler"
-                  state={{ docID: props.docID }}
+                  state={{ docID: props.docID, templateTitle: props.title }}
                   replace={true}
                 />
               )}

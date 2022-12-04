@@ -102,11 +102,11 @@ const QuestionAnswer = (props) => {
       {/* Button positioning */}
       <Grid container direction='row' spacing={4} pt={4} justifyContent='flex-end'>
         <Grid item xs={4}>
-            <Button
-              text='BACK'
-              handleClick={e => props.handleBack(e)}
-              css='back-btn'
-            />
+          <Button
+            text='BACK'
+            handleClick={e => props.handleBack(e)}
+            css={(props.fieldId === 0 || !props.authenticated) ? 'disable-btn' : 'back-btn'}
+          />
         </Grid>
         <Grid item xs={8}>
           <Box display='flex' justifyContent='flex-end'>

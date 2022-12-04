@@ -167,7 +167,8 @@
   cursor: pointer;
 }
 
-.back-btn::before {
+.back-btn::before,
+.disable-btn::before {
   padding: 0.17rem;
   margin: 2% 0%;
   content: " ";
@@ -175,6 +176,22 @@
   border-left: 0.12rem solid #000;
   transform: translateX(-50%) rotate(45deg);
   display: inline-block;
+}
+
+.disable-btn {
+  font-family: 'Nunito';
+  min-width: 6rem;
+  height: 3rem;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  background-color: rgb(231, 227, 227);
+  border-color: rgb(231, 227, 227);
+  border-width: 0.05rem;
+  border-style: solid;
+  border-radius: 0.7rem;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* Grey median button with white text and right pointing arrow */
@@ -361,7 +378,7 @@
   font-weight: bold;
   font-size: 1rem;
   font-family: 'Nunito';
-  background:#64926E;
+  background: #64926E;
   border-width: 0.05rem;
   border-style: none;
   border-radius: 0.7rem;
