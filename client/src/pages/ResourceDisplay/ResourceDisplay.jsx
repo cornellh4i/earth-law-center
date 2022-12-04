@@ -23,7 +23,7 @@ const ResourceDisplay = () => {
   }
 
   return (
-    <>
+    <div>
       <Header title="Earth Law Resources" description="Video, document, and website resources for creating earth laws." hasSearch={true} searchBarPlaceholder="Search Resources" handleSearch={searchData}/>
       <Grid container columns={14}>
         <Grid item xs={4}>
@@ -34,7 +34,7 @@ const ResourceDisplay = () => {
         </Grid>
       </Grid>
       <Footer text="Powered by Earth Law Center" />
-    </>
+    </div>
   );
 };
 export default ResourceDisplay;
