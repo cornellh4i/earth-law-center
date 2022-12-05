@@ -102,7 +102,7 @@ const ResourceCard = (props) => {
 
 
 ResourceCard.defaultProps = {
-  description: 'Lorem ipsum dolor sit amet, in sed percipitur eloquentia Lorem ipsum dolor sit amet, in sed',
+  description: 'Description coming soon!',
   doc_img: '../../properties/elc-home-mar2022.jpeg'
 };
 

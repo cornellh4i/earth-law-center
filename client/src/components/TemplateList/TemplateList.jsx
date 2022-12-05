@@ -4,9 +4,10 @@ import TemplateCard from "../TemplateCard/TemplateCard"
 
 /** Component for a landing card used by template law/letter cards
  *  @param {data} is the json of data data
+ *  @param {checked} is the checked boxes in the side bar
  *  @param {category} is the category chosen from the side bar
 */
-function dataList({ data, checked }) {
+function dataList({ data, checked, category }) {
   if (!data || data.length === 0) {
     return <p>No data yet</p>
   }
@@ -18,6 +19,8 @@ function dataList({ data, checked }) {
         title={item.title}
         summary={item.summary}
         letter={item.letter}
+        category={item.category}
+        filterCategory={category}
         preview={item.preview}
         law={item.law}
         jurisdiction={item.jurisdiction}

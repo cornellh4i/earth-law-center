@@ -79,14 +79,20 @@ const TemplateCard = (props) => {
     matchjurisdiction = true;
   }
 
-  // if the card does not match the current filter state, don't render
-  if (!(matchlaw && matchjurisdiction)) {
-    return null;
+  let displayCategory = true;
+
+  if(!props.letter) {
+    displayCategory = ((props.filterCategory.toLowerCase() == props.category.toLowerCase()) || (props.filterCategory.toLowerCase() == 'all categories'))
+  } 
+  
+
+  // // if the card does not match the current filter state, don't render
+  if (!(matchlaw && matchjurisdiction) || !displayCategory ){
+    return null; 
   }
 
   var card_content = (
     <div className="card-text-container">
-      <div className="card-category">{props.category}</div>
       <div className="title-container">
         <h1 className="card-title">{props.title}</h1>
       </div>
