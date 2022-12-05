@@ -48,7 +48,7 @@ const FieldSideBar = (props) => {
         <Box pt={2}>
           <Button
             text='PREVIEW'
-            handleClick={() => navigate(path, { state: { templateTitle: props.templateTitle } })}
+            handleClick={() => props.handleSubmit(props.inputs, props.templateTitle, props.auth)}
             css={props.fieldItem == null || props.downloadPage ? 'hidden' : 'template-preview-btn'}
           />
           <Button

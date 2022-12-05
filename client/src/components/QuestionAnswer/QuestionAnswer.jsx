@@ -125,7 +125,7 @@ const QuestionAnswer = (props) => {
                 }
                 handleClick={
                   props.fieldId === (props.length - 1)
-                    ? e => props.handleSubmit(inputs)
+                    ? e => props.handleSubmit(inputs, false)
                     : e => props.handleNext()
                 }
                 css='continue-btn'
