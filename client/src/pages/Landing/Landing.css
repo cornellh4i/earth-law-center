@@ -3,3 +3,19 @@
   margin-right: 5rem;
   margin-bottom: 5rem;
 }
+
+.title{
+  font-size: 2rem;
+  font-weight: 600;
+  font-family: 'Nunito', sans-serif;
+  color: #64926E;
+  text-align: center;
+  margin: 4rem 0rem 1rem;
+}
+
+.see-more-btn-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
