@@ -60,7 +60,7 @@ const LettersDisplay = () => {
               ))}
             </Masonry>
           </div>
-        {/* </div> */}
+        </div>
       </div>
       <Footer text="Powered by Earth Law Center" />
     </div>
