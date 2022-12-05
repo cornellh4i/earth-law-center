@@ -25,7 +25,7 @@ const LandingCard = (props) => {
               {props.title}
             </Typography>
            
-            <Typography variant='body2' color='text.secondary' sx={{ fontSize: 18, marginTop:'10', fontFamily: 'Nunito'}} >
+            <Typography variant='body2' sx={{ fontSize: 18, marginTop:'10', fontFamily: 'Nunito'}} >
               {props.text}
             </Typography>
             <Link to={props.link}><Button css="seemore-btn" text = "SEE MORE" /></Link> 

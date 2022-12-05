@@ -19,8 +19,6 @@ function dataList({ data, checked, category }) {
         title={item.title}
         summary={item.summary}
         letter={item.letter}
-        // edit={item.edit}
-        // download={item.download}
         category={item.category}
         filterCategory={category}
         preview={item.preview}

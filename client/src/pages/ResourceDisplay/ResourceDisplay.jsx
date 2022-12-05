@@ -11,9 +11,9 @@ import ResourceSideBar from "../../components/ResourceSideBar/ResourceSideBar"
 const ResourceDisplay = () => {
   const [category, setCategory] = useState("ALL RESOURCES")
   const [data, setData] = useState(ResourceData)
-  const searchData=(input)=>{
-    setData(ResourceData.filter((item)=>{
-      if (input===''){
+  const searchData = (input) => {
+    setData(ResourceData.filter((item) => {
+      if (input === '') {
         return true
       }
       else {
@@ -23,18 +23,20 @@ const ResourceDisplay = () => {
   }
 
   return (
-    <>
-      <Header title="Earth Law Resources" description="Video, document, and website resources for creating earth laws." hasSearch={true} searchBarPlaceholder="Search Resources" handleSearch={searchData}/>
-      <Grid container columns={14}>
-        <Grid item xs={4}>
-          <ResourceSideBar category={category} setCategory={setCategory} />
+    <div>
+      <Header title="Earth Law Resources" description="Video, document, and website resources for creating earth laws." hasSearch={true} searchBarPlaceholder="Search Resources" handleSearch={searchData} />
+      <div class="content">
+        <Grid container columns={14}>
+          <Grid item xs={3}>
+            <ResourceSideBar category={category} setCategory={setCategory} />
+          </Grid>
+          <Grid item xs={9}>
+            <ResourceList resource={data} category={category} />
+          </Grid>
         </Grid>
-        <Grid item xs={8}>
-          <ResourceList resource={data} category={category} />
-        </Grid>
-      </Grid>
+      </div>
       <Footer text="Powered by Earth Law Center" />
-    </>
+    </div>
   );
 };
 export default ResourceDisplay;

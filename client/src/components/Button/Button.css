@@ -2,7 +2,7 @@
 
 .navbar-btn {
   font-weight: bolder;
-  font-size: 16px;
+  font-size: 17px;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-right: 50px;
@@ -89,7 +89,7 @@
 
 /* Edit button for TemplateCard */
 .card-edit-btn {
-  width: 72%;
+  width: 85%;
   height: 57px;
   padding: 16px;
   background:
@@ -143,12 +143,14 @@
 .card-download-btn {
   border: none;
   background-color: transparent;
-  margin-bottom: 1%;
+  padding:0;
+  transform: translateY(0.5rem) translateX(1rem);
+  max-width: 2rem;
   cursor: pointer;
 }
 
 .card-download-btn img {
-  width: 38%;
+  width: 100%;
 }
 
 /* White median with black text, black border, and left pointing arrow */
