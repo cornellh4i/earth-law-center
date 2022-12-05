@@ -206,6 +206,9 @@ const TemplateFiller = () => {
                 handleDownload={handleDownload}
                 templateTitle={templateTitle}
                 downloadPage={false}
+                inputs={questionsInputs}
+                handleSubmit={handleSubmit}
+                auth={authenticated}
               />
 
               <Grid pt={5} container spacing={4}>
