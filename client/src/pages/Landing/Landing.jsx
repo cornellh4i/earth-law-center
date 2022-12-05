@@ -9,7 +9,6 @@ import './Landing.css';
 import { Link } from 'react-router-dom'
 import text from '../../data/LandingText.js';
 import Button from '../../components/Button/Button';
-import ResourceData from "../../data/ResourceData";
 
 /** Component for Landing Page */
 const Landing = () => {
@@ -41,7 +40,9 @@ const Landing = () => {
         </Grid>
 
         {/*Three resource boxes I believe. We can probably useState to fix them later*/}
-        <Typography pt={10} pb={2} align='center' variant='h5' component='div' sx={{ fontWeight: 500, color: "#64926E" }}>Resources</Typography>
+        <div className='title'>
+          Resources
+        </div>
         <Grid container >
           <Grid item sm={12} md={3.6} pt={1}>
             <ResourceBox title={text.Resource1.title} text={text.Resource1.description} image="thumbnail1" link={text.Resource1.link}></ResourceBox>
@@ -55,8 +56,9 @@ const Landing = () => {
             <ResourceBox title={text.Resource3.title} text={text.Resource3.description} image="thumbnail3" link={text.Resource3.link}></ResourceBox>
           </Grid>
         </Grid>
-
-        <Link to="/resources"><Button text="SEE MORE" css="seemore-bottom-btn" /></Link>
+        <div className='see-more-btn-box'>
+          <Link to="/resources"><Button text="SEE MORE" css="seemore-bottom-btn" /></Link>
+        </div>
       </div>
       <Footer text="Powered by Earth Law Center" />
     </div>

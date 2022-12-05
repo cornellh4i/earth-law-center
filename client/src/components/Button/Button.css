@@ -287,10 +287,9 @@
   border-radius: 0.938rem;
   height: 3.125rem;
   width: 8.125rem;
-  margin-top: 16px;
-  margin-left: 43%;
   box-shadow: none;
   border: none;
+  margin: 0;
 }
 
 .watch-btn-landing-pg {
