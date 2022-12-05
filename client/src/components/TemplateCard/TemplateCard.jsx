@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
 import "./TemplateCard.css";
 import Button from "../Button/Button.jsx";
 import downloadbtn from "./assets/download-btn.png";
@@ -87,7 +86,7 @@ const TemplateCard = (props) => {
 
   var card_content = (
     <div className="card-text-container">
-      <p className="card-category">{props.category}</p>
+      <div className="card-category">{props.category}</div>
       <div className="title-container">
         <h1 className="card-title">{props.title}</h1>
       </div>
@@ -134,30 +133,17 @@ const TemplateCard = (props) => {
     <div className="card-ensure-shadow">
       <div className={props.letter ? "card-letter-container" : "card-container"}>
         {/* only render the TemplateCard's tag if it is a law card, not a letter card */}
-        {card_content}
-        {props.docID == "" ? (
-          // Render the following if there is no doc ID
-          <div className="card-btn-container">
-            <Button css="card-edit-btn" handleClick={edit} text="EDIT"></Button>
-            <button className="card-download-btn" onClick={edit}>
-              <img className="download-img" src={downloadbtn} alt="download" />
-            </button>
-            {navigate && (
-              <Navigate
-                to="/error"
-                state={{
-                  error_msg: "The template you are looking for hasn't been published.",
-                  redirect_url: props.letter ? "/letters" : "/laws"
-                }}
-              />
-            )}
-          </div>
-        ) : (
-          // Render the following if a docID exists
-          <div className="card-btn-container">
-            <Button css="card-edit-btn" handleClick={edit} text="EDIT"></Button>
-            <button className="card-download-btn" onClick={download}>
-              <img className="download-img" src={downloadbtn} alt="download" />
+        <div>
+          {card_content}
+        </div>
+        <div className="card-btn-container">
+          {props.docID == "" ? (
+            // Render the following if there is no doc ID
+            <div>
+              <Button css="card-edit-btn" handleClick={edit} text="EDIT"></Button>
+              <button className="card-download-btn" onClick={edit}>
+                <img className="download-img" src={downloadbtn} alt="download" />
+              </button>
               {navigate && (
                 <Navigate
                   to="/template-filler"
@@ -165,9 +151,24 @@ const TemplateCard = (props) => {
                   replace={true}
                 />
               )}
-            </button>
-          </div>
-        )}
+            </div>
+          ) : (
+            // Render the following if a docID exists
+            <div>
+              <Button css="card-edit-btn" handleClick={edit} text="EDIT"></Button>
+              <button className="card-download-btn" onClick={download}>
+                <img className="download-img" src={downloadbtn} alt="download" />
+                {navigate && (
+                  <Navigate
+                    to="/template-filler"
+                    state={{ docID: props.docID }}
+                    replace={true}
+                  />
+                )}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
