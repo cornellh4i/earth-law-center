@@ -32,7 +32,7 @@ const Header = (props) => {
           <Typography pt={5} pb={1} variant='h2' component='div' sx={{ fontWeight: 'bolder', fontFamily: 'Nunito', color: '#64926E'}}>
             {props.title}
           </Typography>
-          <Typography variant='body2' color='text.secondary' sx={{ fontSize: 18, fontFamily: 'Nunito', marginTop: 4, marginRight: 20}} >
+          <Typography variant='body2' sx={{ fontSize: 18, fontFamily: 'Nunito', marginTop: 4, marginRight: 20}} >
             {props.description}
           </Typography>
           <div className="search-bar-container">
@@ -44,12 +44,12 @@ const Header = (props) => {
   }
   return (
     <div className="banner">
-      <NavBar/>
+      <NavBar />
       <div className="content">
         <Typography pt={5} pb={1} variant='h2' component='div' sx={{ fontWeight: 'bolder', fontFamily: 'Nunito', color: '#64926E'}}>
           {props.title}
         </Typography>
-        <Typography variant='body2' color='text.secondary' sx={{ fontSize: 18, fontFamily: 'Nunito', marginTop: 6, marginRight: 46 }} >
+        <Typography variant='body2' sx={{ fontSize: 18, fontFamily: 'Nunito', marginTop: 6, marginRight: 46 }} >
           {props.description}
         </Typography>
       </div>

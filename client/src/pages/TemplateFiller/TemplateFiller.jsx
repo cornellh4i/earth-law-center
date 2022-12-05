@@ -1,7 +1,6 @@
 import QuestionAnswer from '../../components/QuestionAnswer/QuestionAnswer';
 import FieldSideBar from '../../components/FieldSideBar/FieldSideBar';
 import './TemplateFiller.css';
-
 import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -14,6 +13,7 @@ const TemplateFiller = () => {
   /**
    * Data from the state passed by TemplateCard; contains the following data:
    * @param docID is the ID of the google doc
+   * @param templateTitle is the title of the template
    */
   const data = useLocation().state
 
@@ -44,6 +44,9 @@ const TemplateFiller = () => {
 
   // The current page clicked by the user, defaults to the first entry in questionsData
   const [clickedId, setClickedId] = useState(0);
+
+  // Title of the template
+  const templateTitle = data.templateTitle;
 
   const [loading, setLoading] = useState(false);
 
@@ -106,7 +109,7 @@ const TemplateFiller = () => {
 
   // Handles user pressing the 'Finish' button
   // Error if user clicks the button without inputing any information
-  const handleSubmit = (inputs) => {
+  const handleSubmit = (inputs, preview, auth = true) => {
     // EXAMPLE OF INPUTS DATA STRUCTURE
     // inputs = {
     //   0: 'New York',
@@ -125,22 +128,24 @@ const TemplateFiller = () => {
     //   '[INSERT CITY]': 'Montana',
     //   '[INSERT NAME OF LOCAL ECOSYSTEM(S)]': 'Local River'
     // }
-    
+
     let path = '/final-download';
+    if (preview) {
+      path = '/preview';
+    }
     const response = fetch(`/api/batchReplaceAllTexts/${data.docID}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(batchReplaceData)
     })
-    
+
     response.then((response) => response.json())
-    .then((responseJSON) => {
-      navigate(path, {state: {docID: responseJSON.docID, inputs: questionsInputs, oldID: data.docID}});
-    });
+      .then((responseJSON) => {
+        navigate(path, { state: { docID: responseJSON.docID, templateTitle: templateTitle, inputs: questionsInputs, oldID: data.docID, auth: auth } });
+      });
   };
 
   // Handles user pressing the 'Back' button before authenticating
-  
   const backPageUnauth = () => {
     let path = '/';
     navigate(path);
@@ -181,6 +186,11 @@ const TemplateFiller = () => {
             fieldItem={fieldItem}
             progress={progress}
             handleDownload={handleDownload}
+            templateTitle={templateTitle}
+            downloadPage={false}
+            inputs={questionsInputs}
+            handleSubmit={handleSubmit}
+            auth={authenticated}
           />
 
           <Grid pt={5} container spacing={4}>
@@ -189,7 +199,7 @@ const TemplateFiller = () => {
               <QuestionAnswer
                 field={questionsData[clickedId].field}
                 fieldId={clickedId}
-                title={'Right of Nature Ordinnance Template'}
+                title={templateTitle}
                 question={questionsData[clickedId].question}
                 inputType={questionsData[clickedId].input_type}
                 length={questionsData.length}
