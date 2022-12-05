@@ -46,7 +46,8 @@ const TemplateFiller = () => {
   const [clickedId, setClickedId] = useState(0);
 
   // Title of the template
-  const templateTitle = data.auth === true ? data.title : data.templateTitle + ' Template';
+  const templateTitle = data.templateTitle;
+
   const [loading, setLoading] = useState(false);
 
   // Update the progress bar to the correct percentage value
@@ -108,7 +109,7 @@ const TemplateFiller = () => {
 
   // Handles user pressing the 'Finish' button
   // Error if user clicks the button without inputing any information
-  const handleSubmit = (inputs) => {
+  const handleSubmit = (inputs, preview, auth = true) => {
     // EXAMPLE OF INPUTS DATA STRUCTURE
     // inputs = {
     //   0: 'New York',
@@ -129,6 +130,9 @@ const TemplateFiller = () => {
     // }
 
     let path = '/final-download';
+    if (preview) {
+      path = '/preview';
+    }
     const response = fetch(`/api/batchReplaceAllTexts/${data.docID}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -137,7 +141,7 @@ const TemplateFiller = () => {
 
     response.then((response) => response.json())
       .then((responseJSON) => {
-        navigate(path, { state: { docID: responseJSON.docID, templateTitle: templateTitle, inputs: questionsInputs, oldID: data.docID } });
+        navigate(path, { state: { docID: responseJSON.docID, templateTitle: templateTitle, inputs: questionsInputs, oldID: data.docID, auth: auth } });
       });
   };
 
@@ -184,6 +188,9 @@ const TemplateFiller = () => {
             handleDownload={handleDownload}
             templateTitle={templateTitle}
             downloadPage={false}
+            inputs={questionsInputs}
+            handleSubmit={handleSubmit}
+            auth={authenticated}
           />
 
           <Grid pt={5} container spacing={4}>
