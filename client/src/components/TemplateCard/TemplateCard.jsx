@@ -152,9 +152,11 @@ const TemplateCard = (props) => {
               </button>
               {navigate && (
                 <Navigate
-                  to="/template-filler"
-                  state={{ docID: props.docID, templateTitle: props.title }}
-                  replace={true}
+                  to="/error"
+                  state={{
+                    error_msg: "The template you are looking for hasn't been published.",
+                    redirect_url: props.letter ? "/letters" : "/laws"
+                  }}
                 />
               )}
             </div>
