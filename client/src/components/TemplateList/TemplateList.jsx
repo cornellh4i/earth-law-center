@@ -18,8 +18,6 @@ function dataList({ data, checked }) {
         title={item.title}
         summary={item.summary}
         letter={item.letter}
-        // edit={item.edit}
-        // download={item.download}
         preview={item.preview}
         law={item.law}
         jurisdiction={item.jurisdiction}
