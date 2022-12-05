@@ -35,6 +35,7 @@ const LettersDisplay = () => {
   return (
     <div>
       <Header title="Build Earth Letters" description="Customize and download model laws, resolutions, and other legal instruments that support a paradigm shift to better protect the planet. " hasSearch={true} searchBarPlaceholder="Search Letter Templates" handleSearch={searchData}></Header>
+
       <div className="letters-body-box">
         <div className="letter-content-box">
           <h1 className="card-heading-title">Letter Templates</h1>
@@ -59,7 +60,7 @@ const LettersDisplay = () => {
               ))}
             </Masonry>
           </div>
-        </div>
+        {/* </div> */}
       </div>
       <Footer text="Powered by Earth Law Center" />
     </div>

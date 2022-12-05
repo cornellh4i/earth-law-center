@@ -12,7 +12,6 @@
 
 .side-box {
   display: flex;
-  padding-left: 2%;
   padding-top: 2%;
   flex-direction: column;
   width: 22%;
