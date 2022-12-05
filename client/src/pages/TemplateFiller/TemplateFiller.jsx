@@ -14,10 +14,25 @@ const TemplateFiller = () => {
    * Data from the state passed by TemplateCard; contains the following data:
    * @param docID is the ID of the google doc
    * @param templateTitle is the title of the template
+   * @param questionsInputs is the same as the inputs state in the QuestionsAnswer component
+   * @param auth is authenticated
    */
-  const data = useLocation().state
+  let data = useLocation().state
 
   let navigate = useNavigate();
+
+  // Redirect to error page if not all states have been passed in
+  let invalid = data === null || data.docID === null || data.templateTitle === null || data.questionsInputs === null || data.auth === null;
+  if (invalid) {
+    data = { docID: "", templateTitle: "", questionsData: "", auth: "" };
+  }
+  useEffect(() => {
+    (async function () {
+      if (invalid) {
+        navigate("/error");
+      }
+    })()
+  }, []);
 
   // Storing the initial overview page in the format of a questions object
   const overviewData = {
@@ -173,60 +188,62 @@ const TemplateFiller = () => {
 
   return (
     <div>
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loading}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-      {questionsData.length > 0 &&
-        <Box sx={{ display: 'flex' }}>
-          <FieldSideBar
-            title='EarthLegislator'
-            fieldItem={fieldItem}
-            progress={progress}
-            handleDownload={handleDownload}
-            templateTitle={templateTitle}
-            downloadPage={false}
-            inputs={questionsInputs}
-            handleSubmit={handleSubmit}
-            auth={authenticated}
-          />
-
-          <Grid pt={5} container spacing={4}>
-            <Grid item xs={1} />
-            <Grid item xs={6}>
-              <QuestionAnswer
-                field={questionsData[clickedId].field}
-                fieldId={clickedId}
-                title={templateTitle}
-                question={questionsData[clickedId].question}
-                inputType={questionsData[clickedId].input_type}
-                length={questionsData.length}
-                handleBack={authenticated ? backPage : backPageUnauth}
-                handleSkip={advancePage}
-                handleNext={advancePage}
-                handleAuth={handleAuthentication}
-                handleSubmit={handleSubmit}
-                authenticated={authenticated}
-                inputs={questionsInputs}
-                setInputs={setQuestionsInputs}
+      {/* Only show if state is not invalid */}
+      {!invalid && (
+        <div>
+          <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={loading}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+          {questionsData.length > 0 &&
+            <Box sx={{ display: 'flex' }}>
+              <FieldSideBar
+                title='EarthLegislator'
+                fieldItem={fieldItem}
+                progress={progress}
+                handleDownload={handleDownload}
+                templateTitle={templateTitle}
+                downloadPage={false}
               />
-            </Grid>
-            <Grid item xs={4}>
-              {questionsData[clickedId].description &&
-                <Box style={{ paddingTop: '4.5rem' }}>
-                  <HelpBox
-                    title={`More about ${questionsData[clickedId].field}`}
-                    description={questionsData[clickedId].description}
+
+              <Grid pt={5} container spacing={4}>
+                <Grid item xs={1} />
+                <Grid item xs={6}>
+                  <QuestionAnswer
+                    field={questionsData[clickedId].field}
+                    fieldId={clickedId}
+                    title={templateTitle}
+                    question={questionsData[clickedId].question}
+                    inputType={questionsData[clickedId].input_type}
+                    length={questionsData.length}
+                    handleBack={authenticated ? backPage : backPageUnauth}
+                    handleSkip={advancePage}
+                    handleNext={advancePage}
+                    handleAuth={handleAuthentication}
+                    handleSubmit={handleSubmit}
+                    authenticated={authenticated}
+                    inputs={questionsInputs}
+                    setInputs={setQuestionsInputs}
                   />
-                </Box>
-              }
-            </Grid>
-            <Grid item xs={1} />
-          </Grid>
-        </Box>
-      }
+                </Grid>
+                <Grid item xs={4}>
+                  {questionsData[clickedId].description &&
+                    <Box style={{ paddingTop: '4.5rem' }}>
+                      <HelpBox
+                        title={`More about ${questionsData[clickedId].field}`}
+                        description={questionsData[clickedId].description}
+                      />
+                    </Box>
+                  }
+                </Grid>
+                <Grid item xs={1} />
+              </Grid>
+            </Box>
+          }
+        </div>
+      )}
     </div>
   );
 };
